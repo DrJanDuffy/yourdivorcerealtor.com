@@ -3,11 +3,14 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import Script from 'next/script';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { PostHogProvider } from '@/components/analytics/PostHogProvider';
+import { ThirdPartyScripts } from '@/components/analytics/Scripts';
 import { DemoBadge } from '@/components/DemoBadge';
 import { routing } from '@/libs/I18nRouting';
 import { ClerkLocalizations } from '@/utils/AppConfig';
+import { inter, playfairDisplay } from '@/lib/fonts';
+import { getGoogleVerificationTag } from '@/lib/google-verification';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
@@ -64,16 +67,18 @@ export default async function RootLayout(props: {
     afterSignOutUrl = `/${locale}${afterSignOutUrl}`;
   }
 
-  return (
-    <html lang={locale}>
-      <head>
-        <Script
-          src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
-          type="module"
-          strategy="lazyOnload"
-        />
-      </head>
-      <body>
+      return (
+        <html lang={locale} className={`${inter.variable} ${playfairDisplay.variable}`}>
+          <head>
+            {getGoogleVerificationTag() && (
+              <meta
+                name="google-site-verification"
+                content={getGoogleVerificationTag()!}
+              />
+            )}
+            <ThirdPartyScripts />
+          </head>
+          <body>
         <ClerkProvider
           appearance={{
             cssLayerName: 'clerk',
@@ -89,7 +94,7 @@ export default async function RootLayout(props: {
             <PostHogProvider>
               {props.children}
             </PostHogProvider>
-
+            <SpeedInsights />
             <DemoBadge />
           </NextIntlClientProvider>
         </ClerkProvider>

@@ -38,8 +38,31 @@ export default async function About(props: IAboutProps) {
 
         <h2>Dr. Jan Duffy's Credentials and Experience</h2>
         <p>
-          Dr. Jan Duffy is a REALTOR® with Berkshire Hathaway HomeServices Sahara, serving the Las Vegas metropolitan area. Her specialized focus on divorce real estate has made her the go-to expert for divorcing homeowners, family law attorneys, and divorce mediators throughout Nevada.
+          Dr. Jan Duffy is a REALTOR® with Berkshire Hathaway HomeServices Nevada Properties, serving the Las Vegas metropolitan area. With a Ph.D. in Market Research & Consumer Behavior, she brings a unique analytical perspective to divorce real estate. Her specialized focus on divorce real estate has made her the go-to expert for divorcing homeowners, family law attorneys, and divorce mediators throughout Nevada.
         </p>
+
+        <div className="bg-blue-50 rounded-lg p-6 my-8">
+          <h3 className="text-xl font-bold mb-4">Professional Credentials</h3>
+          <ul className="space-y-2">
+            <li><strong>Ph.D.</strong> in Market Research & Consumer Behavior</li>
+            <li><strong>Nevada Real Estate License:</strong> #S.0197614.LLC</li>
+            <li><strong>Brokerage:</strong> Berkshire Hathaway HomeServices Nevada Properties</li>
+            <li><strong>Specialization:</strong> Certified Divorce Real Estate Expert (CDRE)</li>
+            <li><strong>Training:</strong> Trained through Ilumni® Institute</li>
+            <li><strong>Experience:</strong> Specialized in court-appointed transactions</li>
+          </ul>
+        </div>
+
+        <div className="bg-gray-50 rounded-lg p-6 my-8">
+          <h3 className="text-xl font-bold mb-4">Track Record</h3>
+          <ul className="space-y-2">
+            <li><strong>500+ families</strong> served through divorce real estate transactions</li>
+            <li><strong>$127M+</strong> in sales volume</li>
+            <li><strong>99%</strong> of listings sold successfully</li>
+            <li><strong>4X faster</strong> average sale time compared to traditional listings</li>
+            <li><strong>100%</strong> referral-based business</li>
+          </ul>
+        </div>
 
         <h3>Professional Qualifications</h3>
         <p>

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { FAQAccordion } from '@/components/faq/FAQAccordion';
+import { generateFAQPageSchema } from '@/lib/schema';
 
 type IFAQProps = {
   params: Promise<{ locale: string }>;
@@ -76,17 +78,17 @@ export default async function FAQ(props: IFAQProps) {
           </p>
         </div>
 
-        <div className="space-y-6 mb-12">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md p-8">
-              <h3 className="text-xl font-bold mb-4 text-blue-600">
-                {faq.question}
-              </h3>
-              <p className="text-gray-700 leading-relaxed">
-                {faq.answer}
-              </p>
-            </div>
-          ))}
+        {/* FAQ Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateFAQPageSchema(faqs)),
+          }}
+        />
+
+        {/* Interactive FAQ Accordion */}
+        <div className="mb-12">
+          <FAQAccordion faqs={faqs} />
         </div>
 
         <div className="prose prose-lg max-w-none bg-gray-50 rounded-lg p-8">

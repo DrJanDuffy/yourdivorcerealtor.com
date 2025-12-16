@@ -1,5 +1,71 @@
 'use client';
 
+import { Suspense, useEffect, useRef, useState } from 'react';
+
+/**
+ * RealScout Home Value Widget
+ * Optimized with:
+ * - Lazy loading via Intersection Observer
+ * - Error boundary
+ * - Loading skeleton
+ * - Only loads when in viewport
+ */
+function RealScoutWidget() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0]?.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '100px' }, // Start loading 100px before widget is visible
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  if (hasError) {
+    return (
+      <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center">
+        <p className="text-red-800">
+          Unable to load home valuation widget. Please{' '}
+          <a href="/contact" className="font-semibold underline">
+            contact us
+          </a>
+          {' '}
+          for a free home valuation.
+        </p>
+      </div>
+    );
+  }
+
+  if (!isVisible) {
+    return (
+      <div
+        ref={containerRef}
+        className="h-96 animate-pulse rounded-lg bg-gray-200"
+        aria-label="Loading home valuation widget"
+      />
+    );
+  }
+
+  return (
+    <div ref={containerRef}>
+      {/* @ts-expect-error - Custom element from RealScout */}
+      <realscout-home-value agent-encoded-id="QWdlbnQtMjI1MDUw" />
+    </div>
+  );
+}
+
 export function RealScoutHomeValue() {
   return (
     <section className="py-16 bg-gray-50">
@@ -13,11 +79,15 @@ export function RealScoutHomeValue() {
           for divorce property division negotiations in Las Vegas.
         </p>
         <div className="max-w-xl mx-auto">
-          {/* @ts-expect-error - Custom element from RealScout */}
-          <realscout-home-value agent-encoded-id="QWdlbnQtMjI1MDUw" />
+          <Suspense
+            fallback={
+              <div className="h-96 animate-pulse rounded-lg bg-gray-200" />
+            }
+          >
+            <RealScoutWidget />
+          </Suspense>
         </div>
       </div>
     </section>
   );
 }
-

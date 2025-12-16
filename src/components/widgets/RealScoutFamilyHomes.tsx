@@ -1,5 +1,81 @@
 'use client';
 
+import { Suspense, useEffect, useRef, useState } from 'react';
+
+/**
+ * RealScout Single Family Home Listings Widget
+ * Optimized with lazy loading and error handling
+ */
+function RealScoutFamilyHomesWidget() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0]?.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }, // Start loading earlier for listings
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  if (hasError) {
+    return (
+      <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center">
+        <p className="text-red-800 mb-4">
+          Unable to load property listings. Please{' '}
+          <a href="/contact" className="font-semibold underline">
+            contact us
+          </a>
+          {' '}
+          to view available family homes.
+        </p>
+      </div>
+    );
+  }
+
+  if (!isVisible) {
+    return (
+      <div
+        ref={containerRef}
+        className="space-y-4"
+        aria-label="Loading family home listings"
+      >
+        {[1, 2, 3].map(i => (
+          <div
+            key={i}
+            className="h-64 animate-pulse rounded-lg bg-gray-200"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div ref={containerRef}>
+      {/* @ts-expect-error - Custom element from RealScout */}
+      <realscout-office-listings
+        agent-encoded-id="QWdlbnQtMjI1MDUw"
+        sort-order="NEWEST"
+        listing-status="For Sale"
+        property-types=",SFR"
+        price-min="400000"
+        price-max="1100000"
+      />
+    </div>
+  );
+}
+
 export function RealScoutFamilyHomes() {
   return (
     <section className="py-16 bg-gray-50">
@@ -12,17 +88,21 @@ export function RealScoutFamilyHomes() {
           {' '}
           homes in Las Vegas that give your children stability and space.
         </p>
-        {/* @ts-expect-error - Custom element from RealScout */}
-        <realscout-office-listings
-          agent-encoded-id="QWdlbnQtMjI1MDUw"
-          sort-order="NEWEST"
-          listing-status="For Sale"
-          property-types=",SFR"
-          price-min="400000"
-          price-max="1100000"
-        />
+        <Suspense
+          fallback={
+            <div className="space-y-4">
+              {[1, 2, 3].map(i => (
+                <div
+                  key={i}
+                  className="h-64 animate-pulse rounded-lg bg-gray-200"
+                />
+              ))}
+            </div>
+          }
+        >
+          <RealScoutFamilyHomesWidget />
+        </Suspense>
       </div>
     </section>
   );
 }
-

@@ -33,10 +33,10 @@ export function DivorceHero() {
               {messaging.ctas.valuation}
             </Link>
             <a
-              href="tel:+17025551234"
+              href="tel:+17022221964"
               className="rounded-lg bg-yellow-400 px-8 py-4 font-semibold text-gray-900 transition-colors hover:bg-yellow-300"
             >
-              Call Now: (702) 555-1234
+              Call Now: (702) 222-1964
             </a>
           </div>
         </div>

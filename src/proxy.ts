@@ -1,78 +1,33 @@
-import type { NextFetchEvent, NextRequest } from 'next/server';
-import { detectBot } from '@arcjet/next';
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import createMiddleware from 'next-intl/middleware';
-import { NextResponse } from 'next/server';
-import arcjet from '@/libs/Arcjet';
-import { routing } from './libs/I18nRouting';
+import type { NextRequest } from 'next/server';
 
-const handleI18nRouting = createMiddleware(routing);
+/**
+ * Next.js 16 proxy.ts replaces middleware.ts
+ * Runs on Node.js runtime (not Edge)
+ * Handles redirects and request processing for Vercel deployment
+ */
+export function proxy(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  const hostname = request.headers.get('host') || '';
 
-const isProtectedRoute = createRouteMatcher([
-  '/dashboard(.*)',
-  '/:locale/dashboard(.*)',
-]);
-
-const isAuthPage = createRouteMatcher([
-  '/sign-in(.*)',
-  '/:locale/sign-in(.*)',
-  '/sign-up(.*)',
-  '/:locale/sign-up(.*)',
-]);
-
-// Improve security with Arcjet
-const aj = arcjet.withRule(
-  detectBot({
-    mode: 'LIVE',
-    // Block all bots except the following
-    allow: [
-      // See https://docs.arcjet.com/bot-protection/identifying-bots
-      'CATEGORY:SEARCH_ENGINE', // Allow search engines
-      'CATEGORY:PREVIEW', // Allow preview links to show OG images
-      'CATEGORY:MONITOR', // Allow uptime monitoring services
-    ],
-  }),
-);
-
-export default async function proxy(
-  request: NextRequest,
-  event: NextFetchEvent,
-) {
-  // Verify the request with Arcjet
-  // Use `process.env` instead of Env to reduce bundle size in middleware
-  if (process.env.ARCJET_KEY) {
-    const decision = await aj.protect(request);
-
-    if (decision.isDenied()) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
-    }
+  // Redirect non-www to www (primary domain)
+  if (hostname === 'yourdivorcerealtor.com' || hostname === 'yourdivorcerealtor.com:3000') {
+    url.hostname = 'www.yourdivorcerealtor.com';
+    return Response.redirect(url, 301);
   }
 
-  // Clerk keyless mode doesn't work with i18n, this is why we need to run the middleware conditionally
-  if (
-    isAuthPage(request) || isProtectedRoute(request)
-  ) {
-    return clerkMiddleware(async (auth, req) => {
-      if (isProtectedRoute(req)) {
-        const locale = req.nextUrl.pathname.match(/(\/.*)\/dashboard/)?.at(1) ?? '';
-
-        const signInUrl = new URL(`${locale}/sign-in`, req.url);
-
-        await auth.protect({
-          unauthenticatedUrl: signInUrl.toString(),
-        });
-      }
-
-      return handleI18nRouting(req);
-    })(request, event);
+  // Handle trailing slashes - remove trailing slash except for root
+  if (url.pathname !== '/' && url.pathname.endsWith('/')) {
+    url.pathname = url.pathname.slice(0, -1);
+    return Response.redirect(url, 301);
   }
 
-  return handleI18nRouting(request);
+  // Log request for analytics (non-blocking)
+  // In production, you might want to send this to your analytics service
+  if (process.env.NODE_ENV === 'production') {
+    // Log request metadata (no PII)
+    console.log(`[${new Date().toISOString()}] ${request.method} ${url.pathname}`);
+  }
+
+  // Continue with the request
+  return undefined;
 }
-
-export const config = {
-  // Match all pathnames except for
-  // - … if they start with `/_next`, `/_vercel` or `monitoring`
-  // - … the ones containing a dot (e.g. `favicon.ico`)
-  matcher: '/((?!_next|_vercel|monitoring|.*\\..*).*)',
-};

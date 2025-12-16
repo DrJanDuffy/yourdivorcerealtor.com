@@ -1,14 +1,133 @@
 import type { MetadataRoute } from 'next';
-import { getBaseUrl } from '@/utils/Helpers';
 
+const baseUrl = 'https://www.yourdivorcerealtor.com';
+
+/**
+ * Dynamic sitemap for all 46 divorce-focused pages
+ * Includes all marketing pages with appropriate priorities and change frequencies
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const now = new Date();
+
+  // Core pages (highest priority)
+  const corePages = [
     {
-      url: `${getBaseUrl()}/`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.7,
+      url: `${baseUrl}/`,
+      lastModified: now,
+      changeFrequency: 'daily' as const,
+      priority: 1.0,
     },
-    // Add more URLs here
+    {
+      url: `${baseUrl}/about`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/divorce-real-estate-services`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/testimonials`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/faq`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
+  ];
+
+  // Process pages (high priority)
+  const processPages = [
+    '/selling-home-during-divorce',
+    '/buying-home-after-divorce',
+    '/divorce-property-division',
+    '/divorce-home-valuation',
+    '/divorce-real-estate-timeline',
+    '/divorce-settlement-options',
+    '/divorce-buyout-options',
+    '/refinancing-after-divorce',
+    '/divorce-and-mortgage',
+    '/quitclaim-deed-divorce',
+    '/divorce-listing-process',
+    '/court-ordered-home-sale',
+  ];
+
+  // Community pages (medium-high priority)
+  const communityPages = [
+    '/divorce-realtor-henderson',
+    '/divorce-realtor-summerlin',
+    '/divorce-realtor-north-las-vegas',
+    '/divorce-realtor-green-valley',
+    '/divorce-realtor-spring-valley',
+    '/divorce-realtor-enterprise',
+    '/divorce-realtor-paradise',
+    '/divorce-realtor-centennial-hills',
+    '/divorce-realtor-southern-highlands',
+    '/divorce-realtor-aliante',
+    '/divorce-realtor-mountains-edge',
+    '/divorce-realtor-inspirada',
+  ];
+
+  // Attorney/Professional resource pages (medium priority)
+  const attorneyPages = [
+    '/attorney-resources',
+    '/family-law-attorney-collaboration',
+    '/divorce-mediator-resources',
+    '/certified-divorce-real-estate-expert',
+    '/divorce-real-estate-expert-witness',
+    '/divorce-appraisal-services',
+  ];
+
+  // Homeowner resource pages (medium priority)
+  const resourcePages = [
+    '/divorce-home-equity-calculator',
+    '/divorce-net-proceeds-calculator',
+    '/divorce-real-estate-checklist',
+    '/preparing-home-sale-divorce',
+    '/divorce-real-estate-documents',
+    '/divorce-home-staging',
+  ];
+
+  // Educational guide pages (medium priority)
+  const guidePages = [
+    '/divorce-real-estate-guide',
+    '/divorce-real-estate-mistakes',
+    '/emotional-guide-selling-divorce',
+    '/financial-planning-divorce-real-estate',
+  ];
+
+  // Helper function to create sitemap entries
+  const createEntries = (
+    paths: string[],
+    priority: number,
+    changeFrequency: 'daily' | 'weekly' | 'monthly' | 'yearly' = 'weekly',
+  ) =>
+    paths.map(path => ({
+      url: `${baseUrl}${path}`,
+      lastModified: now,
+      changeFrequency,
+      priority,
+    }));
+
+  return [
+    ...corePages,
+    ...createEntries(processPages, 0.8, 'weekly'),
+    ...createEntries(communityPages, 0.7, 'monthly'),
+    ...createEntries(attorneyPages, 0.7, 'monthly'),
+    ...createEntries(resourcePages, 0.7, 'monthly'),
+    ...createEntries(guidePages, 0.7, 'monthly'),
   ];
 }

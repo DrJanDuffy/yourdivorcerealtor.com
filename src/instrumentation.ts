@@ -11,11 +11,11 @@ const sentryOptions: Sentry.NodeOptions | Sentry.EdgeOptions = {
     Sentry.consoleLoggingIntegration(),
   ],
 
-  // Adds request headers and IP for users, for more info visit
-  sendDefaultPii: true,
+  // Privacy: Don't send PII by default (GDPR/CCPA compliance)
+  sendDefaultPii: false,
 
   // Adjust this value in production, or use tracesSampler for greater control
-  tracesSampleRate: 1,
+  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1, // 10% in production
 
   // Enable logs to be sent to Sentry
   enableLogs: true,

@@ -18,6 +18,84 @@ const baseConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
+  // Security headers for divorce client privacy
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://em.realscout.com https://*.posthog.com https://*.clerk.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com data:",
+              "img-src 'self' data: https: blob:",
+              "connect-src 'self' https://*.realscout.com https://*.posthog.com https://*.clerk.com https://*.sentry.io",
+              "frame-src 'self' https://*.clerk.com",
+            ].join('; '),
+          },
+        ],
+      },
+    ];
+  },
+  // Image optimization configuration
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'em.realscout.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.realscout.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+    ],
+    formats: ['image/avif', 'image/webp'],
+  },
+  // CacheLife profiles for Next.js 16 caching
+  cacheLife: {
+    static: {
+      revalidate: 86400, // 24 hours - for marketing copy, about page
+    },
+    listings: {
+      revalidate: 3600, // 1 hour - for property widgets
+    },
+    dynamic: {
+      revalidate: 0, // No cache - for contact forms, consultations
+    },
+    communities: {
+      revalidate: 14400, // 4 hours - for Las Vegas community pages
+    },
+  },
 };
 
 // Initialize the Next-Intl plugin

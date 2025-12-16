@@ -40,8 +40,8 @@ export default async function Contact(props: IContactProps) {
                 <p className="text-gray-600">Serving the Greater Las Vegas Area</p>
               </div>
               <div>
-                <a href="tel:+17025551234" className="text-blue-600 hover:text-blue-700 font-semibold text-lg">
-                  (702) 555-1234
+                <a href="tel:+17022221964" className="text-blue-600 hover:text-blue-700 font-semibold text-lg">
+                  (702) 222-1964
                 </a>
               </div>
               <div>
@@ -158,7 +158,7 @@ export default async function Contact(props: IContactProps) {
           </p>
 
           <p className="text-xl font-semibold text-center mt-8">
-            Call (702) 555-1234 or use the home valuation tool below to get started.
+            Call (702) 222-1964 or use the home valuation tool below to get started.
           </p>
         </div>
       </div>

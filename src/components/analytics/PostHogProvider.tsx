@@ -7,19 +7,35 @@ import { Env } from '@/libs/Env';
 import { SuspendedPostHogPageView } from './PostHogPageView';
 
 export const PostHogProvider = (props: { children: React.ReactNode }) => {
-  useEffect(() => {
-    if (Env.NEXT_PUBLIC_POSTHOG_KEY) {
-      posthog.init(Env.NEXT_PUBLIC_POSTHOG_KEY, {
-        api_host: Env.NEXT_PUBLIC_POSTHOG_HOST,
-        capture_pageview: false, // Disable automatic pageview capture, as we capture manually
-        capture_pageleave: true, // Enable pageleave capture
-      });
-    }
-  }, []);
-
   if (!Env.NEXT_PUBLIC_POSTHOG_KEY) {
     return props.children;
   }
+
+  // Initialize PostHog with privacy-focused configuration
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      posthog.init(Env.NEXT_PUBLIC_POSTHOG_KEY, {
+        api_host: Env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
+        capture_pageview: false, // Disable automatic pageview capture
+        capture_pageleave: true,
+        disable_session_recording: true, // Privacy: Disable session recording for divorce clients
+        loaded: (posthogInstance) => {
+          // Anonymize IP addresses (GDPR/CCPA compliance)
+          posthogInstance.config.capture_performance = false;
+          
+          // Respect Do Not Track
+          if (navigator.doNotTrack === '1') {
+            posthogInstance.opt_out_capturing();
+          }
+          
+          // Opt out in development
+          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            posthogInstance.opt_out_capturing();
+          }
+        },
+      });
+    }
+  }, []);
 
   return (
     <PHProvider client={posthog}>
