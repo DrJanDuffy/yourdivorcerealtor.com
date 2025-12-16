@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
  * - View Transitions for smooth animations
  * - Review schema for SEO
  */
-function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   const [isVisible, setIsVisible] = useState(false);
 
   return (
@@ -87,11 +87,10 @@ export function Testimonials() {
           }
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((testimonial) => (
               <TestimonialCard
                 key={testimonial.id}
                 testimonial={testimonial}
-                index={index}
               />
             ))}
           </div>
