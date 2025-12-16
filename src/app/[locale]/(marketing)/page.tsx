@@ -19,9 +19,14 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Las Vegas Divorce Real Estate Specialist | Dr. Jan Duffy',
-    description: 'Unlock Your New Normal. Expert divorce real estate services in Las Vegas. Helping divorcing homeowners navigate property division, home sales, and fresh starts with compassion and expertise.',
-    keywords: 'divorce realtor las vegas, divorce real estate specialist, las vegas divorce realtor, property division divorce, selling home during divorce',
+    title: 'Dr. Jan Duffy | Divorce Real Estate Specialist Las Vegas',
+    description: 'Dr. Jan Duffy is Las Vegas\' trusted Divorce Real Estate specialist. Expert help with property division, home sales during divorce, buyouts, and fresh starts. Call (702) 222-1964.',
+    keywords: 'Dr. Jan Duffy, Divorce Real Estate, divorce realtor las vegas, divorce real estate specialist, las vegas divorce realtor, Dr Jan Duffy divorce, property division divorce',
+    openGraph: {
+      title: 'Dr. Jan Duffy | Divorce Real Estate Specialist',
+      description: 'Las Vegas\' trusted Divorce Real Estate specialist helping divorcing homeowners navigate property division with compassion and expertise.',
+      type: 'website',
+    },
   };
 }
 

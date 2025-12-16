@@ -6,9 +6,13 @@ export function DivorceHero() {
     <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
-          <h1 className="mb-6 text-5xl font-bold md:text-6xl">
+          {/* Primary H1 with target search term: "Dr. Jan Duffy Divorce Real Estate" */}
+          <h1 className="mb-4 text-5xl font-bold md:text-6xl">
             {messaging.headlines.primary}
           </h1>
+          <p className="mb-6 text-xl font-medium text-blue-200 md:text-2xl">
+            {messaging.headlines.subtitle}
+          </p>
           <p className="mb-4 text-2xl font-semibold text-blue-100 md:text-3xl">
             {messaging.headlines.unlock}
           </p>

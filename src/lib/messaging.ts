@@ -5,7 +5,8 @@
 
 export const messaging = {
   headlines: {
-    primary: 'Las Vegas Divorce Real Estate Specialist',
+    primary: 'Dr. Jan Duffy - Divorce Real Estate',
+    subtitle: 'Las Vegas Divorce Real Estate Specialist',
     unlock: 'Unlock Your New Normal',
     control: 'Get Control of Your Future',
     notUsual: "This Isn't Business As Usual",
