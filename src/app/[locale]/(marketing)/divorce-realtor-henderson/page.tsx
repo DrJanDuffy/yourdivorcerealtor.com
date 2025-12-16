@@ -13,9 +13,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Henderson Nevada | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Henderson, Nevada. Helping divorcing homeowners in Henderson navigate property division, home sales, and fresh starts.',
-    keywords: 'divorce realtor henderson, henderson divorce real estate, divorce realtor henderson nevada',
+    title: 'Henderson Divorce Real Estate Agent | Selling House Divorce Henderson NV | Dr. Jan Duffy',
+    description: 'Henderson divorce realtor helping divorcing homeowners sell house divorce Henderson NV. Expert divorce real estate agent in Henderson, Nevada. Property division, home sales, buyouts.',
+    keywords: 'selling house divorce Henderson NV, Henderson divorce realtor, divorce real estate agent Henderson, Henderson divorce real estate, divorce realtor Henderson Nevada, Henderson NV divorce realtor',
   };
 }
 
@@ -26,8 +26,8 @@ export default async function Henderson(props: IHendersonProps) {
   return (
     <>
       <DivorcePageTemplate
-        h1="Divorce Realtor in Henderson Nevada"
-        heroSubhead="Expert Divorce Real Estate Services in Henderson"
+        h1="Henderson Divorce Real Estate Agent"
+        heroSubhead="Selling House Divorce Henderson NV - Expert Guidance"
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Why Choose Dr. Jan Duffy for Henderson Divorce Real Estate?</h2>

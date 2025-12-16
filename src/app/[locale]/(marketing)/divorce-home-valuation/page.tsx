@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Home Valuation Services Las Vegas | Know Your Equity',
-    description: 'Accurate home valuations for divorce property division in Las Vegas. Know your equity position with expert valuation services from Dr. Jan Duffy.',
-    keywords: 'divorce home valuation, home valuation divorce, las vegas divorce home value',
+    title: 'Divorce Home Valuation Las Vegas | Free Home Value Calculator | Dr. Jan Duffy',
+    description: 'Get accurate divorce home valuation in Las Vegas. Free home value calculator and expert valuation services for property division. Know your equity position today.',
+    keywords: 'divorce home valuation Las Vegas, divorce home valuation, home valuation divorce, las vegas divorce home value, divorce home equity calculator',
   };
 }
 
@@ -117,10 +117,44 @@ export default async function HomeValuation(props: IValuationProps) {
           If your divorce process takes time, updated valuations may be necessary. Market conditions change, and property values can fluctuate. Dr. Jan Duffy provides updated valuations when needed, ensuring you always have current information.
         </p>
 
-        <h2>Get Your Home Valuation Today</h2>
+        <h2>The Divorce Home Valuation Process</h2>
         <p>
-          Don't wait to understand your home's value and equity position. Schedule a consultation with Dr. Jan Duffy today and get the accurate valuation you need for property division negotiations. Use the home value widget below to get started, or contact Dr. Jan Duffy directly for a comprehensive valuation.
+          Dr. Jan Duffy's divorce home valuation process is designed specifically for divorcing homeowners. It's comprehensive, accurate, and provides the information you need for property division decisions.
         </p>
+        <ol className="list-decimal pl-6 space-y-3 mt-4">
+          <li>
+            <strong>Initial Consultation:</strong> We start with a confidential consultation to understand your situation, property details, and valuation needs. This helps us tailor the valuation to your specific circumstances.
+          </li>
+          <li>
+            <strong>Property Inspection:</strong> Dr. Jan Duffy conducts a thorough inspection of your property, evaluating condition, features, upgrades, and any factors that affect value. This on-site evaluation ensures accuracy.
+          </li>
+          <li>
+            <strong>Market Analysis:</strong> Comprehensive analysis of comparable sales, current market conditions, and neighborhood trends. This analysis uses multiple methods to ensure the most accurate valuation possible.
+          </li>
+          <li>
+            <strong>Equity Calculation:</strong> Calculation of your equity position by subtracting all outstanding obligations from your home's value. This includes mortgages, liens, and other encumbrances.
+          </li>
+          <li>
+            <strong>Detailed Report:</strong> You receive a comprehensive valuation report documenting the analysis, methods, and conclusions. This report can be used for property division negotiations, court proceedings, or decision-making.
+          </li>
+          <li>
+            <strong>Ongoing Support:</strong> Dr. Jan Duffy provides ongoing support, answering questions and providing updates as needed. If market conditions change or your situation evolves, updated valuations are available.
+          </li>
+        </ol>
+
+        <h2>Get Your Free Home Valuation Today</h2>
+        <p>
+          Don't wait to understand your home's value and equity position. Use the free home value calculator below to get an instant estimate, or schedule a consultation with Dr. Jan Duffy for a comprehensive, court-ready valuation. Accurate divorce home valuation is the foundation of fair property division—get started today.
+        </p>
+        <div className="bg-blue-50 border-l-4 border-blue-600 p-6 my-8">
+          <h3 className="text-xl font-semibold mb-2">Free Home Value Calculator</h3>
+          <p className="mb-4">
+            Get an instant estimate of your home's value using our free calculator below. For a comprehensive, court-ready valuation, contact Dr. Jan Duffy for a detailed analysis.
+          </p>
+          <p className="text-sm text-gray-600">
+            <em>Scroll down to use the home value widget, or <a href="/contact" className="text-blue-600 hover:text-blue-700 underline">contact us</a> for a full valuation report.</em>
+          </p>
+        </div>
       </div>
     </DivorcePageTemplate>
   );

@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Property Division in Las Vegas | Fair and Equitable Solutions',
-    description: 'Expert guidance for divorce property division in Las Vegas. Fair valuations, equitable solutions, and specialized expertise for dividing real estate assets.',
-    keywords: 'divorce property division, property division divorce, las vegas divorce property division',
+    title: 'Nevada Divorce Property Division | Who Gets the House in a Divorce Nevada | Dr. Jan Duffy',
+    description: 'Expert guidance for Nevada divorce property division. Learn who gets the house in a divorce Nevada. Community property laws, fair valuations, and equitable solutions for dividing real estate assets.',
+    keywords: 'Nevada divorce property division, who gets the house in a divorce Nevada, divorce property division, property division divorce, las vegas divorce property division, community property divorce house',
   };
 }
 
@@ -77,6 +77,14 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
           How equity is divided depends on your state's laws and your specific circumstances. In community property states like Nevada, marital property is typically divided equally, but separate property and other factors can complicate this. Dr. Jan Duffy helps you understand how these laws apply to your situation.
         </p>
 
+        <h2>Nevada Community Property Laws</h2>
+        <p>
+          Nevada is a community property state, which means property acquired during marriage is generally considered community property and is divided equally (50/50) during divorce. However, separate property (owned before marriage or received as gifts/inheritance) remains with the original owner. Understanding these laws is essential for fair property division.
+        </p>
+        <p>
+          When it comes to your home, if it was purchased during marriage with marital funds, it's typically considered community property and subject to equal division. However, if one spouse owned the home before marriage or contributed separate property to the purchase, the division can be more complex. Dr. Jan Duffy helps you understand how Nevada's community property laws apply to your specific situation.
+        </p>
+
         <h2>Legal Considerations</h2>
         <p>
           Property division has legal implications that must be handled correctly. Dr. Jan Duffy works with family law attorneys to ensure property division agreements are structured correctly and comply with legal requirements.
@@ -116,6 +124,53 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
         <p>
           When court involvement is necessary, Dr. Jan Duffy can serve as an expert witness, providing professional opinions on property values and market conditions. Her expertise and credibility support your legal case.
         </p>
+
+        <h2>Frequently Asked Questions: Who Gets the House in a Divorce Nevada?</h2>
+        <div className="mt-8 space-y-6">
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Who Gets the House in a Divorce Nevada?</h3>
+            <p>
+              In Nevada, a community property state, the house is typically divided equally between spouses if it was acquired during marriage. However, who actually gets to keep the house depends on several factors:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 mt-2">
+              <li><strong>Agreement:</strong> If both spouses agree, one can keep the house by buying out the other's share</li>
+              <li><strong>Court Decision:</strong> If there's no agreement, the court may order the house sold and proceeds divided equally</li>
+              <li><strong>Children:</strong> The spouse with primary custody may be more likely to keep the house for stability</li>
+              <li><strong>Financial Ability:</strong> The spouse who can qualify for refinancing and afford the mortgage alone may keep it</li>
+              <li><strong>Separate Property:</strong> If one spouse owned the house before marriage, they may retain it, but may owe the other spouse for community property contributions</li>
+            </ul>
+            <p className="mt-3">
+              Dr. Jan Duffy helps divorcing homeowners understand their options and navigate the process of determining who gets the house in a divorce in Nevada. She provides accurate valuations, buyout calculations, and coordinates with attorneys to ensure fair outcomes.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">How is Property Divided in Nevada Divorce?</h3>
+            <p>
+              Nevada follows community property laws, meaning property acquired during marriage is divided equally (50/50). This includes the marital home, unless it was separate property. Dr. Jan Duffy provides accurate home valuations and equity calculations to ensure fair division according to Nevada law.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">What if We Can't Agree on Who Gets the House?</h3>
+            <p>
+              If spouses can't agree, the court may order the house sold and proceeds divided equally. Dr. Jan Duffy specializes in court-ordered home sales and ensures compliance with all court directives. She also helps mediate between parties to reach agreements when possible.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Can One Spouse Keep the House in Nevada Divorce?</h3>
+            <p>
+              Yes, one spouse can keep the house by buying out the other spouse's share. This requires accurate home valuation, calculating the buyout amount, and refinancing the mortgage to remove the other spouse. Dr. Jan Duffy helps navigate this entire process, from valuation to refinancing coordination.
+            </p>
+          </div>
+        </div>
+
+        <h2>Related Resources</h2>
+        <ul className="list-disc pl-6 space-y-2 mt-4">
+          <li><a href="/divorce-home-valuation" className="text-blue-600 hover:text-blue-700 underline">Get Your Home Valuation</a></li>
+          <li><a href="/divorce-buyout-options" className="text-blue-600 hover:text-blue-700 underline">Divorce Buyout Options</a></li>
+          <li><a href="/community-property-divorce-house" className="text-blue-600 hover:text-blue-700 underline">Community Property and Divorce</a></li>
+          <li><a href="/divorce-home-equity-split" className="text-blue-600 hover:text-blue-700 underline">Divorce Home Equity Split</a></li>
+          <li><a href="/selling-home-during-divorce" className="text-blue-600 hover:text-blue-700 underline">Selling Home During Divorce</a></li>
+        </ul>
 
         <h2>Get Expert Help with Property Division</h2>
         <p>

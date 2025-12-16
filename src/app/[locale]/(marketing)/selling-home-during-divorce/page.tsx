@@ -11,9 +11,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Selling Your Home During Divorce in Las Vegas | Dr. Jan Duffy',
-    description: 'Expert guidance for selling your home during divorce in Las Vegas. Specialized process, neutral representation, and proven results.',
-    keywords: 'selling home during divorce, divorce home sale, las vegas divorce home sale',
+    title: 'Selling House During Divorce Las Vegas | Dr. Jan Duffy',
+    description: 'Expert guidance for selling house during divorce in Las Vegas. Specialized divorce listing process, neutral representation, and proven results. Learn how to sell house during divorce.',
+    keywords: 'selling house during divorce Las Vegas, selling house during divorce, how to sell house during divorce, divorce home sale, las vegas divorce home sale, selling marital home divorce',
   };
 }
 
@@ -23,7 +23,7 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Selling Your Home During Divorce in Las Vegas"
+      h1="Selling House During Divorce Las Vegas"
       heroSubhead="Your House is Closure - Let's Help You Move Forward"
       showHomeValue
     >
@@ -142,6 +142,43 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
         <p>
           Once your home is sold, Dr. Jan Duffy helps ensure proceeds are distributed according to your agreement or court order. She coordinates with attorneys and financial professionals to ensure the closing supports your overall divorce resolution.
         </p>
+
+        <h2>Frequently Asked Questions: How to Sell House During Divorce</h2>
+        <div className="mt-8 space-y-6">
+          <div>
+            <h3 className="text-xl font-semibold mb-2">How to Sell House During Divorce?</h3>
+            <p>
+              Selling a house during divorce requires a specialized approach. The process begins with a confidential consultation where Dr. Jan Duffy provides an accurate home valuation and explains the divorce-specific listing process. She coordinates with both spouses and their attorneys, ensures compliance with court orders, and maintains neutral representation throughout. The key is working with a divorce real estate specialist who understands the unique challenges of divorce transactions.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">Can I Sell My House During Divorce?</h3>
+            <p>
+              Yes, you can sell your house during divorce, but it requires coordination and often court approval or agreement from both spouses. Dr. Jan Duffy helps navigate the legal requirements, coordinates with attorneys, and ensures all necessary approvals are obtained before listing. If one spouse won't agree to sell, court intervention may be necessary, which Dr. Jan Duffy can help coordinate.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">How Long Does It Take to Sell a House During Divorce?</h3>
+            <p>
+              The timeline varies based on Las Vegas market conditions, your property specifics, and any court orders or settlement agreements. Typically, well-priced homes in good condition sell within 30-90 days in Las Vegas. Dr. Jan Duffy provides realistic timelines based on your specific situation and keeps you informed throughout the process. For more details, see our <Link href="/divorce-home-sale-timeline" className="text-blue-600 hover:text-blue-700 underline">divorce home sale timeline guide</Link>.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2">What Happens to the Proceeds When Selling House During Divorce?</h3>
+            <p>
+              Proceeds from selling your house during divorce are typically divided according to your settlement agreement or court order. In Nevada, as a community property state, proceeds are usually split 50/50 unless otherwise specified. Dr. Jan Duffy coordinates with attorneys to ensure proceeds are distributed correctly. Learn more about <Link href="/splitting-house-proceeds-divorce" className="text-blue-600 hover:text-blue-700 underline">splitting house proceeds in divorce</Link>.
+            </p>
+          </div>
+        </div>
+
+        <h2>Related Resources</h2>
+        <ul className="list-disc pl-6 space-y-2 mt-4">
+          <li><Link href="/how-to-sell-house-during-divorce" className="text-blue-600 hover:text-blue-700 underline">Step-by-Step Guide: How to Sell House During Divorce</Link></li>
+          <li><Link href="/divorce-home-valuation" className="text-blue-600 hover:text-blue-700 underline">Get Your Free Home Valuation</Link></li>
+          <li><Link href="/divorce-listing-process" className="text-blue-600 hover:text-blue-700 underline">Understanding the Divorce Listing Process</Link></li>
+          <li><Link href="/divorce-home-sale-checklist" className="text-blue-600 hover:text-blue-700 underline">Divorce Home Sale Checklist</Link></li>
+          <li><Link href="/one-spouse-wont-sell-house-divorce" className="text-blue-600 hover:text-blue-700 underline">What to Do When One Spouse Won't Sell</Link></li>
+        </ul>
 
         <h2>Get Started Today</h2>
         <p>

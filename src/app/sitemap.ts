@@ -63,6 +63,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/quitclaim-deed-divorce',
     '/divorce-listing-process',
     '/court-ordered-home-sale',
+    // New long-tail content pages
+    '/how-to-sell-house-during-divorce',
+    '/can-i-sell-my-house-during-divorce',
+    '/what-to-do-with-house-in-divorce',
+    '/selling-house-before-or-after-divorce',
+    '/one-spouse-wont-sell-house-divorce',
+    '/remove-spouse-from-mortgage-after-divorce',
+    '/divorce-home-equity-split',
+    '/splitting-house-proceeds-divorce',
+    '/community-property-divorce-house',
+    '/capital-gains-tax-divorce-home-sale',
+    '/divorce-home-sale-taxes-nevada',
   ];
 
   // Community pages (medium-high priority)
@@ -96,6 +108,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/divorce-home-equity-calculator',
     '/divorce-net-proceeds-calculator',
     '/divorce-real-estate-checklist',
+    '/divorce-home-sale-checklist',
+    '/divorce-home-sale-timeline',
     '/preparing-home-sale-divorce',
     '/divorce-real-estate-documents',
     '/divorce-home-staging',
@@ -104,6 +118,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Educational guide pages (medium priority)
   const guidePages = [
     '/divorce-real-estate-guide',
+    '/selling-house-during-divorce-nevada-guide',
     '/divorce-real-estate-mistakes',
     '/emotional-guide-selling-divorce',
     '/financial-planning-divorce-real-estate',

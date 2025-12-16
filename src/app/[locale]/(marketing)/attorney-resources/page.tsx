@@ -11,9 +11,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Attorney Resources for Divorce Real Estate | Dr. Jan Duffy',
-    description: 'Resources for family law attorneys working on divorce cases involving real estate. Property valuations, expert testimony, and transaction coordination.',
-    keywords: 'divorce attorney resources, family law attorney real estate, divorce real estate expert witness',
+    title: 'Real Estate Expert Family Law | Divorce Attorney Real Estate Referral | Dr. Jan Duffy',
+    description: 'Real estate expert for family law attorneys. Divorce attorney real estate referral services. Property valuations, expert testimony, court-appointed real estate Nevada. B2B resources.',
+    keywords: 'real estate expert family law, divorce attorney real estate referral, family law real estate specialist, court appointed real estate Nevada, collaborative divorce real estate, real estate expert witness family law',
   };
 }
 

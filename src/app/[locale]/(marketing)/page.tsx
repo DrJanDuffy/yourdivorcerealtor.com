@@ -19,12 +19,12 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Dr. Jan Duffy | Divorce Real Estate Specialist Las Vegas',
-    description: 'Dr. Jan Duffy is Las Vegas\' trusted Divorce Real Estate specialist. Expert help with property division, home sales during divorce, buyouts, and fresh starts. Call (702) 222-1964.',
-    keywords: 'Dr. Jan Duffy, Divorce Real Estate, divorce realtor las vegas, divorce real estate specialist, las vegas divorce realtor, Dr Jan Duffy divorce, property division divorce',
+    title: 'Divorce Real Estate Agent Las Vegas | Dr. Jan Duffy - Divorce Realtor Near Me',
+    description: 'Dr. Jan Duffy is Las Vegas\' trusted Divorce Real Estate Agent. Expert divorce realtor near me helping with property division, home sales during divorce, buyouts, and fresh starts. Call (702) 222-1964.',
+    keywords: 'divorce real estate agent Las Vegas, divorce realtor near me, Dr. Jan Duffy, Divorce Real Estate, divorce realtor las vegas, divorce real estate specialist, las vegas divorce realtor, Dr Jan Duffy divorce, property division divorce',
     openGraph: {
-      title: 'Dr. Jan Duffy | Divorce Real Estate Specialist',
-      description: 'Las Vegas\' trusted Divorce Real Estate specialist helping divorcing homeowners navigate property division with compassion and expertise.',
+      title: 'Divorce Real Estate Agent Las Vegas | Dr. Jan Duffy',
+      description: 'Las Vegas\' trusted Divorce Real Estate Agent helping divorcing homeowners navigate property division with compassion and expertise.',
       type: 'website',
     },
   };

@@ -13,9 +13,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Summerlin Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Summerlin, Las Vegas. Helping divorcing homeowners navigate property division and home sales.',
-    keywords: 'divorce realtor summerlin, summerlin divorce real estate, divorce realtor summerlin las vegas',
+    title: 'Summerlin Divorce Realtor | Divorce Realtor Summerlin | Dr. Jan Duffy',
+    description: 'Divorce realtor Summerlin helping divorcing homeowners. Summerlin divorce home sale expert. Property division, home sales, and buyouts in Summerlin, Las Vegas.',
+    keywords: 'divorce realtor Summerlin, Summerlin divorce realtor, Summerlin divorce home sale, divorce real estate Summerlin, divorce realtor Summerlin Las Vegas',
   };
 }
 
@@ -26,8 +26,8 @@ export default async function Summerlin(props: ISummerlinProps) {
   return (
     <>
       <DivorcePageTemplate
-        h1="Divorce Realtor in Summerlin Las Vegas"
-        heroSubhead="Expert Divorce Real Estate Services in Summerlin"
+        h1="Divorce Realtor Summerlin"
+        heroSubhead="Summerlin Divorce Home Sale Expert"
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Summerlin Divorce Real Estate Expertise</h2>

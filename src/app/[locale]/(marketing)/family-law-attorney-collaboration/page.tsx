@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Working with Family Law Attorneys on Divorce Property | Dr. Jan Duffy',
-    description: 'Professional collaboration with family law attorneys on divorce property cases. Expert coordination and support.',
-    keywords: 'family law attorney collaboration, divorce attorney real estate, attorney real estate coordination',
+    title: 'Family Law Real Estate Specialist | Collaborative Divorce Real Estate | Dr. Jan Duffy',
+    description: 'Family law real estate specialist collaborating with attorneys. Collaborative divorce real estate services. Expert coordination, property valuations, and transaction support for family law cases.',
+    keywords: 'family law real estate specialist, collaborative divorce real estate, real estate expert family law, divorce attorney collaboration, family law attorney real estate coordination',
   };
 }
 

@@ -12,9 +12,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in North Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in North Las Vegas. Helping divorcing homeowners navigate property division and home sales.',
-    keywords: 'divorce realtor north las vegas, north las vegas divorce real estate',
+    title: 'North Las Vegas Divorce Realtor | Divorce Home Sale North Las Vegas | Dr. Jan Duffy',
+    description: 'Divorce home sale North Las Vegas expert. North Las Vegas divorce realtor helping divorcing homeowners with property division, home sales, and buyouts.',
+    keywords: 'divorce home sale North Las Vegas, North Las Vegas divorce realtor, divorce realtor North Las Vegas, North Las Vegas divorce real estate, divorce real estate agent North Las Vegas',
   };
 }
 
@@ -25,8 +25,8 @@ export default async function NorthLasVegas(props: INorthLasVegasProps) {
   return (
     <>
       <DivorcePageTemplate
-        h1="Divorce Realtor in North Las Vegas"
-        heroSubhead="Expert Divorce Real Estate Services in North Las Vegas"
+        h1="North Las Vegas Divorce Realtor"
+        heroSubhead="Divorce Home Sale North Las Vegas - Expert Guidance"
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>North Las Vegas Divorce Real Estate Expertise</h2>
