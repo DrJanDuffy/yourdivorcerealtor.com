@@ -7,6 +7,11 @@ import { useState } from 'react';
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Only render UserButton on client-side to avoid SSG issues
+  // Check if we're in the browser and Clerk is configured
+  const showUserButton = typeof window !== 'undefined'
+    && !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       {/* Top Banner */}
@@ -54,7 +59,9 @@ export function Header() {
             <a href="tel:+12562709393" className="font-semibold text-blue-600 hover:text-blue-700">
               (256) 270-9393
             </a>
-            <UserButton afterSignOutUrl="/" />
+            {showUserButton && (
+              <UserButton afterSignOutUrl="/" />
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,9 +119,11 @@ export function Header() {
             <a href="tel:+12562709393" className="block font-semibold text-blue-600">
               (256) 270-9393
             </a>
-            <div className="pt-4">
-              <UserButton afterSignOutUrl="/" />
-            </div>
+            {showUserButton && (
+              <div className="pt-4">
+                <UserButton afterSignOutUrl="/" />
+              </div>
+            )}
           </div>
         )}
       </nav>

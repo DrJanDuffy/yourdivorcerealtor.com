@@ -11,6 +11,9 @@ type IIndexProps = {
   params: Promise<{ locale: string }>;
 };
 
+// Disable static generation for pages with Clerk components
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Best Real Estate Agent Team | Your Divorce Realtor',

@@ -7,6 +7,9 @@ type IPortfolioDetailProps = {
   params: Promise<{ slug: string; locale: string }>;
 };
 
+// Disable static generation for pages with Clerk components
+export const dynamic = 'force-dynamic';
+
 export function generateStaticParams() {
   return routing.locales
     .map(locale =>

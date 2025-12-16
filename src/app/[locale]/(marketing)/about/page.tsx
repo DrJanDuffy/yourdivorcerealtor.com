@@ -6,6 +6,9 @@ type IAboutProps = {
   params: Promise<{ locale: string }>;
 };
 
+// Disable static generation for pages with Clerk components
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(props: IAboutProps): Promise<Metadata> {
   const { locale } = await props.params;
   const t = await getTranslations({
