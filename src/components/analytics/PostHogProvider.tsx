@@ -13,7 +13,7 @@ export const PostHogProvider = (props: { children: React.ReactNode }) => {
 
   // Initialize PostHog with privacy-focused configuration
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && Env.NEXT_PUBLIC_POSTHOG_KEY) {
       posthog.init(Env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: Env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
         capture_pageview: false, // Disable automatic pageview capture
