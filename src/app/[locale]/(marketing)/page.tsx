@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { PageProps } from '@/types';
 import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorceHero } from '@/components/divorce/DivorceHero';
@@ -13,10 +14,6 @@ import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListi
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { Testimonials } from '@/components/sections/Testimonials';
 
-type IIndexProps = {
-  params: Promise<{ locale: string }>;
-};
-
 // Disable static generation for pages with Clerk components
 export const dynamic = 'force-dynamic';
 
@@ -28,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function Index(props: IIndexProps) {
+export default async function Index(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 

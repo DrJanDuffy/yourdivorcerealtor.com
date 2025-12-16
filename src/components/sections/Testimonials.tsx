@@ -1,13 +1,7 @@
 'use client';
 
+import type { Testimonial } from '@/types';
 import { Suspense, startTransition, useState } from 'react';
-
-type Testimonial = {
-  id: string;
-  name: string;
-  text: string;
-  imageUrl?: string;
-};
 
 const testimonials: Testimonial[] = [
   {

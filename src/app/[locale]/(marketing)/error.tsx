@@ -1,5 +1,6 @@
 'use client';
 
+import type { ErrorPageProps } from '@/types';
 import { useEffect } from 'react';
 import Link from 'next/link';
 
@@ -7,13 +8,7 @@ import Link from 'next/link';
  * Error boundary for marketing pages
  * Provides friendly error messaging for divorce clients
  */
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error({ error, reset }: ErrorPageProps) {
   useEffect(() => {
     // Log error to monitoring service
     console.error('Marketing page error:', error);

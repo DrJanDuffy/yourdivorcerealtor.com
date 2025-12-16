@@ -1,18 +1,13 @@
 'use client';
 
+import type { ErrorPageProps } from '@/types';
 import { useEffect } from 'react';
 
 /**
  * Global error boundary for the entire application
  * Catches errors that escape other error boundaries
  */
-export default function GlobalError({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function GlobalError({ error, reset }: ErrorPageProps) {
   useEffect(() => {
     // Log to error monitoring service
     console.error('Global error:', error);

@@ -1,12 +1,10 @@
+import type { LayoutProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { Footer } from '@/components/layouts/Footer';
 import { Header } from '@/components/layouts/Header';
 
-export default async function Layout(props: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function Layout(props: LayoutProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 

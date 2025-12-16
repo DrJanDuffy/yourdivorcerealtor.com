@@ -1,10 +1,7 @@
 import type { Metadata } from 'next';
+import type { PageProps, PropertyListing } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import { PropertyCard } from '@/components/sections/PropertyCard';
-
-type HomesPageProps = {
-  params: Promise<{ locale: string }>;
-};
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -14,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // Mock listings - replace with real data from your API/database
-const allListings = [
+const allListings: PropertyListing[] = [
   {
     id: '1',
     address: '216 Arcadian Way',
@@ -26,7 +23,7 @@ const allListings = [
     mlsNumber: '21905765',
     agentName: 'Rochon Hall',
     agentPhone: '256-270-9393',
-    status: 'New' as const,
+    status: 'New',
   },
   {
     id: '2',
@@ -39,7 +36,7 @@ const allListings = [
     mlsNumber: '21905764',
     agentName: 'Rochon Hall',
     agentPhone: '256-270-9393',
-    status: 'New' as const,
+    status: 'New',
   },
   {
     id: '3',
@@ -52,11 +49,11 @@ const allListings = [
     mlsNumber: '21902045',
     agentName: 'Benjamin Waye',
     agentPhone: '256-270-9393',
-    status: 'Active' as const,
+    status: 'Active',
   },
 ];
 
-export default async function HomesPage(props: HomesPageProps) {
+export default async function HomesPage(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 

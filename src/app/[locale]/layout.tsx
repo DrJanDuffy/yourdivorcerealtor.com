@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { LayoutProps } from '@/types';
 import { ClerkProvider } from '@clerk/nextjs';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
@@ -42,10 +43,7 @@ export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
 }
 
-export default async function RootLayout(props: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function RootLayout(props: LayoutProps) {
   const { locale } = await props.params;
 
   if (!hasLocale(routing.locales, locale)) {
