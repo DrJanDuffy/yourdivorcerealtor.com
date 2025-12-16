@@ -1,19 +1,9 @@
+import type { PropertyListing } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type PropertyCardProps = {
+type PropertyCardProps = Omit<PropertyListing, 'id'> & {
   id: string;
-  address: string;
-  city: string;
-  price: number;
-  beds: number;
-  baths: number;
-  sqft: number;
-  mlsNumber: string;
-  agentName: string;
-  agentPhone: string;
-  imageUrl?: string;
-  status?: 'New' | 'Active';
 };
 
 export function PropertyCard({
@@ -26,7 +16,7 @@ export function PropertyCard({
   mlsNumber,
   agentName,
   agentPhone,
-  imageUrl = '/placeholder-property.jpg',
+  imageUrl,
   status = 'Active',
 }: PropertyCardProps) {
   const formattedPrice = new Intl.NumberFormat('en-US', {
@@ -45,19 +35,37 @@ export function PropertyCard({
               New
             </div>
           )}
-          <div className="absolute top-2 right-2 z-10 rounded bg-blue-600 px-3 py-1 text-sm font-semibold text-white">
-            {status}
-          </div>
-          <Image
-            src={imageUrl}
-            alt={`${address}, ${city}`}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-          />
+          {status && (
+            <div
+              className={`absolute top-2 right-2 z-10 rounded px-3 py-1 text-sm font-semibold text-white ${
+                status === 'New'
+                  ? 'bg-green-500'
+                  : status === 'Active'
+                    ? 'bg-blue-600'
+                    : status === 'Pending'
+                      ? 'bg-yellow-500'
+                      : 'bg-gray-500'
+              }`}
+            >
+              {status}
+            </div>
+          )}
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              alt={`${address}, ${city}`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center bg-gray-300 text-gray-500">
+              <span>No Image</span>
+            </div>
+          )}
         </div>
 
         {/* Content */}
