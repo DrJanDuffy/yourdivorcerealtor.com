@@ -54,12 +54,16 @@ The project is configured with:
 
 ### 4. Database Migrations
 
-Database migrations run automatically during the build process via the `build` script:
-```json
-"build": "run-s db:migrate build:next"
-```
+Database migrations are **optional** during the build process. The build script will:
+- Skip migrations if `DATABASE_URL` is not set
+- Skip migrations if `SKIP_MIGRATIONS=true` is set
+- Attempt to run migrations if `DATABASE_URL` is available
+- **Not fail the build** if migrations fail (they can be run separately)
 
-**Important**: Ensure `DATABASE_URL` is set in Vercel environment variables before deploying, as migrations require database access.
+**Important**: 
+- If you want migrations to run during build, ensure `DATABASE_URL` is set in Vercel environment variables
+- If migrations fail during build, you can run them manually or set up a post-deploy hook
+- For production, consider running migrations separately via a Vercel Post-Deploy hook or manually
 
 ### 5. Deploy
 

@@ -30,9 +30,9 @@ if (process.env.ANALYZE === 'true') {
 
 // Conditionally enable Sentry configuration
 if (
-  !process.env.NEXT_PUBLIC_SENTRY_DISABLED &&
-  process.env.SENTRY_ORGANIZATION &&
-  process.env.SENTRY_PROJECT
+  !process.env.NEXT_PUBLIC_SENTRY_DISABLED
+  && process.env.SENTRY_ORGANIZATION
+  && process.env.SENTRY_PROJECT
 ) {
   configWithPlugins = withSentryConfig(configWithPlugins, {
     // For all available options, see:
