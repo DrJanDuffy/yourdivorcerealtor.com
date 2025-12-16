@@ -27,7 +27,7 @@ export function FourPillars() {
               <h3 className="text-2xl font-bold text-blue-600 mb-4">
                 {pillar.title}
               </h3>
-              <p className="text-gray-700">{pillar.message || pillar.description}</p>
+              <p className="text-gray-700">{pillar.message}</p>
             </div>
           ))}
         </div>
