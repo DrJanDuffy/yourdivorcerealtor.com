@@ -1,9 +1,14 @@
 import type { NextRequest } from 'next/server';
+import createIntlMiddleware from 'next-intl/middleware';
+import { routing } from './libs/I18nRouting';
+
+// Create the next-intl middleware for i18n routing
+const intlMiddleware = createIntlMiddleware(routing);
 
 /**
  * Next.js 16 proxy.ts replaces middleware.ts
  * Runs on Node.js runtime (not Edge)
- * Handles redirects and request processing for Vercel deployment
+ * Handles redirects, i18n routing, and request processing
  */
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
@@ -21,13 +26,22 @@ export function proxy(request: NextRequest) {
     return Response.redirect(url, 301);
   }
 
-  // Log request for analytics (non-blocking)
-  // In production, you might want to send this to your analytics service
-  if (process.env.NODE_ENV === 'production') {
-    // Log request metadata (no PII)
-    console.log(`[${new Date().toISOString()}] ${request.method} ${url.pathname}`);
+  // Skip i18n for API routes, static files, and Next.js internals
+  const pathname = request.nextUrl.pathname;
+  if (
+    pathname.startsWith('/api')
+    || pathname.startsWith('/_next')
+    || pathname.startsWith('/_vercel')
+    || pathname.includes('.')
+  ) {
+    return undefined;
   }
 
-  // Continue with the request
-  return undefined;
+  // Apply i18n middleware for all other routes
+  return intlMiddleware(request);
 }
+
+// Export config for matcher (required for proxy.ts in Next.js 16)
+export const config = {
+  matcher: ['/', '/(en|fr)/:path*', '/((?!api|_next|_vercel|.*\\..*).*)'],
+};
