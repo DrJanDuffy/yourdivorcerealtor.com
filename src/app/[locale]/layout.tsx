@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import { PostHogProvider } from '@/components/analytics/PostHogProvider';
 import { DemoBadge } from '@/components/DemoBadge';
 import { routing } from '@/libs/I18nRouting';
@@ -65,6 +66,13 @@ export default async function RootLayout(props: {
 
   return (
     <html lang={locale}>
+      <head>
+        <Script
+          src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
+          type="module"
+          strategy="lazyOnload"
+        />
+      </head>
       <body>
         <ClerkProvider
           appearance={{

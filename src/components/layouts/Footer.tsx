@@ -7,43 +7,38 @@ export function Footer() {
     <footer className="bg-gray-900 py-12 text-white">
       <div className="container mx-auto px-4">
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
-          {/* Our Communities */}
+          {/* Las Vegas Communities */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Our Communities</h3>
+            <h3 className="mb-4 text-lg font-semibold">Las Vegas Communities</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/communities/madison" className="text-gray-300 hover:text-white">
-                  Madison
+                <Link href="/divorce-realtor-henderson" className="text-gray-300 hover:text-white">
+                  Henderson
                 </Link>
               </li>
               <li>
-                <Link href="/communities/harvest" className="text-gray-300 hover:text-white">
-                  Harvest
+                <Link href="/divorce-realtor-summerlin" className="text-gray-300 hover:text-white">
+                  Summerlin
                 </Link>
               </li>
               <li>
-                <Link href="/communities/decatur" className="text-gray-300 hover:text-white">
-                  Decatur
+                <Link href="/divorce-realtor-north-las-vegas" className="text-gray-300 hover:text-white">
+                  North Las Vegas
                 </Link>
               </li>
               <li>
-                <Link href="/communities/huntsville" className="text-gray-300 hover:text-white">
-                  Huntsville
+                <Link href="/divorce-realtor-green-valley" className="text-gray-300 hover:text-white">
+                  Green Valley
                 </Link>
               </li>
               <li>
-                <Link href="/communities/athens" className="text-gray-300 hover:text-white">
-                  Athens
+                <Link href="/divorce-realtor-southern-highlands" className="text-gray-300 hover:text-white">
+                  Southern Highlands
                 </Link>
               </li>
               <li>
-                <Link href="/communities/meridianville" className="text-gray-300 hover:text-white">
-                  Meridianville
-                </Link>
-              </li>
-              <li>
-                <Link href="/communities/hampton-cove" className="text-gray-300 hover:text-white">
-                  Hampton Cove
+                <Link href="/divorce-realtor-spring-valley" className="text-gray-300 hover:text-white">
+                  Spring Valley
                 </Link>
               </li>
             </ul>
@@ -54,23 +49,28 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/homes" className="text-gray-300 hover:text-white">
-                  Search
+                <Link href="/divorce-home-valuation" className="text-gray-300 hover:text-white">
+                  Home Valuation
                 </Link>
               </li>
               <li>
-                <Link href="/sell" className="text-gray-300 hover:text-white">
-                  Selling Process
+                <Link href="/selling-home-during-divorce" className="text-gray-300 hover:text-white">
+                  Selling During Divorce
                 </Link>
               </li>
               <li>
-                <Link href="/sell/instant-offer" className="text-gray-300 hover:text-white">
-                  Instant Offer
+                <Link href="/buying-home-after-divorce" className="text-gray-300 hover:text-white">
+                  Buying After Divorce
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-white">
-                  About Us
+                <Link href="/attorney-resources" className="text-gray-300 hover:text-white">
+                  Attorney Resources
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="text-gray-300 hover:text-white">
+                  FAQ
                 </Link>
               </li>
             </ul>
@@ -78,14 +78,19 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Your Divorce Realtor</h3>
+            <h3 className="mb-4 text-lg font-semibold">Dr. Jan Duffy, REALTOR</h3>
             <ul className="space-y-2 text-gray-300">
-              <li>100 Providence Main St, Suite B</li>
-              <li>Huntsville, AL 35806</li>
+              <li>Berkshire Hathaway HomeServices Sahara</li>
+              <li>Las Vegas, NV</li>
               <li>
-                <a href="tel:+12562709393" className="hover:text-white">
-                  Phone: (256) 270-9393
+                <a href="tel:+17025551234" className="hover:text-white">
+                  Phone: (702) 555-1234
                 </a>
+              </li>
+              <li className="mt-4">
+                <Link href="/about" className="text-gray-300 hover:text-white">
+                  About Dr. Jan
+                </Link>
               </li>
             </ul>
           </div>

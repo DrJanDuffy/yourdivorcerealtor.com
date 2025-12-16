@@ -17,10 +17,10 @@ export function Header() {
       {/* Top Banner */}
       <div className="bg-blue-600 py-2 text-center text-sm text-white">
         <p>
-          Skip the Showings. Get an Instant Offer.
+          Skip the Stress. Get Expert Divorce Real Estate Help.
           {' '}
-          <Link href="/sell/instant-offer" className="font-semibold underline">
-            Get My Offer
+          <Link href="/contact" className="font-semibold underline">
+            Schedule a Consultation
           </Link>
         </p>
       </div>
@@ -36,28 +36,31 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center space-x-8 lg:flex">
-            <Link href="/homes" className="font-medium text-gray-700 hover:text-blue-600">
-              Homes for Sale
+          <div className="hidden items-center space-x-6 lg:flex">
+            <Link href="/" className="font-medium text-gray-700 hover:text-blue-600">
+              Home
             </Link>
-            <Link href="/communities" className="font-medium text-gray-700 hover:text-blue-600">
-              Communities
+            <Link href="/divorce-real-estate-services" className="font-medium text-gray-700 hover:text-blue-600">
+              Divorce Specialist
             </Link>
-            <Link href="/sell" className="font-medium text-gray-700 hover:text-blue-600">
-              Sell
+            <Link href="/divorce-realtor-henderson" className="font-medium text-gray-700 hover:text-blue-600">
+              Las Vegas Communities
+            </Link>
+            <Link href="/attorney-resources" className="font-medium text-gray-700 hover:text-blue-600">
+              Resources
             </Link>
             <Link href="/about" className="font-medium text-gray-700 hover:text-blue-600">
-              About
+              About Dr. Jan
             </Link>
-            <Link href="/dashboard" className="font-medium text-gray-700 hover:text-blue-600">
-              My Dashboard
+            <Link href="/contact" className="font-medium text-gray-700 hover:text-blue-600">
+              Contact
             </Link>
           </div>
 
           {/* Right Side - Phone & Auth */}
           <div className="hidden items-center space-x-6 lg:flex">
-            <a href="tel:+12562709393" className="font-semibold text-blue-600 hover:text-blue-700">
-              (256) 270-9393
+            <a href="tel:+17025551234" className="font-semibold text-blue-600 hover:text-blue-700">
+              (702) 555-1234
             </a>
             {showUserButton && (
               <UserButton afterSignOutUrl="/" />
@@ -101,23 +104,26 @@ export function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="space-y-4 py-4 lg:hidden">
-            <Link href="/homes" className="block text-gray-700 hover:text-blue-600">
-              Homes for Sale
+            <Link href="/" className="block text-gray-700 hover:text-blue-600">
+              Home
             </Link>
-            <Link href="/communities" className="block text-gray-700 hover:text-blue-600">
-              Communities
+            <Link href="/divorce-real-estate-services" className="block text-gray-700 hover:text-blue-600">
+              Divorce Specialist
             </Link>
-            <Link href="/sell" className="block text-gray-700 hover:text-blue-600">
-              Sell
+            <Link href="/divorce-realtor-henderson" className="block text-gray-700 hover:text-blue-600">
+              Las Vegas Communities
+            </Link>
+            <Link href="/attorney-resources" className="block text-gray-700 hover:text-blue-600">
+              Resources
             </Link>
             <Link href="/about" className="block text-gray-700 hover:text-blue-600">
-              About
+              About Dr. Jan
             </Link>
-            <Link href="/dashboard" className="block text-gray-700 hover:text-blue-600">
-              My Dashboard
+            <Link href="/contact" className="block text-gray-700 hover:text-blue-600">
+              Contact
             </Link>
-            <a href="tel:+12562709393" className="block font-semibold text-blue-600">
-              (256) 270-9393
+            <a href="tel:+17025551234" className="block font-semibold text-blue-600">
+              (702) 555-1234
             </a>
             {showUserButton && (
               <div className="pt-4">

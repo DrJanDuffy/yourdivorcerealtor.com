@@ -1,0 +1,57 @@
+import type { Metadata } from 'next';
+import { setRequestLocale } from 'next-intl/server';
+import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+
+type IQuitclaimProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Quitclaim Deed in Divorce Transactions | Dr. Jan Duffy',
+    description: 'Expert guidance for quitclaim deeds in divorce. Transfer ownership correctly with professional assistance.',
+    keywords: 'quitclaim deed divorce, transfer property divorce, divorce property transfer',
+  };
+}
+
+export default async function QuitclaimDeed(props: IQuitclaimProps) {
+  const { locale } = await props.params;
+  setRequestLocale(locale);
+
+  return (
+    <DivorcePageTemplate
+      h1="Quitclaim Deed in Divorce Transactions"
+      heroSubhead="Transfer Ownership Correctly"
+    >
+      <div className="max-w-4xl mx-auto prose prose-lg">
+        <h2>Understanding Quitclaim Deeds in Divorce</h2>
+        <p>
+          A quitclaim deed transfers ownership interest in a property from one person to another. In divorce, it's often used when one spouse transfers their interest to the other, typically as part of a buyout or property division agreement. Dr. Jan Duffy helps ensure quitclaim deeds are handled correctly, coordinating with attorneys to ensure legal compliance and proper documentation.
+        </p>
+
+        <h3>How Quitclaim Deeds Work</h3>
+        <p>
+          A quitclaim deed transfers whatever interest the grantor has in the property to the grantee. It doesn't guarantee the grantor has clear title, but in divorce situations where both parties are on the deed, it effectively transfers one spouse's interest to the other.
+        </p>
+
+        <h2>When Quitclaim Deeds Are Used</h2>
+        <p>
+          Quitclaim deeds are commonly used in divorce when one spouse is keeping the home and buying out the other's share. They're also used when property is being transferred as part of a settlement agreement.
+        </p>
+
+        <h2>Legal Requirements</h2>
+        <p>
+          Quitclaim deeds must be prepared correctly and recorded with the county recorder's office. Dr. Jan Duffy coordinates with attorneys to ensure quitclaim deeds are handled properly and legally compliant.
+        </p>
+
+        <h2>Get Quitclaim Deed Help Today</h2>
+        <p>
+          Quitclaim deeds are important legal documents that must be handled correctly. Dr. Jan Duffy provides the coordination and expertise you need to ensure quitclaim deeds are processed properly. Schedule a consultation today.
+        </p>
+      </div>
+    </DivorcePageTemplate>
+  );
+}
+
