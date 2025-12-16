@@ -109,7 +109,7 @@ export async function submitValuation(
     if (error instanceof z.ZodError) {
       return {
         success: false,
-        error: error.errors[0]?.message || 'Invalid form data',
+        error: error.issues[0]?.message || 'Invalid form data',
       };
     }
 
