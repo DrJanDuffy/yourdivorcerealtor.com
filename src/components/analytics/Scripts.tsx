@@ -1,5 +1,4 @@
 import Script from 'next/script';
-import { Env } from '@/libs/Env';
 
 /**
  * Centralized Third-Party Scripts Component
