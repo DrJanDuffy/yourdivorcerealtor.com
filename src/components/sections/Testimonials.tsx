@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, lazy, startTransition, useState } from 'react';
+import { Suspense, startTransition, useState } from 'react';
 
 type Testimonial = {
   id: string;
