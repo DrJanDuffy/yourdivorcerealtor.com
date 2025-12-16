@@ -29,6 +29,8 @@ export default antfu(
     // Ignored paths
     ignores: [
       'migrations/**/*',
+      '**/*.md',
+      'vercel.json',
     ],
   },
   // --- Accessibility Rules ---
