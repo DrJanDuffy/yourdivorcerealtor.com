@@ -1,7 +1,5 @@
-'use client';
-
 import type { Testimonial } from '@/types';
-import { Suspense, startTransition, useState } from 'react';
+import { Suspense } from 'react';
 
 const testimonials: Testimonial[] = [
   {
@@ -28,21 +26,16 @@ const testimonials: Testimonial[] = [
 
 /**
  * Optimized Testimonials Component
- * - Lazy loading for better performance
- * - View Transitions for smooth animations
  * - Review schema for SEO
+ * - CSS-based hover transitions
  */
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  const [isVisible, setIsVisible] = useState(false);
-
   return (
     <div
       className="rounded-lg bg-gray-50 p-6 shadow-sm transition-all duration-300 hover:shadow-md"
       style={{
         viewTransitionName: `testimonial-${testimonial.id}`,
       }}
-      onMouseEnter={() => startTransition(() => setIsVisible(true))}
-      onMouseLeave={() => startTransition(() => setIsVisible(false))}
     >
       <div className="mb-4 flex items-center">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
