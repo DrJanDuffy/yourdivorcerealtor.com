@@ -67,17 +67,21 @@ export function Header() {
       {/* Main Navigation */}
       <nav className="container mx-auto px-4" aria-label="Main navigation">
         <div className="flex h-20 items-center justify-between">
-          {/* Logo */}
+          {/* Logo - SEO Optimized with Schema Markup */}
           <Link
             href="/"
-            className="flex items-center space-x-2 rounded focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            className="flex flex-col rounded focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             prefetch={true}
             aria-label="Dr. Jan Duffy - Divorce Real Estate Specialist Home"
+            itemScope
+            itemType="https://schema.org/RealEstateAgent"
           >
-            <div className="text-2xl font-bold text-blue-600">
+            <span className="text-2xl font-bold text-blue-600" itemProp="name">
               Dr. Jan Duffy
-            </div>
-            <span className="hidden text-sm text-gray-500 sm:inline">Divorce Real Estate</span>
+            </span>
+            <span className="text-sm font-medium text-gray-600" itemProp="description">
+              Divorce Real Estate Specialist
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
