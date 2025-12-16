@@ -13,7 +13,8 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 function RealScoutWidget() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  // Error state reserved for future widget load error detection
+  const hasError = false;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
