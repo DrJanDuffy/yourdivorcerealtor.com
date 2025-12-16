@@ -60,7 +60,7 @@ export function DivorceProcess() {
               {steps.map((step, index) => (
                 <div
                   key={step.number}
-                  className="relative flex items-start gap-6 group"
+                  className="relative flex items-start gap-6 group process-step"
                 >
                   {/* Step number circle */}
                   <div className="relative z-10 flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-700">
@@ -87,43 +87,6 @@ export function DivorceProcess() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .group {
-          animation: fadeInUp 0.6s ease-out;
-          animation-fill-mode: both;
-        }
-
-        .group:nth-child(1) {
-          animation-delay: 0.1s;
-        }
-        .group:nth-child(2) {
-          animation-delay: 0.2s;
-        }
-        .group:nth-child(3) {
-          animation-delay: 0.3s;
-        }
-        .group:nth-child(4) {
-          animation-delay: 0.4s;
-        }
-        .group:nth-child(5) {
-          animation-delay: 0.5s;
-        }
-        .group:nth-child(6) {
-          animation-delay: 0.6s;
-        }
-      `}</style>
     </section>
   );
 }
