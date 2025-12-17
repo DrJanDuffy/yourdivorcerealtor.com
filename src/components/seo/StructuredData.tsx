@@ -4,7 +4,7 @@
  */
 
 type StructuredDataProps = {
-  data: Record<string, unknown> | Record<string, unknown>[];
+  data: object | object[];
 };
 
 /**
