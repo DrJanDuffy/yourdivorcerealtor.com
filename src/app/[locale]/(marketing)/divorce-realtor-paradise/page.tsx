@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Paradise Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Paradise, Las Vegas.',
-    keywords: 'divorce realtor paradise, paradise las vegas divorce real estate',
+    title: 'Paradise Las Vegas Divorce Realtor | Divorce Real Estate Agent Paradise NV | Dr. Jan Duffy',
+    description: 'Paradise Las Vegas divorce realtor providing property division guidance, house sale strategy, and neutral representation for divorcing homeowners. Call (702) 222-1964.',
+    keywords: 'Paradise Las Vegas divorce realtor, divorce real estate agent Paradise NV, selling house divorce Paradise, Las Vegas Strip area divorce realtor',
   };
 }
 
@@ -22,8 +22,8 @@ export default async function Paradise(props: IParadiseProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Divorce Realtor in Paradise Las Vegas"
-      heroSubhead="Expert Divorce Real Estate Services in Paradise"
+      h1="Paradise Las Vegas Divorce Realtor"
+      heroSubhead="Divorce Real Estate Agent Paradise NV"
       showHomeValue
     >
       <div className="max-w-4xl mx-auto prose prose-lg">

@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Mountains Edge Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Mountains Edge, Las Vegas.',
-    keywords: 'divorce realtor mountains edge, mountains edge las vegas divorce real estate',
+    title: 'Mountains Edge Las Vegas Divorce Realtor | Divorce Real Estate Agent Mountains Edge NV | Dr. Jan Duffy',
+    description: 'Mountains Edge Las Vegas divorce realtor supporting homeowners with valuations, listings, and property division during divorce. Call (702) 222-1964.',
+    keywords: 'Mountains Edge Las Vegas divorce realtor, divorce real estate agent Mountains Edge NV, selling house divorce Mountains Edge, southwest Las Vegas divorce agent',
   };
 }
 
@@ -22,8 +22,8 @@ export default async function MountainsEdge(props: IMountainsEdgeProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Divorce Realtor in Mountains Edge Las Vegas"
-      heroSubhead="Expert Divorce Real Estate Services in Mountains Edge"
+      h1="Mountains Edge Las Vegas Divorce Realtor"
+      heroSubhead="Divorce Real Estate Agent Mountains Edge NV"
       showHomeValue
     >
       <div className="max-w-4xl mx-auto prose prose-lg">

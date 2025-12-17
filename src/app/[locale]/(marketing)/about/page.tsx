@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IAboutProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function About(props: IAboutProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Consultation',
+    'Expert divorce real estate services in Las Vegas. Specialized in helping divorcing homeowners navigate property division with compassion and expertise.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Dr. Jan Duffy - Your Las Vegas Divorce Real Estate Expert"
-      heroSubhead="Your Divorce Real Estate Specialist"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Dr. Jan Duffy - Your Las Vegas Divorce Real Estate Expert"
+        heroSubhead="Your Divorce Real Estate Specialist"
+        currentPath="/about"
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Why Specialization Matters in Divorce Real Estate</h2>
         <p>
@@ -154,6 +170,7 @@ export default async function About(props: IAboutProps) {
           It's never too early to discuss your real estate options during divorce. Whether you're just beginning the divorce process or you're ready to move forward with a property transaction, Dr. Jan Duffy is here to help. Schedule a confidential consultation to discuss your situation and learn how specialized divorce real estate expertise can support your journey to a new beginning.
         </p>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }

@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Spring Valley Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Spring Valley, Las Vegas.',
-    keywords: 'divorce realtor spring valley, spring valley las vegas divorce real estate',
+    title: 'Spring Valley Las Vegas Divorce Realtor | Divorce Real Estate Agent Spring Valley NV | Dr. Jan Duffy',
+    description: 'Spring Valley Las Vegas divorce realtor helping with property division, selling houses during divorce, and neutral representation. Call (702) 222-1964.',
+    keywords: 'Spring Valley Las Vegas divorce realtor, divorce real estate agent Spring Valley NV, selling house divorce Spring Valley, Las Vegas divorce property division',
   };
 }
 
@@ -22,8 +22,8 @@ export default async function SpringValley(props: ISpringValleyProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Divorce Realtor in Spring Valley Las Vegas"
-      heroSubhead="Expert Divorce Real Estate Services in Spring Valley"
+      h1="Spring Valley Las Vegas Divorce Realtor"
+      heroSubhead="Divorce Real Estate Agent Spring Valley NV"
       showHomeValue
     >
       <div className="max-w-4xl mx-auto prose prose-lg">

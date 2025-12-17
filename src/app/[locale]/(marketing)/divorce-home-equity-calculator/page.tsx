@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IEquityCalculatorProps = {
   params: Promise<{ locale: string }>;
@@ -20,9 +25,20 @@ export default async function HomeEquityCalculator(props: IEquityCalculatorProps
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-home-equity-calculator';
+  const serviceSchema = generateServiceSchema(
+    'Home Equity Calculator',
+    'Calculate your home equity for divorce property division. Understand your equity position with our calculator and expert guidance.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Home Equity Calculator Las Vegas"
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Home Equity Calculator Las Vegas"
+        currentPath={currentPath}
       heroSubhead="Know Your Equity Position"
       showHomeValue
     >
@@ -67,7 +83,8 @@ export default async function HomeEquityCalculator(props: IEquityCalculatorProps
           Understanding your equity position is essential for property division. Use the home value widget below to get started, or schedule a consultation with Dr. Jan Duffy for a comprehensive equity calculation and expert guidance on how it applies to your property division.
         </p>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

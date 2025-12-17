@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Inspirada Henderson | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Inspirada, Henderson.',
-    keywords: 'divorce realtor inspirada, inspirada henderson divorce real estate',
+    title: 'Inspirada Henderson Divorce Realtor | Divorce Real Estate Agent Inspirada NV | Dr. Jan Duffy',
+    description: 'Inspirada Henderson divorce realtor assisting with valuations, listings, and buyouts for divorcing homeowners. Call (702) 222-1964.',
+    keywords: 'Inspirada Henderson divorce realtor, divorce real estate agent Inspirada NV, selling house divorce Inspirada, Henderson master planned divorce realtor',
   };
 }
 
@@ -22,8 +22,8 @@ export default async function Inspirada(props: IInspiradaProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Divorce Realtor in Inspirada Henderson"
-      heroSubhead="Expert Divorce Real Estate Services in Inspirada"
+      h1="Inspirada Henderson Divorce Realtor"
+      heroSubhead="Divorce Real Estate Agent Inspirada NV"
       showHomeValue
     >
       <div className="max-w-4xl mx-auto prose prose-lg">

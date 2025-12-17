@@ -2,6 +2,12 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ISellingProps = {
   params: Promise<{ locale: string }>;
@@ -21,8 +27,26 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/selling-home-during-divorce';
+  const articleSchema = generateArticleSchema(
+    'Selling House During Divorce Las Vegas',
+    'Expert guidance for selling house during divorce in Las Vegas. Specialized divorce listing process, neutral representation, and proven results.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Sale Services',
+    'Expert guidance for selling house during divorce in Las Vegas. Specialized divorce listing process with neutral representation.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        currentPath={currentPath}
       h1="Selling House During Divorce Las Vegas"
       heroSubhead="Your House is Closure - Let's Help You Move Forward"
       showHomeValue
@@ -191,7 +215,8 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
           </Link>
         </p>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

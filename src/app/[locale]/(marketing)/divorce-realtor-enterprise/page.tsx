@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Enterprise Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Enterprise, Las Vegas.',
-    keywords: 'divorce realtor enterprise, enterprise las vegas divorce real estate',
+    title: 'Enterprise Las Vegas Divorce Realtor | Divorce Real Estate Agent Enterprise NV | Dr. Jan Duffy',
+    description: 'Enterprise Las Vegas divorce realtor helping divorcing homeowners sell houses, negotiate buyouts, and manage property division. Call (702) 222-1964.',
+    keywords: 'Enterprise Las Vegas divorce realtor, divorce real estate agent Enterprise NV, selling house divorce Enterprise, Las Vegas divorce property division expert',
   };
 }
 
@@ -22,8 +22,8 @@ export default async function Enterprise(props: IEnterpriseProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Divorce Realtor in Enterprise Las Vegas"
-      heroSubhead="Expert Divorce Real Estate Services in Enterprise"
+      h1="Enterprise Las Vegas Divorce Realtor"
+      heroSubhead="Divorce Real Estate Agent Enterprise NV"
       showHomeValue
     >
       <div className="max-w-4xl mx-auto prose prose-lg">

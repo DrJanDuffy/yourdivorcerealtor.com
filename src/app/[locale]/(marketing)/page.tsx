@@ -13,19 +13,45 @@ import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { Testimonials } from '@/components/sections/Testimonials';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateWebSiteSchema,
+  generateOrganizationSchema,
+  generateRealEstateAgentSchema,
+  generateLocalBusinessSchema,
+} from '@/lib/schema';
 
 // Disable static generation for pages with Clerk components
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const siteName = 'Dr. Jan Duffy | Las Vegas Divorce Real Estate Specialist';
+  
   return {
     title: 'Divorce Real Estate Agent Las Vegas | Dr. Jan Duffy - Divorce Realtor Near Me',
     description: 'Dr. Jan Duffy is Las Vegas\' trusted Divorce Real Estate Agent. Expert divorce realtor near me helping with property division, home sales during divorce, buyouts, and fresh starts. Call (702) 222-1964.',
     keywords: 'divorce real estate agent Las Vegas, divorce realtor near me, Dr. Jan Duffy, Divorce Real Estate, divorce realtor las vegas, divorce real estate specialist, las vegas divorce realtor, Dr Jan Duffy divorce, property division divorce',
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: '/',
+    },
     openGraph: {
       title: 'Divorce Real Estate Agent Las Vegas | Dr. Jan Duffy',
       description: 'Las Vegas\' trusted Divorce Real Estate Agent helping divorcing homeowners navigate property division with compassion and expertise.',
       type: 'website',
+      url: baseUrl,
+      siteName,
+      locale: 'en_US',
+      // Note: Add og:image when social sharing image is created
+      // images: [{ url: `${baseUrl}/og-image.jpg`, width: 1200, height: 630, alt: 'Dr. Jan Duffy - Divorce Real Estate Specialist' }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Divorce Real Estate Agent Las Vegas | Dr. Jan Duffy',
+      description: 'Las Vegas\' trusted Divorce Real Estate Agent helping divorcing homeowners navigate property division with compassion and expertise.',
+      // Note: Add twitter:image when social sharing image is created
+      // images: [`${baseUrl}/twitter-image.jpg`],
     },
   };
 }
@@ -34,8 +60,24 @@ export default async function Index(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  // Generate structured data for homepage
+  const webSiteSchema = generateWebSiteSchema();
+  const organizationSchema = generateOrganizationSchema();
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+  const localBusinessSchema = generateLocalBusinessSchema();
+
   return (
     <>
+      {/* Structured Data for SEO */}
+      <StructuredData
+        data={[
+          webSiteSchema,
+          organizationSchema,
+          realEstateAgentSchema,
+          localBusinessSchema,
+        ]}
+      />
+
       {/* Static Shell - Pre-rendered immediately */}
       <DivorceHero />
       <FourPillars />

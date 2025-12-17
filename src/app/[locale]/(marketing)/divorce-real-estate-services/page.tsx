@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IServicesProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +25,22 @@ export default async function Services(props: IServicesProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Services',
+    'Comprehensive divorce real estate services in Las Vegas. Home valuation, property division, buyout assistance, specialized divorce listing process, and expert witness services.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas', 'Green Valley', 'Spring Valley'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Services in Las Vegas"
-      heroSubhead="This Isn't Business As Usual"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Services in Las Vegas"
+        heroSubhead="This Isn't Business As Usual"
+        showHomeValue
+        currentPath="/divorce-real-estate-services"
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Specialized Services for Divorcing Homeowners</h2>
         <p>
@@ -157,7 +172,8 @@ export default async function Services(props: IServicesProps) {
           It's never too early to discuss your real estate options during divorce. Schedule a confidential consultation with Dr. Jan Duffy to learn how her specialized services can support your journey to a new beginning. Whether you're selling, buying, refinancing, or navigating a buyout, she has the expertise to guide you through the process.
         </p>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

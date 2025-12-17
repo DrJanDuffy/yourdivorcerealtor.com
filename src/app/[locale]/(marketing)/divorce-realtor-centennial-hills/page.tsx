@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Centennial Hills Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Centennial Hills, Las Vegas.',
-    keywords: 'divorce realtor centennial hills, centennial hills las vegas divorce real estate',
+    title: 'Centennial Hills Las Vegas Divorce Realtor | Divorce Real Estate Agent Centennial Hills NV | Dr. Jan Duffy',
+    description: 'Centennial Hills Las Vegas divorce realtor helping with home valuations, selling house during divorce, and property division. Call (702) 222-1964.',
+    keywords: 'Centennial Hills Las Vegas divorce realtor, divorce real estate agent Centennial Hills NV, selling house divorce Centennial Hills, northwest Las Vegas divorce realtor',
   };
 }
 
@@ -22,8 +22,8 @@ export default async function CentennialHills(props: ICentennialHillsProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Divorce Realtor in Centennial Hills Las Vegas"
-      heroSubhead="Expert Divorce Real Estate Services in Centennial Hills"
+      h1="Centennial Hills Las Vegas Divorce Realtor"
+      heroSubhead="Divorce Real Estate Agent Centennial Hills NV"
       showHomeValue
     >
       <div className="max-w-4xl mx-auto prose prose-lg">

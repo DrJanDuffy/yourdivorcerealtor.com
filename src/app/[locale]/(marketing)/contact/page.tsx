@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IContactProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +25,22 @@ export default async function Contact(props: IContactProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Consultation',
+    'Schedule a confidential consultation with Dr. Jan Duffy, your Las Vegas divorce real estate specialist. Expert guidance for property division and home sales during divorce.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Schedule Your Divorce Real Estate Consultation"
-      heroSubhead="It's Never Too Early to Discuss Your Options"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Schedule Your Divorce Real Estate Consultation"
+        heroSubhead="It's Never Too Early to Discuss Your Options"
+        showHomeValue
+        currentPath="/contact"
+      >
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
           <div>
@@ -162,7 +177,8 @@ export default async function Contact(props: IContactProps) {
           </p>
         </div>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

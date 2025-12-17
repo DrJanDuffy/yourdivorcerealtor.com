@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IPropertyDivisionProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +26,30 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-property-division';
+  const articleSchema = generateArticleSchema(
+    'Nevada Divorce Property Division | Who Gets the House in a Divorce Nevada',
+    'Expert guidance for Nevada divorce property division. Learn who gets the house in a divorce Nevada. Community property laws, fair valuations, and equitable solutions.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Property Division Services',
+    'Expert guidance for Nevada divorce property division. Fair valuations and equitable solutions for dividing real estate assets during divorce.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Property Division in Las Vegas"
-      heroSubhead="Fair and Equitable Solutions"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Property Division in Las Vegas"
+        heroSubhead="Fair and Equitable Solutions"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding Property Division During Divorce</h2>
         <p>
@@ -177,7 +201,8 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
           Property division is complex, but you don't have to navigate it alone. Dr. Jan Duffy provides the specialized expertise you need to understand your options, achieve fair outcomes, and move forward with confidence. Schedule a consultation today and learn how she can help you navigate property division during your divorce.
         </p>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

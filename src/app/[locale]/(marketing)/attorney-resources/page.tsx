@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 import Link from 'next/link';
 
 type IAttorneyResourcesProps = {
@@ -21,8 +26,19 @@ export default async function AttorneyResources(props: IAttorneyResourcesProps) 
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/attorney-resources';
+  const serviceSchema = generateServiceSchema(
+    'Attorney Collaboration Services',
+    'Real estate expert for family law attorneys. Divorce attorney real estate referral services. Property valuations, expert testimony, court-appointed real estate Nevada.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        currentPath={currentPath}
       h1="Attorney Resources for Divorce Real Estate"
       heroSubhead="Working Together for Your Clients"
     >
@@ -137,7 +153,8 @@ export default async function AttorneyResources(props: IAttorneyResourcesProps) 
           If you're a family law attorney working on divorce cases involving real estate, Dr. Jan Duffy is here to help. <Link href="/contact" className="text-blue-600 hover:text-blue-700">Contact her today</Link> to learn how her specialized expertise can support your clients and your legal practice.
         </p>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

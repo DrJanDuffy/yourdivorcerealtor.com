@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IValuationProps = {
   params: Promise<{ locale: string }>;
@@ -20,9 +26,27 @@ export default async function HomeValuation(props: IValuationProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-home-valuation';
+  const articleSchema = generateArticleSchema(
+    'Divorce Home Valuation Las Vegas | Free Home Value Calculator',
+    'Get accurate divorce home valuation in Las Vegas. Free home value calculator and expert valuation services for property division.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Valuation Services',
+    'Get accurate divorce home valuation in Las Vegas. Free home value calculator and expert valuation services for property division.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Home Valuation Services Las Vegas"
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Home Valuation Services Las Vegas"
+        currentPath={currentPath}
       heroSubhead="Know Your Equity Position"
       showHomeValue
     >
@@ -156,7 +180,8 @@ export default async function HomeValuation(props: IValuationProps) {
           </p>
         </div>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

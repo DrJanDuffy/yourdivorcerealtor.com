@@ -3,6 +3,7 @@ import { DivorceCTA } from './DivorceCTA';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { RelatedContent } from '@/components/seo/RelatedContent';
 
 type DivorcePageTemplateProps = {
   h1: string;
@@ -11,6 +12,8 @@ type DivorcePageTemplateProps = {
   showHomeValue?: boolean;
   showCondoListings?: boolean;
   showFamilyHomes?: boolean;
+  currentPath?: string;
+  showRelatedLinks?: boolean;
 };
 
 export function DivorcePageTemplate({
@@ -20,6 +23,8 @@ export function DivorcePageTemplate({
   showHomeValue = false,
   showCondoListings = false,
   showFamilyHomes = false,
+  currentPath,
+  showRelatedLinks = true,
 }: DivorcePageTemplateProps) {
   return (
     <>
@@ -54,6 +59,11 @@ export function DivorcePageTemplate({
       )}
       {showFamilyHomes && (
         <RealScoutFamilyHomes />
+      )}
+
+      {/* Related Content Links */}
+      {showRelatedLinks && currentPath && (
+        <RelatedContent currentPath={currentPath} />
       )}
 
       {/* Final CTA */}

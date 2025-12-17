@@ -4,6 +4,12 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IHendersonProps = {
   params: Promise<{ locale: string }>;
@@ -23,11 +29,24 @@ export default async function Henderson(props: IHendersonProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-realtor-henderson';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Henderson' }];
+  const serviceSchema = generateServiceSchema(
+    'Henderson Divorce Real Estate Services',
+    'Henderson divorce realtor helping divorcing homeowners sell house divorce Henderson NV. Expert divorce real estate agent in Henderson, Nevada.',
+    'Henderson',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
     <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Henderson Divorce Real Estate Agent"
         heroSubhead="Selling House Divorce Henderson NV - Expert Guidance"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Why Choose Dr. Jan Duffy for Henderson Divorce Real Estate?</h2>

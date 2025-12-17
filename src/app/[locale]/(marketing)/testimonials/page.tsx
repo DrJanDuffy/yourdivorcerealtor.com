@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateReviewSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ITestimonialsProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,51 @@ export default async function Testimonials(props: ITestimonialsProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/testimonials';
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
+  // Generate Review schemas for each testimonial
+  const reviewSchemas = [
+    generateReviewSchema(
+      'Sarah M.',
+      'Dr. Jan Duffy made selling our home during divorce so much easier than I expected. She was neutral, professional, and kept both of us informed every step of the way. The process was smooth, and we got a great price. I can\'t recommend her enough.',
+      5,
+      new Date().toISOString(),
+    ),
+    generateReviewSchema(
+      'Michael R.',
+      'I needed to buy out my ex-wife and keep the house. Dr. Jan Duffy helped me understand the process, coordinated with my lender for refinancing, and made sure everything was done correctly. Her expertise saved me time and money.',
+      5,
+      new Date().toISOString(),
+    ),
+    generateReviewSchema(
+      'Jennifer L.',
+      'Going through a divorce with kids is hard enough. Dr. Jan Duffy understood our situation and helped us sell our home quickly so we could both move on. She was compassionate, professional, and got results. We\'re both in our new homes now, and the kids are adjusting well.',
+      5,
+      new Date().toISOString(),
+    ),
+    generateReviewSchema(
+      'Attorney David Chen',
+      'I\'ve worked with Dr. Jan Duffy on multiple divorce cases, and she\'s always professional, knowledgeable, and efficient. Her expertise in divorce real estate makes my job easier, and my clients consistently get better outcomes. I recommend her to all my clients dealing with property division.',
+      5,
+      new Date().toISOString(),
+    ),
+    generateReviewSchema(
+      'Robert T.',
+      'The court ordered us to sell our home, and I was worried about the process. Dr. Jan Duffy handled everything perfectly. She followed the court order exactly, kept everyone informed, and we closed on time. I couldn\'t have asked for better service.',
+      5,
+      new Date().toISOString(),
+    ),
+  ];
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Success Stories Las Vegas"
-      heroSubhead="Real Stories from Real Families"
-    >
+    <>
+      <StructuredData data={[realEstateAgentSchema, ...reviewSchemas]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Success Stories Las Vegas"
+        heroSubhead="Real Stories from Real Families"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto">
         <div className="prose prose-lg mb-12">
           <h2>Why Our Clients Choose Dr. Jan Duffy</h2>
@@ -117,7 +162,8 @@ export default async function Testimonials(props: ITestimonialsProps) {
           </p>
         </div>
       </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
+    </>
   );
 }
 

@@ -13,9 +13,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Southern Highlands Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Southern Highlands, Las Vegas.',
-    keywords: 'divorce realtor southern highlands, southern highlands las vegas divorce real estate',
+    title: 'Southern Highlands Las Vegas Divorce Realtor | Divorce Real Estate Agent Southern Highlands NV | Dr. Jan Duffy',
+    description: 'Southern Highlands Las Vegas divorce realtor specializing in luxury home sales during divorce, fair buyouts, and neutral representation. Call (702) 222-1964.',
+    keywords: 'Southern Highlands Las Vegas divorce realtor, divorce real estate agent Southern Highlands NV, luxury divorce realtor Las Vegas, selling house divorce Southern Highlands',
   };
 }
 
@@ -26,8 +26,8 @@ export default async function SouthernHighlands(props: ISouthernHighlandsProps) 
   return (
     <>
       <DivorcePageTemplate
-        h1="Divorce Realtor in Southern Highlands Las Vegas"
-        heroSubhead="Expert Divorce Real Estate Services in Southern Highlands"
+        h1="Southern Highlands Las Vegas Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Southern Highlands NV"
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Southern Highlands Divorce Real Estate Expertise</h2>

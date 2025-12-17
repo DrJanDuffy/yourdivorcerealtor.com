@@ -13,9 +13,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Green Valley Henderson | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Green Valley, Henderson. Helping divorcing homeowners navigate property division.',
-    keywords: 'divorce realtor green valley, green valley henderson divorce real estate',
+    title: 'Green Valley Henderson Divorce Realtor | Divorce Real Estate Agent Green Valley NV | Dr. Jan Duffy',
+    description: 'Green Valley Henderson divorce realtor helping divorcing homeowners sell houses, manage property division, and plan buyouts with local expertise. Call (702) 222-1964.',
+    keywords: 'Green Valley Henderson divorce realtor, divorce real estate agent Green Valley NV, selling house divorce Green Valley, Henderson divorce real estate specialist',
   };
 }
 
@@ -26,8 +26,8 @@ export default async function GreenValley(props: IGreenValleyProps) {
   return (
     <>
       <DivorcePageTemplate
-        h1="Divorce Realtor in Green Valley Henderson"
-        heroSubhead="Expert Divorce Real Estate Services in Green Valley"
+        h1="Green Valley Henderson Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Green Valley NV"
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Green Valley Divorce Real Estate Expertise</h2>

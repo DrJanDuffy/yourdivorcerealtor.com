@@ -13,6 +13,7 @@ const intlMiddleware = createIntlMiddleware(routing);
 export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   const hostname = request.headers.get('host') || '';
+  const pathname = request.nextUrl.pathname;
 
   // Redirect non-www to www (primary domain)
   if (hostname === 'yourdivorcerealtor.com' || hostname === 'yourdivorcerealtor.com:3000') {
@@ -27,7 +28,6 @@ export function proxy(request: NextRequest) {
   }
 
   // Skip i18n for API routes, static files, and Next.js internals
-  const pathname = request.nextUrl.pathname;
   if (
     pathname.startsWith('/api')
     || pathname.startsWith('/_next')

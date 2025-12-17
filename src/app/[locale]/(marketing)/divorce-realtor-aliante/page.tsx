@@ -10,9 +10,9 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Divorce Realtor in Aliante Las Vegas | Dr. Jan Duffy',
-    description: 'Expert divorce real estate services in Aliante, Las Vegas.',
-    keywords: 'divorce realtor aliante, aliante las vegas divorce real estate',
+    title: 'Aliante North Las Vegas Divorce Realtor | Divorce Real Estate Agent Aliante NV | Dr. Jan Duffy',
+    description: 'Aliante North Las Vegas divorce realtor guiding homeowners through property division, buyouts, and home sales during divorce. Call (702) 222-1964.',
+    keywords: 'Aliante North Las Vegas divorce realtor, divorce real estate agent Aliante NV, selling house divorce Aliante, North Las Vegas divorce property specialist',
   };
 }
 
@@ -22,8 +22,8 @@ export default async function Aliante(props: IAlianteProps) {
 
   return (
     <DivorcePageTemplate
-      h1="Divorce Realtor in Aliante Las Vegas"
-      heroSubhead="Expert Divorce Real Estate Services in Aliante"
+      h1="Aliante North Las Vegas Divorce Realtor"
+      heroSubhead="Divorce Real Estate Agent Aliante NV"
       showHomeValue
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
