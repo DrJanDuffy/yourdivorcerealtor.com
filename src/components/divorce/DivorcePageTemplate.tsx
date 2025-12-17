@@ -75,7 +75,9 @@ export function DivorcePageTemplate({
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16">
-        {children}
+        <div className="mx-auto max-w-4xl space-y-10 text-left text-gray-800 leading-relaxed">
+          {children}
+        </div>
       </div>
 
       {/* Widgets */}
