@@ -19,12 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Aliante(props: IAlianteProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-aliante';
 
   return (
     <DivorcePageTemplate
       h1="Aliante North Las Vegas Divorce Realtor"
       heroSubhead="Divorce Real Estate Agent Aliante NV"
       showHomeValue
+      currentPath={currentPath}
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Aliante Divorce Real Estate Expertise</h2>

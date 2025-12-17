@@ -22,12 +22,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function GreenValley(props: IGreenValleyProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-green-valley';
 
   return (
     <>
       <DivorcePageTemplate
         h1="Green Valley Henderson Divorce Realtor"
         heroSubhead="Divorce Real Estate Agent Green Valley NV"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Green Valley Divorce Real Estate Expertise</h2>

@@ -19,12 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Paradise(props: IParadiseProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-paradise';
 
   return (
     <DivorcePageTemplate
       h1="Paradise Las Vegas Divorce Realtor"
       heroSubhead="Divorce Real Estate Agent Paradise NV"
       showHomeValue
+      currentPath={currentPath}
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Paradise Divorce Real Estate Expertise</h2>

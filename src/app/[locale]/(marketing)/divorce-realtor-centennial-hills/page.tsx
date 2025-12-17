@@ -19,12 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function CentennialHills(props: ICentennialHillsProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-centennial-hills';
 
   return (
     <DivorcePageTemplate
       h1="Centennial Hills Las Vegas Divorce Realtor"
       heroSubhead="Divorce Real Estate Agent Centennial Hills NV"
       showHomeValue
+      currentPath={currentPath}
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Centennial Hills Divorce Real Estate Expertise</h2>

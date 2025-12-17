@@ -19,12 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function MountainsEdge(props: IMountainsEdgeProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-mountains-edge';
 
   return (
     <DivorcePageTemplate
       h1="Mountains Edge Las Vegas Divorce Realtor"
       heroSubhead="Divorce Real Estate Agent Mountains Edge NV"
       showHomeValue
+      currentPath={currentPath}
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Mountains Edge Divorce Real Estate Expertise</h2>

@@ -19,12 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Enterprise(props: IEnterpriseProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-enterprise';
 
   return (
     <DivorcePageTemplate
       h1="Enterprise Las Vegas Divorce Realtor"
       heroSubhead="Divorce Real Estate Agent Enterprise NV"
       showHomeValue
+      currentPath={currentPath}
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Enterprise Divorce Real Estate Expertise</h2>

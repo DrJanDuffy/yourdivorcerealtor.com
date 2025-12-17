@@ -19,12 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function SpringValley(props: ISpringValleyProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-spring-valley';
 
   return (
     <DivorcePageTemplate
       h1="Spring Valley Las Vegas Divorce Realtor"
       heroSubhead="Divorce Real Estate Agent Spring Valley NV"
       showHomeValue
+      currentPath={currentPath}
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Spring Valley Divorce Real Estate Expertise</h2>

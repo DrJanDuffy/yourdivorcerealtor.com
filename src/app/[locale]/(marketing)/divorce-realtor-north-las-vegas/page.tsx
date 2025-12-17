@@ -21,12 +21,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function NorthLasVegas(props: INorthLasVegasProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-north-las-vegas';
 
   return (
     <>
       <DivorcePageTemplate
         h1="North Las Vegas Divorce Realtor"
         heroSubhead="Divorce Home Sale North Las Vegas - Expert Guidance"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>North Las Vegas Divorce Real Estate Expertise</h2>

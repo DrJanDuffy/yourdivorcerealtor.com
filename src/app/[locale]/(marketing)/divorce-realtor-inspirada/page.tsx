@@ -19,12 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Inspirada(props: IInspiradaProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-inspirada';
 
   return (
     <DivorcePageTemplate
       h1="Inspirada Henderson Divorce Realtor"
       heroSubhead="Divorce Real Estate Agent Inspirada NV"
       showHomeValue
+      currentPath={currentPath}
     >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Inspirada Divorce Real Estate Expertise</h2>

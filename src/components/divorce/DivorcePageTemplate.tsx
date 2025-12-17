@@ -1,9 +1,11 @@
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { DivorceCTA } from './DivorceCTA';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { RelatedContent } from '@/components/seo/RelatedContent';
+import { heroImageMap } from '@/lib/hero-images';
 
 type DivorcePageTemplateProps = {
   h1: string;
@@ -14,6 +16,8 @@ type DivorcePageTemplateProps = {
   showFamilyHomes?: boolean;
   currentPath?: string;
   showRelatedLinks?: boolean;
+  heroImageSrc?: string;
+  heroImageAlt?: string;
 };
 
 export function DivorcePageTemplate({
@@ -25,21 +29,47 @@ export function DivorcePageTemplate({
   showFamilyHomes = false,
   currentPath,
   showRelatedLinks = true,
+  heroImageSrc,
+  heroImageAlt,
 }: DivorcePageTemplateProps) {
+  const mappedHeroImage = currentPath ? heroImageMap[currentPath] : undefined;
+  const resolvedHeroImage = heroImageSrc ?? mappedHeroImage?.src;
+  const resolvedHeroAlt = heroImageAlt ?? mappedHeroImage?.alt ?? h1;
+
   return (
     <>
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-16 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-            {h1}
-          </h1>
-          {heroSubhead && (
-            <p className="mb-8 text-xl text-blue-100 md:text-2xl">
-              {heroSubhead}
-            </p>
-          )}
-          <DivorceCTA variant="primary" />
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center gap-8 lg:flex-row lg:gap-16">
+            <div className="text-center lg:w-1/2 lg:text-left">
+              <h1 className="mb-4 text-4xl font-bold md:text-5xl">
+                {h1}
+              </h1>
+              {heroSubhead && (
+                <p className="mb-8 text-xl text-blue-100 md:text-2xl">
+                  {heroSubhead}
+                </p>
+              )}
+              <div className="flex justify-center lg:justify-start">
+                <DivorceCTA variant="primary" />
+              </div>
+            </div>
+
+            {resolvedHeroImage && (
+              <div className="relative h-72 w-full max-w-xl overflow-hidden rounded-3xl shadow-2xl lg:w-1/2">
+                <Image
+                  src={resolvedHeroImage}
+                  alt={resolvedHeroAlt}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-800/30 via-transparent to-transparent" />
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

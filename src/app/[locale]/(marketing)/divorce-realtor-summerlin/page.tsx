@@ -22,12 +22,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Summerlin(props: ISummerlinProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-summerlin';
 
   return (
     <>
       <DivorcePageTemplate
         h1="Divorce Realtor Summerlin"
         heroSubhead="Summerlin Divorce Home Sale Expert"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Summerlin Divorce Real Estate Expertise</h2>

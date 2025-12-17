@@ -22,12 +22,14 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function SouthernHighlands(props: ISouthernHighlandsProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
+  const currentPath = '/divorce-realtor-southern-highlands';
 
   return (
     <>
       <DivorcePageTemplate
         h1="Southern Highlands Las Vegas Divorce Realtor"
         heroSubhead="Divorce Real Estate Agent Southern Highlands NV"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Southern Highlands Divorce Real Estate Expertise</h2>
