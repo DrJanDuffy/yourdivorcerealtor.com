@@ -52,7 +52,6 @@ export default async function CompleteGuide(props: IGuideProps) {
         heroSubhead="Everything You Need to Know"
         currentPath={currentPath}
       >
-      >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Your Comprehensive Divorce Real Estate Guide</h2>
           <p>

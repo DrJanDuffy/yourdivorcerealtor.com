@@ -56,6 +56,10 @@ export const heroImageMap: Record<string, HeroImageMeta> = {
     src: '/assets/images/IMG_781102%20(12).jpg',
     alt: 'Inspirada planned community',
   },
+  '/home-did-not-sell-during-divorce': {
+    src: '/assets/images/IMG_781102%20(13).jpg',
+    alt: 'Las Vegas home prepared for relaunch after divorce',
+  },
 };
 
 
