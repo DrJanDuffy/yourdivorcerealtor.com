@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +24,30 @@ export default async function CommunityPropertyDivorceHouse(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/community-property-divorce-house';
+  const articleSchema = generateArticleSchema(
+    'Community Property and Divorce House: Nevada Law Guide',
+    'Complete guide to community property and divorce house in Nevada. How community property laws affect property division, home sales, and equity split.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Community Property Divorce Services',
+    'Complete guide to community property and divorce house in Nevada. How community property laws affect property division, home sales, and equity split.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Community Property and Divorce House: Nevada Law Guide"
-      heroSubhead="Understanding How Community Property Laws Affect Your Home"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Community Property and Divorce House: Nevada Law Guide"
+        heroSubhead="Understanding How Community Property Laws Affect Your Home"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Nevada Community Property Laws</h2>
         <p>

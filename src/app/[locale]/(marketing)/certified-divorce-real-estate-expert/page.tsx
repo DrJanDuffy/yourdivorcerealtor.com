@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ICDREProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function CDRE(props: ICDREProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/certified-divorce-real-estate-expert';
+  const serviceSchema = generateServiceSchema(
+    'Certified Divorce Real Estate Expert Services',
+    'CDRE real estate agent Nevada. Certified Divorce Real Estate Expert (CDRE) services in Las Vegas. Specialized training and expertise for divorce transactions.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Certified Divorce Real Estate Expert Las Vegas"
-      heroSubhead="Specialized Training and Expertise"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Certified Divorce Real Estate Expert Las Vegas"
+        heroSubhead="Specialized Training and Expertise"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>What is a CDRE Real Estate Agent?</h2>
         <p>

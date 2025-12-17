@@ -3,6 +3,12 @@ import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IEmotionalGuideProps = {
   params: Promise<{ locale: string }>;
@@ -22,11 +28,28 @@ export default async function EmotionalGuide(props: IEmotionalGuideProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/emotional-guide-selling-divorce';
+  const articleSchema = generateArticleSchema(
+    'Emotional Guide to Selling Your Home in Divorce',
+    'Emotional support and guidance for selling your home during divorce. Navigate the emotional challenges with compassion and expertise.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Emotional Support Services',
+    'Emotional support and guidance for selling your home during divorce. Navigate the emotional challenges with compassion and expertise.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
     <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Emotional Guide to Selling Your Home in Divorce"
         heroSubhead="Navigating the Emotional Journey"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Understanding the Emotional Journey</h2>

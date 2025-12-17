@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +24,30 @@ export default async function DivorceHomeEquitySplit(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-home-equity-split';
+  const articleSchema = generateArticleSchema(
+    'Divorce Home Equity Split: Understanding Your Equity Position',
+    'Learn how home equity is split in divorce. Nevada community property laws, equity calculations, and fair division strategies.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Equity Split Services',
+    'Learn how home equity is split in divorce. Nevada community property laws, equity calculations, and fair division strategies.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Home Equity Split: Understanding Your Equity Position"
-      heroSubhead="Fair Division Starts with Accurate Equity Calculation"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Home Equity Split: Understanding Your Equity Position"
+        heroSubhead="Fair Division Starts with Accurate Equity Calculation"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding Home Equity in Divorce</h2>
         <p>

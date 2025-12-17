@@ -4,6 +4,12 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ISummerlinProps = {
   params: Promise<{ locale: string }>;
@@ -23,9 +29,18 @@ export default async function Summerlin(props: ISummerlinProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-summerlin';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Summerlin' }];
+  const serviceSchema = generateServiceSchema(
+    'Summerlin Divorce Real Estate Services',
+    'Divorce realtor Summerlin helping divorcing homeowners. Summerlin divorce home sale expert. Property division, home sales, and buyouts in Summerlin, Las Vegas.',
+    'Summerlin',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
     <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Divorce Realtor Summerlin"
         heroSubhead="Summerlin Divorce Home Sale Expert"

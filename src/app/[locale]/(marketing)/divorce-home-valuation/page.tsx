@@ -68,12 +68,12 @@ export default async function HomeValuation(props: IValuationProps) {
 
         <h3>Comparable Sales Analysis</h3>
         <p>
-          Comparing your home to recently sold similar properties provides the most accurate valuation. Dr. Jan Duffy identifies true comparable sales in your Las Vegas neighborhood, adjusting for differences in size, condition, features, and location to determine your home's value.
+          Comparing your home to recently sold similar properties provides the most accurate valuation. Dr. Jan Duffy identifies true comparable sales in your <Link href="/divorce-realtor-henderson" className="text-blue-600 hover:text-blue-700 underline">Las Vegas</Link> neighborhood, adjusting for differences in size, condition, features, and location to determine your home's value.
         </p>
 
         <h3>Current Market Conditions</h3>
         <p>
-          Las Vegas market conditions directly impact your home's value. Dr. Jan Duffy analyzes current market trends, inventory levels, and buyer activity to understand how market conditions affect your property's value. This analysis ensures your valuation reflects current market reality.
+          <Link href="/divorce-realtor-summerlin" className="text-blue-600 hover:text-blue-700 underline">Las Vegas</Link> market conditions directly impact your home's value. Dr. Jan Duffy analyzes current market trends, inventory levels, and buyer activity to understand how market conditions affect your property's value. This analysis ensures your valuation reflects current market reality.
         </p>
 
         <h3>Property-Specific Factors</h3>
@@ -93,7 +93,7 @@ export default async function HomeValuation(props: IValuationProps) {
 
         <h3>Net Proceeds Calculation</h3>
         <p>
-          If you're selling, understanding net proceeds is important. Dr. Jan Duffy calculates your expected net proceeds after paying off mortgages, closing costs, and other expenses. This calculation helps you understand what you'll actually receive from a sale.
+          If you're selling, understanding net proceeds is important. Dr. Jan Duffy calculates your expected net proceeds after paying off mortgages, closing costs, and other expenses. This calculation helps you understand what you'll actually receive from a sale. Use our <Link href="/divorce-net-proceeds-calculator" className="text-blue-600 hover:text-blue-700 underline">divorce net proceeds calculator</Link> to estimate your proceeds.
         </p>
 
         <h2>Valuation Methods</h2>

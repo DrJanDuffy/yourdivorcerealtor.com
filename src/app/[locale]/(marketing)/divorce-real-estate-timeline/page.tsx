@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ITimelineProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +26,29 @@ export default async function Timeline(props: ITimelineProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-real-estate-timeline';
+  const articleSchema = generateArticleSchema(
+    'Divorce Real Estate Timeline and Process',
+    'Understand the divorce real estate timeline and process. Know when you\'ll move and how long the process takes.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Timeline Services',
+    'Understand the divorce real estate timeline and process. Know when you\'ll move and how long the process takes.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Timeline and Process"
-      heroSubhead="Know When You'll Move"
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Timeline and Process"
+        heroSubhead="Know When You'll Move"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding the Divorce Real Estate Timeline</h2>
         <p>
@@ -43,7 +67,7 @@ export default async function Timeline(props: ITimelineProps) {
 
         <h3>Initial Consultation and Valuation (1-2 weeks)</h3>
         <p>
-          The process begins with a consultation where Dr. Jan Duffy learns about your situation, provides a home valuation, and helps you understand your options. This phase typically takes 1-2 weeks, depending on scheduling and how quickly you can provide necessary information.
+          The process begins with a consultation where Dr. Jan Duffy learns about your situation, provides a <Link href="/divorce-home-valuation" className="text-blue-600 hover:text-blue-700 underline">home valuation</Link>, and helps you understand your options. This phase typically takes 1-2 weeks, depending on scheduling and how quickly you can provide necessary information.
         </p>
 
         <h3>Decision Making and Planning (2-4 weeks)</h3>
@@ -53,7 +77,7 @@ export default async function Timeline(props: ITimelineProps) {
 
         <h3>Property Preparation (2-4 weeks)</h3>
         <p>
-          If you're selling, preparing your property for sale takes time. This includes repairs, staging, photography, and listing preparation. Dr. Jan Duffy helps coordinate this process efficiently.
+          If you're selling, preparing your property for sale takes time. This includes repairs, staging, photography, and listing preparation. Dr. Jan Duffy helps coordinate this process efficiently. See our <Link href="/divorce-home-sale-checklist" className="text-blue-600 hover:text-blue-700 underline">divorce home sale checklist</Link> for a complete guide.
         </p>
 
         <h3>Marketing and Showings (30-90 days)</h3>

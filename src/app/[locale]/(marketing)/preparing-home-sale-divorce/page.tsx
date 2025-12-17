@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IPreparingProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +25,23 @@ export default async function PreparingHomeSale(props: IPreparingProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/preparing-home-sale-divorce';
+  const serviceSchema = generateServiceSchema(
+    'Home Preparation Services',
+    'Expert guidance for preparing your home for sale during divorce. Maximize value while respecting the emotional dynamics.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Preparing Your Home for Sale During Divorce"
-      heroSubhead="Maximize Value While Respecting Emotions"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Preparing Your Home for Sale During Divorce"
+        heroSubhead="Maximize Value While Respecting Emotions"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Preparing Your Home for Sale During Divorce</h2>
         <p>

@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ICourtOrderedProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +26,30 @@ export default async function CourtOrderedSale(props: ICourtOrderedProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/court-ordered-home-sale';
+  const articleSchema = generateArticleSchema(
+    'Court-Ordered Home Sale in Divorce',
+    'Expert handling of court-ordered home sales in divorce. We handle court orders with strict compliance and professional service.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Court-Ordered Home Sale Services',
+    'Expert handling of court-ordered home sales in divorce. Strict compliance and professional service.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Court-Ordered Home Sale in Divorce"
-      heroSubhead="We Handle Court Orders"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Court-Ordered Home Sale in Divorce"
+        heroSubhead="We Handle Court Orders"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding Court-Ordered Home Sales</h2>
         <p>

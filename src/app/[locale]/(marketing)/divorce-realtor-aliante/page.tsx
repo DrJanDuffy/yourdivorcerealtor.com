@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IAlianteProps = {
   params: Promise<{ locale: string }>;
@@ -20,14 +26,24 @@ export default async function Aliante(props: IAlianteProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-aliante';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Aliante' }];
+  const serviceSchema = generateServiceSchema(
+    'Aliante Divorce Real Estate Services',
+    'Aliante North Las Vegas divorce realtor guiding homeowners through property division, buyouts, and home sales during divorce.',
+    'Aliante',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
-    <DivorcePageTemplate
-      h1="Aliante North Las Vegas Divorce Realtor"
-      heroSubhead="Divorce Real Estate Agent Aliante NV"
-      showHomeValue
-      currentPath={currentPath}
-    >
+    <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Aliante North Las Vegas Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Aliante NV"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Aliante Divorce Real Estate Expertise</h2>
         <p>

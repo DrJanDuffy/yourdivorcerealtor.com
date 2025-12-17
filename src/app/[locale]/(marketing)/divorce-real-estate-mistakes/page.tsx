@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IMistakesProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +26,29 @@ export default async function MistakesToAvoid(props: IMistakesProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-real-estate-mistakes';
+  const articleSchema = generateArticleSchema(
+    'Divorce Real Estate Mistakes to Avoid',
+    'Common divorce real estate mistakes and how to avoid them. Learn from others\' experiences and protect your interests.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Mistakes Guide Services',
+    'Common divorce real estate mistakes and how to avoid them. Learn from others\' experiences and protect your interests.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Mistakes to Avoid"
-      heroSubhead="Learn from Others' Experiences"
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Mistakes to Avoid"
+        heroSubhead="Learn from Others' Experiences"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Common Divorce Real Estate Mistakes</h2>
         <p>

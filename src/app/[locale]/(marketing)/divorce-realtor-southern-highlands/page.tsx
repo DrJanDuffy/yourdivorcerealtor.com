@@ -4,6 +4,12 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ISouthernHighlandsProps = {
   params: Promise<{ locale: string }>;
@@ -23,9 +29,18 @@ export default async function SouthernHighlands(props: ISouthernHighlandsProps) 
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-southern-highlands';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Southern Highlands' }];
+  const serviceSchema = generateServiceSchema(
+    'Southern Highlands Divorce Real Estate Services',
+    'Southern Highlands Las Vegas divorce realtor specializing in luxury home sales during divorce, fair buyouts, and neutral representation.',
+    'Southern Highlands',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
     <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Southern Highlands Las Vegas Divorce Realtor"
         heroSubhead="Divorce Real Estate Agent Southern Highlands NV"

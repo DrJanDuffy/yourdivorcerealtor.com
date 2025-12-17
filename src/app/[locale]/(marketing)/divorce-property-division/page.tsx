@@ -58,7 +58,7 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
 
         <h3>The Importance of Accurate Valuation</h3>
         <p>
-          Fair property division starts with accurate home valuation. Without knowing your home's true value, you can't make informed decisions about how to divide it. Dr. Jan Duffy provides comprehensive home valuations that consider market conditions, property specifics, and comparable sales, ensuring you have accurate information for property division negotiations.
+          Fair property division starts with accurate <Link href="/divorce-home-valuation" className="text-blue-600 hover:text-blue-700 underline">home valuation</Link>. Without knowing your home's true value, you can't make informed decisions about how to divide it. Dr. Jan Duffy provides comprehensive home valuations that consider market conditions, property specifics, and comparable sales, ensuring you have accurate information for property division negotiations.
         </p>
 
         <h2>Property Division Options</h2>
@@ -73,7 +73,7 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
 
         <h3>One Spouse Buys Out the Other</h3>
         <p>
-          If one spouse wants to keep the home, they can buy out the other spouse's share. This involves determining the home's value, calculating the buyout amount, and refinancing the mortgage to remove the other spouse. Dr. Jan Duffy helps navigate this entire process, from valuation to refinancing.
+          If one spouse wants to keep the home, they can buy out the other spouse's share. This involves determining the home's value, calculating the buyout amount, and <Link href="/refinancing-after-divorce" className="text-blue-600 hover:text-blue-700 underline">refinancing the mortgage</Link> to remove the other spouse. Dr. Jan Duffy helps navigate this entire process, from <Link href="/divorce-home-valuation" className="text-blue-600 hover:text-blue-700 underline">valuation</Link> to refinancing. Learn more about <Link href="/divorce-buyout-options" className="text-blue-600 hover:text-blue-700 underline">divorce buyout options</Link>.
         </p>
 
         <h3>Co-Own Temporarily</h3>
@@ -83,7 +83,7 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
 
         <h3>Refinance to Remove Spouse</h3>
         <p>
-          If one spouse keeps the home, refinancing removes the other spouse from the mortgage, protecting their credit and financial future. This process involves qualifying for a new mortgage based on one income, which can be challenging. Dr. Jan Duffy helps coordinate with lenders and ensures the refinancing supports the property division agreement.
+          If one spouse keeps the home, <Link href="/refinancing-after-divorce" className="text-blue-600 hover:text-blue-700 underline">refinancing</Link> removes the other spouse from the mortgage, protecting their credit and financial future. This process involves qualifying for a new mortgage based on one income, which can be challenging. Dr. Jan Duffy helps coordinate with lenders and ensures the refinancing supports the property division agreement.
         </p>
 
         <h2>Calculating Fair Division</h2>

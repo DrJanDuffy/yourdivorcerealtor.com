@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IMediatorProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function MediatorResources(props: IMediatorProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-mediator-resources';
+  const serviceSchema = generateServiceSchema(
+    'Divorce Mediator Resources Services',
+    'Resources for divorce mediators working on cases involving real estate. Property information and analysis for productive mediation.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Mediator Real Estate Resources"
-      heroSubhead="Supporting Productive Mediation"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Mediator Real Estate Resources"
+        heroSubhead="Supporting Productive Mediation"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Supporting Divorce Mediation</h2>
         <p>

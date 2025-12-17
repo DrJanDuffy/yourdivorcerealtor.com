@@ -3,6 +3,12 @@ import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IRefinancingProps = {
   params: Promise<{ locale: string }>;
@@ -22,11 +28,28 @@ export default async function RefinancingAfterDivorce(props: IRefinancingProps) 
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/refinancing-after-divorce';
+  const articleSchema = generateArticleSchema(
+    'Refinancing Your Home After Divorce',
+    'Expert guidance for refinancing your home after divorce. Remove your ex from the mortgage and protect your credit.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Post-Divorce Refinancing Services',
+    'Expert guidance for refinancing your home after divorce. Remove your ex from the mortgage and protect your credit.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
     <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Refinancing Your Home After Divorce"
         heroSubhead="Remove Your Ex from the Mortgage"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Why Refinancing After Divorce Matters</h2>

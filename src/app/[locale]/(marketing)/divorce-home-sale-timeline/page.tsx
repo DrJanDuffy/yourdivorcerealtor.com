@@ -3,6 +3,11 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +23,23 @@ export default async function DivorceHomeSaleTimeline(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-home-sale-timeline';
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Sale Timeline Services',
+    'Complete timeline guide: How long to sell house in divorce. Average timeframes, factors affecting timeline, and what to expect at each stage.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="How Long to Sell House in Divorce: Complete Timeline Guide"
-      heroSubhead="Know What to Expect and When"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="How Long to Sell House in Divorce: Complete Timeline Guide"
+        heroSubhead="Know What to Expect and When"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding the Divorce Home Sale Timeline</h2>
         <p>

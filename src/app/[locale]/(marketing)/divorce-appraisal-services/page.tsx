@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IAppraisalProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +25,23 @@ export default async function AppraisalServices(props: IAppraisalProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-appraisal-services';
+  const serviceSchema = generateServiceSchema(
+    'Divorce Appraisal Services',
+    'Professional divorce appraisal services in Las Vegas. Accurate property valuations for property division and court proceedings.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Appraisal Services Las Vegas"
-      heroSubhead="Accurate Valuations for Property Division"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Appraisal Services Las Vegas"
+        heroSubhead="Accurate Valuations for Property Division"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Professional Divorce Appraisal Services</h2>
         <p>

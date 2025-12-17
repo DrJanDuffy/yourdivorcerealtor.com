@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ICentennialHillsProps = {
   params: Promise<{ locale: string }>;
@@ -20,14 +26,24 @@ export default async function CentennialHills(props: ICentennialHillsProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-centennial-hills';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Centennial Hills' }];
+  const serviceSchema = generateServiceSchema(
+    'Centennial Hills Divorce Real Estate Services',
+    'Centennial Hills Las Vegas divorce realtor helping with home valuations, selling house during divorce, and property division.',
+    'Centennial Hills',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
-    <DivorcePageTemplate
-      h1="Centennial Hills Las Vegas Divorce Realtor"
-      heroSubhead="Divorce Real Estate Agent Centennial Hills NV"
-      showHomeValue
-      currentPath={currentPath}
-    >
+    <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Centennial Hills Las Vegas Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Centennial Hills NV"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Centennial Hills Divorce Real Estate Expertise</h2>
         <p>

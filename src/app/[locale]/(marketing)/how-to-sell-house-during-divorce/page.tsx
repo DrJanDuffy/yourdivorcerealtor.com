@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +24,30 @@ export default async function HowToSellHouseDuringDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/how-to-sell-house-during-divorce';
+  const articleSchema = generateArticleSchema(
+    'How to Sell House During Divorce: Complete Step-by-Step Guide',
+    'Complete guide on how to sell house during divorce. Step-by-step process, timeline, checklist, and common mistakes to avoid.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Sale Guide Services',
+    'Complete guide on how to sell house during divorce. Step-by-step process, timeline, checklist, and expert guidance.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="How to Sell House During Divorce: Complete Step-by-Step Guide"
-      heroSubhead="Navigate the Process with Confidence and Clarity"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="How to Sell House During Divorce: Complete Step-by-Step Guide"
+        heroSubhead="Navigate the Process with Confidence and Clarity"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Introduction: Why Selling During Divorce is Different</h2>
         <p>

@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,11 +24,29 @@ export default async function CapitalGainsTaxDivorceHomeSale(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/capital-gains-tax-divorce-home-sale';
+  const articleSchema = generateArticleSchema(
+    'Capital Gains Tax on Divorce Home Sale: Complete Tax Guide',
+    'Complete guide to capital gains tax on divorce home sale. IRS rules, exemptions, and Nevada-specific considerations. Minimize taxes when selling your home during divorce.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Sale Tax Services',
+    'Complete guide to capital gains tax on divorce home sale. IRS rules, exemptions, and Nevada-specific considerations.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Capital Gains Tax on Divorce Home Sale: Complete Tax Guide"
-      heroSubhead="Understand Tax Implications and Minimize Your Tax Burden"
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Capital Gains Tax on Divorce Home Sale: Complete Tax Guide"
+        heroSubhead="Understand Tax Implications and Minimize Your Tax Burden"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding Capital Gains Tax on Home Sales</h2>
         <p>

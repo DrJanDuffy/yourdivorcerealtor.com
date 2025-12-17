@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,11 +24,29 @@ export default async function RemoveSpouseFromMortgageAfterDivorce(props: PagePr
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/remove-spouse-from-mortgage-after-divorce';
+  const articleSchema = generateArticleSchema(
+    'Remove Spouse from Mortgage After Divorce: Complete Guide',
+    'Complete guide to removing spouse from mortgage after divorce. Refinancing process, lender requirements, quitclaim deeds, and credit protection.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Post-Divorce Mortgage Refinancing Services',
+    'Complete guide to removing spouse from mortgage after divorce. Refinancing process, lender requirements, quitclaim deeds, and credit protection.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Remove Spouse from Mortgage After Divorce: Complete Guide"
-      heroSubhead="Protect Your Credit and Financial Future"
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Remove Spouse from Mortgage After Divorce: Complete Guide"
+        heroSubhead="Protect Your Credit and Financial Future"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Why Remove Spouse from Mortgage?</h2>
         <p>

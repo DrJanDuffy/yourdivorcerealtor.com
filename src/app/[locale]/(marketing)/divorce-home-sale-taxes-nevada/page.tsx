@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,11 +24,29 @@ export default async function DivorceHomeSaleTaxesNevada(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-home-sale-taxes-nevada';
+  const articleSchema = generateArticleSchema(
+    'Divorce Home Sale Taxes Nevada: Complete Tax Guide',
+    'Complete guide to divorce home sale taxes in Nevada. Capital gains tax, exemptions, Nevada tax considerations, and strategies to minimize taxes.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Nevada Divorce Home Sale Tax Services',
+    'Complete guide to divorce home sale taxes in Nevada. Capital gains tax, exemptions, Nevada tax considerations, and strategies to minimize taxes.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Home Sale Taxes Nevada: Complete Tax Guide"
-      heroSubhead="Understand Tax Implications and Minimize Your Tax Burden"
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Home Sale Taxes Nevada: Complete Tax Guide"
+        heroSubhead="Understand Tax Implications and Minimize Your Tax Burden"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Nevada Divorce Home Sale Tax Overview</h2>
         <p>

@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IParadiseProps = {
   params: Promise<{ locale: string }>;
@@ -20,14 +26,24 @@ export default async function Paradise(props: IParadiseProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-paradise';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Paradise' }];
+  const serviceSchema = generateServiceSchema(
+    'Paradise Divorce Real Estate Services',
+    'Paradise Las Vegas divorce realtor providing property division guidance, house sale strategy, and neutral representation for divorcing homeowners.',
+    'Paradise',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
-    <DivorcePageTemplate
-      h1="Paradise Las Vegas Divorce Realtor"
-      heroSubhead="Divorce Real Estate Agent Paradise NV"
-      showHomeValue
-      currentPath={currentPath}
-    >
+    <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Paradise Las Vegas Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Paradise NV"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Paradise Divorce Real Estate Expertise</h2>
         <p>

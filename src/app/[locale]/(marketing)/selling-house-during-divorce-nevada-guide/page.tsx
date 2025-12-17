@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +24,30 @@ export default async function SellingHouseDuringDivorceNevadaGuide(props: PagePr
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/selling-house-during-divorce-nevada-guide';
+  const articleSchema = generateArticleSchema(
+    'Ultimate Guide: Selling House During Divorce in Nevada',
+    'Complete ultimate guide to selling house during divorce in Nevada. Nevada laws, community property, court orders, timelines, and expert strategies. Everything you need to know.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Nevada Divorce Real Estate Guide Services',
+    'Complete ultimate guide to selling house during divorce in Nevada. Nevada laws, community property, court orders, timelines, and expert strategies.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Ultimate Guide: Selling House During Divorce in Nevada"
-      heroSubhead="Complete Guide to Nevada Divorce Real Estate"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Ultimate Guide: Selling House During Divorce in Nevada"
+        heroSubhead="Complete Guide to Nevada Divorce Real Estate"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Introduction: Nevada Divorce Real Estate</h2>
         <p>

@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +24,30 @@ export default async function WhatToDoWithHouseInDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/what-to-do-with-house-in-divorce';
+  const articleSchema = generateArticleSchema(
+    'What to Do with House in Divorce: Your Complete Options Guide',
+    'What to do with house in divorce? Complete guide to your options: sell, buyout, co-own, refinance. Understand each option and make informed decisions.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Property Options Services',
+    'Complete guide to your options: sell, buyout, co-own, refinance. Understand each option and make informed decisions.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="What to Do with House in Divorce: Your Complete Options Guide"
-      heroSubhead="Understand All Your Options and Make Informed Decisions"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="What to Do with House in Divorce: Your Complete Options Guide"
+        heroSubhead="Understand All Your Options and Make Informed Decisions"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding Your Options</h2>
         <p>

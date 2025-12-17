@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IAttorneyCollabProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function AttorneyCollaboration(props: IAttorneyCollabProps)
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/family-law-attorney-collaboration';
+  const serviceSchema = generateServiceSchema(
+    'Family Law Attorney Collaboration Services',
+    'Family law real estate specialist collaborating with attorneys. Collaborative divorce real estate services. Expert coordination, property valuations, and transaction support for family law cases.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Working with Family Law Attorneys on Divorce Property"
-      heroSubhead="Professional Collaboration for Your Clients"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Working with Family Law Attorneys on Divorce Property"
+        heroSubhead="Professional Collaboration for Your Clients"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Professional Collaboration with Family Law Attorneys</h2>
         <p>

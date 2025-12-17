@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IExpertWitnessProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function ExpertWitness(props: IExpertWitnessProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-real-estate-expert-witness';
+  const serviceSchema = generateServiceSchema(
+    'Expert Witness Services',
+    'Expert witness services for divorce cases involving real estate. Professional testimony on property values and market conditions.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Expert Witness Services"
-      heroSubhead="Professional Testimony for Your Case"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Expert Witness Services"
+        heroSubhead="Professional Testimony for Your Case"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Expert Witness Services for Divorce Cases</h2>
         <p>

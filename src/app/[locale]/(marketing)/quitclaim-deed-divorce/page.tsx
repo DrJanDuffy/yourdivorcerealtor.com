@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IQuitclaimProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +26,29 @@ export default async function QuitclaimDeed(props: IQuitclaimProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/quitclaim-deed-divorce';
+  const articleSchema = generateArticleSchema(
+    'Quitclaim Deed in Divorce Transactions',
+    'Expert guidance for quitclaim deeds in divorce. Transfer ownership correctly with professional assistance.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Quitclaim Deed Services',
+    'Expert guidance for quitclaim deeds in divorce. Transfer ownership correctly with professional assistance.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Quitclaim Deed in Divorce Transactions"
-      heroSubhead="Transfer Ownership Correctly"
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Quitclaim Deed in Divorce Transactions"
+        heroSubhead="Transfer Ownership Correctly"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding Quitclaim Deeds in Divorce</h2>
         <p>

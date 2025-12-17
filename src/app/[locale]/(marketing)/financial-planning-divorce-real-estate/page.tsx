@@ -4,6 +4,12 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IFinancialPlanningProps = {
   params: Promise<{ locale: string }>;
@@ -23,11 +29,28 @@ export default async function FinancialPlanning(props: IFinancialPlanningProps) 
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/financial-planning-divorce-real-estate';
+  const articleSchema = generateArticleSchema(
+    'Financial Planning for Divorce Real Estate',
+    'Expert financial planning guidance for divorce real estate. Understand financial implications and plan for your future.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Financial Planning Services',
+    'Expert financial planning guidance for divorce real estate. Understand financial implications and plan for your future.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
     <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Financial Planning for Divorce Real Estate"
         heroSubhead="Plan for Your Financial Future"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Financial Planning for Divorce Real Estate</h2>

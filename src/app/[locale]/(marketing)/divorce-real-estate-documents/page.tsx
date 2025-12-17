@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IDocumentsProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function RealEstateDocuments(props: IDocumentsProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-real-estate-documents';
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Documents Services',
+    'Essential documents for divorce real estate transactions. Know what documents you need and why.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Documents You Need"
-      heroSubhead="Know What Documents You Need and Why"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Documents You Need"
+        heroSubhead="Know What Documents You Need and Why"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Essential Documents for Divorce Real Estate</h2>
         <p>

@@ -12,6 +12,8 @@ import { routing } from '@/libs/I18nRouting';
 import { ClerkLocalizations } from '@/utils/AppConfig';
 import { inter, playfairDisplay } from '@/lib/fonts';
 import { getGoogleVerificationTag } from '@/lib/google-verification';
+import { StructuredData } from '@/components/seo/StructuredData';
+import { generateSiteNavigationElementSchema } from '@/lib/schema';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
@@ -65,6 +67,17 @@ export default async function RootLayout(props: LayoutProps) {
     afterSignOutUrl = `/${locale}${afterSignOutUrl}`;
   }
 
+  // Generate SiteNavigationElement schemas for main navigation
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const navigationSchemas = [
+    generateSiteNavigationElementSchema('Home', `${baseUrl}/`),
+    generateSiteNavigationElementSchema('Divorce Specialist', `${baseUrl}/divorce-real-estate-services`),
+    generateSiteNavigationElementSchema('Las Vegas Communities', `${baseUrl}/divorce-realtor-henderson`),
+    generateSiteNavigationElementSchema('Resources', `${baseUrl}/attorney-resources`),
+    generateSiteNavigationElementSchema('About Dr. Jan', `${baseUrl}/about`),
+    generateSiteNavigationElementSchema('Contact', `${baseUrl}/contact`),
+  ];
+
       return (
         <html lang={locale} className={`${inter.variable} ${playfairDisplay.variable}`}>
           <head>
@@ -74,6 +87,7 @@ export default async function RootLayout(props: LayoutProps) {
                 content={getGoogleVerificationTag()!}
               />
             )}
+            <StructuredData data={navigationSchemas} />
             <ThirdPartyScripts />
           </head>
           <body>

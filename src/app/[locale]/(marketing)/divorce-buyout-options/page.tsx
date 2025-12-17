@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IBuyoutProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +26,30 @@ export default async function BuyoutOptions(props: IBuyoutProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-buyout-options';
+  const articleSchema = generateArticleSchema(
+    'Divorce Buyout Options for Las Vegas Homes',
+    'Expert guidance for divorce buyout options. Keep your home if you can with professional buyout assistance.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Buyout Services',
+    'Expert guidance for divorce buyout options. Professional buyout assistance to help you keep your home.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Buyout Options for Las Vegas Homes"
-      heroSubhead="Keep Your Home If You Can"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Buyout Options for Las Vegas Homes"
+        heroSubhead="Keep Your Home If You Can"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Understanding Divorce Buyout Options</h2>
         <p>

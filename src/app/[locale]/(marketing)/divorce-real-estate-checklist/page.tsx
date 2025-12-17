@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IChecklistProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function RealEstateChecklist(props: IChecklistProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-real-estate-checklist';
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Checklist Services',
+    'Comprehensive checklist for divorce real estate in Las Vegas. Know what to do and when during your divorce property transaction.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Checklist for Las Vegas"
-      heroSubhead="Know What to Do and When"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Checklist for Las Vegas"
+        heroSubhead="Know What to Do and When"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Your Divorce Real Estate Checklist</h2>
         <p>

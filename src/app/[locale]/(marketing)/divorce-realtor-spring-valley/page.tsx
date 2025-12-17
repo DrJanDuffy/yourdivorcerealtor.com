@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ISpringValleyProps = {
   params: Promise<{ locale: string }>;
@@ -20,14 +26,24 @@ export default async function SpringValley(props: ISpringValleyProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-spring-valley';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Spring Valley' }];
+  const serviceSchema = generateServiceSchema(
+    'Spring Valley Divorce Real Estate Services',
+    'Spring Valley Las Vegas divorce realtor helping with property division, selling houses during divorce, and neutral representation.',
+    'Spring Valley',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
-    <DivorcePageTemplate
-      h1="Spring Valley Las Vegas Divorce Realtor"
-      heroSubhead="Divorce Real Estate Agent Spring Valley NV"
-      showHomeValue
-      currentPath={currentPath}
-    >
+    <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Spring Valley Las Vegas Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Spring Valley NV"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Spring Valley Divorce Real Estate Expertise</h2>
         <p>

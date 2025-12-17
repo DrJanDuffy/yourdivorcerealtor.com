@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +24,30 @@ export default async function CanISellMyHouseDuringDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/can-i-sell-my-house-during-divorce';
+  const articleSchema = generateArticleSchema(
+    'Can I Sell My House During Divorce? Yes, Here\'s How',
+    'Yes, you can sell your house during divorce. Learn when you can sell, legal requirements, spouse approval, court orders, and how to proceed.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Sale Legal Services',
+    'Yes, you can sell your house during divorce. Learn when you can sell, legal requirements, spouse approval, and how to proceed.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Can I Sell My House During Divorce? Yes, Here's How"
-      heroSubhead="Understanding Your Rights and Options"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Can I Sell My House During Divorce? Yes, Here's How"
+        heroSubhead="Understanding Your Rights and Options"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Yes, You Can Sell Your House During Divorce</h2>
         <p>

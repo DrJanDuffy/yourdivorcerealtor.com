@@ -4,6 +4,12 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IGuideProps = {
   params: Promise<{ locale: string }>;
@@ -23,11 +29,29 @@ export default async function CompleteGuide(props: IGuideProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-real-estate-guide';
+  const articleSchema = generateArticleSchema(
+    'Complete Guide to Divorce Real Estate Las Vegas',
+    'Comprehensive guide to divorce real estate in Las Vegas. Everything you need to know about property division, home sales, and fresh starts.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Real Estate Guide Services',
+    'Comprehensive guide to divorce real estate in Las Vegas. Everything you need to know about property division, home sales, and fresh starts.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
     <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Complete Guide to Divorce Real Estate Las Vegas"
         heroSubhead="Everything You Need to Know"
+        currentPath={currentPath}
+      >
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Your Comprehensive Divorce Real Estate Guide</h2>

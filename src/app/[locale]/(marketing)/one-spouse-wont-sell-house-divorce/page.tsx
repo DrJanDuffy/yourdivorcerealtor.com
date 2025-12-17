@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,11 +24,29 @@ export default async function OneSpouseWontSellHouseDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/one-spouse-wont-sell-house-divorce';
+  const articleSchema = generateArticleSchema(
+    'One Spouse Won\'t Sell House Divorce: Your Legal Options',
+    'What to do when one spouse won\'t sell house during divorce. Legal options, forced sale divorce Nevada, court-ordered sales, and mediation strategies.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Forced Sale Divorce Services',
+    'What to do when one spouse won\'t sell house during divorce. Legal options, forced sale divorce Nevada, court-ordered sales, and mediation strategies.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="One Spouse Won't Sell House Divorce: Your Legal Options"
-      heroSubhead="Navigate Forced Sales and Court-Ordered Solutions"
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="One Spouse Won't Sell House Divorce: Your Legal Options"
+        heroSubhead="Navigate Forced Sales and Court-Ordered Solutions"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>When One Spouse Refuses to Sell</h2>
         <p>

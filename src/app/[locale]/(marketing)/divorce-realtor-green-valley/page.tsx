@@ -4,6 +4,12 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IGreenValleyProps = {
   params: Promise<{ locale: string }>;
@@ -23,9 +29,18 @@ export default async function GreenValley(props: IGreenValleyProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-green-valley';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Green Valley' }];
+  const serviceSchema = generateServiceSchema(
+    'Green Valley Divorce Real Estate Services',
+    'Green Valley Henderson divorce realtor helping divorcing homeowners sell houses, manage property division, and plan buyouts with local expertise.',
+    'Green Valley',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
     <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Green Valley Henderson Divorce Realtor"
         heroSubhead="Divorce Real Estate Agent Green Valley NV"

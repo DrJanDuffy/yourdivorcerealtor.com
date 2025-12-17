@@ -3,6 +3,12 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,12 +24,30 @@ export default async function SellingHouseBeforeOrAfterDivorce(props: PageProps)
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/selling-house-before-or-after-divorce';
+  const articleSchema = generateArticleSchema(
+    'Selling House Before or After Divorce: Timing Your Sale',
+    'Should you sell house before or after divorce? Pros and cons, tax implications, timeline considerations, and financial impact.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Sale Timing Services',
+    'Should you sell house before or after divorce? Pros and cons, tax implications, timeline considerations, and financial impact.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Selling House Before or After Divorce: Timing Your Sale"
-      heroSubhead="Make Informed Decisions About When to Sell"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Selling House Before or After Divorce: Timing Your Sale"
+        heroSubhead="Make Informed Decisions About When to Sell"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Timing Your Home Sale During Divorce</h2>
         <p>

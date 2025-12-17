@@ -3,6 +3,12 @@ import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type INorthLasVegasProps = {
   params: Promise<{ locale: string }>;
@@ -22,9 +28,18 @@ export default async function NorthLasVegas(props: INorthLasVegasProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-north-las-vegas';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'North Las Vegas' }];
+  const serviceSchema = generateServiceSchema(
+    'North Las Vegas Divorce Real Estate Services',
+    'Divorce home sale North Las Vegas expert. North Las Vegas divorce realtor helping divorcing homeowners with property division, home sales, and buyouts.',
+    'North Las Vegas',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
     <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="North Las Vegas Divorce Realtor"
         heroSubhead="Divorce Home Sale North Las Vegas - Expert Guidance"

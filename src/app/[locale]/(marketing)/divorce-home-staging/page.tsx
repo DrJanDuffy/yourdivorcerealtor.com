@@ -1,6 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IStagingProps = {
   params: Promise<{ locale: string }>;
@@ -20,11 +25,22 @@ export default async function HomeStaging(props: IStagingProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-home-staging';
+  const serviceSchema = generateServiceSchema(
+    'Home Staging Services',
+    'Expert home staging tips for selling during divorce. Maximize appeal and value with professional staging guidance.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Home Staging Tips Las Vegas"
-      heroSubhead="Maximize Appeal and Value"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Home Staging Tips Las Vegas"
+        heroSubhead="Maximize Appeal and Value"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Home Staging for Divorce Sales</h2>
         <p>

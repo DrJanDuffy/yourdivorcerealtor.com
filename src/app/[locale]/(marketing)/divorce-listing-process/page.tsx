@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IListingProcessProps = {
   params: Promise<{ locale: string }>;
@@ -20,12 +26,30 @@ export default async function ListingProcess(props: IListingProcessProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-listing-process';
+  const articleSchema = generateArticleSchema(
+    'The Divorce Listing Process Explained',
+    'Understand the specialized divorce listing process. Customized for divorce listings so problems are prevented.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Listing Process Services',
+    'Specialized divorce listing process customized for divorce transactions. Prevents problems and ensures smooth execution.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="The Divorce Listing Process Explained"
-      heroSubhead="Customized for Divorce Listings"
-      showHomeValue
-    >
+    <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="The Divorce Listing Process Explained"
+        heroSubhead="Customized for Divorce Listings"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Why Divorce Listing Process is Different</h2>
         <p>
@@ -44,7 +68,7 @@ export default async function ListingProcess(props: IListingProcessProps) {
 
         <h3>Step 1: Initial Consultation and Valuation</h3>
         <p>
-          The process begins with a confidential consultation where Dr. Jan Duffy learns about your situation, provides an accurate home valuation, and helps you understand the listing process. This valuation is essential for property division negotiations and ensures you have realistic expectations.
+          The process begins with a confidential consultation where Dr. Jan Duffy learns about your situation, provides an accurate <Link href="/divorce-home-valuation" className="text-blue-600 hover:text-blue-700 underline">home valuation</Link>, and helps you understand the listing process. This valuation is essential for <Link href="/divorce-property-division" className="text-blue-600 hover:text-blue-700 underline">property division</Link> negotiations and ensures you have realistic expectations.
         </p>
 
         <h3>Step 2: Neutral Representation Agreement</h3>
@@ -54,7 +78,7 @@ export default async function ListingProcess(props: IListingProcessProps) {
 
         <h3>Step 3: Property Preparation</h3>
         <p>
-          Preparing a home for sale during divorce requires sensitivity and coordination. Dr. Jan Duffy helps coordinate property preparation while respecting the emotional dynamics of the situation.
+          Preparing a home for sale during divorce requires sensitivity and coordination. Dr. Jan Duffy helps coordinate property preparation while respecting the emotional dynamics of the situation. Learn more about <Link href="/preparing-home-sale-divorce" className="text-blue-600 hover:text-blue-700 underline">preparing your home for sale</Link> and <Link href="/divorce-home-staging" className="text-blue-600 hover:text-blue-700 underline">divorce home staging</Link>.
         </p>
 
         <h3>Step 4: Marketing and Showings</h3>

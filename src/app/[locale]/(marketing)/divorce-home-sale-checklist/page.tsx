@@ -3,6 +3,11 @@ import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,11 +23,22 @@ export default async function DivorceHomeSaleChecklist(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/divorce-home-sale-checklist';
+  const serviceSchema = generateServiceSchema(
+    'Divorce Home Sale Checklist Services',
+    'Complete divorce home sale checklist. Step-by-step checklist for selling your home during divorce. Downloadable PDF option. Everything you need to know.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Home Sale Checklist: Complete Step-by-Step Guide"
-      heroSubhead="Stay Organized Throughout the Process"
-    >
+    <>
+      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Home Sale Checklist: Complete Step-by-Step Guide"
+        heroSubhead="Stay Organized Throughout the Process"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Your Complete Divorce Home Sale Checklist</h2>
         <p>

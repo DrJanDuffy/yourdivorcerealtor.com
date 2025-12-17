@@ -84,12 +84,12 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
 
         <h3>Property Preparation</h3>
         <p>
-          Preparing a home for sale during divorce requires sensitivity and coordination. Dr. Jan Duffy helps you prepare your property for sale while respecting the emotional dynamics of the situation. She coordinates with both parties to ensure the property is presented in its best light, maximizing its value in the Las Vegas market.
+          Preparing a home for sale during divorce requires sensitivity and coordination. Dr. Jan Duffy helps you prepare your property for sale while respecting the emotional dynamics of the situation. She coordinates with both parties to ensure the property is presented in its best light, maximizing its value in the <Link href="/divorce-realtor-henderson" className="text-blue-600 hover:text-blue-700 underline">Las Vegas</Link> market. Learn more about <Link href="/preparing-home-sale-divorce" className="text-blue-600 hover:text-blue-700 underline">preparing your home for sale during divorce</Link>.
         </p>
 
         <h3>Marketing and Showings</h3>
         <p>
-          Effective marketing is crucial for selling your home quickly and at the best price. Dr. Jan Duffy develops customized marketing strategies that highlight your property's strengths and appeal to Las Vegas buyers. She coordinates showings with sensitivity to the divorce situation, ensuring the process is as smooth as possible.
+          Effective marketing is crucial for selling your home quickly and at the best price. Dr. Jan Duffy develops customized marketing strategies that highlight your property's strengths and appeal to <Link href="/divorce-realtor-summerlin" className="text-blue-600 hover:text-blue-700 underline">Las Vegas</Link> buyers. She coordinates showings with sensitivity to the divorce situation, ensuring the process is as smooth as possible.
         </p>
 
         <h3>Offer Negotiation</h3>
@@ -109,7 +109,7 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
 
         <h3>Market Conditions Impact</h3>
         <p>
-          Las Vegas market conditions directly impact how quickly your home will sell and what price you can expect. Dr. Jan Duffy provides realistic timelines based on current market conditions, ensuring you have accurate expectations from the start.
+          <Link href="/divorce-realtor-henderson" className="text-blue-600 hover:text-blue-700 underline">Las Vegas</Link> market conditions directly impact how quickly your home will sell and what price you can expect. Dr. Jan Duffy provides realistic timelines based on current market conditions, ensuring you have accurate expectations from the start.
         </p>
 
         <h3>Property-Specific Factors</h3>
@@ -134,7 +134,7 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
 
         <h2>Maximizing Your Home's Value</h2>
         <p>
-          Getting the best price for your home is important, especially during divorce when proceeds need to be divided. Dr. Jan Duffy's expertise in the Las Vegas market and her specialized divorce listing process help maximize your home's value.
+          Getting the best price for your home is important, especially during divorce when proceeds need to be divided. Dr. Jan Duffy's expertise in the <Link href="/divorce-realtor-summerlin" className="text-blue-600 hover:text-blue-700 underline">Las Vegas</Link> market and her specialized <Link href="/divorce-listing-process" className="text-blue-600 hover:text-blue-700 underline">divorce listing process</Link> help maximize your home's value.
         </p>
 
         <h3>Accurate Pricing</h3>

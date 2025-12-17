@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IEnterpriseProps = {
   params: Promise<{ locale: string }>;
@@ -20,14 +26,24 @@ export default async function Enterprise(props: IEnterpriseProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-enterprise';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Enterprise' }];
+  const serviceSchema = generateServiceSchema(
+    'Enterprise Divorce Real Estate Services',
+    'Enterprise Las Vegas divorce realtor helping divorcing homeowners sell houses, negotiate buyouts, and manage property division.',
+    'Enterprise',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
-    <DivorcePageTemplate
-      h1="Enterprise Las Vegas Divorce Realtor"
-      heroSubhead="Divorce Real Estate Agent Enterprise NV"
-      showHomeValue
-      currentPath={currentPath}
-    >
+    <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Enterprise Las Vegas Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Enterprise NV"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Enterprise Divorce Real Estate Expertise</h2>
         <p>

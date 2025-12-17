@@ -1,6 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateLocalBusinessSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IInspiradaProps = {
   params: Promise<{ locale: string }>;
@@ -20,14 +26,24 @@ export default async function Inspirada(props: IInspiradaProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-inspirada';
+  const localBusinessSchema = generateLocalBusinessSchema();
+  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Inspirada' }];
+  const serviceSchema = generateServiceSchema(
+    'Inspirada Divorce Real Estate Services',
+    'Inspirada Henderson divorce realtor assisting with valuations, listings, and buyouts for divorcing homeowners.',
+    'Inspirada',
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
 
   return (
-    <DivorcePageTemplate
-      h1="Inspirada Henderson Divorce Realtor"
-      heroSubhead="Divorce Real Estate Agent Inspirada NV"
-      showHomeValue
-      currentPath={currentPath}
-    >
+    <>
+      <StructuredData data={[localBusinessSchema, serviceSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Inspirada Henderson Divorce Realtor"
+        heroSubhead="Divorce Real Estate Agent Inspirada NV"
+        showHomeValue
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto prose prose-lg">
         <h2>Inspirada Divorce Real Estate Expertise</h2>
         <p>

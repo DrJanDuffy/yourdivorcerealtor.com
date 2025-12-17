@@ -4,6 +4,12 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateArticleSchema,
+  generateServiceSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type ISettlementProps = {
   params: Promise<{ locale: string }>;
@@ -23,11 +29,28 @@ export default async function SettlementOptions(props: ISettlementProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const currentPath = '/divorce-settlement-options';
+  const articleSchema = generateArticleSchema(
+    'Divorce Settlement Real Estate Options',
+    'Understand all your divorce settlement real estate options. Sell, buyout, co-own, or refinance - expert guidance for each option.',
+    `${baseUrl}${currentPath}`,
+    new Date().toISOString(),
+  );
+  const serviceSchema = generateServiceSchema(
+    'Divorce Settlement Options Services',
+    'Understand all your divorce settlement real estate options. Expert guidance for each option.',
+    ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
+  );
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
     <>
+      <StructuredData data={[articleSchema, serviceSchema, realEstateAgentSchema]} />
       <DivorcePageTemplate
         h1="Divorce Settlement Real Estate Options"
         heroSubhead="Understand All Your Options"
+        currentPath={currentPath}
       >
         <div className="max-w-4xl mx-auto prose prose-lg">
           <h2>Understanding Your Divorce Settlement Options</h2>

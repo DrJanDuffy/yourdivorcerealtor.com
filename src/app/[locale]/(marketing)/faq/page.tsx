@@ -2,7 +2,11 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { FAQAccordion } from '@/components/faq/FAQAccordion';
-import { generateFAQPageSchema } from '@/lib/schema';
+import { StructuredData } from '@/components/seo/StructuredData';
+import {
+  generateFAQPageSchema,
+  generateRealEstateAgentSchema,
+} from '@/lib/schema';
 
 type IFAQProps = {
   params: Promise<{ locale: string }>;
@@ -22,6 +26,7 @@ export default async function FAQ(props: IFAQProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
+  const currentPath = '/faq';
   const faqs = [
     {
       question: 'Do I need to sell my home during divorce?',
@@ -65,11 +70,17 @@ export default async function FAQ(props: IFAQProps) {
     },
   ];
 
+  const faqPageSchema = generateFAQPageSchema(faqs);
+  const realEstateAgentSchema = generateRealEstateAgentSchema();
+
   return (
-    <DivorcePageTemplate
-      h1="Divorce Real Estate Questions Answered"
-      heroSubhead="Your Questions, Expert Answers"
-    >
+    <>
+      <StructuredData data={[faqPageSchema, realEstateAgentSchema]} />
+      <DivorcePageTemplate
+        h1="Divorce Real Estate Questions Answered"
+        heroSubhead="Your Questions, Expert Answers"
+        currentPath={currentPath}
+      >
       <div className="max-w-4xl mx-auto">
         <div className="prose prose-lg mb-12">
           <h2>Common Questions About Divorce Real Estate</h2>
@@ -77,14 +88,6 @@ export default async function FAQ(props: IFAQProps) {
             Navigating divorce real estate raises many questions. Here are answers to the most common questions Dr. Jan Duffy receives from divorcing homeowners in Las Vegas. If you don't see your question here, schedule a consultation for personalized guidance.
           </p>
         </div>
-
-        {/* FAQ Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateFAQPageSchema(faqs)),
-          }}
-        />
 
         {/* Interactive FAQ Accordion */}
         <div className="mb-12">
