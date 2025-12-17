@@ -3,6 +3,11 @@
  * For SEO and rich snippets in search results
  */
 
+type CitySchema = {
+  '@type': 'City';
+  name: string;
+};
+
 export interface RealEstateAgentSchema {
   '@context': string;
   '@type': 'RealEstateAgent';
@@ -23,10 +28,7 @@ export interface RealEstateAgentSchema {
     name: string;
   };
   priceRange?: string;
-  areaServed: {
-    '@type': 'City';
-    name: string;
-  }[];
+  areaServed: CitySchema[];
 }
 
 export interface LocalBusinessSchema {
@@ -55,10 +57,7 @@ export interface LocalBusinessSchema {
     closes: string;
   }[];
   priceRange?: string;
-  areaServed: {
-    '@type': 'City';
-    name: string;
-  }[];
+  areaServed: CitySchema[];
 }
 
 export interface FAQPageSchema {
@@ -84,13 +83,7 @@ export interface ServiceSchema {
     '@type': 'RealEstateAgent';
     name: string;
   };
-  areaServed: {
-    '@type': 'City';
-    name: string;
-  } | {
-    '@type': 'City';
-    name: string;
-  }[];
+  areaServed: CitySchema | CitySchema[];
   priceRange?: string;
   offers?: {
     '@type': 'Offer';
@@ -368,8 +361,8 @@ export function generateServiceSchema(
   name?: string,
   priceRange?: string,
 ): ServiceSchema {
-  const areas = Array.isArray(areaServed)
-    ? areaServed.map(area => ({ '@type': 'City', name: area }))
+  const areas: CitySchema | CitySchema[] = Array.isArray(areaServed)
+    ? areaServed.map(area => ({ '@type': 'City', name: area } as CitySchema))
     : { '@type': 'City', name: areaServed };
 
   return {
