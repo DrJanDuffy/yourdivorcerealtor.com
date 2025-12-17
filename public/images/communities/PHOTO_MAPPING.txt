@@ -1,0 +1,17 @@
+﻿Community Photo Mapping Guide
+==============================
+
+Review the IMG_781102 files and map them to cities:
+
+  henderson.jpg = [Select IMG_781102 (X).jpg]
+  summerlin.jpg = [Select IMG_781102 (X).jpg]
+  north-las-vegas.jpg = [Select IMG_781102 (X).jpg]
+  green-valley.jpg = [Select IMG_781102 (X).jpg]
+  spring-valley.jpg = [Select IMG_781102 (X).jpg]
+  enterprise.jpg = [Select IMG_781102 (X).jpg]
+  paradise.jpg = [Select IMG_781102 (X).jpg]
+  centennial-hills.jpg = [Select IMG_781102 (X).jpg]
+  southern-highlands.jpg = [Select IMG_781102 (X).jpg]
+  aliante.jpg = [Select IMG_781102 (X).jpg]
+  mountains-edge.jpg = [Select IMG_781102 (X).jpg]
+  inspirada.jpg = [Select IMG_781102 (X).jpg]

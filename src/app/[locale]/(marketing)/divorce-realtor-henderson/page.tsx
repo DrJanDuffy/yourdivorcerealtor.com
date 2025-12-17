@@ -29,7 +29,6 @@ export default async function Henderson(props: IHendersonProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/divorce-realtor-henderson';
   const localBusinessSchema = generateLocalBusinessSchema();
   localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Henderson' }];

@@ -25,7 +25,6 @@ export default async function About(props: IAboutProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const serviceSchema = generateServiceSchema(
     'Divorce Real Estate Consultation',
     'Expert divorce real estate services in Las Vegas. Specialized in helping divorcing homeowners navigate property division with compassion and expertise.',
