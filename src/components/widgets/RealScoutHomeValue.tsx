@@ -54,8 +54,11 @@ function RealScoutWidget() {
       <div
         ref={containerRef}
         className="h-96 animate-pulse rounded-lg bg-gray-200"
-        aria-label="Loading home valuation widget"
-      />
+        role="status"
+        aria-live="polite"
+      >
+        <span className="sr-only">Loading home valuation widget</span>
+      </div>
     );
   }
 
@@ -81,9 +84,11 @@ export function RealScoutHomeValue() {
         </p>
         <div className="max-w-xl mx-auto">
           <Suspense
-            fallback={
-              <div className="h-96 animate-pulse rounded-lg bg-gray-200" />
-            }
+            fallback={(
+              <div className="h-96 animate-pulse rounded-lg bg-gray-200" role="status" aria-live="polite">
+                <span className="sr-only">Loading home valuation widget</span>
+              </div>
+            )}
           >
             <RealScoutWidget />
           </Suspense>

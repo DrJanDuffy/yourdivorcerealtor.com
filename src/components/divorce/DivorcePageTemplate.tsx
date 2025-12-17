@@ -47,7 +47,7 @@ export function DivorcePageTemplate({
                 {h1}
               </h1>
               {heroSubhead && (
-                <p className="mb-8 text-xl text-blue-100 md:text-2xl">
+                <p className="mb-8 text-xl text-blue-50 md:text-2xl">
                   {heroSubhead}
                 </p>
               )}

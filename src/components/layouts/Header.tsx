@@ -55,7 +55,7 @@ export function Header() {
             {' '}
             <Link
               href="/contact"
-              className="font-semibold underline transition-colors hover:text-blue-100"
+              className="font-semibold underline transition-colors hover:text-blue-200"
               prefetch={true}
             >
               Schedule a Consultation
@@ -150,45 +150,41 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu - Animated */}
-        <div
-          id="mobile-menu"
-          className={`overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${
-            mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}
-          {...(!mobileMenuOpen ? { 'aria-hidden': 'true' } : { 'aria-hidden': 'false' })}
-        >
-          <div className="space-y-4 border-t border-gray-200 py-4">
-            {navigationLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div id="mobile-menu" className="lg:hidden" aria-hidden="false">
+            <div className="space-y-4 border-t border-gray-200 py-4">
+              {navigationLinks.map(link => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMobileMenu}
+                  className={`block rounded-md px-4 py-2 transition-colors focus:ring-2 focus:ring-blue-600 focus:outline-none ${
+                    isActive(link.href)
+                      ? 'bg-blue-50 font-semibold text-blue-600'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
+                  }`}
+                  prefetch={true}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <a
+                href="tel:+17022221964"
                 onClick={closeMobileMenu}
-                className={`block rounded-md px-4 py-2 transition-colors focus:ring-2 focus:ring-blue-600 focus:outline-none ${
-                  isActive(link.href)
-                    ? 'bg-blue-50 font-semibold text-blue-600'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
-                }`}
-                prefetch={true}
+                className="block rounded-md px-4 py-2 font-semibold text-blue-600 transition-colors hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+                aria-label="Call Dr. Jan Duffy at 702-222-1964"
               >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href="tel:+17022221964"
-              onClick={closeMobileMenu}
-              className="block rounded-md px-4 py-2 font-semibold text-blue-600 transition-colors hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-              aria-label="Call Dr. Jan Duffy at 702-222-1964"
-            >
-              (702) 222-1964
-            </a>
-            {showUserButton && (
-              <div className="border-t border-gray-200 px-4 pt-4">
-                <UserButton afterSignOutUrl="/" />
-              </div>
-            )}
+                (702) 222-1964
+              </a>
+              {showUserButton && (
+                <div className="border-t border-gray-200 px-4 pt-4">
+                  <UserButton afterSignOutUrl="/" />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </nav>
     </header>
   );

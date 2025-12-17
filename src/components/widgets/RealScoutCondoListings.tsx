@@ -50,8 +50,10 @@ function RealScoutListingsWidget() {
       <div
         ref={containerRef}
         className="space-y-4"
-        aria-label="Loading property listings"
+        role="status"
+        aria-live="polite"
       >
+        <span className="sr-only">Loading property listings</span>
         {[1, 2, 3].map(i => (
           <div
             key={i}
@@ -90,8 +92,9 @@ export function RealScoutCondoListings() {
           townhomes perfect for starting your next chapter after divorce.
         </p>
         <Suspense
-          fallback={
-            <div className="space-y-4">
+          fallback={(
+            <div className="space-y-4" role="status" aria-live="polite">
+              <span className="sr-only">Loading property listings</span>
               {[1, 2, 3].map(i => (
                 <div
                   key={i}
@@ -99,7 +102,7 @@ export function RealScoutCondoListings() {
                 />
               ))}
             </div>
-          }
+          )}
         >
           <RealScoutListingsWidget />
         </Suspense>

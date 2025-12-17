@@ -6,7 +6,7 @@ export function StatsSection() {
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-4 text-4xl font-bold">8,000+ Families Served</h2>
-          <p className="mb-12 text-xl text-blue-100">
+        <p className="mb-12 text-xl text-blue-50">
             We offer the best home buying realtors, housing market experts,
             marketing specialists, and home closing real estate team so your
             experience with buying and selling a home is a breeze. We are named

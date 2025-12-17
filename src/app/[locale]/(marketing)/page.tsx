@@ -155,7 +155,7 @@ export default async function Index(props: PageProps) {
           <h2 className="text-4xl font-bold mb-4">
             It's Never Too Early to Discuss Your Options
           </h2>
-          <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 text-blue-50 max-w-2xl mx-auto">
             Schedule a confidential strategy call today and take control of your future.
           </p>
           <DivorceCTA variant="primary" className="bg-white text-blue-600 hover:bg-blue-50" />

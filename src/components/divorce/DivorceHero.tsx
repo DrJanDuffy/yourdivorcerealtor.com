@@ -14,17 +14,17 @@ export function DivorceHero() {
             <h1 className="mb-4 text-5xl font-bold md:text-6xl">
               Divorce Real Estate Agent Las Vegas
             </h1>
-            <p className="mb-6 text-xl font-medium text-blue-200 md:text-2xl">
+            <p className="mb-6 text-xl font-medium text-white md:text-2xl">
               {messaging.headlines.primary}
               {' '}
               -
               {' '}
               {messaging.headlines.subtitle}
             </p>
-            <p className="mb-4 text-2xl font-semibold text-blue-100 md:text-3xl">
+            <p className="mb-4 text-2xl font-semibold text-blue-50 md:text-3xl">
               {messaging.headlines.unlock}
             </p>
-            <p className="mb-8 text-xl text-blue-100 md:text-2xl">
+            <p className="mb-8 text-xl text-blue-50 md:text-2xl">
               Divorce is complicated enough without real estate.
               {' '}
               {messaging.headlines.houseKey}
@@ -40,7 +40,7 @@ export function DivorceHero() {
               </Link>
               <Link
                 href="#home-value"
-                className="rounded-lg bg-blue-500 px-8 py-4 font-semibold text-white transition-colors hover:bg-blue-400"
+                className="rounded-lg bg-blue-700 px-8 py-4 font-semibold text-white transition-colors hover:bg-blue-800 focus:ring-2 focus:ring-white focus:outline-none"
               >
                 {messaging.ctas.valuation}
               </Link>
