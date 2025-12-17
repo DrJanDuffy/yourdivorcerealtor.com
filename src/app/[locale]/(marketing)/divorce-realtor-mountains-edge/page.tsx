@@ -61,6 +61,6 @@ export default async function MountainsEdge(props: IMountainsEdgeProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

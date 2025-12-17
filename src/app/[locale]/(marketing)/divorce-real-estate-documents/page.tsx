@@ -87,6 +87,6 @@ export default async function RealEstateDocuments(props: IDocumentsProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

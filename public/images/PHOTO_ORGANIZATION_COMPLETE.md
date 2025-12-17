@@ -131,3 +131,5 @@ Get-ChildItem public/assets/images/IMG_781102*.jpg | Select-Object Name, Length
 - Property photos should stay in `assets/images/` for RealScout widget compatibility
 - All images should be optimized before final deployment
 
+
+

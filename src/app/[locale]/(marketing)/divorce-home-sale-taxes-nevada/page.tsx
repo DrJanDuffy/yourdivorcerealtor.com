@@ -205,6 +205,6 @@ export default async function DivorceHomeSaleTaxesNevada(props: PageProps) {
         </div>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

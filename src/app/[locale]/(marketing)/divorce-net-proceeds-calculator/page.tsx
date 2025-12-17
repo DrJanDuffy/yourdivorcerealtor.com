@@ -84,6 +84,6 @@ export default async function NetProceedsCalculator(props: INetProceedsProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

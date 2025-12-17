@@ -61,6 +61,6 @@ export default async function Paradise(props: IParadiseProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

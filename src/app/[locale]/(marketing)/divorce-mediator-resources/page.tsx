@@ -58,6 +58,6 @@ export default async function MediatorResources(props: IMediatorProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

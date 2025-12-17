@@ -138,3 +138,5 @@ mv "public/assets/images/IMG_781102 (Y).jpg" "public/images/communities/summerli
 - Be descriptive: `henderson-community.jpg` not `img-1.jpg`
 - Include purpose: `homepage-hero.jpg` not `photo.jpg`
 
+
+

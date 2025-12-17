@@ -103,3 +103,5 @@ For each IMG_781102 file, document:
 - Move marketing/display photos to `public/images/` organized folders
 - EPS files are source files - keep in assets, export optimized versions to images/logo/
 
+
+

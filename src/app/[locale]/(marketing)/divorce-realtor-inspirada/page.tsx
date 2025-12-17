@@ -61,6 +61,6 @@ export default async function Inspirada(props: IInspiradaProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

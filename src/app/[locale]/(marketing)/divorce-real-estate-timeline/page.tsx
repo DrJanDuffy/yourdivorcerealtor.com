@@ -136,6 +136,6 @@ export default async function Timeline(props: ITimelineProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

@@ -78,6 +78,6 @@ export default async function HomeStaging(props: IStagingProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

@@ -132,6 +132,6 @@ export default async function BuyoutOptions(props: IBuyoutProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

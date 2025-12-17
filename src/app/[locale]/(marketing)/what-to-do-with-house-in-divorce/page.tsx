@@ -225,6 +225,6 @@ export default async function WhatToDoWithHouseInDivorce(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

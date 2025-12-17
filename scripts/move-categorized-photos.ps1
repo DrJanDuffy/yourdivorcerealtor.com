@@ -73,3 +73,5 @@ Write-Host "     To:   $destDir/$destFile" -ForegroundColor Gray
 # .\move-categorized-photos.ps1 -SourceFile "IMG_781102 (1).jpg" -Category "community" -CityName "henderson"
 # .\move-categorized-photos.ps1 -SourceFile "IMG_781102 (2).jpg" -Category "staging" -NewFileName "staging-before.jpg"
 
+
+

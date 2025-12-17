@@ -79,6 +79,7 @@ export default async function CDRE(props: ICDREProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
 

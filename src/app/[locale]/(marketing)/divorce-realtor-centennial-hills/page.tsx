@@ -61,6 +61,6 @@ export default async function CentennialHills(props: ICentennialHillsProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

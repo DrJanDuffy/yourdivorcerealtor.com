@@ -229,3 +229,5 @@ Before submitting to Google Search Console, verify:
 - **Structured Data**: All schemas are server-rendered for better SEO
 - **Performance**: Optimized for Core Web Vitals with PPR, lazy loading, and code splitting
 
+
+

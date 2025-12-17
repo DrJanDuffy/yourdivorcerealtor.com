@@ -61,6 +61,6 @@ export default async function Enterprise(props: IEnterpriseProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

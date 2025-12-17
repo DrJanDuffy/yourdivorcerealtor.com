@@ -22,3 +22,5 @@ export const playfairDisplay = Playfair_Display({
   weight: ['400', '600', '700'],
 });
 
+
+

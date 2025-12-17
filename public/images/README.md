@@ -25,3 +25,5 @@ This directory contains all images used throughout the yourdivorcerealtor.com we
 
 ## See PHOTO_AUDIT.md for complete specifications
 
+
+

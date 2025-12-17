@@ -111,6 +111,6 @@ export default async function MistakesToAvoid(props: IMistakesProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

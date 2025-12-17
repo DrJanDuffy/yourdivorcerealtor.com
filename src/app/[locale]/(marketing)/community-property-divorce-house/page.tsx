@@ -205,6 +205,7 @@ export default async function CommunityPropertyDivorceHouse(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
 

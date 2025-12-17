@@ -98,3 +98,5 @@ foreach ($file in $imgFiles) {
 Write-Host "[OK] Created quick reference at:" -ForegroundColor Green
 Write-Host "     $quickRef" -ForegroundColor Cyan
 
+
+

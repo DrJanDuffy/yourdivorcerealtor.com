@@ -217,6 +217,6 @@ export default async function SellingHouseBeforeOrAfterDivorce(props: PageProps)
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

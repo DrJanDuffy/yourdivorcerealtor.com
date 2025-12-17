@@ -239,6 +239,6 @@ export default async function RemoveSpouseFromMortgageAfterDivorce(props: PagePr
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

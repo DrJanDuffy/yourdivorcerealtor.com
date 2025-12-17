@@ -61,6 +61,6 @@ export default async function Aliante(props: IAlianteProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

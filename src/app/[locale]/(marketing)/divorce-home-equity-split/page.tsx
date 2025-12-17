@@ -184,6 +184,6 @@ export default async function DivorceHomeEquitySplit(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

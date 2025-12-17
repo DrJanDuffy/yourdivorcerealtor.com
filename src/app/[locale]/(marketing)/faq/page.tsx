@@ -115,6 +115,6 @@ export default async function FAQ(props: IFAQProps) {
         </div>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

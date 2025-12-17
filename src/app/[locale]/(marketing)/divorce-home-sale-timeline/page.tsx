@@ -279,6 +279,6 @@ export default async function DivorceHomeSaleTimeline(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

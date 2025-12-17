@@ -160,7 +160,7 @@ export default async function Index(props: PageProps) {
           </p>
           <DivorceCTA variant="primary" className="bg-white text-blue-600 hover:bg-blue-50" />
         </div>
-      </section>
+    </DivorcePageTemplate>
     </>
   );
-};
+}

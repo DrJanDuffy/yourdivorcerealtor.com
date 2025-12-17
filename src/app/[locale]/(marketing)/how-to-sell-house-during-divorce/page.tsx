@@ -298,6 +298,6 @@ export default async function HowToSellHouseDuringDivorce(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

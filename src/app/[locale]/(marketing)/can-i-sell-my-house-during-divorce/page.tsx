@@ -12,6 +12,22 @@ import {
 
 export const dynamic = 'force-dynamic';
 
+// #region agent log
+fetch('http://127.0.0.1:7246/ingest/aba3c3fb-219d-4db0-ba97-481ba0275178', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    sessionId: 'debug-session',
+    runId: 'pre-fix',
+    hypothesisId: 'H1',
+    location: 'can-i-sell-my-house-during-divorce/page.tsx:module',
+    message: 'Marketing page module loaded',
+    data: { page: '/can-i-sell-my-house-during-divorce' },
+    timestamp: Date.now(),
+  }),
+}).catch(() => {});
+// #endregion
+
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'Can I Sell My House During Divorce? | Yes, Here\'s How | Dr. Jan Duffy',
@@ -26,6 +42,23 @@ export default async function CanISellMyHouseDuringDivorce(props: PageProps) {
 
   const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/can-i-sell-my-house-during-divorce';
+
+  // #region agent log
+  fetch('http://127.0.0.1:7246/ingest/aba3c3fb-219d-4db0-ba97-481ba0275178', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sessionId: 'debug-session',
+      runId: 'pre-fix',
+      hypothesisId: 'H2',
+      location: 'can-i-sell-my-house-during-divorce/page.tsx:loader',
+      message: 'Locale resolved for can-i-sell page',
+      data: { locale, currentPath },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+  // #endregion
+
   const articleSchema = generateArticleSchema(
     'Can I Sell My House During Divorce? Yes, Here\'s How',
     'Yes, you can sell your house during divorce. Learn when you can sell, legal requirements, spouse approval, court orders, and how to proceed.',
@@ -38,6 +71,22 @@ export default async function CanISellMyHouseDuringDivorce(props: PageProps) {
     ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
   );
   const realEstateAgentSchema = generateRealEstateAgentSchema();
+
+  // #region agent log
+  fetch('http://127.0.0.1:7246/ingest/aba3c3fb-219d-4db0-ba97-481ba0275178', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sessionId: 'debug-session',
+      runId: 'pre-fix',
+      hypothesisId: 'H3',
+      location: 'can-i-sell-my-house-during-divorce/page.tsx:schemas',
+      message: 'Schemas generated for can-i-sell page',
+      data: { schemaCount: 3 },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+  // #endregion
 
   return (
     <>
@@ -170,6 +219,7 @@ export default async function CanISellMyHouseDuringDivorce(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
 

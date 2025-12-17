@@ -64,6 +64,6 @@ export default async function AppraisalServices(props: IAppraisalProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

@@ -176,6 +176,6 @@ export default async function SplittingHouseProceedsDivorce(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

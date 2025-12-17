@@ -401,6 +401,6 @@ export default async function DivorceHomeSaleChecklist(props: PageProps) {
         </ul>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

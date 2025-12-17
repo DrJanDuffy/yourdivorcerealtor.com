@@ -146,3 +146,5 @@
 5. Implement lazy loading for below-fold images
 6. Use priority loading for hero images
 
+
+

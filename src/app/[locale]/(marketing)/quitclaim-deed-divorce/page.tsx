@@ -76,6 +76,6 @@ export default async function QuitclaimDeed(props: IQuitclaimProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

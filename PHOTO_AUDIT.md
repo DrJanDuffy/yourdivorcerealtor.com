@@ -357,3 +357,5 @@ public/
 6. Verify alt text and accessibility
 7. Update metadata for social sharing images
 
+
+

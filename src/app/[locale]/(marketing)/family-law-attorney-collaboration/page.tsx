@@ -78,6 +78,6 @@ export default async function AttorneyCollaboration(props: IAttorneyCollabProps)
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

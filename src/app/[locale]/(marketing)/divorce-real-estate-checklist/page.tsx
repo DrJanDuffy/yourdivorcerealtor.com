@@ -92,6 +92,6 @@ export default async function RealEstateChecklist(props: IChecklistProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

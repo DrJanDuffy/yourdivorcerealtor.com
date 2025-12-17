@@ -79,6 +79,6 @@ export default async function PreparingHomeSale(props: IPreparingProps) {
         </p>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
-

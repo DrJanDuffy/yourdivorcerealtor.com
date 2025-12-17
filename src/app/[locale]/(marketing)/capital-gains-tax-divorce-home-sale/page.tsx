@@ -203,6 +203,7 @@ export default async function CapitalGainsTaxDivorceHomeSale(props: PageProps) {
         </div>
       </div>
     </DivorcePageTemplate>
+    </>
   );
 }
 
