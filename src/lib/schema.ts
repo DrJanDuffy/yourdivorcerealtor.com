@@ -300,7 +300,7 @@ export function generateOrganizationSchema(): OrganizationSchema {
     '@type': 'Organization',
     name: 'Dr. Jan Duffy - Divorce Real Estate Specialist',
     url: 'https://www.yourdivorcerealtor.com',
-    logo: 'https://www.yourdivorcerealtor.com/logo.png',
+    logo: 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
     sameAs: [
       'https://www.facebook.com',
       'https://www.linkedin.com',
@@ -339,7 +339,7 @@ export function generateArticleSchema(
       name: 'Dr. Jan Duffy - Divorce Real Estate Specialist',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.yourdivorcerealtor.com/logo.png',
+        url: 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
       },
     },
     datePublished,

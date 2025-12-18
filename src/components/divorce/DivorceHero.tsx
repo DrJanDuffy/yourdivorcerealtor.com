@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { messaging } from '@/lib/messaging';
 
 export function DivorceHero() {
-  const heroImageSrc = '/images/hero/homepage-hero.jpg';
+  const heroImageSrc = '/images/agent/dr-jan-duffy-professional.jpg';
 
   return (
     <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
@@ -56,7 +56,7 @@ export function DivorceHero() {
           <div className="relative h-80 w-full max-w-xl overflow-hidden rounded-3xl shadow-2xl lg:w-1/2">
             <Image
               src={heroImageSrc}
-              alt="Modern Las Vegas home exterior at sunset"
+              alt="Dr. Jan Duffy, Las Vegas divorce real estate specialist"
               fill
               priority
               className="object-cover"

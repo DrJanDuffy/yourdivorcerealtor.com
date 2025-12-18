@@ -1,6 +1,7 @@
 'use client';
 
 import { UserButton } from '@clerk/nextjs';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useTransition } from 'react';
@@ -70,18 +71,29 @@ export function Header() {
           {/* Logo - SEO Optimized with Schema Markup */}
           <Link
             href="/"
-            className="flex flex-col rounded focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+            className="flex rounded focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
             prefetch={true}
             aria-label="Dr. Jan Duffy - Divorce Real Estate Specialist Home"
             itemScope
             itemType="https://schema.org/RealEstateAgent"
           >
-            <span className="text-2xl font-bold text-blue-600" itemProp="name">
-              Dr. Jan Duffy
-            </span>
-            <span className="text-sm font-medium text-gray-600" itemProp="description">
-              Divorce Real Estate Specialist
-            </span>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/images/logo/berkshire-hathaway-quality-seal.png"
+                alt="Berkshire Hathaway HomeServices Nevada Properties quality seal"
+                width={40}
+                height={40}
+                priority
+              />
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-blue-600" itemProp="name">
+                  Dr. Jan Duffy
+                </span>
+                <span className="text-sm font-medium text-gray-600" itemProp="description">
+                  Divorce Real Estate Specialist
+                </span>
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
