@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { messaging } from '@/lib/messaging';
 
 export function DivorceHero() {
-  const heroImageSrc = '/images/agent/dr-jan-duffy-professional.jpg';
+  const heroImageSrc = '/images/hero/homepage-hero.jpg';
 
   return (
     <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
