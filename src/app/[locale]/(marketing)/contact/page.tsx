@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { CalendlyInline } from '@/components/calendly/CalendlyInline';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { WhatWeDoAndDontDo } from '@/components/divorce/WhatWeDoAndDontDo';
 import { FAQAccordion } from '@/components/faq/FAQAccordion';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { generateLocaleAlternates } from '@/lib/metadata';
@@ -89,7 +90,8 @@ export default async function Contact(props: IContactProps) {
                 <div className="rounded-lg border border-blue-100 bg-blue-50/50 p-4">
                   <p className="text-sm font-semibold text-gray-800">Dr. Jan Duffy, REALTOR®</p>
                   <p className="text-sm text-gray-600">Berkshire Hathaway HomeServices Nevada Properties</p>
-                  <p className="mt-1 text-sm text-gray-600">Las Vegas, NV · Monday–Saturday</p>
+                  <p className="mt-1 text-sm text-gray-600">601 N. Pecos, Family Courts and Services Center</p>
+                  <p className="text-sm text-gray-600">Las Vegas, NV 89155 · Monday - Friday, 8 a.m. - 4 p.m.</p>
                 </div>
                 <ul className="mt-6 space-y-2 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
@@ -122,6 +124,11 @@ export default async function Contact(props: IContactProps) {
           <section className="mb-14">
             <h2 className="mb-4 text-2xl font-bold text-gray-900">What to expect in your consultation</h2>
             <FAQAccordion faqs={whatToExpectFaqs} />
+          </section>
+
+          {/* What we do / don't do — sets expectations before scheduling */}
+          <section className="mb-14 rounded-xl border border-gray-200 bg-gray-50/50 p-6">
+            <WhatWeDoAndDontDo variant="compact" />
           </section>
 
           {/* Second scheduler — if above fold is scrolled past */}

@@ -19,8 +19,10 @@ export type RealEstateAgentSchema = {
   'email'?: string;
   'address': {
     '@type': 'PostalAddress';
+    'streetAddress'?: string;
     'addressLocality': string;
     'addressRegion': string;
+    'postalCode'?: string;
     'addressCountry': string;
   };
   'worksFor': {
@@ -40,6 +42,7 @@ export type LocalBusinessSchema = {
   'telephone': string;
   'address': {
     '@type': 'PostalAddress';
+    'streetAddress'?: string;
     'addressLocality': string;
     'addressRegion': string;
     'postalCode'?: string;
@@ -148,7 +151,7 @@ export type BreadcrumbListSchema = {
     '@type': 'ListItem';
     'position': number;
     'name': string;
-    'item': string;
+    'item': string | { '@id': string; 'name': string };
   }[];
 };
 
@@ -249,9 +252,11 @@ export type ReviewSchema = {
     'ratingValue': number;
     'bestRating'?: number;
   };
-  'itemReviewed'?: {
+  /** Required for Review rich results - identifies what is being reviewed */
+  'itemReviewed': {
     '@type': 'RealEstateAgent';
     'name': string;
+    'url': string;
   };
 };
 
@@ -269,8 +274,10 @@ export function generateRealEstateAgentSchema(): RealEstateAgentSchema {
     'telephone': '+17022221964',
     'address': {
       '@type': 'PostalAddress',
+      'streetAddress': '601 N. Pecos, Family Courts and Services Center',
       'addressLocality': 'Las Vegas',
       'addressRegion': 'NV',
+      'postalCode': '89155',
       'addressCountry': 'US',
     },
     'worksFor': {
@@ -299,10 +306,20 @@ export function generateLocalBusinessSchema(): LocalBusinessSchema {
     'telephone': '+17022221964',
     'address': {
       '@type': 'PostalAddress',
+      'streetAddress': '601 N. Pecos, Family Courts and Services Center',
       'addressLocality': 'Las Vegas',
       'addressRegion': 'NV',
+      'postalCode': '89155',
       'addressCountry': 'US',
     },
+    'openingHoursSpecification': [
+      {
+        '@type': 'OpeningHoursSpecification',
+        'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        'opens': '08:00',
+        'closes': '16:00',
+      },
+    ],
     'areaServed': [
       { '@type': 'City', 'name': 'Las Vegas' },
       { '@type': 'City', 'name': 'Henderson' },
@@ -425,7 +442,8 @@ export function generateQAPageSchema(
 }
 
 /**
- * Generate BreadcrumbList schema
+ * Generate BreadcrumbList schema (schema.org recommended format with item @id for GSC rich results)
+ * @see https://schema.org/BreadcrumbList
  */
 export function generateBreadcrumbListSchema(items: Array<{ name: string; url: string }>): BreadcrumbListSchema {
   return {
@@ -435,7 +453,7 @@ export function generateBreadcrumbListSchema(items: Array<{ name: string; url: s
       '@type': 'ListItem',
       'position': index + 1,
       'name': item.name,
-      'item': item.url,
+      'item': { '@id': item.url, 'name': item.name },
     })),
   };
 }
@@ -607,8 +625,11 @@ export function generateServiceSchema(
   };
 }
 
+const REVIEW_ITEM_BASE_URL = 'https://www.yourdivorcerealtor.com';
+
 /**
- * Generate Review schema for testimonials
+ * Generate Review schema for testimonials.
+ * Google requires: author (@type + name), itemReviewed (@type + name + url).
  */
 export function generateReviewSchema(
   authorName: string,
@@ -616,27 +637,55 @@ export function generateReviewSchema(
   rating?: number,
   datePublished?: string,
 ): ReviewSchema {
-  return {
+  const schema: ReviewSchema = {
     '@context': 'https://schema.org',
     '@type': 'Review',
     'author': {
       '@type': 'Person',
       'name': authorName,
     },
-    datePublished,
     reviewBody,
-    'reviewRating': rating
-      ? {
-          '@type': 'Rating',
-          'ratingValue': rating,
-          'bestRating': 5,
-        }
-      : undefined,
     'itemReviewed': {
       '@type': 'RealEstateAgent',
       'name': 'Dr. Jan Duffy',
+      'url': REVIEW_ITEM_BASE_URL,
     },
   };
+  if (datePublished) {
+    schema.datePublished = datePublished;
+  }
+  if (rating !== undefined && rating > 0) {
+    schema.reviewRating = {
+      '@type': 'Rating',
+      'ratingValue': rating,
+      'bestRating': 5,
+    };
+  }
+  return schema;
+}
+
+/** Shared Review schemas for use across marketing pages (e.g. layout, homepage) */
+export function getSharedReviewSchemas(): ReviewSchema[] {
+  return [
+    generateReviewSchema(
+      'Sarah M.',
+      'Dr. Jan Duffy made selling our home during divorce so much easier than I expected. She was neutral, professional, and kept both of us informed every step of the way. The process was smooth, and we got a great price. I can\'t recommend her enough.',
+      5,
+      '2024-06-15',
+    ),
+    generateReviewSchema(
+      'Michael R.',
+      'I needed to buy out my ex-wife and keep the house. Dr. Jan Duffy helped me understand the process, coordinated with my lender for refinancing, and made sure everything was done correctly. Her expertise saved me time and money.',
+      5,
+      '2024-07-22',
+    ),
+    generateReviewSchema(
+      'Jennifer L.',
+      'Going through a divorce with kids is hard enough. Dr. Jan Duffy understood our situation and helped us sell our home quickly so we could both move on. She was compassionate, professional, and got results. We\'re both in our new homes now, and the kids are adjusting well.',
+      5,
+      '2024-08-10',
+    ),
+  ];
 }
 
 /**
