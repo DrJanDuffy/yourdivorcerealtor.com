@@ -19,10 +19,8 @@ export const PostHogProvider = (props: { children: React.ReactNode }) => {
         capture_pageview: false, // Disable automatic pageview capture
         capture_pageleave: true,
         disable_session_recording: true, // Privacy: Disable session recording for divorce clients
+        capture_performance: false, // Privacy: disable performance capture (GDPR/CCPA)
         loaded: (posthogInstance) => {
-          // Anonymize IP addresses (GDPR/CCPA compliance)
-          posthogInstance.config.capture_performance = false;
-          
           // Respect Do Not Track
           if (navigator.doNotTrack === '1') {
             posthogInstance.opt_out_capturing();
