@@ -1,74 +1,66 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
-import Image from 'next/image';
 import Link from 'next/link';
+import { StructuredData } from '@/components/seo/StructuredData';
+import { communities } from '@/lib/communities';
+import { generateLocaleAlternates, siteUrl } from '@/lib/metadata';
+import { generateCarouselItemListSchema } from '@/lib/schema';
 
 type CommunitiesPageProps = {
   params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/communities';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
-    title: 'Alabama Communities | Your Divorce Realtor',
-    description: 'Browse Alabama communities and find your dream home.',
+    title: 'Las Vegas Communities | Divorce Real Estate',
+    description: 'Divorce real estate help across Las Vegas, Henderson, Summerlin, North Las Vegas, and more. Dr. Jan Duffy serves all Nevada communities.',
+    alternates: { canonical, languages },
   };
 }
-
-const communities = [
-  { name: 'Huntsville, AL', slug: 'huntsville', description: 'The Heart and Soul of Huntsville' },
-  { name: 'Madison, AL', slug: 'madison', description: 'Family-friendly community with excellent schools' },
-  { name: 'Harvest, AL', slug: 'harvest', description: 'Beautiful suburban living' },
-  { name: 'Athens, AL', slug: 'athens', description: 'Beautiful canola fields in Limestone County' },
-  { name: 'Meridianville, AL', slug: 'meridianville', description: 'Quiet country living' },
-  { name: 'Decatur, AL', slug: 'decatur', description: 'Riverside community with rich history' },
-  { name: 'Hampton Cove, AL', slug: 'hampton-cove', description: 'Luxury golf community' },
-];
 
 export default async function CommunitiesPage(props: CommunitiesPageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="mb-12 text-center">
-        <h1 className="mb-4 text-5xl font-bold text-gray-900">
-          Communities
-        </h1>
-        <p className="text-xl text-gray-600">
-          Browse Alabama communities and find your dream home.
-        </p>
-      </div>
+  const carouselSchema = generateCarouselItemListSchema(communities, {
+    baseUrl: siteUrl,
+    priceRange: '$$',
+    aggregateRating: { ratingValue: 5, reviewCount: 4 },
+  });
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {communities.map(community => (
-          <Link
-            key={community.slug}
-            href={`/communities/${community.slug}`}
-            className="group"
-          >
-            <div className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-xl">
-              <div className="relative h-64 bg-gray-200">
-                <Image
-                  src={`/communities/${community.slug}.jpg`}
-                  alt={`${community.name} real estate community`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                />
-              </div>
-              <div className="p-6">
-                <h2 className="mb-2 text-2xl font-bold text-gray-900">
-                  {community.name}
-                </h2>
-                <p className="text-gray-600">{community.description}</p>
-              </div>
-            </div>
-          </Link>
-        ))}
+  return (
+    <>
+      <StructuredData data={carouselSchema} />
+      <div className="container mx-auto px-4 py-16">
+        <div className="mb-12 text-center">
+          <h1 className="mb-4 text-5xl font-bold text-gray-900">
+            Las Vegas Area Communities
+          </h1>
+          <p className="text-xl text-gray-600">
+            Divorce real estate help across Las Vegas, Henderson, and surrounding Nevada communities.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {communities.map(community => (
+            <Link
+              key={community.href}
+              href={community.href}
+              className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-shadow hover:border-blue-500 hover:shadow-xl"
+              prefetch={true}
+            >
+              <h2 className="mb-2 text-2xl font-bold text-gray-900 group-hover:text-blue-600">
+                {community.name}
+              </h2>
+              <p className="text-gray-600">{community.description}</p>
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

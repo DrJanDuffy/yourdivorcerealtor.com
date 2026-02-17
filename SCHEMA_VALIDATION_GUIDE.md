@@ -76,6 +76,15 @@ This guide provides instructions for validating all JSON-LD structured data sche
 - `/divorce-realtor-mountains-edge`
 - `/divorce-realtor-inspirada`
 
+### Communities Summary Page (`/communities`)
+- ✅ ItemList schema (carousel)
+- ✅ LocalBusiness schema (nested in each ListItem)
+
+**Geographic eligibility:** The carousel rich result is in beta and currently shown only in **EEA, Turkey, and South Africa**. The site targets Las Vegas/Nevada (US), so the carousel will not appear in US search results until Google expands eligibility. Implementation is forward-looking.
+
+**Pages:**
+- `/communities`
+
 ### Resource/Calculator Pages (8 pages)
 - ✅ Service schema
 - ✅ RealEstateAgent schema
@@ -161,7 +170,15 @@ For each page:
    - ✅ RealEstateAgent schema is detected
    - ✅ No errors or warnings
 
-### Step 4: Test City Pages
+### Step 4: Test Communities Page
+1. Enter: `https://www.yourdivorcerealtor.com/communities`
+2. Verify:
+   - ✅ ItemList schema is detected
+   - ✅ LocalBusiness schema is detected (nested in list items)
+   - ✅ No errors or warnings
+3. Note: Carousel rich result displays only in EEA, Turkey, South Africa (beta).
+
+### Step 5: Test City Pages
 Test a sample of city pages (at least 3):
 - `/divorce-realtor-henderson`
 - `/divorce-realtor-summerlin`
@@ -175,7 +192,7 @@ For each page:
    - ✅ RealEstateAgent schema is detected
    - ✅ No errors or warnings
 
-### Step 5: Test Resource Pages
+### Step 6: Test Resource Pages
 Test a sample of resource pages (at least 3):
 - `/divorce-net-proceeds-calculator`
 - `/divorce-real-estate-checklist`
@@ -188,7 +205,7 @@ For each page:
    - ✅ RealEstateAgent schema is detected
    - ✅ No errors or warnings
 
-### Step 6: Test Attorney Resource Pages
+### Step 7: Test Attorney Resource Pages
 Test a sample of attorney pages (at least 2):
 - `/attorney-resources`
 - `/family-law-attorney-collaboration`
@@ -200,7 +217,7 @@ For each page:
    - ✅ RealEstateAgent schema is detected
    - ✅ No errors or warnings
 
-### Step 7: Test Guide Pages
+### Step 8: Test Guide Pages
 Test a sample of guide pages (at least 2):
 - `/divorce-real-estate-guide`
 - `/divorce-real-estate-mistakes`

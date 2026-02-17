@@ -24,7 +24,21 @@ function initBadge() {
 export function CalendlyScripts() {
   return (
     <>
-      <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+      {/* Non-blocking: media=print defers render-blocking; onLoad switches to all media */}
+      <link
+        rel="stylesheet"
+        href="https://assets.calendly.com/assets/external/widget.css"
+        media="print"
+        onLoad={(e) => {
+          const el = e.currentTarget as HTMLLinkElement;
+          if (el) {
+            el.media = 'all';
+          }
+        }}
+      />
+      <noscript>
+        <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+      </noscript>
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
         strategy="lazyOnload"

@@ -12,12 +12,18 @@ import { DemoBadge } from '@/components/DemoBadge';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { inter, playfairDisplay } from '@/lib/fonts';
 import { getGoogleVerificationTag } from '@/lib/google-verification';
+import { siteName, siteUrl } from '@/lib/metadata';
 import { generateSiteNavigationElementSchema } from '@/lib/schema';
 import { routing } from '@/libs/I18nRouting';
 import { ClerkLocalizations } from '@/utils/AppConfig';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: siteName,
+    template: `%s`,
+  },
   icons: [
     {
       rel: 'apple-touch-icon',
@@ -88,6 +94,10 @@ export default async function RootLayout(props: LayoutProps) {
             content={getGoogleVerificationTag()!}
           />
         )}
+        {/* Preconnect to third-party origins for faster LCP and script loading */}
+        <link rel="preconnect" href="https://em.realscout.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.realscout.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="anonymous" />
         <StructuredData data={navigationSchemas} />
         <ThirdPartyScripts />
       </head>

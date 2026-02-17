@@ -5,178 +5,255 @@
 
 type CitySchema = {
   '@type': 'City';
-  name: string;
+  'name': string;
 };
 
-export interface RealEstateAgentSchema {
+export type RealEstateAgentSchema = {
   '@context': string;
   '@type': 'RealEstateAgent';
-  name: string;
-  jobTitle: string;
-  description: string;
-  url: string;
-  telephone: string;
-  email?: string;
-  address: {
+  'name': string;
+  'jobTitle': string;
+  'description': string;
+  'url': string;
+  'telephone': string;
+  'email'?: string;
+  'address': {
     '@type': 'PostalAddress';
-    addressLocality: string;
-    addressRegion: string;
-    addressCountry: string;
+    'addressLocality': string;
+    'addressRegion': string;
+    'addressCountry': string;
   };
-  worksFor: {
+  'worksFor': {
     '@type': 'RealEstateAgent';
-    name: string;
+    'name': string;
   };
-  priceRange?: string;
-  areaServed: CitySchema[];
-}
+  'priceRange'?: string;
+  'areaServed': CitySchema[];
+};
 
-export interface LocalBusinessSchema {
+export type LocalBusinessSchema = {
   '@context': string;
   '@type': 'LocalBusiness';
-  name: string;
-  description: string;
-  url: string;
-  telephone: string;
-  address: {
+  'name': string;
+  'description': string;
+  'url': string;
+  'telephone': string;
+  'address': {
     '@type': 'PostalAddress';
-    addressLocality: string;
-    addressRegion: string;
-    postalCode?: string;
-    addressCountry: string;
+    'addressLocality': string;
+    'addressRegion': string;
+    'postalCode'?: string;
+    'addressCountry': string;
   };
-  geo?: {
+  'geo'?: {
     '@type': 'GeoCoordinates';
-    latitude: number;
-    longitude: number;
+    'latitude': number;
+    'longitude': number;
   };
-  openingHoursSpecification?: {
+  'openingHoursSpecification'?: {
     '@type': 'OpeningHoursSpecification';
-    dayOfWeek: string[];
-    opens: string;
-    closes: string;
+    'dayOfWeek': string[];
+    'opens': string;
+    'closes': string;
   }[];
-  priceRange?: string;
-  areaServed: CitySchema[];
-}
+  'priceRange'?: string;
+  'areaServed': CitySchema[];
+};
 
-export interface FAQPageSchema {
+/**
+ * FAQPage: Use for pages with MULTIPLE site-written Q&As and NO user-submitted answers.
+ * Do NOT use QAPage for FAQ content — Google requires QAPage only for single-question
+ * pages where users can submit answers (e.g. forum/support thread).
+ */
+export type FAQPageSchema = {
   '@context': string;
   '@type': 'FAQPage';
-  mainEntity: {
+  'mainEntity': {
     '@type': 'Question';
-    name: string;
-    acceptedAnswer: {
+    'name': string;
+    'acceptedAnswer': {
       '@type': 'Answer';
-      text: string;
+      'text': string;
     };
   }[];
-}
+};
 
-export interface ServiceSchema {
+/**
+ * QAPage: Use ONLY for a page focused on ONE question and its answers where USERS
+ * can submit answers (forum, product support with user answers). One Question per page.
+ * Required: mainEntity (Question), Question.name, answerCount, and acceptedAnswer and/or suggestedAnswer.
+ * @see https://developers.google.com/search/docs/appearance/structured-data/qapage
+ */
+export type QAPageSchema = {
+  '@context': string;
+  '@type': 'QAPage';
+  'mainEntity': QAPageQuestion;
+};
+
+export type QAPageQuestion = {
+  '@type': 'Question';
+  'name': string;
+  'text'?: string;
+  'answerCount': number;
+  'datePublished'?: string;
+  'dateModified'?: string;
+  'author'?: { '@type': 'Person' | 'Organization'; 'name': string; 'url'?: string };
+  'upvoteCount'?: number;
+  'acceptedAnswer'?: QAPageAnswer;
+  'suggestedAnswer'?: QAPageAnswer[];
+};
+
+export type QAPageAnswer = {
+  '@type': 'Answer';
+  'text': string;
+  'url'?: string;
+  'datePublished'?: string;
+  'dateModified'?: string;
+  'author'?: { '@type': 'Person' | 'Organization'; 'name': string; 'url'?: string };
+  'upvoteCount'?: number;
+  'image'?: string;
+  'comment'?: QAPageComment;
+};
+
+export type QAPageComment = {
+  '@type': 'Comment';
+  'text': string;
+  'datePublished'?: string;
+  'author'?: { '@type': 'Person' | 'Organization'; 'name': string; 'url'?: string };
+};
+
+export type ServiceSchema = {
   '@context': string;
   '@type': 'Service';
-  serviceType: string;
-  name?: string;
-  description: string;
-  provider: {
+  'serviceType': string;
+  'name'?: string;
+  'description': string;
+  'provider': {
     '@type': 'RealEstateAgent';
-    name: string;
+    'name': string;
   };
-  areaServed: CitySchema | CitySchema[];
-  priceRange?: string;
-  offers?: {
+  'areaServed': CitySchema | CitySchema[];
+  'priceRange'?: string;
+  'offers'?: {
     '@type': 'Offer';
-    price?: string;
-    priceCurrency?: string;
+    'price'?: string;
+    'priceCurrency'?: string;
   };
-}
+};
 
-export interface BreadcrumbListSchema {
+export type BreadcrumbListSchema = {
   '@context': string;
   '@type': 'BreadcrumbList';
-  itemListElement: {
+  'itemListElement': {
     '@type': 'ListItem';
-    position: number;
-    name: string;
-    item: string;
+    'position': number;
+    'name': string;
+    'item': string;
   }[];
-}
+};
 
-export interface WebSiteSchema {
+/**
+ * ItemList + LocalBusiness carousel schema for Google's structured data carousel rich result (beta).
+ * Eligibility: EEA, Turkey, South Africa only. Forward-looking for geographic expansion.
+ * @see https://developers.google.com/search/docs/appearance/structured-data/carousels
+ */
+export type CarouselItemListSchema = {
+  '@context': string;
+  '@type': 'ItemList';
+  'itemListElement': {
+    '@type': 'ListItem';
+    'position': number;
+    'item': {
+      '@type': 'LocalBusiness';
+      'name': string;
+      'image': string[];
+      'url': string;
+      'priceRange'?: string;
+      'aggregateRating'?: {
+        '@type': 'AggregateRating';
+        'ratingValue': number;
+        'reviewCount': number;
+        'bestRating'?: number;
+        'worstRating'?: number;
+      };
+    };
+  }[];
+};
+
+export type WebSiteSchema = {
   '@context': string;
   '@type': 'WebSite';
-  name: string;
-  url: string;
-  potentialAction?: {
+  'name': string;
+  'url': string;
+  'potentialAction'?: {
     '@type': 'SearchAction';
-    target: {
+    'target': {
       '@type': 'EntryPoint';
-      urlTemplate: string;
+      'urlTemplate': string;
     };
     'query-input': string;
   };
-}
+};
 
-export interface OrganizationSchema {
+export type OrganizationSchema = {
   '@context': string;
   '@type': 'Organization';
-  name: string;
-  url: string;
-  logo?: string;
-  sameAs?: string[];
-  contactPoint?: {
+  'name': string;
+  'url': string;
+  'logo'?: string;
+  'sameAs'?: string[];
+  'contactPoint'?: {
     '@type': 'ContactPoint';
-    telephone: string;
-    contactType: string;
-    areaServed: string;
+    'telephone': string;
+    'contactType': string;
+    'areaServed': string;
   };
-}
+};
 
-export interface ArticleSchema {
+export type ArticleSchema = {
   '@context': string;
   '@type': 'Article';
-  headline: string;
-  description: string;
-  author: {
+  'headline': string;
+  'description': string;
+  'author': {
     '@type': 'RealEstateAgent';
-    name: string;
+    'name': string;
   };
-  publisher: {
+  'publisher': {
     '@type': 'Organization';
-    name: string;
-    logo?: {
+    'name': string;
+    'logo'?: {
       '@type': 'ImageObject';
-      url: string;
+      'url': string;
     };
   };
-  datePublished?: string;
-  dateModified?: string;
-  mainEntityOfPage?: {
+  'datePublished'?: string;
+  'dateModified'?: string;
+  'mainEntityOfPage'?: {
     '@type': 'WebPage';
     '@id': string;
   };
-}
+};
 
-export interface ReviewSchema {
+export type ReviewSchema = {
   '@context': string;
   '@type': 'Review';
-  author: {
+  'author': {
     '@type': 'Person';
-    name: string;
+    'name': string;
   };
-  datePublished?: string;
-  reviewBody: string;
-  reviewRating?: {
+  'datePublished'?: string;
+  'reviewBody': string;
+  'reviewRating'?: {
     '@type': 'Rating';
-    ratingValue: number;
-    bestRating?: number;
+    'ratingValue': number;
+    'bestRating'?: number;
   };
-  itemReviewed?: {
+  'itemReviewed'?: {
     '@type': 'RealEstateAgent';
-    name: string;
+    'name': string;
   };
-}
+};
 
 /**
  * Generate RealEstateAgent schema for Dr. Jan Duffy
@@ -185,26 +262,26 @@ export function generateRealEstateAgentSchema(): RealEstateAgentSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'RealEstateAgent',
-    name: 'Dr. Jan Duffy',
-    jobTitle: 'Divorce Real Estate Specialist',
-    description: 'Expert divorce real estate services in Las Vegas. Helping divorcing homeowners navigate property division with compassion and expertise.',
-    url: 'https://www.yourdivorcerealtor.com',
-    telephone: '+17022221964',
-    address: {
+    'name': 'Dr. Jan Duffy',
+    'jobTitle': 'Divorce Real Estate Specialist',
+    'description': 'Expert divorce real estate services in Las Vegas. Helping divorcing homeowners navigate property division with compassion and expertise.',
+    'url': 'https://www.yourdivorcerealtor.com',
+    'telephone': '+17022221964',
+    'address': {
       '@type': 'PostalAddress',
-      addressLocality: 'Las Vegas',
-      addressRegion: 'NV',
-      addressCountry: 'US',
+      'addressLocality': 'Las Vegas',
+      'addressRegion': 'NV',
+      'addressCountry': 'US',
     },
-    worksFor: {
+    'worksFor': {
       '@type': 'RealEstateAgent',
-      name: 'Berkshire Hathaway HomeServices Nevada Properties',
+      'name': 'Berkshire Hathaway HomeServices Nevada Properties',
     },
-    areaServed: [
-      { '@type': 'City', name: 'Las Vegas' },
-      { '@type': 'City', name: 'Henderson' },
-      { '@type': 'City', name: 'Summerlin' },
-      { '@type': 'City', name: 'North Las Vegas' },
+    'areaServed': [
+      { '@type': 'City', 'name': 'Las Vegas' },
+      { '@type': 'City', 'name': 'Henderson' },
+      { '@type': 'City', 'name': 'Summerlin' },
+      { '@type': 'City', 'name': 'North Las Vegas' },
     ],
   };
 }
@@ -216,42 +293,134 @@ export function generateLocalBusinessSchema(): LocalBusinessSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Dr. Jan Duffy - Divorce Real Estate Specialist',
-    description: 'Expert divorce real estate services in Las Vegas. Specialized in helping divorcing homeowners navigate property division.',
-    url: 'https://www.yourdivorcerealtor.com',
-    telephone: '+17022221964',
-    address: {
+    'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
+    'description': 'Expert divorce real estate services in Las Vegas. Specialized in helping divorcing homeowners navigate property division.',
+    'url': 'https://www.yourdivorcerealtor.com',
+    'telephone': '+17022221964',
+    'address': {
       '@type': 'PostalAddress',
-      addressLocality: 'Las Vegas',
-      addressRegion: 'NV',
-      addressCountry: 'US',
+      'addressLocality': 'Las Vegas',
+      'addressRegion': 'NV',
+      'addressCountry': 'US',
     },
-    areaServed: [
-      { '@type': 'City', name: 'Las Vegas' },
-      { '@type': 'City', name: 'Henderson' },
-      { '@type': 'City', name: 'Summerlin' },
-      { '@type': 'City', name: 'North Las Vegas' },
-      { '@type': 'City', name: 'Green Valley' },
-      { '@type': 'City', name: 'Spring Valley' },
+    'areaServed': [
+      { '@type': 'City', 'name': 'Las Vegas' },
+      { '@type': 'City', 'name': 'Henderson' },
+      { '@type': 'City', 'name': 'Summerlin' },
+      { '@type': 'City', 'name': 'North Las Vegas' },
+      { '@type': 'City', 'name': 'Green Valley' },
+      { '@type': 'City', 'name': 'Spring Valley' },
     ],
   };
 }
 
 /**
- * Generate FAQPage schema
+ * Generate FAQPage schema (multiple Q&As, site-written, no user submission).
  */
 export function generateFAQPageSchema(faqs: Array<{ question: string; answer: string }>): FAQPageSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map(faq => ({
+    'mainEntity': faqs.map(faq => ({
       '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
+      'name': faq.question,
+      'acceptedAnswer': {
         '@type': 'Answer',
-        text: faq.answer,
+        'text': faq.answer,
       },
     })),
+  };
+}
+
+/** Input for a single answer in QAPage (accepted or suggested). */
+export type QAPageAnswerInput = {
+  text: string;
+  url?: string;
+  datePublished?: string;
+  dateModified?: string;
+  author?: { name: string; url?: string };
+  upvoteCount?: number;
+  image?: string;
+};
+
+/**
+ * Generate QAPage schema for a SINGLE question page where users can submit answers.
+ * Use only for forum/support-style pages (one question + its answers). Not for FAQ pages.
+ */
+export function generateQAPageSchema(
+  question: {
+    name: string;
+    text?: string;
+    datePublished?: string;
+    dateModified?: string;
+    author?: { name: string; url?: string };
+    upvoteCount?: number;
+  },
+  answers: {
+    accepted?: QAPageAnswerInput;
+    suggested?: QAPageAnswerInput[];
+  },
+): QAPageSchema {
+  const totalAnswers = (answers.accepted ? 1 : 0) + (answers.suggested?.length ?? 0);
+  const mainEntity: QAPageQuestion = {
+    '@type': 'Question',
+    'name': question.name,
+    'answerCount': totalAnswers,
+  };
+  if (question.text) {
+    mainEntity.text = question.text;
+  }
+  if (question.datePublished) {
+    mainEntity.datePublished = question.datePublished;
+  }
+  if (question.dateModified) {
+    mainEntity.dateModified = question.dateModified;
+  }
+  if (question.author) {
+    mainEntity.author = {
+      '@type': 'Person',
+      'name': question.author.name,
+      ...(question.author.url && { url: question.author.url }),
+    };
+  }
+  if (question.upvoteCount !== undefined) {
+    mainEntity.upvoteCount = question.upvoteCount;
+  }
+
+  const toAnswer = (a: QAPageAnswerInput): QAPageAnswer => {
+    const ans: QAPageAnswer = { '@type': 'Answer', 'text': a.text };
+    if (a.url) {
+      ans.url = a.url;
+    }
+    if (a.datePublished) {
+      ans.datePublished = a.datePublished;
+    }
+    if (a.dateModified) {
+      ans.dateModified = a.dateModified;
+    }
+    if (a.author) {
+      ans.author = { '@type': 'Person', 'name': a.author.name, ...(a.author.url && { url: a.author.url }) };
+    }
+    if (a.upvoteCount !== undefined) {
+      ans.upvoteCount = a.upvoteCount;
+    }
+    if (a.image) {
+      ans.image = a.image;
+    }
+    return ans;
+  };
+
+  if (answers.accepted) {
+    mainEntity.acceptedAnswer = toAnswer(answers.accepted);
+  }
+  if (answers.suggested?.length) {
+    mainEntity.suggestedAnswer = answers.suggested.map(toAnswer);
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'QAPage',
+    mainEntity,
   };
 }
 
@@ -262,12 +431,70 @@ export function generateBreadcrumbListSchema(items: Array<{ name: string; url: s
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
+    'itemListElement': items.map((item, index) => ({
       '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: item.url,
+      'position': index + 1,
+      'name': item.name,
+      'item': item.url,
     })),
+  };
+}
+
+/** Input for carousel list item (LocalBusiness in ItemList) */
+export type CarouselCommunityItem = {
+  name: string;
+  href: string;
+  description: string;
+  image?: string | string[];
+};
+
+/**
+ * Generate ItemList + LocalBusiness carousel schema for summary pages (e.g. /communities).
+ * Used for Google's carousel rich result (beta) - EEA, Turkey, South Africa only.
+ */
+export function generateCarouselItemListSchema(
+  items: CarouselCommunityItem[],
+  options: {
+    baseUrl: string;
+    defaultImage?: string;
+    priceRange?: string;
+    aggregateRating?: { ratingValue: number; reviewCount: number };
+  },
+): CarouselItemListSchema {
+  const { baseUrl, defaultImage, priceRange = '$$', aggregateRating } = options;
+  const fallbackImage = defaultImage || `${baseUrl}/images/hero/homepage-hero.jpg`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'itemListElement': items.map((item, index) => {
+      const imageUrls = item.image
+        ? Array.isArray(item.image)
+          ? item.image.map(url => (url.startsWith('http') ? url : `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`))
+          : [`${baseUrl}${item.image.startsWith('/') ? '' : '/'}${item.image}`]
+        : [fallbackImage];
+
+      return {
+        '@type': 'ListItem',
+        'position': index + 1,
+        'item': {
+          '@type': 'LocalBusiness',
+          'name': `${item.name} Divorce Real Estate - Dr. Jan Duffy`,
+          'image': imageUrls,
+          'url': `${baseUrl}${item.href.startsWith('/') ? '' : '/'}${item.href}`,
+          ...(priceRange && { priceRange }),
+          ...(aggregateRating && {
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              'ratingValue': aggregateRating.ratingValue,
+              'reviewCount': aggregateRating.reviewCount,
+              'bestRating': 5,
+              'worstRating': 1,
+            },
+          }),
+        },
+      };
+    }),
   };
 }
 
@@ -278,13 +505,13 @@ export function generateWebSiteSchema(): WebSiteSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Dr. Jan Duffy - Divorce Real Estate Specialist',
-    url: 'https://www.yourdivorcerealtor.com',
-    potentialAction: {
+    'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
+    'url': 'https://www.yourdivorcerealtor.com',
+    'potentialAction': {
       '@type': 'SearchAction',
-      target: {
+      'target': {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://www.yourdivorcerealtor.com/search?q={search_term_string}',
+        'urlTemplate': 'https://www.yourdivorcerealtor.com/search?q={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
@@ -298,19 +525,19 @@ export function generateOrganizationSchema(): OrganizationSchema {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Dr. Jan Duffy - Divorce Real Estate Specialist',
-    url: 'https://www.yourdivorcerealtor.com',
-    logo: 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
-    sameAs: [
+    'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
+    'url': 'https://www.yourdivorcerealtor.com',
+    'logo': 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
+    'sameAs': [
       'https://www.facebook.com',
       'https://www.linkedin.com',
       'https://www.youtube.com',
     ],
-    contactPoint: {
+    'contactPoint': {
       '@type': 'ContactPoint',
-      telephone: '+17022221964',
-      contactType: 'Customer Service',
-      areaServed: 'US',
+      'telephone': '+17022221964',
+      'contactType': 'Customer Service',
+      'areaServed': 'US',
     },
   };
 }
@@ -330,21 +557,21 @@ export function generateArticleSchema(
     '@type': 'Article',
     headline,
     description,
-    author: {
+    'author': {
       '@type': 'RealEstateAgent',
-      name: 'Dr. Jan Duffy',
+      'name': 'Dr. Jan Duffy',
     },
-    publisher: {
+    'publisher': {
       '@type': 'Organization',
-      name: 'Dr. Jan Duffy - Divorce Real Estate Specialist',
-      logo: {
+      'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
+      'logo': {
         '@type': 'ImageObject',
-        url: 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
+        'url': 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
       },
     },
     datePublished,
-    dateModified: dateModified || datePublished,
-    mainEntityOfPage: {
+    'dateModified': dateModified || datePublished,
+    'mainEntityOfPage': {
       '@type': 'WebPage',
       '@id': url,
     },
@@ -362,20 +589,20 @@ export function generateServiceSchema(
   priceRange?: string,
 ): ServiceSchema {
   const areas: CitySchema | CitySchema[] = Array.isArray(areaServed)
-    ? areaServed.map(area => ({ '@type': 'City', name: area } as CitySchema))
-    : { '@type': 'City', name: areaServed };
+    ? areaServed.map(area => ({ '@type': 'City', 'name': area } as CitySchema))
+    : { '@type': 'City', 'name': areaServed };
 
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
     serviceType,
-    name: name || serviceType,
+    'name': name || serviceType,
     description,
-    provider: {
+    'provider': {
       '@type': 'RealEstateAgent',
-      name: 'Dr. Jan Duffy',
+      'name': 'Dr. Jan Duffy',
     },
-    areaServed: areas,
+    'areaServed': areas,
     priceRange,
   };
 }
@@ -392,22 +619,22 @@ export function generateReviewSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'Review',
-    author: {
+    'author': {
       '@type': 'Person',
-      name: authorName,
+      'name': authorName,
     },
     datePublished,
     reviewBody,
-    reviewRating: rating
+    'reviewRating': rating
       ? {
           '@type': 'Rating',
-          ratingValue: rating,
-          bestRating: 5,
+          'ratingValue': rating,
+          'bestRating': 5,
         }
       : undefined,
-    itemReviewed: {
+    'itemReviewed': {
       '@type': 'RealEstateAgent',
-      name: 'Dr. Jan Duffy',
+      'name': 'Dr. Jan Duffy',
     },
   };
 }
@@ -415,12 +642,12 @@ export function generateReviewSchema(
 /**
  * Generate SiteNavigationElement schema
  */
-export interface SiteNavigationElementSchema {
+export type SiteNavigationElementSchema = {
   '@context': string;
   '@type': 'SiteNavigationElement';
-  name: string;
-  url: string;
-}
+  'name': string;
+  'url': string;
+};
 
 export function generateSiteNavigationElementSchema(
   name: string,
@@ -433,4 +660,3 @@ export function generateSiteNavigationElementSchema(
     url,
   };
 }
-
