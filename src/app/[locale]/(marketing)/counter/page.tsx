@@ -4,6 +4,9 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { CurrentCount } from '@/components/CurrentCount';
+import { generateLocaleAlternates } from '@/lib/metadata';
+
+const path = '/counter';
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -13,10 +16,11 @@ export async function generateMetadata(props: {
     locale,
     namespace: 'Counter',
   });
-
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: t('meta_title'),
     description: t('meta_description'),
+    alternates: { canonical, languages },
   };
 }
 

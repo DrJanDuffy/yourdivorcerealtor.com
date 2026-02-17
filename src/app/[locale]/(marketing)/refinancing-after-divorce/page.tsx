@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateArticleSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 type IRefinancingProps = {
@@ -16,11 +18,16 @@ type IRefinancingProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/refinancing-after-divorce';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Refinancing Your Home After Divorce | Dr. Jan Duffy',
     description: 'Expert guidance for refinancing your home after divorce. Remove your ex from the mortgage and protect your credit.',
     keywords: 'refinancing after divorce, remove spouse from mortgage, divorce refinancing',
+    alternates: { canonical, languages },
   };
 }
 
@@ -34,7 +41,8 @@ export default async function RefinancingAfterDivorce(props: IRefinancingProps) 
     'Refinancing Your Home After Divorce',
     'Expert guidance for refinancing your home after divorce. Remove your ex from the mortgage and protect your credit.',
     `${baseUrl}${currentPath}`,
-    new Date().toISOString(),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
   const serviceSchema = generateServiceSchema(
     'Post-Divorce Refinancing Services',
@@ -50,8 +58,10 @@ export default async function RefinancingAfterDivorce(props: IRefinancingProps) 
         h1="Refinancing Your Home After Divorce"
         heroSubhead="Remove Your Ex from the Mortgage"
         currentPath={currentPath}
+        datePublished={CONTENT_LAST_UPDATED}
+        dateModified={CONTENT_LAST_UPDATED}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Why Refinancing After Divorce Matters</h2>
           <p>
             If you're keeping the home after divorce, refinancing removes your ex-spouse from the mortgage, protecting both your credit and theirs. This is essential even if your divorce decree says you're responsible for the mortgage—without refinancing, both names remain on the loan, and both credit scores are affected by payment history. Dr. Jan Duffy helps coordinate the refinancing process, ensuring it supports your property division agreement and protects your financial future.
@@ -103,4 +113,3 @@ export default async function RefinancingAfterDivorce(props: IRefinancingProps) 
     </>
   );
 }
-

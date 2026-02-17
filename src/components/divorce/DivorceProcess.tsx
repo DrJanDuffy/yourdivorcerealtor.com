@@ -42,44 +42,40 @@ export function DivorceProcess() {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4">
+    <section className="bg-white py-16 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="mb-3 text-center text-3xl font-bold text-gray-900 sm:text-4xl">
           Your Step-by-Step Path Forward
         </h2>
-        <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+        <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600 sm:text-xl">
           Dr. Jan Duffy guides you through every step of the divorce real estate process with clarity and compassion.
         </p>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto max-w-4xl">
           <div className="relative">
-            {/* Vertical line for desktop */}
-            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-blue-200 hidden md:block" />
+            <div className="absolute top-0 bottom-0 left-6 hidden w-0.5 bg-blue-200 md:block" />
 
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {steps.map((step, index) => (
                 <div
                   key={step.number}
-                  className="relative flex items-start gap-6 group process-step"
+                  className="group process-step relative flex items-start gap-5 sm:gap-6"
                 >
-                  {/* Step number circle */}
-                  <div className="relative z-10 flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-700">
+                  <div className="relative z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-blue-600 font-bold text-white shadow-md transition-all duration-300 group-hover:scale-105 group-hover:bg-blue-700 group-hover:shadow-lg">
                     {step.number}
                   </div>
 
-                  {/* Content */}
-                  <div className="flex-1 pt-1">
-                    <h3 className="text-2xl font-semibold mb-2 text-gray-900">
+                  <div className="flex-1 pt-0.5">
+                    <h3 className="mb-2 text-xl font-semibold text-gray-900 sm:text-2xl">
                       {step.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="leading-relaxed text-gray-600">
                       {step.description}
                     </p>
                   </div>
 
-                  {/* Animated connector line (mobile) */}
                   {index < steps.length - 1 && (
-                    <div className="absolute left-6 top-12 w-0.5 h-8 bg-blue-200 md:hidden" />
+                    <div className="absolute top-12 left-6 h-6 w-0.5 bg-blue-200 md:hidden" />
                   )}
                 </div>
               ))}

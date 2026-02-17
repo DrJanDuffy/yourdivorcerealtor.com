@@ -18,6 +18,17 @@ const baseConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
+  // Non-www → www 301 so GSC indexes canonical (www) and reports "Page with redirect" as intended
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'header' as const, key: 'host', value: 'yourdivorcerealtor.com' }],
+        destination: 'https://www.yourdivorcerealtor.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
   // Security headers for divorce client privacy
   async headers() {
     return [

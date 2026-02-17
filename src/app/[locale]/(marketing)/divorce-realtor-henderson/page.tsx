@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
-import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateLocalBusinessSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 type IHendersonProps = {
@@ -17,11 +18,16 @@ type IHendersonProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/divorce-realtor-henderson';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Henderson Divorce Real Estate Agent | Selling House Divorce Henderson NV | Dr. Jan Duffy',
     description: 'Henderson divorce realtor helping divorcing homeowners sell house divorce Henderson NV. Expert divorce real estate agent in Henderson, Nevada. Property division, home sales, buyouts.',
     keywords: 'selling house divorce Henderson NV, Henderson divorce realtor, divorce real estate agent Henderson, Henderson divorce real estate, divorce realtor Henderson Nevada, Henderson NV divorce realtor',
+    alternates: { canonical, languages },
   };
 }
 
@@ -31,7 +37,7 @@ export default async function Henderson(props: IHendersonProps) {
 
   const currentPath = '/divorce-realtor-henderson';
   const localBusinessSchema = generateLocalBusinessSchema();
-  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Henderson' }];
+  localBusinessSchema.areaServed = [{ '@type': 'City', 'name': 'Henderson' }];
   const serviceSchema = generateServiceSchema(
     'Henderson Divorce Real Estate Services',
     'Henderson divorce realtor helping divorcing homeowners sell house divorce Henderson NV. Expert divorce real estate agent in Henderson, Nevada.',
@@ -47,7 +53,7 @@ export default async function Henderson(props: IHendersonProps) {
         heroSubhead="Selling House Divorce Henderson NV - Expert Guidance"
         currentPath={currentPath}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Why Choose Dr. Jan Duffy for Henderson Divorce Real Estate?</h2>
           <p>
             Henderson, Nevada, is one of Las Vegas's most desirable communities, known for its excellent schools, family-friendly neighborhoods, and strong real estate market. When you're going through a divorce in Henderson, you need a real estate professional who understands both the local market and the unique challenges of divorce transactions. Dr. Jan Duffy brings specialized expertise to Henderson divorcing homeowners, ensuring your property transaction supports your overall divorce resolution.
@@ -135,4 +141,3 @@ export default async function Henderson(props: IHendersonProps) {
     </>
   );
 }
-

@@ -2,10 +2,13 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
+import { generateLocaleAlternates } from '@/lib/metadata';
 
 type IPortfolioProps = {
   params: Promise<{ locale: string }>;
 };
+
+const path = '/portfolio';
 
 export async function generateMetadata(props: IPortfolioProps): Promise<Metadata> {
   const { locale } = await props.params;
@@ -13,10 +16,11 @@ export async function generateMetadata(props: IPortfolioProps): Promise<Metadata
     locale,
     namespace: 'Portfolio',
   });
-
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: t('meta_title'),
     description: t('meta_description'),
+    alternates: { canonical, languages },
   };
 }
 

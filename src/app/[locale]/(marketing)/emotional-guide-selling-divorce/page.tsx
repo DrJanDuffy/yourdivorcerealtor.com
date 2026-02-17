@@ -1,14 +1,18 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateArticleSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
+
+const path = '/emotional-guide-selling-divorce';
 
 type IEmotionalGuideProps = {
   params: Promise<{ locale: string }>;
@@ -16,11 +20,14 @@ type IEmotionalGuideProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Emotional Guide to Selling Your Home in Divorce | Dr. Jan Duffy',
     description: 'Emotional support and guidance for selling your home during divorce. Navigate the emotional challenges with compassion and expertise.',
     keywords: 'emotional guide divorce, selling home emotions, divorce emotional support',
+    alternates: { canonical, languages },
   };
 }
 
@@ -34,7 +41,8 @@ export default async function EmotionalGuide(props: IEmotionalGuideProps) {
     'Emotional Guide to Selling Your Home in Divorce',
     'Emotional support and guidance for selling your home during divorce. Navigate the emotional challenges with compassion and expertise.',
     `${baseUrl}${currentPath}`,
-    new Date().toISOString(),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
   const serviceSchema = generateServiceSchema(
     'Emotional Support Services',
@@ -50,8 +58,10 @@ export default async function EmotionalGuide(props: IEmotionalGuideProps) {
         h1="Emotional Guide to Selling Your Home in Divorce"
         heroSubhead="Navigating the Emotional Journey"
         currentPath={currentPath}
+        datePublished={CONTENT_LAST_UPDATED}
+        dateModified={CONTENT_LAST_UPDATED}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Understanding the Emotional Journey</h2>
           <p>
             Selling your home during divorce is more than a financial transaction—it's an emotional journey. Your home represents memories, family life, and a chapter that's closing. Understanding and navigating these emotions is essential for moving forward. Dr. Jan Duffy provides compassionate guidance that acknowledges the emotional challenges while helping you make practical decisions.
@@ -123,4 +133,3 @@ export default async function EmotionalGuide(props: IEmotionalGuideProps) {
     </>
   );
 }
-

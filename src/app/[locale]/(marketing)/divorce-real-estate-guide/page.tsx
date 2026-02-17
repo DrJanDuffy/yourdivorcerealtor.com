@@ -1,15 +1,20 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
-import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateArticleSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
+
+const path = '/divorce-real-estate-guide';
 
 type IGuideProps = {
   params: Promise<{ locale: string }>;
@@ -17,11 +22,14 @@ type IGuideProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Complete Guide to Divorce Real Estate Las Vegas | Dr. Jan Duffy',
     description: 'Comprehensive guide to divorce real estate in Las Vegas. Everything you need to know about property division, home sales, and fresh starts.',
     keywords: 'divorce real estate guide, complete guide divorce property, las vegas divorce guide',
+    alternates: { canonical, languages },
   };
 }
 
@@ -35,7 +43,8 @@ export default async function CompleteGuide(props: IGuideProps) {
     'Complete Guide to Divorce Real Estate Las Vegas',
     'Comprehensive guide to divorce real estate in Las Vegas. Everything you need to know about property division, home sales, and fresh starts.',
     `${baseUrl}${currentPath}`,
-    new Date().toISOString(),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
   const serviceSchema = generateServiceSchema(
     'Divorce Real Estate Guide Services',
@@ -51,8 +60,10 @@ export default async function CompleteGuide(props: IGuideProps) {
         h1="Complete Guide to Divorce Real Estate Las Vegas"
         heroSubhead="Everything You Need to Know"
         currentPath={currentPath}
+        datePublished={CONTENT_LAST_UPDATED}
+        dateModified={CONTENT_LAST_UPDATED}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Your Comprehensive Divorce Real Estate Guide</h2>
           <p>
             Divorce real estate is complex, involving legal, financial, and emotional considerations. This comprehensive guide covers everything you need to know about handling real estate during divorce in Las Vegas. Whether you're just beginning to consider divorce or you're ready to move forward with a property transaction, this guide provides the information you need to make informed decisions.
@@ -167,6 +178,31 @@ export default async function CompleteGuide(props: IGuideProps) {
           <p>
             This guide provides comprehensive information, but every situation is unique. Schedule a consultation with Dr. Jan Duffy today and get personalized guidance for your specific situation. Her specialized expertise ensures you receive the support you need to navigate divorce real estate successfully.
           </p>
+          <p>
+            You are not obligated to disclose divorce to buyers; your agent handles that discreetly. For a full checklist including living in the home during the sale, keeping divorce private, deferred sales, and multiple properties, see our
+            {' '}
+            <Link href="/divorce-real-estate-guide-divorcing-couples" className="text-blue-600 underline hover:text-blue-700">Real Estate Guide for Divorcing Couples</Link>
+            .
+          </p>
+
+          <h2>Further Reading</h2>
+          <p>
+            Expert perspectives from other divorce real estate specialists:
+          </p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>
+              <a
+                href="https://jeffmarples.com/blog/real-estate-guide-for-divorcing-couples"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline hover:text-blue-700"
+              >
+                Avoid These Mistakes When Selling a Property As a Result of Divorce
+              </a>
+              {' '}
+              — Jeff Marples (San Francisco & Marin)
+            </li>
+          </ul>
         </div>
       </DivorcePageTemplate>
       <RealScoutHomeValue />
@@ -175,4 +211,3 @@ export default async function CompleteGuide(props: IGuideProps) {
     </>
   );
 }
-

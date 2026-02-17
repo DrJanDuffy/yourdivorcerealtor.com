@@ -36,27 +36,27 @@ export function DivorceOptions() {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-4">
+    <section className="bg-white py-16 sm:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="mb-3 text-center text-3xl font-bold text-gray-900 sm:text-4xl">
           Know Your Options
         </h2>
-        <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto">
+        <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600 sm:text-xl">
           Understanding all your options is the first step to making the right decision for your future.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {options.map((option) => (
+        <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {options.map(option => (
             <Link
               key={option.title}
               href={option.href}
-              className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+              className="flex flex-col rounded-2xl border border-gray-200 bg-gray-50/80 p-6 shadow-sm transition-all hover:border-blue-200 hover:shadow-md focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
             >
-              <div className="text-4xl mb-4">{option.icon}</div>
-              <h3 className="text-xl font-bold mb-3">{option.title}</h3>
-              <p className="text-gray-600 mb-4">{option.description}</p>
-              <span className="text-blue-600 font-semibold hover:underline">
-                Learn More →
+              <div className="mb-4 text-3xl sm:text-4xl" aria-hidden>{option.icon}</div>
+              <h3 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">{option.title}</h3>
+              <p className="mb-4 flex-1 leading-relaxed text-gray-600">{option.description}</p>
+              <span className="font-semibold text-blue-600 hover:underline">
+                Learn more →
               </span>
             </Link>
           ))}
@@ -65,7 +65,3 @@ export function DivorceOptions() {
     </section>
   );
 }
-
-
-
-

@@ -1,15 +1,21 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import { generateLocaleAlternates } from '@/lib/metadata';
 
 type SellPageProps = {
   params: Promise<{ locale: string }>;
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/sell';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Sell Your House | Your Divorce Realtor',
     description: 'Trust our real estate experts to advise you and secure the highest market value for your property.',
+    alternates: { canonical, languages },
   };
 }
 
@@ -89,6 +95,3 @@ export default async function SellPage(props: SellPageProps) {
     </div>
   );
 }
-
-
-

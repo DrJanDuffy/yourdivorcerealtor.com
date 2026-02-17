@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 type IAppraisalProps = {
@@ -13,11 +14,16 @@ type IAppraisalProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/divorce-appraisal-services';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Divorce Appraisal Services Las Vegas | Dr. Jan Duffy',
     description: 'Professional divorce appraisal services in Las Vegas. Accurate property valuations for property division and court proceedings.',
     keywords: 'divorce appraisal, property appraisal divorce, las vegas divorce appraisal',
+    alternates: { canonical, languages },
   };
 }
 
@@ -42,28 +48,28 @@ export default async function AppraisalServices(props: IAppraisalProps) {
         showHomeValue
         currentPath={currentPath}
       >
-      <div className="max-w-4xl mx-auto prose prose-lg">
-        <h2>Professional Divorce Appraisal Services</h2>
-        <p>
-          Accurate property appraisals are essential for property division during divorce. Dr. Jan Duffy provides comprehensive appraisal services specifically designed for divorce situations, ensuring you have accurate, defensible valuations that support property division negotiations and court proceedings.
-        </p>
+        <div className="prose prose-lg mx-auto max-w-4xl">
+          <h2>Professional Divorce Appraisal Services</h2>
+          <p>
+            Accurate property appraisals are essential for property division during divorce. Dr. Jan Duffy provides comprehensive appraisal services specifically designed for divorce situations, ensuring you have accurate, defensible valuations that support property division negotiations and court proceedings.
+          </p>
 
-        <h3>Why Professional Appraisals Matter</h3>
-        <p>
-          Professional appraisals provide credible, defensible valuations that support property division negotiations and court proceedings. Dr. Jan Duffy's appraisals are thorough, well-documented, and court-ready.
-        </p>
+          <h3>Why Professional Appraisals Matter</h3>
+          <p>
+            Professional appraisals provide credible, defensible valuations that support property division negotiations and court proceedings. Dr. Jan Duffy's appraisals are thorough, well-documented, and court-ready.
+          </p>
 
-        <h2>Appraisal Process</h2>
-        <p>
-          Dr. Jan Duffy's appraisal process is comprehensive and designed to provide accurate, defensible valuations. She uses multiple methods and considers all relevant factors to ensure accuracy.
-        </p>
+          <h2>Appraisal Process</h2>
+          <p>
+            Dr. Jan Duffy's appraisal process is comprehensive and designed to provide accurate, defensible valuations. She uses multiple methods and considers all relevant factors to ensure accuracy.
+          </p>
 
-        <h2>Get Appraisal Services Today</h2>
-        <p>
-          Accurate appraisals are essential for fair property division. Schedule a consultation with Dr. Jan Duffy today and get the professional appraisal services you need for your divorce case.
-        </p>
-      </div>
-    </DivorcePageTemplate>
+          <h2>Get Appraisal Services Today</h2>
+          <p>
+            Accurate appraisals are essential for fair property division. Schedule a consultation with Dr. Jan Duffy today and get the professional appraisal services you need for your divorce case.
+          </p>
+        </div>
+      </DivorcePageTemplate>
     </>
   );
 }

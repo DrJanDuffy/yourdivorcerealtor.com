@@ -1,59 +1,56 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { messaging } from '@/lib/messaging';
 
 export function DivorceHero() {
   const heroImageSrc = '/images/hero/homepage-hero.jpg';
 
   return (
-    <section className="bg-gradient-to-r from-blue-600 to-blue-800 py-20 text-white">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-16">
-          <div className="text-center lg:w-1/2 lg:text-left">
-            {/* Primary H1 with target search terms */}
-            <h1 className="mb-4 text-5xl font-bold md:text-6xl">
+    <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 py-16 text-white sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 lg:flex-row lg:gap-16">
+          <div className="max-w-xl text-center lg:w-1/2 lg:max-w-none lg:text-left">
+            <h1 className="mb-4 text-4xl leading-tight font-bold sm:text-5xl md:text-6xl">
               Divorce Real Estate Agent Las Vegas
             </h1>
-            <p className="mb-6 text-xl font-medium text-white md:text-2xl">
+            <p className="mb-4 text-lg font-medium text-blue-50 sm:text-xl md:text-2xl">
               {messaging.headlines.primary}
               {' '}
-              -
-              {' '}
+              —
               {messaging.headlines.subtitle}
             </p>
-            <p className="mb-4 text-2xl font-semibold text-blue-50 md:text-3xl">
+            <p className="mb-3 text-xl font-semibold text-white sm:text-2xl md:text-3xl">
               {messaging.headlines.unlock}
             </p>
-            <p className="mb-8 text-xl text-blue-50 md:text-2xl">
+            <p className="mb-8 text-lg text-blue-100 sm:text-xl md:text-2xl">
               Divorce is complicated enough without real estate.
               {' '}
               {messaging.headlines.houseKey}
             </p>
 
-            {/* CTA Buttons */}
-            <div className="mb-12 flex flex-wrap justify-center gap-4 lg:justify-start">
-              <Link
-                href="/contact"
-                className="rounded-lg bg-white px-8 py-4 font-semibold text-blue-600 transition-colors hover:bg-blue-50"
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 lg:justify-start">
+              <CalendlyLink
+                className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3.5 text-base font-semibold text-blue-600 shadow-lg transition-all hover:bg-blue-50 hover:shadow-xl focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 focus:outline-none sm:px-8 sm:py-4"
               >
                 {messaging.ctas.primary}
-              </Link>
+              </CalendlyLink>
               <Link
                 href="#home-value"
-                className="rounded-lg bg-blue-700 px-8 py-4 font-semibold text-white transition-colors hover:bg-blue-800 focus:ring-2 focus:ring-white focus:outline-none"
+                className="inline-flex items-center justify-center rounded-xl border-2 border-white/80 bg-transparent px-6 py-3.5 text-base font-semibold text-white transition-all hover:border-white hover:bg-white/10 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 focus:outline-none sm:px-8 sm:py-4"
               >
                 {messaging.ctas.valuation}
               </Link>
               <a
                 href="tel:+17022221964"
-                className="rounded-lg bg-yellow-400 px-8 py-4 font-semibold text-gray-900 transition-colors hover:bg-yellow-300"
+                className="inline-flex items-center justify-center rounded-xl bg-amber-400 px-6 py-3.5 text-base font-semibold text-gray-900 transition-all hover:bg-amber-300 focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 focus:ring-offset-blue-600 focus:outline-none sm:px-8 sm:py-4"
               >
-                Call Now: (702) 222-1964
+                Call (702) 222-1964
               </a>
             </div>
           </div>
 
-          <div className="relative h-80 w-full max-w-xl overflow-hidden rounded-3xl shadow-2xl lg:w-1/2">
+          <div className="relative h-72 w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/20 sm:h-80 lg:h-96 lg:w-1/2 lg:max-w-xl">
             <Image
               src={heroImageSrc}
               alt="Dr. Jan Duffy, Las Vegas divorce real estate specialist"
@@ -62,11 +59,10 @@ export function DivorceHero() {
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-800/20 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-transparent to-transparent" />
           </div>
         </div>
       </div>
     </section>
   );
 }
-

@@ -118,6 +118,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Educational guide pages (medium priority)
   const guidePages = [
     '/divorce-real-estate-guide',
+    '/divorce-real-estate-guide-divorcing-couples',
     '/selling-house-during-divorce-nevada-guide',
     '/divorce-real-estate-mistakes',
     '/emotional-guide-selling-divorce',

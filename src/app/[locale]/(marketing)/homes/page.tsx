@@ -2,11 +2,17 @@ import type { Metadata } from 'next';
 import type { PageProps, PropertyListing } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import { PropertyCard } from '@/components/sections/PropertyCard';
+import { generateLocaleAlternates } from '@/lib/metadata';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/homes';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Homes for Sale | Your Divorce Realtor',
     description: 'Search homes for sale. Your best Real Estate Experience is here, browse homes.',
+    alternates: { canonical, languages },
   };
 }
 

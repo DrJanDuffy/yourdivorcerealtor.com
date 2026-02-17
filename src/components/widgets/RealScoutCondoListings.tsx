@@ -1,6 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useRef, useState } from 'react';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 
 /**
  * RealScout Condo/Townhome Listings Widget
@@ -14,7 +15,7 @@ function RealScoutListingsWidget() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
+      (entries) => {
         if (entries[0]?.isIntersecting) {
           setIsVisible(true);
           observer.disconnect();
@@ -33,11 +34,12 @@ function RealScoutListingsWidget() {
   if (hasError) {
     return (
       <div className="rounded-lg border border-red-200 bg-red-50 p-8 text-center">
-        <p className="text-red-800 mb-4">
-          Unable to load property listings. Please{' '}
-          <a href="/contact" className="font-semibold underline">
-            contact us
-          </a>
+        <p className="mb-4 text-red-800">
+          Unable to load property listings. Please
+          {' '}
+          <CalendlyLink className="font-semibold underline">
+            schedule a call
+          </CalendlyLink>
           {' '}
           to view available properties.
         </p>
@@ -81,12 +83,12 @@ function RealScoutListingsWidget() {
 
 export function RealScoutCondoListings() {
   return (
-    <section className="py-16 bg-white">
+    <section className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-4 text-center">
+        <h2 className="mb-4 text-center text-3xl font-bold">
           Condos & Townhomes for Your Fresh Start
         </h2>
-        <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-center">
+        <p className="mx-auto mb-8 max-w-2xl text-center text-gray-600">
           Ready for low-maintenance living? Browse Las Vegas condos and
           {' '}
           townhomes perfect for starting your next chapter after divorce.

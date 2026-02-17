@@ -2,23 +2,31 @@ import type { Metadata } from 'next';
 import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
+import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateArticleSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/home-did-not-sell-during-divorce';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Home Didn’t Sell During Divorce? | Relist Strategically | Dr. Jan Duffy',
     description:
       'If your home failed to sell during divorce, relaunch with a proven pricing, marketing, and legal strategy tailored to Las Vegas divorce listings.',
     keywords:
       'home didn’t sell during divorce, relist divorce home Las Vegas, divorce house expired listing',
+    alternates: { canonical, languages },
   };
 }
 
@@ -32,7 +40,8 @@ export default async function HomeDidNotSellDuringDivorce(props: PageProps) {
     'What to Do When Your Home Didn’t Sell During Divorce',
     'Relist your Las Vegas divorce property with a pricing, marketing, and negotiation plan that keeps the decree on track.',
     `${baseUrl}${currentPath}`,
-    new Date().toISOString(),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
   const serviceSchema = generateServiceSchema(
     'Divorce Expired Listing Rescue',
@@ -49,8 +58,10 @@ export default async function HomeDidNotSellDuringDivorce(props: PageProps) {
         heroSubhead="Specialized strategy for expired or withdrawn divorce listings"
         showHomeValue
         currentPath={currentPath}
+        datePublished={CONTENT_LAST_UPDATED}
+        dateModified={CONTENT_LAST_UPDATED}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Why Divorce Listings Fail the First Time</h2>
           <p>
             Divorce listings fail for different reasons than traditional sales. Pricing is often set
@@ -58,27 +69,35 @@ export default async function HomeDidNotSellDuringDivorce(props: PageProps) {
             agents, and court-imposed timelines add pressure. Understanding the failure points helps
             you relaunch strategically.
           </p>
-          <ul className="list-disc pl-6 space-y-2">
+          <ul className="list-disc space-y-2 pl-6">
             <li>
-              <strong>Contract chasing:</strong> The property was overpriced to win the listing and
+              <strong>Contract chasing:</strong>
+              {' '}
+              The property was overpriced to win the listing and
               then reduced too late.
             </li>
             <li>
-              <strong>Fragmented communication:</strong> Missed updates between spouses, attorneys,
+              <strong>Fragmented communication:</strong>
+              {' '}
+              Missed updates between spouses, attorneys,
               and the agent scared serious buyers away.
             </li>
             <li>
-              <strong>Weak marketing:</strong> Cell-phone photos, no video, and no syndication meant
+              <strong>Weak marketing:</strong>
+              {' '}
+              Cell-phone photos, no video, and no syndication meant
               the right buyers never saw the home.
             </li>
             <li>
-              <strong>Legal friction:</strong> Inspection responses, repairs, or occupancy timelines
+              <strong>Legal friction:</strong>
+              {' '}
+              Inspection responses, repairs, or occupancy timelines
               weren’t aligned with the decree.
             </li>
           </ul>
 
           <h2>Immediate Steps After an Expired Divorce Listing</h2>
-          <ol className="list-decimal pl-6 space-y-2">
+          <ol className="list-decimal space-y-2 pl-6">
             <li>Review the listing agreement and MLS history to document pricing and feedback.</li>
             <li>Audit all marketing assets—photos, video, copy, syndication, and paid traffic.</li>
             <li>
@@ -133,7 +152,7 @@ export default async function HomeDidNotSellDuringDivorce(props: PageProps) {
           </p>
 
           <h2>Resources</h2>
-          <ul className="list-disc pl-6 space-y-2">
+          <ul className="list-disc space-y-2 pl-6">
             <li>
               <Link href="/one-spouse-wont-sell-house-divorce" className="text-blue-600">
                 One Spouse Won’t Sell
@@ -163,16 +182,14 @@ export default async function HomeDidNotSellDuringDivorce(props: PageProps) {
               listing, align with your attorneys, and relaunch with a plan that protects equity and
               deadlines.
             </p>
-            <Link
-              href="/contact"
+            <CalendlyLink
               className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700"
             >
               Request a Relaunch Plan
-            </Link>
+            </CalendlyLink>
           </div>
         </div>
       </DivorcePageTemplate>
     </>
   );
 }
-

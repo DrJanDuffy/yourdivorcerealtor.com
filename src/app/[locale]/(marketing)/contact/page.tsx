@@ -2,8 +2,11 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { CalendlyInline } from '@/components/calendly/CalendlyInline';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { FAQAccordion } from '@/components/faq/FAQAccordion';
 import { StructuredData } from '@/components/seo/StructuredData';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
+  generateFAQPageSchema,
   generateRealEstateAgentSchema,
   generateServiceSchema,
 } from '@/lib/schema';
@@ -14,11 +17,35 @@ type IContactProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const whatToExpectFaqs = [
+  {
+    question: 'Confidential Discussion',
+    answer: 'Your consultation is completely confidential. Dr. Jan Duffy will listen to your situation, answer your questions, and provide expert guidance without judgment. She understands the emotional challenges of divorce and provides compassionate, professional service.',
+  },
+  {
+    question: 'Options Analysis',
+    answer: 'During your consultation, Dr. Jan Duffy will help you understand all your property options: selling, buying out, co-owning, or refinancing. She\'ll explain the pros and cons of each option and help you determine which path makes the most sense for your situation.',
+  },
+  {
+    question: 'Home Valuation',
+    answer: 'If you\'re ready, Dr. Jan Duffy can provide an initial home valuation to help you understand your equity position. This information is essential for property division negotiations and decision-making.',
+  },
+  {
+    question: 'Next Steps Planning',
+    answer: 'By the end of your consultation, you\'ll have a clear understanding of your options and a plan for moving forward. Dr. Jan Duffy will outline the next steps and help you feel confident about your decisions.',
+  },
+];
+
+const path = '/contact';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Schedule Your Divorce Real Estate Consultation | Contact Dr. Jan Duffy',
     description: 'Schedule a confidential consultation with Dr. Jan Duffy, your Las Vegas divorce real estate specialist. It\'s never too early to discuss your options.',
     keywords: 'divorce realtor consultation, contact divorce realtor las vegas, schedule divorce real estate consultation',
+    alternates: { canonical, languages },
   };
 }
 
@@ -32,159 +59,81 @@ export default async function Contact(props: IContactProps) {
     ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
   );
   const realEstateAgentSchema = generateRealEstateAgentSchema();
+  const faqPageSchema = generateFAQPageSchema(whatToExpectFaqs);
 
   return (
     <>
-      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <StructuredData data={[serviceSchema, realEstateAgentSchema, faqPageSchema]} />
       <DivorcePageTemplate
         h1="Schedule Your Divorce Real Estate Consultation"
         heroSubhead="It's Never Too Early to Discuss Your Options"
         showHomeValue
         currentPath="/contact"
       >
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-16 grid grid-cols-1 gap-12 md:grid-cols-2">
-            <div>
-              <h2 className="mb-6 text-3xl font-bold">Contact Information</h2>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="mb-2 text-lg font-semibold">Dr. Jan Duffy, REALTOR®</h3>
-                  <p className="text-gray-600">Berkshire Hathaway HomeServices Sahara</p>
+        <div className="mx-auto max-w-5xl">
+          {/* Primary action: Schedule or call — above the fold */}
+          <section className="mb-14">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-5 lg:gap-12">
+              <div className="lg:col-span-2">
+                <h2 className="mb-4 text-2xl font-bold text-gray-900">Pick a time or call now</h2>
+                <p className="mb-6 text-gray-600">
+                  Choose a 15-minute slot below, or talk with Dr. Jan Duffy directly.
+                </p>
+                <a
+                  href="tel:+17022221964"
+                  className="mb-6 inline-flex items-center gap-2 rounded-xl bg-green-600 px-8 py-4 text-lg font-semibold text-white shadow-md transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
+                >
+                  <span aria-hidden>📞</span>
+                  Call (702) 222-1964
+                </a>
+                <div className="rounded-lg border border-blue-100 bg-blue-50/50 p-4">
+                  <p className="text-sm font-semibold text-gray-800">Dr. Jan Duffy, REALTOR®</p>
+                  <p className="text-sm text-gray-600">Berkshire Hathaway HomeServices Nevada Properties</p>
+                  <p className="mt-1 text-sm text-gray-600">Las Vegas, NV · Monday–Saturday</p>
                 </div>
-                <div>
-                  <p className="mb-1 text-gray-600">Las Vegas, Nevada</p>
-                  <p className="text-gray-600">Serving the Greater Las Vegas Area</p>
-                </div>
-                <div>
-                  <a href="tel:+17022221964" className="text-lg font-semibold text-blue-600 hover:text-blue-700">
-                    (702) 222-1964
-                  </a>
-                </div>
-                <div>
-                  <p className="text-gray-600">Available for consultations Monday - Saturday</p>
+                <ul className="mt-6 space-y-2 text-sm text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">✓</span>
+                    <span>Understand your property options</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">✓</span>
+                    <span>Get an accurate home valuation</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-600">✓</span>
+                    <span>Plan next steps with confidence</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="lg:col-span-3">
+                <h2 className="mb-2 text-2xl font-bold text-gray-900">Schedule your consultation</h2>
+                <p className="mb-4 text-gray-600">
+                  Select a time that works for you. Free 15-minute private conversation.
+                </p>
+                <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                  <CalendlyInline />
                 </div>
               </div>
             </div>
+          </section>
 
-            <div>
-              <h2 className="mb-6 text-3xl font-bold">Why Schedule a Consultation?</h2>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start">
-                  <span className="mr-2 text-blue-600">✓</span>
-                  <span>Understand all your property options during divorce</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-blue-600">✓</span>
-                  <span>Get an accurate home valuation for property division</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-blue-600">✓</span>
-                  <span>Learn about the divorce real estate process</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-blue-600">✓</span>
-                  <span>Receive expert guidance on your unique situation</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2 text-blue-600">✓</span>
-                  <span>Plan your next steps with confidence</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          {/* What to expect — accordion */}
+          <section className="mb-14">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900">What to expect in your consultation</h2>
+            <FAQAccordion faqs={whatToExpectFaqs} />
+          </section>
 
-          <div className="mb-12 rounded-lg bg-gray-50 p-8">
-            <h2 className="mb-6 text-3xl font-bold">What to Expect in Your Consultation</h2>
-            <div className="space-y-6">
-              <div>
-                <h3 className="mb-2 text-xl font-semibold">Confidential Discussion</h3>
-                <p className="text-gray-700">
-                  Your consultation is completely confidential. Dr. Jan Duffy will listen to your situation, answer your questions, and provide expert guidance without judgment. She understands the emotional challenges of divorce and provides compassionate, professional service.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-xl font-semibold">Options Analysis</h3>
-                <p className="text-gray-700">
-                  During your consultation, Dr. Jan Duffy will help you understand all your property options: selling, buying out, co-owning, or refinancing. She'll explain the pros and cons of each option and help you determine which path makes the most sense for your situation.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-xl font-semibold">Home Valuation</h3>
-                <p className="text-gray-700">
-                  If you're ready, Dr. Jan Duffy can provide an initial home valuation to help you understand your equity position. This information is essential for property division negotiations and decision-making.
-                </p>
-              </div>
-              <div>
-                <h3 className="mb-2 text-xl font-semibold">Next Steps Planning</h3>
-                <p className="text-gray-700">
-                  By the end of your consultation, you'll have a clear understanding of your options and a plan for moving forward. Dr. Jan Duffy will outline the next steps and help you feel confident about your decisions.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-12">
-            <h2 className="mb-6 text-3xl font-bold">Schedule Your Consultation</h2>
-            <p className="mb-6 text-gray-600">
-              Choose a time that works for you. Dr. Jan Duffy offers 15-minute private conversations to discuss your situation and next steps.
+          {/* Short supporting copy */}
+          <section className="prose prose-lg max-w-none border-t border-gray-200 pt-10">
+            <h2 className="text-xl font-bold text-gray-900">Questions to bring</h2>
+            <p className="text-gray-700">
+              Consider asking about your home’s value, equity, options (sell, buyout, co-own), process timeline, and fees. Dr. Jan Duffy will answer honestly and help you decide next steps.
             </p>
-            <CalendlyInline />
-          </div>
-
-          <div className="prose prose-lg max-w-none">
-            <h2>It's Never Too Early to Plan</h2>
-            <p>
-              Many divorcing homeowners wait too long to address their real estate situation, which can complicate their divorce and delay their ability to move forward. The earlier you discuss your options, the better prepared you'll be for property division negotiations and the smoother your transition will be.
-            </p>
-
-            <h3>Early Planning Benefits</h3>
-            <p>
-              Planning early allows you to understand your options, get accurate valuations, and make informed decisions. It also gives you time to prepare your property for sale if needed, coordinate with your attorney, and plan your next steps. Early planning reduces stress and ensures better outcomes.
-            </p>
-
-            <h3>During Divorce Proceedings</h3>
-            <p>
-              If you're already in the middle of divorce proceedings, it's not too late to get expert help. Dr. Jan Duffy can step in at any point to provide valuations, coordinate transactions, and ensure your property division proceeds smoothly. She works seamlessly with attorneys and mediators to support your case.
-            </p>
-
-            <h2>Questions to Ask During Your Consultation</h2>
-            <p>
-              Come prepared with questions to make the most of your consultation. Here are some questions to consider:
-            </p>
-
-            <h3>About Your Property</h3>
-            <ul>
-              <li>What is my home worth in today's market?</li>
-              <li>How much equity do I have?</li>
-              <li>What are my options for the property?</li>
-              <li>Should I sell, buy out, or co-own?</li>
-            </ul>
-
-            <h3>About the Process</h3>
-            <ul>
-              <li>How long will the process take?</li>
-              <li>What documents will I need?</li>
-              <li>How do you work with attorneys?</li>
-              <li>What if my spouse isn't cooperative?</li>
-            </ul>
-
-            <h3>About Costs and Fees</h3>
-            <ul>
-              <li>What are your fees?</li>
-              <li>Are there any additional costs?</li>
-              <li>How does payment work?</li>
-              <li>What if the sale doesn't close?</li>
-            </ul>
-
-            <h2>Schedule Your Consultation Today</h2>
-            <p>
-              Don't wait to get the expert guidance you need. Schedule a confidential consultation with Dr. Jan Duffy today and take the first step toward understanding your options and planning your future. Whether you're just beginning to consider divorce or you're ready to move forward with a property transaction, she's here to help.
-            </p>
-
-            <p className="mt-8 text-center text-xl font-semibold">
+            <p className="mt-6 text-center text-lg font-semibold text-gray-800">
               Schedule above or call (702) 222-1964. You can also use the home valuation tool below.
             </p>
-          </div>
+          </section>
         </div>
       </DivorcePageTemplate>
     </>

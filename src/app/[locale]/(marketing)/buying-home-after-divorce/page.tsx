@@ -2,13 +2,15 @@ import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateArticleSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 type IBuyingProps = {
@@ -17,11 +19,16 @@ type IBuyingProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/buying-home-after-divorce';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Buying a Home After Divorce in Las Vegas | Dr. Jan Duffy',
     description: 'Expert guidance for buying a home after divorce in Las Vegas. Your fresh start awaits with specialized support for post-divorce home buying.',
     keywords: 'buying home after divorce, post divorce home purchase, las vegas divorce home buying',
+    alternates: { canonical, languages },
   };
 }
 
@@ -35,7 +42,8 @@ export default async function BuyingAfterDivorce(props: IBuyingProps) {
     'Buying a Home After Divorce in Las Vegas',
     'Expert guidance for buying a home after divorce in Las Vegas. Your fresh start awaits with specialized support for post-divorce home buying.',
     `${baseUrl}${currentPath}`,
-    new Date().toISOString(),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
   const serviceSchema = generateServiceSchema(
     'Post-Divorce Home Buying Services',
@@ -51,11 +59,16 @@ export default async function BuyingAfterDivorce(props: IBuyingProps) {
         h1="Buying a Home After Divorce in Las Vegas"
         heroSubhead="Your Fresh Start Awaits"
         currentPath={currentPath}
+        datePublished={CONTENT_LAST_UPDATED}
+        dateModified={CONTENT_LAST_UPDATED}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Starting Fresh After Divorce</h2>
           <p>
-            Buying a home after divorce represents a new beginning—a chance to create a space that's truly yours and build a new life. But post-divorce home buying comes with unique considerations, from financial qualifications to timing relative to your divorce proceedings. Dr. Jan Duffy provides specialized guidance for buying a home after divorce in <Link href="/divorce-realtor-henderson" className="text-blue-600 hover:text-blue-700 underline">Las Vegas</Link>, helping you make informed decisions and find the perfect property for your fresh start.
+            Buying a home after divorce represents a new beginning—a chance to create a space that's truly yours and build a new life. But post-divorce home buying comes with unique considerations, from financial qualifications to timing relative to your divorce proceedings. Dr. Jan Duffy provides specialized guidance for buying a home after divorce in
+            {' '}
+            <Link href="/divorce-realtor-henderson" className="text-blue-600 underline hover:text-blue-700">Las Vegas</Link>
+            , helping you make informed decisions and find the perfect property for your fresh start.
           </p>
 
           <h3>The Emotional Journey</h3>
@@ -70,7 +83,11 @@ export default async function BuyingAfterDivorce(props: IBuyingProps) {
 
           <h3>Mortgage Qualification</h3>
           <p>
-            Qualifying for a mortgage after divorce requires understanding how your income, assets, and debts have changed. Lenders will evaluate your financial situation based on your post-divorce circumstances. Dr. Jan Duffy can help you understand what lenders look for and connect you with mortgage professionals who understand divorce situations. Learn more about <Link href="/divorce-and-mortgage" className="text-blue-600 hover:text-blue-700 underline">divorce and mortgage</Link> considerations.
+            Qualifying for a mortgage after divorce requires understanding how your income, assets, and debts have changed. Lenders will evaluate your financial situation based on your post-divorce circumstances. Dr. Jan Duffy can help you understand what lenders look for and connect you with mortgage professionals who understand divorce situations. Learn more about
+            {' '}
+            <Link href="/divorce-and-mortgage" className="text-blue-600 underline hover:text-blue-700">divorce and mortgage</Link>
+            {' '}
+            considerations.
           </p>
 
           <h3>Down Payment Considerations</h3>
@@ -159,4 +176,3 @@ export default async function BuyingAfterDivorce(props: IBuyingProps) {
     </>
   );
 }
-

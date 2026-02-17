@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import { routing } from '@/libs/I18nRouting';
 
 type IPortfolioDetailProps = {
@@ -27,10 +28,12 @@ export async function generateMetadata(props: IPortfolioDetailProps): Promise<Me
     locale,
     namespace: 'PortfolioSlug',
   });
-
+  const path = `/portfolio/${slug}`;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: t('meta_title', { slug }),
     description: t('meta_description', { slug }),
+    alternates: { canonical, languages },
   };
 }
 

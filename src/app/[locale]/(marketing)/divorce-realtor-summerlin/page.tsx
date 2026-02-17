@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
-import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateLocalBusinessSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 type ISummerlinProps = {
@@ -17,11 +18,16 @@ type ISummerlinProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/divorce-realtor-summerlin';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Summerlin Divorce Realtor | Divorce Realtor Summerlin | Dr. Jan Duffy',
     description: 'Divorce realtor Summerlin helping divorcing homeowners. Summerlin divorce home sale expert. Property division, home sales, and buyouts in Summerlin, Las Vegas.',
     keywords: 'divorce realtor Summerlin, Summerlin divorce realtor, Summerlin divorce home sale, divorce real estate Summerlin, divorce realtor Summerlin Las Vegas',
+    alternates: { canonical, languages },
   };
 }
 
@@ -30,7 +36,7 @@ export default async function Summerlin(props: ISummerlinProps) {
   setRequestLocale(locale);
   const currentPath = '/divorce-realtor-summerlin';
   const localBusinessSchema = generateLocalBusinessSchema();
-  localBusinessSchema.areaServed = [{ '@type': 'City', name: 'Summerlin' }];
+  localBusinessSchema.areaServed = [{ '@type': 'City', 'name': 'Summerlin' }];
   const serviceSchema = generateServiceSchema(
     'Summerlin Divorce Real Estate Services',
     'Divorce realtor Summerlin helping divorcing homeowners. Summerlin divorce home sale expert. Property division, home sales, and buyouts in Summerlin, Las Vegas.',
@@ -46,7 +52,7 @@ export default async function Summerlin(props: ISummerlinProps) {
         heroSubhead="Summerlin Divorce Home Sale Expert"
         currentPath={currentPath}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Summerlin Divorce Real Estate Expertise</h2>
           <p>
             Summerlin is one of Las Vegas's premier master-planned communities, known for its quality of life, excellent amenities, and strong real estate values. When you're going through a divorce in Summerlin, you need a real estate professional who understands both the local market and the unique challenges of divorce transactions. Dr. Jan Duffy brings specialized expertise to Summerlin divorcing homeowners, ensuring your property transaction supports your overall divorce resolution.
@@ -99,4 +105,3 @@ export default async function Summerlin(props: ISummerlinProps) {
     </>
   );
 }
-

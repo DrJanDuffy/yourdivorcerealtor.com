@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
-import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateArticleSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 type IFinancialPlanningProps = {
@@ -17,11 +19,16 @@ type IFinancialPlanningProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/financial-planning-divorce-real-estate';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Financial Planning for Divorce Real Estate | Dr. Jan Duffy',
     description: 'Expert financial planning guidance for divorce real estate. Understand financial implications and plan for your future.',
     keywords: 'financial planning divorce, divorce real estate finances, property division finances',
+    alternates: { canonical, languages },
   };
 }
 
@@ -35,7 +42,8 @@ export default async function FinancialPlanning(props: IFinancialPlanningProps) 
     'Financial Planning for Divorce Real Estate',
     'Expert financial planning guidance for divorce real estate. Understand financial implications and plan for your future.',
     `${baseUrl}${currentPath}`,
-    new Date().toISOString(),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
   const serviceSchema = generateServiceSchema(
     'Financial Planning Services',
@@ -51,8 +59,10 @@ export default async function FinancialPlanning(props: IFinancialPlanningProps) 
         h1="Financial Planning for Divorce Real Estate"
         heroSubhead="Plan for Your Financial Future"
         currentPath={currentPath}
+        datePublished={CONTENT_LAST_UPDATED}
+        dateModified={CONTENT_LAST_UPDATED}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Financial Planning for Divorce Real Estate</h2>
           <p>
             Divorce real estate decisions have significant financial implications that affect your future. Understanding these implications and planning accordingly is essential for protecting your financial well-being. Dr. Jan Duffy provides financial planning guidance that helps you understand costs, plan for expenses, and make decisions that support your long-term financial health.
@@ -120,4 +130,3 @@ export default async function FinancialPlanning(props: IFinancialPlanningProps) 
     </>
   );
 }
-

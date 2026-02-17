@@ -49,9 +49,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md" role="banner">
-      {/* Top Banner - Dismissible */}
-      <div className="bg-blue-600 py-2 text-center text-sm text-white">
-        <div className="container mx-auto px-4">
+      {/* Top Banner */}
+      <div className="bg-blue-600 py-2.5 text-center text-sm text-white sm:py-3">
+        <div className="container mx-auto px-4 sm:px-6">
           <p>
             Skip the Stress. Get Expert Divorce Real Estate Help.
             {' '}
@@ -63,7 +63,7 @@ export function Header() {
       </div>
 
       {/* Main Navigation */}
-      <nav className="container mx-auto px-4" aria-label="Main navigation">
+      <nav className="container mx-auto px-4 sm:px-6" aria-label="Main navigation">
         <div className="flex h-20 items-center justify-between">
           {/* Logo - SEO Optimized with Schema Markup */}
           <Link

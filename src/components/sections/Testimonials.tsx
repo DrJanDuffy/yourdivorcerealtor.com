@@ -26,13 +26,14 @@ const testimonials: Testimonial[] = [
 
 /**
  * Optimized Testimonials Component
- * - Review schema for SEO
  * - CSS-based hover transitions
+ * - No Review/AggregateRating schema: Google does not allow self-serving review
+ *   markup (reviews about the same business on its own site) for rich snippets.
  */
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div
-      className="rounded-lg bg-gray-50 p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+      className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-100 hover:shadow-md"
       style={{
         viewTransitionName: `testimonial-${testimonial.id}`,
       }}
@@ -61,14 +62,14 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 export function Testimonials() {
   return (
-    <section className="bg-white py-16" itemScope itemType="https://schema.org/Review">
-      <div className="container mx-auto px-4">
-        <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
+    <section className="bg-white py-14 sm:py-16">
+      <div className="container mx-auto px-4 sm:px-6">
+        <h2 className="mb-10 text-center text-3xl font-bold text-gray-900 sm:mb-12 sm:text-4xl">
           What Our Clients Say
         </h2>
 
         <Suspense
-          fallback={
+          fallback={(
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
               {[1, 2, 3, 4].map(i => (
                 <div
@@ -77,10 +78,10 @@ export function Testimonials() {
                 />
               ))}
             </div>
-          }
+          )}
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {testimonials.map((testimonial) => (
+            {testimonials.map(testimonial => (
               <TestimonialCard
                 key={testimonial.id}
                 testimonial={testimonial}
@@ -88,25 +89,6 @@ export function Testimonials() {
             ))}
           </div>
         </Suspense>
-
-        {/* Review Schema for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'AggregateRating',
-              itemReviewed: {
-                '@type': 'RealEstateAgent',
-                name: 'Dr. Jan Duffy',
-              },
-              ratingValue: '5',
-              reviewCount: testimonials.length,
-              bestRating: '5',
-              worstRating: '1',
-            }),
-          }}
-        />
       </div>
     </section>
   );

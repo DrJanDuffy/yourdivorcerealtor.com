@@ -3,6 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { FAQAccordion } from '@/components/faq/FAQAccordion';
 import { StructuredData } from '@/components/seo/StructuredData';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateFAQPageSchema,
   generateRealEstateAgentSchema,
@@ -14,11 +15,16 @@ type IFAQProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/faq';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Divorce Real Estate Questions Answered | FAQ',
     description: 'Frequently asked questions about divorce real estate in Las Vegas. Get answers about property division, home sales, buyouts, and more.',
     keywords: 'divorce property faq, divorce real estate questions, las vegas divorce realtor faq',
+    alternates: { canonical, languages },
   };
 }
 
@@ -68,6 +74,22 @@ export default async function FAQ(props: IFAQProps) {
       question: 'Can I buy a new home before the divorce is final?',
       answer: 'Yes, you can buy a new home before your divorce is final, but there are important considerations. Your ability to qualify for a mortgage, how the purchase affects property division, and timing relative to your divorce proceedings all matter. Dr. Jan Duffy can help you understand these considerations and plan accordingly.',
     },
+    {
+      question: 'Do I need to disclose the divorce to buyers?',
+      answer: 'No. Divorce is a personal matter—you are not obligated to disclose it to buyers. You must disclose material facts that affect the property, but divorce is not one of them. Your agent will deflect "why are you selling" questions professionally and protect your confidentiality.',
+    },
+    {
+      question: 'Can we defer the sale of our home?',
+      answer: 'Yes. You can agree between yourselves or have a court order to delay the sale, for example to let children finish school or wait for a better market. If you defer the sale, you must agree in writing on who pays the mortgage, taxes, insurance, and maintenance until the home sells.',
+    },
+    {
+      question: 'Should we live in the home while it\'s on the market?',
+      answer: 'It depends on your finances and staging goals. Vacated and staged homes often sell faster and for more money. If someone stays, remove personal items (family photos, children\'s belongings), keep the home show-ready, and be flexible with showings. Having one person stay can help with housing costs if you cannot afford three payments.',
+    },
+    {
+      question: 'What if we own multiple properties?',
+      answer: 'The same principles apply—divide or sell each property. With multiple properties you have more options, such as offsetting values between homes. An attorney can help structure the division, for example using LLCs or a trust to manage sales and disbursements.',
+    },
   ];
 
   const faqPageSchema = generateFAQPageSchema(faqs);
@@ -81,40 +103,40 @@ export default async function FAQ(props: IFAQProps) {
         heroSubhead="Your Questions, Expert Answers"
         currentPath={currentPath}
       >
-      <div className="max-w-4xl mx-auto">
-        <div className="prose prose-lg mb-12">
-          <h2>Common Questions About Divorce Real Estate</h2>
-          <p>
-            Navigating divorce real estate raises many questions. Here are answers to the most common questions Dr. Jan Duffy receives from divorcing homeowners in Las Vegas. If you don't see your question here, schedule a consultation for personalized guidance.
-          </p>
+        <div className="mx-auto max-w-4xl">
+          <div className="prose prose-lg mb-12">
+            <h2>Common Questions About Divorce Real Estate</h2>
+            <p>
+              Navigating divorce real estate raises many questions. Here are answers to the most common questions Dr. Jan Duffy receives from divorcing homeowners in Las Vegas. If you don't see your question here, schedule a consultation for personalized guidance.
+            </p>
+          </div>
+
+          {/* Interactive FAQ Accordion */}
+          <div className="mb-12">
+            <FAQAccordion faqs={faqs} />
+          </div>
+
+          <div className="prose prose-lg max-w-none rounded-lg bg-gray-50 p-8">
+            <h2>Still Have Questions?</h2>
+            <p>
+              Every divorce situation is unique, and you may have questions specific to your circumstances. Dr. Jan Duffy is here to help. Schedule a confidential consultation to get personalized answers to your questions and expert guidance on your situation.
+            </p>
+
+            <h3>What to Bring to Your Consultation</h3>
+            <ul>
+              <li>Your divorce paperwork or settlement agreement (if available)</li>
+              <li>Information about your mortgage and any liens</li>
+              <li>Your questions and concerns</li>
+              <li>Any court orders related to property</li>
+            </ul>
+
+            <h3>Get Expert Answers Today</h3>
+            <p>
+              Don't let unanswered questions delay your ability to move forward. Schedule a consultation with Dr. Jan Duffy today and get the expert answers you need to make informed decisions about your property during divorce.
+            </p>
+          </div>
         </div>
-
-        {/* Interactive FAQ Accordion */}
-        <div className="mb-12">
-          <FAQAccordion faqs={faqs} />
-        </div>
-
-        <div className="prose prose-lg max-w-none bg-gray-50 rounded-lg p-8">
-          <h2>Still Have Questions?</h2>
-          <p>
-            Every divorce situation is unique, and you may have questions specific to your circumstances. Dr. Jan Duffy is here to help. Schedule a confidential consultation to get personalized answers to your questions and expert guidance on your situation.
-          </p>
-
-          <h3>What to Bring to Your Consultation</h3>
-          <ul>
-            <li>Your divorce paperwork or settlement agreement (if available)</li>
-            <li>Information about your mortgage and any liens</li>
-            <li>Your questions and concerns</li>
-            <li>Any court orders related to property</li>
-          </ul>
-
-          <h3>Get Expert Answers Today</h3>
-          <p>
-            Don't let unanswered questions delay your ability to move forward. Schedule a consultation with Dr. Jan Duffy today and get the expert answers you need to make informed decisions about your property during divorce.
-          </p>
-        </div>
-      </div>
-    </DivorcePageTemplate>
+      </DivorcePageTemplate>
     </>
   );
 }

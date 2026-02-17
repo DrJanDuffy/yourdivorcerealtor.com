@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
 
 type IStagingProps = {
@@ -13,11 +15,16 @@ type IStagingProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+const path = '/divorce-home-staging';
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Divorce Home Staging Tips Las Vegas | Dr. Jan Duffy',
     description: 'Expert home staging tips for selling during divorce. Maximize appeal and value with professional staging guidance.',
     keywords: 'divorce home staging, home staging divorce, staging tips divorce',
+    alternates: { canonical, languages },
   };
 }
 
@@ -41,43 +48,52 @@ export default async function HomeStaging(props: IStagingProps) {
         heroSubhead="Maximize Appeal and Value"
         currentPath={currentPath}
       >
-      <div className="max-w-4xl mx-auto prose prose-lg">
-        <h2>Home Staging for Divorce Sales</h2>
-        <p>
-          Professional home staging can significantly increase your home's appeal and value, helping it sell faster and for more money. During divorce, staging requires sensitivity to the emotional dynamics while maximizing practical appeal. Dr. Jan Duffy provides staging guidance and can recommend staging professionals who understand the divorce context.
-        </p>
+        <div className="prose prose-lg mx-auto max-w-4xl">
+          <h2>Home Staging for Divorce Sales</h2>
+          <p>
+            Professional home staging can significantly increase your home's appeal and value, helping it sell faster and for more money. During divorce, staging requires sensitivity to the emotional dynamics while maximizing practical appeal. Dr. Jan Duffy provides staging guidance and can recommend staging professionals who understand the divorce context.
+          </p>
 
-        <h3>Why Staging Matters</h3>
-        <p>
-          Staged homes typically sell faster and for higher prices than unstaged homes. Professional staging helps buyers envision themselves in the space, increasing appeal and value.
-        </p>
+          <h3>Why Staging Matters</h3>
+          <p>
+            Staged homes typically sell faster and for higher prices than unstaged homes. Professional staging helps buyers envision themselves in the space, increasing appeal and value.
+          </p>
 
-        <h2>Staging Tips for Divorce Sales</h2>
-        <p>
-          Effective staging during divorce balances maximizing appeal with respecting the emotional context. Here are key tips for staging your home during divorce.
-        </p>
+          <h2>Staging Tips for Divorce Sales</h2>
+          <p>
+            Effective staging during divorce balances maximizing appeal with respecting the emotional context. Here are key tips for staging your home during divorce.
+          </p>
 
-        <h3>Depersonalize</h3>
-        <p>
-          Removing personal items helps buyers envision themselves in the home. This can be emotionally challenging during divorce but is important for maximizing appeal.
-        </p>
+          <h3>Depersonalize</h3>
+          <p>
+            Removing personal items helps buyers envision themselves in the home. This can be emotionally challenging during divorce but is important for maximizing appeal.
+          </p>
 
-        <h3>Neutralize</h3>
-        <p>
-          Neutral colors and decor appeal to the widest range of buyers. This helps maximize appeal and value.
-        </p>
+          <h3>Neutralize</h3>
+          <p>
+            Neutral colors and decor appeal to the widest range of buyers. This helps maximize appeal and value.
+          </p>
 
-        <h3>Highlight Strengths</h3>
-        <p>
-          Professional staging highlights your home's strengths while minimizing weaknesses. This helps maximize value and appeal.
-        </p>
+          <h3>Highlight Strengths</h3>
+          <p>
+            Professional staging highlights your home's strengths while minimizing weaknesses. This helps maximize value and appeal.
+          </p>
 
-        <h2>Get Staging Guidance Today</h2>
-        <p>
-          Professional staging can significantly impact your sale. Schedule a consultation with Dr. Jan Duffy today and get expert staging guidance for your divorce home sale.
-        </p>
-      </div>
-    </DivorcePageTemplate>
+          <h2>Living in the Home While It&apos;s on the Market</h2>
+          <p>
+            The decision of whether one or both spouses stay in the property during the sale depends on finances and what you can afford. Vacated and staged homes often sell faster and for more money. If someone must stay, remove all personal items—family photos, children&apos;s belongings—so buyers can visualize themselves in the space. The person who stays should keep the home clean and ready to show at a moment&apos;s notice. Having one person remain can help with housing costs if you cannot afford mortgage plus separate rent. See our
+            {' '}
+            <Link href="/divorce-real-estate-guide-divorcing-couples" className="text-blue-600 underline hover:text-blue-700">Real Estate Guide for Divorcing Couples</Link>
+            {' '}
+            for more on this topic.
+          </p>
+
+          <h2>Get Staging Guidance Today</h2>
+          <p>
+            Professional staging can significantly impact your sale. Schedule a consultation with Dr. Jan Duffy today and get expert staging guidance for your divorce home sale.
+          </p>
+        </div>
+      </DivorcePageTemplate>
     </>
   );
 }

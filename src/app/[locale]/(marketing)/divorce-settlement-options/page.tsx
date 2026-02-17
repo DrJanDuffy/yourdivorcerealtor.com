@@ -1,15 +1,19 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
-import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
-import { StructuredData } from '@/components/seo/StructuredData';
+import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
+import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
+import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateArticleSchema,
-  generateServiceSchema,
   generateRealEstateAgentSchema,
+  generateServiceSchema,
 } from '@/lib/schema';
+
+const path = '/divorce-settlement-options';
 
 type ISettlementProps = {
   params: Promise<{ locale: string }>;
@@ -17,11 +21,14 @@ type ISettlementProps = {
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await props.params;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
     title: 'Divorce Settlement Real Estate Options | Dr. Jan Duffy',
     description: 'Understand all your divorce settlement real estate options. Sell, buyout, co-own, or refinance - expert guidance for each option.',
     keywords: 'divorce settlement options, divorce real estate options, property settlement divorce',
+    alternates: { canonical, languages },
   };
 }
 
@@ -35,7 +42,8 @@ export default async function SettlementOptions(props: ISettlementProps) {
     'Divorce Settlement Real Estate Options',
     'Understand all your divorce settlement real estate options. Sell, buyout, co-own, or refinance - expert guidance for each option.',
     `${baseUrl}${currentPath}`,
-    new Date().toISOString(),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
+    toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
   const serviceSchema = generateServiceSchema(
     'Divorce Settlement Options Services',
@@ -51,8 +59,10 @@ export default async function SettlementOptions(props: ISettlementProps) {
         h1="Divorce Settlement Real Estate Options"
         heroSubhead="Understand All Your Options"
         currentPath={currentPath}
+        datePublished={CONTENT_LAST_UPDATED}
+        dateModified={CONTENT_LAST_UPDATED}
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
+        <div className="prose prose-lg mx-auto max-w-4xl">
           <h2>Understanding Your Divorce Settlement Options</h2>
           <p>
             When it comes to real estate during divorce, you have several settlement options. Understanding all your options is essential for making informed decisions that support your financial future and overall divorce resolution. Dr. Jan Duffy helps you understand each option, its implications, and which path makes the most sense for your situation.
@@ -135,4 +145,3 @@ export default async function SettlementOptions(props: ISettlementProps) {
     </>
   );
 }
-

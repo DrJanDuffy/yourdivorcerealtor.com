@@ -82,6 +82,7 @@ const pageTitles: Record<string, string> = {
 
   // Guide pages
   '/divorce-real-estate-guide': 'Divorce Real Estate Guide',
+  '/divorce-real-estate-guide-divorcing-couples': 'Real Estate Guide for Divorcing Couples',
   '/selling-house-during-divorce-nevada-guide': 'Selling House During Divorce Nevada Guide',
   '/divorce-real-estate-mistakes': 'Divorce Real Estate Mistakes',
   '/emotional-guide-selling-divorce': 'Emotional Guide Selling Divorce',
@@ -448,10 +449,18 @@ export const relatedLinksMap: Record<string, string[]> = {
 
   // Guide pages
   '/divorce-real-estate-guide': [
+    '/divorce-real-estate-guide-divorcing-couples',
     '/divorce-property-division',
     '/selling-home-during-divorce',
     '/divorce-home-valuation',
     '/divorce-real-estate-services',
+  ],
+  '/divorce-real-estate-guide-divorcing-couples': [
+    '/divorce-real-estate-guide',
+    '/what-to-do-with-house-in-divorce',
+    '/community-property-divorce-house',
+    '/divorce-listing-process',
+    '/selling-home-during-divorce',
   ],
   '/selling-house-during-divorce-nevada-guide': [
     '/selling-home-during-divorce',
@@ -511,6 +520,3 @@ export function getRelatedLinks(pathname: string, limit = 4): Array<{ title: str
     }))
     .filter(link => link.href !== cleanPath); // Exclude self-reference
 }
-
-
-
