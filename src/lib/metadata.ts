@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
+import { routing } from '@/libs/I18nRouting';
+import { getI18nPath } from '@/utils/Helpers';
 
-const siteName = 'Dr. Jan Duffy | Las Vegas Divorce Real Estate Specialist';
-const siteUrl = 'https://www.yourdivorcerealtor.com';
+export const siteName = 'Dr. Jan Duffy | Las Vegas Divorce Real Estate Specialist';
+export const siteUrl = 'https://www.yourdivorcerealtor.com';
 const defaultDescription = 'Expert divorce real estate services in Las Vegas. Dr. Jan Duffy helps divorcing homeowners navigate property division with compassion and expertise.';
 
 /**
@@ -30,8 +32,8 @@ export function generateBaseMetadata(): Metadata {
       index: true,
       follow: true,
       googleBot: {
-        index: true,
-        follow: true,
+        'index': true,
+        'follow': true,
         'max-video-preview': -1,
         'max-image-preview': 'large',
         'max-snippet': -1,
@@ -88,10 +90,68 @@ export function generatePageMetadata({
 }
 
 /**
+ * Generate locale-aware canonical and hreflang alternates for [locale] pages.
+ * Path is the pathname without locale (e.g. '/divorce-and-mortgage', '/' for homepage).
+ */
+export function generateLocaleAlternates(
+  path: string,
+  locale: string,
+): { canonical: string; languages: Record<string, string> } {
+  const canonicalPath = getI18nPath(path, locale);
+  const canonical = `${siteUrl}${canonicalPath}`;
+  const languages: Record<string, string> = {};
+  for (const loc of routing.locales) {
+    languages[loc] = `${siteUrl}${getI18nPath(path, loc)}`;
+  }
+  languages['x-default'] = `${siteUrl}${getI18nPath(path, routing.defaultLocale)}`;
+  return { canonical, languages };
+}
+
+/**
+ * Generate full page metadata with locale-aware canonical and hreflang.
+ * Use in [locale] marketing pages: pass path (no locale prefix) and locale from params.
+ */
+export function generateLocalePageMetadata({
+  path,
+  locale,
+  title,
+  description,
+  keywords,
+  noindex = false,
+}: {
+  path: string;
+  locale: string;
+  title: string;
+  description: string;
+  keywords?: string;
+  noindex?: boolean;
+}): Metadata {
+  const fullTitle = `${title} | ${siteName}`;
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
+  return {
+    title: fullTitle,
+    description,
+    keywords,
+    alternates: {
+      canonical,
+      languages,
+    },
+    openGraph: {
+      title: fullTitle,
+      description,
+      url: canonical,
+    },
+    twitter: {
+      title: fullTitle,
+      description,
+    },
+    robots: noindex
+      ? { index: false, follow: false }
+      : { index: true, follow: true },
+  };
+}
+
+/**
  * Title template for consistent page titles
  */
 export const titleTemplate = `%s | ${siteName}`;
-
-
-
-
