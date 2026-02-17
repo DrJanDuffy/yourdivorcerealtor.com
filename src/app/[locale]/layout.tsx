@@ -10,6 +10,7 @@ import { ThirdPartyScripts } from '@/components/analytics/Scripts';
 import { CalendlyScripts } from '@/components/calendly/CalendlyScripts';
 import { DemoBadge } from '@/components/DemoBadge';
 import { StructuredData } from '@/components/seo/StructuredData';
+import { CLOUDFLARE_IMAGE_IDS, cloudflareImageUrl } from '@/lib/cloudflare-images';
 import { inter, playfairDisplay } from '@/lib/fonts';
 import { getGoogleVerificationTag } from '@/lib/google-verification';
 import { siteName, siteUrl } from '@/lib/metadata';
@@ -23,6 +24,26 @@ export const metadata: Metadata = {
   title: {
     default: siteName,
     template: `%s`,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteUrl,
+    siteName,
+    title: siteName,
+    images: [
+      {
+        url: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['dr-jan-duffy-og']),
+        width: 1200,
+        height: 630,
+        alt: 'Dr. Jan Duffy - Las Vegas Divorce Real Estate Specialist',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteName,
+    images: [cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['dr-jan-duffy-twitter'])],
   },
   icons: [
     {

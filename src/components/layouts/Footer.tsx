@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { generateLocalBusinessSchema } from '@/lib/schema';
 
 /**
@@ -77,16 +78,26 @@ export function Footer() {
       />
 
       <div className="container mx-auto px-4">
+        {/* Primary CTA: Schedule a consultation */}
+        <div className="mb-10 flex flex-col items-center gap-4 rounded-xl bg-blue-600/20 px-6 py-8 text-center">
+          <p className="text-lg font-semibold text-white sm:text-xl">
+            Ready to discuss your options?
+          </p>
+          <CalendlyLink className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-8 py-4 font-semibold text-white transition-colors hover:bg-blue-500 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none">
+            Schedule a Free 15-Minute Call
+          </CalendlyLink>
+        </div>
+
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Las Vegas Communities */}
           <nav aria-label="Las Vegas Communities">
             <h3 className="mb-4 text-lg font-semibold">Las Vegas Communities</h3>
             <ul className="space-y-2">
-              {communities.map((community) => (
+              {communities.map(community => (
                 <li key={community.href}>
                   <Link
                     href={community.href}
-                    className="text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                    className="rounded text-gray-300 transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     prefetch={true}
                   >
                     {community.name}
@@ -100,11 +111,11 @@ export function Footer() {
           <nav aria-label="Resources">
             <h3 className="mb-4 text-lg font-semibold">Resources</h3>
             <ul className="space-y-2">
-              {resources.map((resource) => (
+              {resources.map(resource => (
                 <li key={resource.href}>
                   <Link
                     href={resource.href}
-                    className="text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                    className="rounded text-gray-300 transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     prefetch={true}
                   >
                     {resource.name}
@@ -124,7 +135,7 @@ export function Footer() {
               <li>
                 <a
                   href="tel:+17022221964"
-                  className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  className="rounded transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   aria-label="Call client phone number 702-222-1964"
                 >
                   Client Phone: (702) 222-1964
@@ -133,7 +144,7 @@ export function Footer() {
               <li>
                 <a
                   href="tel:+17025001955"
-                  className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  className="rounded transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   aria-label="Call professional phone number 702-500-1955"
                 >
                   Professional Phone: (702) 500-1955
@@ -142,7 +153,7 @@ export function Footer() {
               <li className="mt-4">
                 <Link
                   href="/about"
-                  className="text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  className="rounded text-gray-300 transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   prefetch={true}
                 >
                   About Dr. Jan
@@ -156,13 +167,13 @@ export function Footer() {
             <h3 className="mb-4 text-lg font-semibold">Connect With Us</h3>
             <nav aria-label="Social media links">
               <ul className="flex space-x-4">
-                {socialLinks.map((social) => (
+                {socialLinks.map(social => (
                   <li key={social.name}>
                     <a
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded p-1"
+                      className="rounded p-1 text-gray-300 transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                       aria-label={`Visit Dr. Jan Duffy on ${social.name}`}
                     >
                       <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -189,19 +200,19 @@ export function Footer() {
           <nav className="mt-4 space-x-4" aria-label="Legal links">
             <Link
               href="/sitemap"
-              className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+              className="rounded transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
               Sitemap
             </Link>
             <Link
               href="/privacy"
-              className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+              className="rounded transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+              className="rounded transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
             >
               Terms of Use
             </Link>

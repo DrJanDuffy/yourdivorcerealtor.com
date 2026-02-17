@@ -7,6 +7,8 @@ const CALENDLY_URL = 'https://calendly.com/drjanduffy/dr-duffy-private-15-min-co
 type CalendlyLinkProps = {
   children: ReactNode;
   className?: string;
+  /** Optional callback when link is clicked (e.g. close mobile menu) */
+  onClick?: () => void;
 };
 
 declare global {
@@ -21,9 +23,10 @@ declare global {
 /**
  * Link that opens Calendly scheduler in a popup. Use for "Schedule a Consultation" CTAs.
  */
-export function CalendlyLink({ children, className }: CalendlyLinkProps) {
+export function CalendlyLink({ children, className, onClick }: CalendlyLinkProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    onClick?.();
     if (typeof window !== 'undefined' && window.Calendly) {
       window.Calendly.initPopupWidget({ url: CALENDLY_URL });
     } else {

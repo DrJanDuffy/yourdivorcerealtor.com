@@ -89,6 +89,11 @@ const baseConfig: NextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'imagedelivery.net',
+        pathname: '/byE6BTe9lNqo21V57n4aPQ/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

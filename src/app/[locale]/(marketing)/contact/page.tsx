@@ -124,6 +124,17 @@ export default async function Contact(props: IContactProps) {
             <FAQAccordion faqs={whatToExpectFaqs} />
           </section>
 
+          {/* Second scheduler — if above fold is scrolled past */}
+          <section className="mb-14">
+            <h2 className="mb-4 text-2xl font-bold text-gray-900">Pick a time that works for you</h2>
+            <p className="mb-6 text-gray-600">
+              Choose a 15-minute slot below. Free, confidential consultation with Dr. Jan Duffy.
+            </p>
+            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+              <CalendlyInline />
+            </div>
+          </section>
+
           {/* Short supporting copy */}
           <section className="prose prose-lg max-w-none border-t border-gray-200 pt-10">
             <h2 className="text-xl font-bold text-gray-900">Questions to bring</h2>
@@ -131,7 +142,7 @@ export default async function Contact(props: IContactProps) {
               Consider asking about your home’s value, equity, options (sell, buyout, co-own), process timeline, and fees. Dr. Jan Duffy will answer honestly and help you decide next steps.
             </p>
             <p className="mt-6 text-center text-lg font-semibold text-gray-800">
-              Schedule above or call (702) 222-1964. You can also use the home valuation tool below.
+              Schedule above or call (702) 222-1964. For a home valuation, schedule a call—Dr. Jan provides valuations during your consultation.
             </p>
           </section>
         </div>

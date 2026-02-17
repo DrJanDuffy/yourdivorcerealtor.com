@@ -1,3 +1,5 @@
+import { CLOUDFLARE_IMAGE_IDS, cloudflareImageUrl } from '@/lib/cloudflare-images';
+
 type HeroImageMeta = {
   src: string;
   alt: string;
@@ -9,58 +11,55 @@ export const heroImageMap: Record<string, HeroImageMeta> = {
     alt: 'Dr. Jan Duffy - Las Vegas divorce real estate specialist',
   },
   '/divorce-realtor-henderson': {
-    src: '/assets/images/IMG_781102%20(1).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Henderson, Nevada luxury homes',
   },
   '/divorce-realtor-summerlin': {
-    src: '/assets/images/IMG_781102%20(2).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Summerlin Las Vegas skyline',
   },
   '/divorce-realtor-north-las-vegas': {
-    src: '/assets/images/IMG_781102%20(3).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'North Las Vegas neighborhood',
   },
   '/divorce-realtor-green-valley': {
-    src: '/assets/images/IMG_781102%20(4).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Green Valley master-planned community',
   },
   '/divorce-realtor-spring-valley': {
-    src: '/assets/images/IMG_781102%20(5).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Spring Valley homes and parks',
   },
   '/divorce-realtor-enterprise': {
-    src: '/assets/images/IMG_781102%20(6).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Enterprise luxury real estate',
   },
   '/divorce-realtor-paradise': {
-    src: '/assets/images/IMG_781102%20(7).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Paradise, NV desert modern home',
   },
   '/divorce-realtor-centennial-hills': {
-    src: '/assets/images/IMG_781102%20(8).jpg',
-    alt: 'Centennial Hills neighborhood streetscape',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['centennial-hills-hero']),
+    alt: 'Centennial Hills neighborhood - modern home exterior',
   },
   '/divorce-realtor-southern-highlands': {
-    src: '/assets/images/IMG_781102%20(9).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Southern Highlands golf course community',
   },
   '/divorce-realtor-aliante': {
-    src: '/assets/images/IMG_781102%20(10).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Aliante homes and parks',
   },
   '/divorce-realtor-mountains-edge': {
-    src: '/assets/images/IMG_781102%20(11).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Mountains Edge desert landscape',
   },
   '/divorce-realtor-inspirada': {
-    src: '/assets/images/IMG_781102%20(12).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['las-vegas-neighborhood']),
     alt: 'Inspirada planned community',
   },
   '/home-did-not-sell-during-divorce': {
-    src: '/assets/images/IMG_781102%20(13).jpg',
+    src: cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['property-default']),
     alt: 'Las Vegas home prepared for relaunch after divorce',
   },
 };
-
-
-

@@ -106,8 +106,11 @@ export function Header() {
             ))}
           </div>
 
-          {/* Right Side - Phone & Auth */}
-          <div className="hidden items-center space-x-6 lg:flex">
+          {/* Right Side - Schedule CTA, Phone & Auth */}
+          <div className="hidden items-center space-x-4 lg:flex">
+            <CalendlyLink className="rounded-lg bg-blue-600 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none">
+              Schedule a Call
+            </CalendlyLink>
             <a
               href="tel:+17022221964"
               className="rounded px-2 py-1 font-semibold text-blue-600 transition-colors hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
@@ -178,6 +181,12 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+              <CalendlyLink
+                onClick={closeMobileMenu}
+                className="block rounded-md bg-blue-600 px-4 py-3 text-center font-semibold text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:outline-none"
+              >
+                Schedule a Call
+              </CalendlyLink>
               <a
                 href="tel:+17022221964"
                 onClick={closeMobileMenu}

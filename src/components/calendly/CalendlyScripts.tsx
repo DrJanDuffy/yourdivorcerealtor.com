@@ -9,7 +9,7 @@ function initBadge() {
   if (w?.Calendly) {
     w.Calendly.initBadgeWidget({
       url: CALENDLY_URL,
-      text: 'Schedule a Private Consultation',
+      text: 'Schedule Now',
       color: '#0069ff',
       textColor: '#ffffff',
       branding: false,

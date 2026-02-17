@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+import { CalendlyInline } from '@/components/calendly/CalendlyInline';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { FAQAccordion } from '@/components/faq/FAQAccordion';
 import { StructuredData } from '@/components/seo/StructuredData';
@@ -116,6 +118,16 @@ export default async function FAQ(props: IFAQProps) {
             <FAQAccordion faqs={faqs} />
           </div>
 
+          <div className="mb-12">
+            <h3 className="mb-4 text-xl font-bold text-gray-900">Schedule a call for personalized answers</h3>
+            <p className="mb-4 text-gray-600">
+              Every divorce situation is unique. Schedule a free 15-minute consultation to get answers tailored to your circumstances.
+            </p>
+            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+              <CalendlyInline />
+            </div>
+          </div>
+
           <div className="prose prose-lg max-w-none rounded-lg bg-gray-50 p-8">
             <h2>Still Have Questions?</h2>
             <p>
@@ -133,6 +145,11 @@ export default async function FAQ(props: IFAQProps) {
             <h3>Get Expert Answers Today</h3>
             <p>
               Don't let unanswered questions delay your ability to move forward. Schedule a consultation with Dr. Jan Duffy today and get the expert answers you need to make informed decisions about your property during divorce.
+            </p>
+            <p className="mt-6">
+              <CalendlyLink className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700">
+                Schedule a Free 15-Minute Call
+              </CalendlyLink>
             </p>
           </div>
         </div>
