@@ -1,19 +1,20 @@
 import type { Metadata } from 'next';
 import type { LayoutProps } from '@/types';
 import { ClerkProvider } from '@clerk/nextjs';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { PostHogProvider } from '@/components/analytics/PostHogProvider';
 import { ThirdPartyScripts } from '@/components/analytics/Scripts';
+import { CalendlyScripts } from '@/components/calendly/CalendlyScripts';
 import { DemoBadge } from '@/components/DemoBadge';
-import { routing } from '@/libs/I18nRouting';
-import { ClerkLocalizations } from '@/utils/AppConfig';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { inter, playfairDisplay } from '@/lib/fonts';
 import { getGoogleVerificationTag } from '@/lib/google-verification';
-import { StructuredData } from '@/components/seo/StructuredData';
 import { generateSiteNavigationElementSchema } from '@/lib/schema';
+import { routing } from '@/libs/I18nRouting';
+import { ClerkLocalizations } from '@/utils/AppConfig';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
@@ -78,19 +79,19 @@ export default async function RootLayout(props: LayoutProps) {
     generateSiteNavigationElementSchema('Contact', `${baseUrl}/contact`),
   ];
 
-      return (
-        <html lang={locale} className={`${inter.variable} ${playfairDisplay.variable}`}>
-          <head>
-            {getGoogleVerificationTag() && (
-              <meta
-                name="google-site-verification"
-                content={getGoogleVerificationTag()!}
-              />
-            )}
-            <StructuredData data={navigationSchemas} />
-            <ThirdPartyScripts />
-          </head>
-          <body>
+  return (
+    <html lang={locale} className={`${inter.variable} ${playfairDisplay.variable}`}>
+      <head>
+        {getGoogleVerificationTag() && (
+          <meta
+            name="google-site-verification"
+            content={getGoogleVerificationTag()!}
+          />
+        )}
+        <StructuredData data={navigationSchemas} />
+        <ThirdPartyScripts />
+      </head>
+      <body>
         <ClerkProvider
           appearance={{
             cssLayerName: 'clerk',
@@ -107,6 +108,7 @@ export default async function RootLayout(props: LayoutProps) {
               {props.children}
             </PostHogProvider>
             <SpeedInsights />
+            <CalendlyScripts />
             <DemoBadge />
           </NextIntlClientProvider>
         </ClerkProvider>

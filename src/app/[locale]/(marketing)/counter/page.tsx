@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
-import { CounterForm } from '@/components/CounterForm';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { CurrentCount } from '@/components/CurrentCount';
 
 export async function generateMetadata(props: {
@@ -25,7 +25,12 @@ export default function Counter() {
 
   return (
     <>
-      <CounterForm />
+      <div className="mb-6 text-center">
+        <p className="mb-4 text-gray-600">This page is for testing.</p>
+        <CalendlyLink className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700">
+          Schedule a consultation
+        </CalendlyLink>
+      </div>
 
       <div className="mt-3">
         <CurrentCount />

@@ -1,43 +1,10 @@
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
+import type { Ratelimit } from '@upstash/ratelimit';
 
 /**
  * Rate Limiting Configuration
  * Uses Upstash Redis (works with Vercel)
- * Falls back gracefully if Redis is not configured
+ * getClientIP and checkRateLimit are available for future rate limiters
  */
-
-// Initialize Redis client (only if environment variables are set)
-const redis = process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-  ? new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN,
-    })
-  : null;
-
-/**
- * Contact form rate limiter: 3 submissions per hour per IP
- */
-export const contactRateLimit = redis
-  ? new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(3, '1 h'),
-      analytics: true,
-      prefix: '@ratelimit/contact',
-    })
-  : null;
-
-/**
- * Valuation form rate limiter: 5 submissions per day per IP
- */
-export const valuationRateLimit = redis
-  ? new Ratelimit({
-      redis,
-      limiter: Ratelimit.slidingWindow(5, '1 d'),
-      analytics: true,
-      prefix: '@ratelimit/valuation',
-    })
-  : null;
 
 /**
  * Get client IP address from request headers
@@ -77,7 +44,3 @@ export async function checkRateLimit(
     reset: result.reset,
   };
 }
-
-
-
-

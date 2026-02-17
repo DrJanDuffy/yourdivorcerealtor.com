@@ -88,7 +88,7 @@ export type NotFoundPageProps = Record<string, never>;
  * Generate metadata function type
  */
 export type GenerateMetadata<T extends PageProps = PageProps> = (
-  props: T
+  props: T,
 ) => Promise<Metadata>;
 
 /**
@@ -119,39 +119,6 @@ export type WithChildren = {
  */
 export type WithOptionalChildren = {
   children?: React.ReactNode;
-};
-
-// ============================================================================
-// Form Types
-// ============================================================================
-
-/**
- * Standard form state for Server Actions
- */
-export type FormState<T = unknown> = {
-  success: boolean;
-  error?: string;
-  data?: T;
-};
-
-/**
- * Contact form data type
- */
-export type ContactFormData = {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-};
-
-/**
- * Home valuation form data type
- */
-export type ValuationFormData = {
-  address: string;
-  name: string;
-  email: string;
-  phone: string;
 };
 
 // ============================================================================
@@ -221,15 +188,11 @@ export type NonNullableDeep<T> = {
 /**
  * Async function return type extractor
  */
-export type AsyncReturnType<T extends (...args: unknown[]) => Promise<unknown>> =
-  T extends (...args: unknown[]) => Promise<infer R> ? R : never;
+export type AsyncReturnType<T extends (...args: unknown[]) => Promise<unknown>>
+  = T extends (...args: unknown[]) => Promise<infer R> ? R : never;
 
 /**
  * String literal union from array
  */
-export type ArrayElement<T extends readonly unknown[]> =
-  T extends readonly (infer U)[] ? U : never;
-
-
-
-
+export type ArrayElement<T extends readonly unknown[]>
+  = T extends readonly (infer U)[] ? U : never;

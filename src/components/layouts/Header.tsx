@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useTransition } from 'react';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { NavigationLink } from './NavigationLink';
 
 /**
@@ -54,13 +55,9 @@ export function Header() {
           <p>
             Skip the Stress. Get Expert Divorce Real Estate Help.
             {' '}
-            <Link
-              href="/contact"
-              className="font-semibold underline transition-colors hover:text-blue-200"
-              prefetch={true}
-            >
+            <CalendlyLink className="font-semibold underline transition-colors hover:text-blue-200">
               Schedule a Consultation
-            </Link>
+            </CalendlyLink>
           </p>
         </div>
       </div>

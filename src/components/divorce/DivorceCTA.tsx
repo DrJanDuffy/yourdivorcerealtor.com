@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { messaging } from '@/lib/messaging';
 
 type DivorceCTAProps = {
@@ -10,33 +11,41 @@ export function DivorceCTA({ variant = 'primary', className = '' }: DivorceCTAPr
   const variants = {
     primary: {
       text: messaging.ctas.primary,
-      href: '/contact',
       style: 'bg-blue-600 text-white hover:bg-blue-700',
+      useCalendly: true,
     },
     secondary: {
       text: messaging.ctas.valuation,
       href: '#home-value',
       style: 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50',
+      useCalendly: false,
     },
     urgency: {
       text: messaging.ctas.control,
-      href: '/contact',
       style: 'bg-yellow-400 text-gray-900 hover:bg-yellow-300',
+      useCalendly: true,
     },
   };
 
   const config = variants[variant];
 
+  if (config.useCalendly) {
+    return (
+      <CalendlyLink
+        className={`inline-block rounded-lg px-8 py-4 font-semibold transition-colors ${config.style} ${className}`}
+      >
+        {config.text}
+      </CalendlyLink>
+    );
+  }
+
+  // secondary variant only
   return (
     <Link
-      href={config.href}
+      href="#home-value"
       className={`inline-block rounded-lg px-8 py-4 font-semibold transition-colors ${config.style} ${className}`}
     >
       {config.text}
     </Link>
   );
 }
-
-
-
-
