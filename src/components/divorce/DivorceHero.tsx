@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
+import { cloudflareImageUrl } from '@/lib/cloudflare-images';
 import { messaging } from '@/lib/messaging';
 
+const HOMEPAGE_HERO_ID = 'lonemountaineights/hero/hero-las-vegas.png';
+
 export function DivorceHero() {
-  const heroImageSrc = '/images/hero/homepage-hero.jpg';
+  const heroImageSrc = cloudflareImageUrl(HOMEPAGE_HERO_ID);
 
   return (
     <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 py-16 text-white sm:py-20 lg:py-24">
