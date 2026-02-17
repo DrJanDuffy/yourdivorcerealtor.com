@@ -96,6 +96,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Attorney/Professional resource pages (medium priority)
   const attorneyPages = [
     '/attorney-resources',
+    '/references-and-links',
     '/family-law-attorney-collaboration',
     '/divorce-mediator-resources',
     '/certified-divorce-real-estate-expert',

@@ -35,7 +35,15 @@ export function Footer() {
     { name: 'Selling During Divorce', href: '/selling-home-during-divorce' },
     { name: 'Buying After Divorce', href: '/buying-home-after-divorce' },
     { name: 'Attorney Resources', href: '/attorney-resources' },
+    { name: 'References & Links', href: '/references-and-links' },
     { name: 'FAQ', href: '/faq' },
+  ];
+
+  const externalResources = [
+    { name: 'IRS Publication 523', href: 'https://www.irs.gov/publications/p523', description: 'Home sale tax rules' },
+    { name: 'Nevada NRS Chapter 123', href: 'https://www.leg.state.nv.us/NRS/NRS-123.html', description: 'Community property' },
+    { name: 'Nevada Real Estate Division', href: 'https://red.nv.gov/', description: 'License lookup' },
+    { name: 'Nevada State Bar', href: 'https://nvbar.org/', description: 'Find an attorney' },
   ];
 
   const socialLinks = [
@@ -131,7 +139,9 @@ export function Footer() {
             <ul className="space-y-2 text-gray-300">
               <li>Berkshire Hathaway HomeServices Nevada Properties</li>
               <li>License #S.0197614.LLC</li>
-              <li>Las Vegas, NV</li>
+              <li>601 N. Pecos</li>
+              <li>Family Courts and Services Center</li>
+              <li>Las Vegas, NV 89155</li>
               <li>
                 <a
                   href="tel:+17022221964"
@@ -188,8 +198,27 @@ export function Footer() {
           </div>
         </div>
 
+        {/* External / Official Resources */}
+        <nav className="mt-8 border-t border-gray-800 pt-8" aria-label="Official resources">
+          <h3 className="mb-3 text-sm font-semibold text-gray-300">Legal &amp; Tax Resources</h3>
+          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            {externalResources.map(resource => (
+              <li key={resource.href}>
+                <a
+                  href={resource.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded text-gray-400 transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                >
+                  {resource.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         {/* Copyright and Legal Links */}
-        <div className="mt-8 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+        <div className="mt-6 border-t border-gray-800 pt-6 text-center text-sm text-gray-400">
           <p>
             ©
             {' '}
