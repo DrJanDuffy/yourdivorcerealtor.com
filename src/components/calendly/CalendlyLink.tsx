@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import { captureEngagement } from '@/lib/analytics/engagement';
 
 const CALENDLY_URL = 'https://calendly.com/drjanduffy/dr-duffy-private-15-min-conversation';
 
@@ -26,6 +27,7 @@ declare global {
 export function CalendlyLink({ children, className, onClick }: CalendlyLinkProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    captureEngagement('cta_calendly_popup', { location: 'calendly_link' });
     onClick?.();
     if (typeof window !== 'undefined' && window.Calendly) {
       window.Calendly.initPopupWidget({ url: CALENDLY_URL });

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { EngagementPhoneLink } from '@/components/analytics/EngagementPhoneLink';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import {
   CLOUDFLARE_IMAGE_IDS,
@@ -50,14 +51,15 @@ export function DivorceHero() {
               >
                 {messaging.ctas.valuation}
               </Link>
-              <a
+              <EngagementPhoneLink
                 href={SITE_PHONE_TEL}
+                location="divorce_hero_call"
                 className="inline-flex items-center justify-center rounded-xl bg-amber-400 px-6 py-3.5 text-base font-semibold text-gray-900 transition-all hover:bg-amber-300 focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 focus:ring-offset-blue-600 focus:outline-none sm:px-8 sm:py-4"
               >
                 Call
                 {' '}
                 {SITE_PHONE_DISPLAY}
-              </a>
+              </EngagementPhoneLink>
             </div>
           </div>
 

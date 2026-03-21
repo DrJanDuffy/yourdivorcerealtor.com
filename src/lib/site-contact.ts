@@ -15,3 +15,11 @@ export const NAP_ADDRESS_REGION = 'NV';
 export const NAP_POSTAL_CODE = '89155';
 /** Single-line street for PostalAddress in JSON-LD */
 export const NAP_STREET_ADDRESS = '601 N. Pecos, Family Courts and Services Center';
+/** Public contact email — align with GBP / site. */
+export const SITE_EMAIL = 'DrDuffy@YourDivorceRealtor.com';
+/**
+ * Approximate map pin for NAP address (Family Courts area). Align decimals with Google Business Profile.
+ * @see https://schema.org/GeoCoordinates
+ */
+export const NAP_GEO_LATITUDE = 36.1729;
+export const NAP_GEO_LONGITUDE = -115.1041;

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
+import { EngagementPhoneLink } from '@/components/analytics/EngagementPhoneLink';
 import { CalendlyInline } from '@/components/calendly/CalendlyInline';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { WhatWeDoAndDontDo } from '@/components/divorce/WhatWeDoAndDontDo';
@@ -89,15 +90,16 @@ export default async function Contact(props: IContactProps) {
                 <p className="mb-6 text-gray-600">
                   Choose a 15-minute slot below, or talk with Dr. Jan Duffy directly.
                 </p>
-                <a
+                <EngagementPhoneLink
                   href={SITE_PHONE_TEL}
+                  location="contact_primary_call"
                   className="mb-6 inline-flex items-center gap-2 rounded-xl bg-green-600 px-8 py-4 text-lg font-semibold text-white shadow-md transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
                 >
                   <span aria-hidden>📞</span>
                   Call
                   {' '}
                   {SITE_PHONE_DISPLAY}
-                </a>
+                </EngagementPhoneLink>
                 <div className="rounded-lg border border-blue-100 bg-blue-50/50 p-4">
                   <p className="text-sm font-semibold text-gray-800">Dr. Jan Duffy, REALTOR®</p>
                   <p className="text-sm text-gray-600">{BROKERAGE_NAME}</p>

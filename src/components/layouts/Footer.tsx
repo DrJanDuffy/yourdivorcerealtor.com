@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { EngagementPhoneLink } from '@/components/analytics/EngagementPhoneLink';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { generateLocalBusinessSchema } from '@/lib/schema';
 import {
@@ -134,26 +135,28 @@ export function Footer() {
                 {NAP_POSTAL_CODE}
               </li>
               <li>
-                <a
+                <EngagementPhoneLink
                   href={SITE_PHONE_TEL}
+                  location="footer_client_phone"
                   className="rounded transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   aria-label={`Call client phone number ${SITE_PHONE_DISPLAY}`}
                 >
                   Client Phone:
                   {' '}
                   {SITE_PHONE_DISPLAY}
-                </a>
+                </EngagementPhoneLink>
               </li>
               <li>
-                <a
+                <EngagementPhoneLink
                   href={PROFESSIONAL_PHONE_TEL}
+                  location="footer_professional_phone"
                   className="rounded transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   aria-label={`Call professional phone number ${PROFESSIONAL_PHONE_DISPLAY}`}
                 >
                   Professional Phone:
                   {' '}
                   {PROFESSIONAL_PHONE_DISPLAY}
-                </a>
+                </EngagementPhoneLink>
               </li>
               <li className="mt-4">
                 <Link
@@ -173,9 +176,13 @@ export function Footer() {
               Social profile links are not listed here until they are verified for this site. Use the scheduling button
               above, call
               {' '}
-              <a href={SITE_PHONE_TEL} className="text-gray-300 underline hover:text-white">
+              <EngagementPhoneLink
+                href={SITE_PHONE_TEL}
+                location="footer_connect_blurb"
+                className="text-gray-300 underline hover:text-white"
+              >
                 {SITE_PHONE_DISPLAY}
-              </a>
+              </EngagementPhoneLink>
               , or visit
               {' '}
               <Link href="/contact" className="text-gray-300 underline hover:text-white">
@@ -215,7 +222,10 @@ export function Footer() {
             Dr. Jan Duffy,
             {' '}
             {BROKERAGE_NAME}
-            . All Rights Reserved.
+            . #
+            {REAL_ESTATE_LICENSE_NV}
+            {' '}
+            All Rights Reserved.
           </p>
           <nav className="mt-4 space-x-4" aria-label="Legal links">
             <Link

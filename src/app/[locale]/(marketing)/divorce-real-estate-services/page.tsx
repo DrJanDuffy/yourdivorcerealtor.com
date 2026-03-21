@@ -4,6 +4,7 @@ import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { generateLocaleAlternates } from '@/lib/metadata';
 import {
+  generateFAQPageSchema,
   generateRealEstateAgentSchema,
   generateServiceSchema,
 } from '@/lib/schema';
@@ -16,13 +17,38 @@ export const dynamic = 'force-dynamic';
 
 const path = '/divorce-real-estate-services';
 
+const servicesFaqs = [
+  {
+    question: 'Why do divorcing homeowners need specialized real estate services?',
+    answer:
+      'Divorce involves emotional dynamics, legal considerations, financial complexities, and often court involvement. Traditional real estate processes are not built for that context. Dr. Jan Duffy\'s services are designed for divorce transactions so property decisions align with your resolution.',
+  },
+  {
+    question: 'What does home valuation and equity analysis include?',
+    answer:
+      'Dr. Jan Duffy provides market analysis using comparable sales and current conditions, plus equity calculations that account for value, mortgage balance, and liens—supporting fair division, buyouts, and settlement discussions.',
+  },
+  {
+    question: 'What is neutral representation in a divorce listing?',
+    answer:
+      'Neutral representation means equal, professional service without taking sides—transparent communication with both spouses and counsel, clear timelines, and a process that reduces conflict while moving the sale forward.',
+  },
+  {
+    question: 'How can Dr. Jan Duffy help with buyouts and refinancing?',
+    answer:
+      'She helps determine fair value, calculate buyout amounts, and coordinate with lenders and attorneys so refinancing and documentation align with your agreement or court orders.',
+  },
+];
+
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params;
   const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
-    title: 'Divorce Real Estate Services in Las Vegas | Dr. Jan Duffy',
-    description: 'Comprehensive divorce real estate services in Las Vegas. Home valuation, property division, buyout assistance, and specialized divorce listing process.',
-    keywords: 'divorce real estate services, divorce property services, las vegas divorce realtor services',
+    title: 'Specialized Services for Divorcing Homeowners | Dr. Jan Duffy — Las Vegas',
+    description:
+      'Comprehensive divorce real estate services in Las Vegas: valuation, equity analysis, neutral listing process, buyout and refinancing help, court-related support, and collaboration with attorneys and mediators.',
+    keywords:
+      'divorce real estate services, divorce property services, las vegas divorce realtor services, divorce home valuation, buyout assistance',
     alternates: { canonical, languages },
   };
 }
@@ -37,60 +63,56 @@ export default async function Services(props: IServicesProps) {
     ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas', 'Green Valley', 'Spring Valley'],
   );
   const realEstateAgentSchema = generateRealEstateAgentSchema();
+  const faqPageSchema = generateFAQPageSchema(servicesFaqs);
 
   return (
     <>
-      <StructuredData data={[serviceSchema, realEstateAgentSchema]} />
+      <StructuredData data={[serviceSchema, realEstateAgentSchema, faqPageSchema]} />
       <DivorcePageTemplate
-        h1="Divorce Real Estate Services in Las Vegas"
-        heroSubhead="This Isn't Business As Usual"
+        h1="Specialized Services for Divorcing Homeowners"
+        heroSubhead="Divorce real estate requires specialized expertise that goes far beyond traditional real estate transactions. Dr. Jan Duffy provides comprehensive services designed specifically for divorcing homeowners in Las Vegas. Each service is customized to your unique situation, ensuring your property transaction supports your overall divorce resolution."
         showHomeValue
         currentPath="/divorce-real-estate-services"
       >
-        <div className="prose prose-lg mx-auto max-w-4xl">
-          <h2>Specialized Services for Divorcing Homeowners</h2>
+        <article className="prose prose-lg prose-gray prose-headings:scroll-mt-24 prose-headings:font-bold prose-headings:text-gray-900 prose-h2:mt-12 prose-h2:text-balance prose-h2:text-2xl prose-h2:sm:text-3xl prose-h3:mt-8 prose-h3:text-xl prose-p:leading-relaxed max-w-none">
+          <h2>Why Specialized Services Matter</h2>
           <p>
-            Divorce real estate requires specialized expertise that goes far beyond traditional real estate transactions. Dr. Jan Duffy provides comprehensive services designed specifically for divorcing homeowners in Las Vegas. Each service is customized to your unique situation, ensuring your property transaction supports your overall divorce resolution.
-          </p>
-
-          <h3>Why Specialized Services Matter</h3>
-          <p>
-            Traditional real estate processes don't work for divorce transactions. Divorce involves emotional dynamics, legal considerations, financial complexities, and often court involvement. Dr. Jan Duffy's specialized services address these unique challenges, ensuring smoother transactions and better outcomes for all parties involved.
+            Traditional real estate processes don&apos;t work for divorce transactions. Divorce involves emotional dynamics, legal considerations, financial complexities, and often court involvement. Dr. Jan Duffy&apos;s specialized services address these unique challenges, ensuring smoother transactions and better outcomes for all parties involved.
           </p>
 
           <h2>Home Valuation and Equity Analysis</h2>
           <p>
-            Understanding your home's value and equity position is the foundation of property division during divorce. Dr. Jan Duffy provides accurate, comprehensive home valuations and detailed equity analyses that support fair property division negotiations.
+            Understanding your home&apos;s value and equity position is the foundation of property division during divorce. Dr. Jan Duffy provides accurate, comprehensive home valuations and detailed equity analyses that support fair property division negotiations.
           </p>
 
           <h3>Comprehensive Market Analysis</h3>
           <p>
-            Dr. Jan Duffy conducts thorough market analyses using comparable sales, current market conditions, and property-specific factors. This analysis provides an accurate assessment of your home's value, which is essential for property division, buyout calculations, and settlement negotiations.
+            Dr. Jan Duffy conducts thorough market analyses using comparable sales, current market conditions, and property-specific factors. This analysis provides an accurate assessment of your home&apos;s value, which is essential for property division, buyout calculations, and settlement negotiations.
           </p>
 
           <h3>Equity Calculations</h3>
           <p>
-            Understanding your equity position requires more than just knowing your home's value. Dr. Jan Duffy calculates your equity by considering your home's value, outstanding mortgage balance, and any other liens or encumbrances. This information is critical for determining buyout amounts and dividing assets fairly.
+            Understanding your equity position requires more than just knowing your home&apos;s value. Dr. Jan Duffy calculates your equity by considering your home&apos;s value, outstanding mortgage balance, and any other liens or encumbrances. This information is critical for determining buyout amounts and dividing assets fairly.
           </p>
 
           <h2>Divorce Listing Process</h2>
           <p>
-            Selling a home during divorce requires a specialized approach that prevents problems before they arise. Dr. Jan Duffy's divorce listing process is customized to address the unique challenges of divorce transactions.
+            Selling a home during divorce requires a specialized approach that prevents problems before they arise. Dr. Jan Duffy&apos;s divorce listing process is customized to address the unique challenges of divorce transactions.
           </p>
 
           <h3>Neutral Representation</h3>
           <p>
-            Dr. Jan Duffy provides equal treatment to all clients and doesn't pick sides. This neutral approach ensures fair outcomes, reduces conflict, and helps both parties move forward. Whether you're the one staying, leaving, or both parties are selling, you'll receive the same level of professional service.
+            Dr. Jan Duffy provides equal treatment to all clients and doesn&apos;t pick sides. This neutral approach ensures fair outcomes, reduces conflict, and helps both parties move forward. Whether you&apos;re the one staying, leaving, or both parties are selling, you&apos;ll receive the same level of professional service.
           </p>
 
           <h3>Communication System</h3>
           <p>
-            Everyone stays on the same page with Dr. Jan Duffy's communication system. She maintains transparent communication with both spouses, their attorneys, and any other professionals involved. This ensures all parties are informed, reducing misunderstandings and preventing delays.
+            Everyone stays on the same page with Dr. Jan Duffy&apos;s communication system. She maintains transparent communication with both spouses, their attorneys, and any other professionals involved. This ensures all parties are informed, reducing misunderstandings and preventing delays.
           </p>
 
           <h3>Timeline Transparency</h3>
           <p>
-            You'll know exactly how long the process will take and when you'll need to move. Dr. Jan Duffy provides clear timelines based on market conditions, property specifics, and any court orders or settlement agreements. This transparency helps you plan your next steps and reduces stress.
+            You&apos;ll know exactly how long the process will take and when you&apos;ll need to move. Dr. Jan Duffy provides clear timelines based on market conditions, property specifics, and any court orders or settlement agreements. This transparency helps you plan your next steps and reduces stress.
           </p>
 
           <h2>Buyout and Refinancing Assistance</h2>
@@ -100,7 +122,7 @@ export default async function Services(props: IServicesProps) {
 
           <h3>Buyout Calculations</h3>
           <p>
-            Calculating a fair buyout amount requires understanding your home's value, outstanding mortgage balance, and how to divide equity fairly. Dr. Jan Duffy provides detailed buyout calculations that consider all relevant factors, ensuring fair outcomes for both parties.
+            Calculating a fair buyout amount requires understanding your home&apos;s value, outstanding mortgage balance, and how to divide equity fairly. Dr. Jan Duffy provides detailed buyout calculations that consider all relevant factors, ensuring fair outcomes for both parties.
           </p>
 
           <h3>Refinancing Coordination</h3>
@@ -120,7 +142,7 @@ export default async function Services(props: IServicesProps) {
 
           <h3>Sale Sabotage Escalation</h3>
           <p>
-            If someone deviates from the plan, Dr. Jan Duffy's escalation protocol gets things back on track. She understands how to handle non-compliance, coordinate with attorneys, and ensure transactions proceed according to agreements or court orders.
+            If someone deviates from the plan, Dr. Jan Duffy&apos;s escalation protocol gets things back on track. She understands how to handle non-compliance, coordinate with attorneys, and ensure transactions proceed according to agreements or court orders.
           </p>
 
           <h2>Professional Collaboration</h2>
@@ -153,14 +175,14 @@ export default async function Services(props: IServicesProps) {
             Divorce real estate transactions involve extensive documentation, including quitclaim deeds, refinancing paperwork, and settlement agreements. Dr. Jan Duffy ensures all documentation is completed correctly and coordinates with attorneys to ensure legal compliance.
           </p>
 
-          <h2>Why Choose Dr. Jan Duffy's Services?</h2>
+          <h2>Why Choose Dr. Jan Duffy&apos;s Services?</h2>
           <p>
-            Dr. Jan Duffy's specialized services are designed specifically for divorce real estate. Her approach addresses the unique challenges of divorce transactions, ensuring smoother processes and better outcomes. When you choose Dr. Jan Duffy, you're choosing expertise, compassion, and proven results.
+            Dr. Jan Duffy&apos;s specialized services are designed specifically for divorce real estate. Her approach addresses the unique challenges of divorce transactions, ensuring smoother processes and better outcomes. When you choose Dr. Jan Duffy, you&apos;re choosing expertise, compassion, and proven results.
           </p>
 
           <h3>Specialized Expertise</h3>
           <p>
-            Dr. Jan Duffy's specialized knowledge of divorce real estate ensures your transaction is handled correctly from start to finish. She understands the legal, financial, and emotional aspects of property division during divorce.
+            Dr. Jan Duffy&apos;s specialized knowledge of divorce real estate ensures your transaction is handled correctly from start to finish. She understands the legal, financial, and emotional aspects of property division during divorce.
           </p>
 
           <h3>Proven Processes</h3>
@@ -170,14 +192,26 @@ export default async function Services(props: IServicesProps) {
 
           <h3>Compassionate Service</h3>
           <p>
-            Divorce is emotionally challenging. Dr. Jan Duffy provides compassionate, understanding service that acknowledges the difficulty of your situation while maintaining professional boundaries. She's there to support you through the process, not just complete a transaction.
+            Divorce is emotionally challenging. Dr. Jan Duffy provides compassionate, understanding service that acknowledges the difficulty of your situation while maintaining professional boundaries. She&apos;s there to support you through the process, not just complete a transaction.
           </p>
 
           <h2>Get Started Today</h2>
           <p>
-            It's never too early to discuss your real estate options during divorce. Schedule a confidential consultation with Dr. Jan Duffy to learn how her specialized services can support your journey to a new beginning. Whether you're selling, buying, refinancing, or navigating a buyout, she has the expertise to guide you through the process.
+            It&apos;s never too early to discuss your real estate options during divorce. Schedule a confidential consultation with Dr. Jan Duffy to learn how her specialized services can support your journey to a new beginning. Whether you&apos;re selling, buying, refinancing, or navigating a buyout, she has the expertise to guide you through the process.
           </p>
-        </div>
+
+          <div className="not-prose mt-12 rounded-2xl border border-gray-200 bg-gray-50/80 p-6 sm:p-8">
+            <h2 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">Common questions</h2>
+            <dl className="space-y-6">
+              {servicesFaqs.map(faq => (
+                <div key={faq.question}>
+                  <dt className="font-semibold text-gray-900">{faq.question}</dt>
+                  <dd className="mt-2 text-base leading-relaxed text-gray-700">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </article>
       </DivorcePageTemplate>
     </>
   );

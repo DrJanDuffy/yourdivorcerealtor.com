@@ -20,6 +20,8 @@ export const Env = createEnv({
     NEXT_PUBLIC_BETTER_STACK_INGESTING_HOST: z.string().optional(),
     NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
     NEXT_PUBLIC_POSTHOG_HOST: z.string().optional(),
+    /** Google Search Console HTML tag verification (meta content value only). */
+    NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: z.string().optional(),
   },
   shared: {
     NODE_ENV: z.enum(['test', 'development', 'production']).optional(),
@@ -40,6 +42,8 @@ export const Env = createEnv({
     NEXT_PUBLIC_BETTER_STACK_INGESTING_HOST: process.env.NEXT_PUBLIC_BETTER_STACK_INGESTING_HOST,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION:
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     NODE_ENV: process.env.NODE_ENV,
   },
 });

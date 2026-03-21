@@ -1,13 +1,19 @@
 /**
- * llms.txt — AI discoverability endpoint for yourdivorcerealtor.com
- * Helps AI models (ChatGPT, Claude, Perplexity, etc.) understand this site
+ * llms.txt — AI discoverability endpoint
  * @see https://llmstxt.org
  */
+
+import { siteUrl } from '@/lib/metadata';
+import {
+  REAL_ESTATE_LICENSE_NV,
+  SITE_EMAIL,
+  SITE_PHONE_DISPLAY,
+} from '@/lib/site-contact';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
+  const baseUrl = siteUrl;
 
   const content = `# Your Divorce Realtor — Dr. Jan Duffy
 
@@ -16,53 +22,49 @@ export async function GET() {
 
 ## About
 
-Dr. Jan Duffy is a licensed Nevada real estate agent (S.0197614) who specializes in helping divorcing couples navigate the complex process of selling marital property. With 30+ years of Las Vegas real estate experience and $127M+ in career sales, she provides discrete, professional service during one of life's most challenging transitions.
+Dr. Jan Duffy is a licensed Nevada real estate agent (${REAL_ESTATE_LICENSE_NV}) who specializes in helping divorcing couples navigate marital property sales. She provides discrete, professional service during difficult transitions.
 
 - **Brokerage:** Berkshire Hathaway HomeServices Nevada Properties
-- **License:** Nevada S.0197614.LLC
-- **Phone:** (702) 222-1964
-- **Email:** DrDuffy@YourDivorceRealtor.com
+- **License:** Nevada ${REAL_ESTATE_LICENSE_NV}
+- **Phone:** ${SITE_PHONE_DISPLAY}
+- **Email:** ${SITE_EMAIL}
 - **Website:** ${baseUrl}
 
 ## Services
 
-- **Divorce Home Sales** — Expert management of marital property sales during divorce proceedings
-- **Property Valuation for Divorce** — Accurate market analysis for equitable property division
-- **Court-Ordered Sales** — Handling court-mandated property dispositions
-- **Buyout Analysis** — Helping one spouse buy out the other's equity interest
-- **Pre-Divorce Planning** — Strategic advice before filing to protect real estate assets
-- **Discrete Property Marketing** — Private sales for clients who need confidentiality
-- **Mortgage & Refinance Guidance** — Navigating loan assumptions and refinancing during divorce
-- **Multi-Property Portfolio Sales** — Handling investment properties and multiple assets in divorce
+- **Divorce home sales** — Managing marital property sales during divorce
+- **Property valuation for divorce** — Market analysis for equitable division
+- **Court-ordered sales** — Court-mandated property dispositions
+- **Buyout analysis** — Equity buyouts and refinancing guidance
+- **Mortgage and refinance guidance** — Loan assumptions and removing a spouse from the mortgage
 
-## Communities Served
+## Communities served
 
 Henderson, Summerlin, North Las Vegas, Green Valley, Spring Valley, Enterprise, Paradise, Centennial Hills, Southern Highlands, Aliante, Mountains Edge, Inspirada, Las Vegas
 
-## Key Pages
+## Key pages
 
 - [Home](${baseUrl}/)
-- [Divorce Real Estate Services](${baseUrl}/services)
+- [Divorce real estate services](${baseUrl}/divorce-real-estate-services)
 - [Communities](${baseUrl}/communities)
-- [Divorce & Mortgage Guide](${baseUrl}/divorce-and-mortgage)
-- [Contact](${baseUrl}/contact)
-- [Divorce Realtor Henderson](${baseUrl}/divorce-realtor-henderson)
-- [Divorce Realtor Summerlin](${baseUrl}/divorce-realtor-summerlin)
+- [FAQ](${baseUrl}/faq)
+- [Contact / schedule](${baseUrl}/contact)
+- [Divorce realtor — Henderson](${baseUrl}/divorce-realtor-henderson)
+- [Divorce realtor — Summerlin](${baseUrl}/divorce-realtor-summerlin)
+- [Attorney resources](${baseUrl}/attorney-resources)
+- [Divorce and mortgage](${baseUrl}/divorce-and-mortgage)
 
-## Why Choose a Divorce Real Estate Specialist
+## Why a divorce real estate specialist
 
-- Neutral third-party guidance for both parties
-- Experience with court-ordered timelines and legal requirements
-- Discrete marketing to protect client privacy
-- Understanding of Nevada community property law
-- Compassionate approach during emotional transitions
-- Quick sales when needed to finalize divorce proceedings
+- Neutral guidance for both parties when appropriate
+- Experience with court timelines and settlement coordination
+- Understanding of Nevada community property context for real estate decisions
+- Focus on clarity and next steps during stressful transitions
 
 ## Contact
 
-For confidential divorce real estate consultation:
-- **Call/Text:** (702) 222-1964
-- **Email:** DrDuffy@YourDivorceRealtor.com
+- **Call/text:** ${SITE_PHONE_DISPLAY}
+- **Email:** ${SITE_EMAIL}
 - **Website:** ${baseUrl}
 `;
 

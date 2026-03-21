@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useTransition } from 'react';
+import { EngagementPhoneLink } from '@/components/analytics/EngagementPhoneLink';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
 import { NavigationLink } from './NavigationLink';
@@ -112,13 +113,14 @@ export function Header() {
             <CalendlyLink className="rounded-lg bg-blue-600 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none">
               Schedule a Call
             </CalendlyLink>
-            <a
+            <EngagementPhoneLink
               href={SITE_PHONE_TEL}
+              location="header_desktop"
               className="rounded px-2 py-1 font-semibold text-blue-600 transition-colors hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
             >
               {SITE_PHONE_DISPLAY}
-            </a>
+            </EngagementPhoneLink>
             {showUserButton && (
               <div className="flex items-center">
                 <UserButton afterSignOutUrl="/" />
@@ -188,14 +190,15 @@ export function Header() {
               >
                 Schedule a Call
               </CalendlyLink>
-              <a
+              <EngagementPhoneLink
                 href={SITE_PHONE_TEL}
+                location="header_mobile_menu"
                 onClick={closeMobileMenu}
                 className="block rounded-md px-4 py-2 font-semibold text-blue-600 transition-colors hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:outline-none"
                 aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
               >
                 {SITE_PHONE_DISPLAY}
-              </a>
+              </EngagementPhoneLink>
               {showUserButton && (
                 <div className="border-t border-gray-200 px-4 pt-4">
                   <UserButton afterSignOutUrl="/" />

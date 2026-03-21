@@ -30,6 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/communities`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.85,
+    },
+    {
       url: `${baseUrl}/divorce-real-estate-services`,
       lastModified: now,
       changeFrequency: 'weekly' as const,
@@ -81,6 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/quitclaim-deed-divorce',
     '/divorce-listing-process',
     '/court-ordered-home-sale',
+    '/home-did-not-sell-during-divorce',
     // New long-tail content pages
     '/how-to-sell-house-during-divorce',
     '/can-i-sell-my-house-during-divorce',

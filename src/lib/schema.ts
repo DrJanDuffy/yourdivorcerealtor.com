@@ -13,6 +13,8 @@ import {
   BROKERAGE_NAME,
   NAP_ADDRESS_LOCALITY,
   NAP_ADDRESS_REGION,
+  NAP_GEO_LATITUDE,
+  NAP_GEO_LONGITUDE,
   NAP_POSTAL_CODE,
   NAP_STREET_ADDRESS,
   SITE_PHONE_E164,
@@ -39,6 +41,11 @@ export type RealEstateAgentSchema = {
     'addressRegion': string;
     'postalCode'?: string;
     'addressCountry': string;
+  };
+  'geo'?: {
+    '@type': 'GeoCoordinates';
+    'latitude': number;
+    'longitude': number;
   };
   'worksFor': {
     '@type': 'RealEstateAgent';
@@ -295,6 +302,11 @@ export function generateRealEstateAgentSchema(): RealEstateAgentSchema {
       'postalCode': NAP_POSTAL_CODE,
       'addressCountry': 'US',
     },
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude': NAP_GEO_LATITUDE,
+      'longitude': NAP_GEO_LONGITUDE,
+    },
     'worksFor': {
       '@type': 'RealEstateAgent',
       'name': BROKERAGE_NAME,
@@ -326,6 +338,11 @@ export function generateLocalBusinessSchema(): LocalBusinessSchema {
       'addressRegion': NAP_ADDRESS_REGION,
       'postalCode': NAP_POSTAL_CODE,
       'addressCountry': 'US',
+    },
+    'geo': {
+      '@type': 'GeoCoordinates',
+      'latitude': NAP_GEO_LATITUDE,
+      'longitude': NAP_GEO_LONGITUDE,
     },
     'openingHoursSpecification': [
       {
