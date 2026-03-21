@@ -74,6 +74,8 @@ export default async function Services(props: IServicesProps) {
         showHomeValue
         currentPath="/divorce-real-estate-services"
       >
+        {/* Tailwind v4 + typography plugin modifiers; eslint cannot resolve prose-* variants */}
+        {/* eslint-disable-next-line tailwindcss/no-custom-classname -- prose-headings/h2/h3 from @tailwindcss/typography */}
         <article className="prose prose-lg prose-gray prose-headings:scroll-mt-24 prose-headings:font-bold prose-headings:text-gray-900 prose-h2:mt-12 prose-h2:text-balance prose-h2:text-2xl prose-h2:sm:text-3xl prose-h3:mt-8 prose-h3:text-xl prose-p:leading-relaxed max-w-none">
           <h2>Why Specialized Services Matter</h2>
           <p>

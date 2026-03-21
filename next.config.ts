@@ -23,8 +23,10 @@ const baseConfig: NextConfig = {
   },
   experimental: {
     turbopackFileSystemCacheForDev: true,
+    /** Inline CSS in HTML in production (App Router) to cut render-blocking CSS chain. */
+    inlineCss: true,
     /** Smaller client chunks where Clerk is imported (dashboard / auth). */
-    optimizePackageImports: ['@clerk/nextjs'],
+    optimizePackageImports: ['@clerk/nextjs', 'posthog-js'],
   },
   // Non-www → www 301 so GSC indexes canonical (www) and reports "Page with redirect" as intended
   async redirects() {

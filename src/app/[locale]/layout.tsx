@@ -98,9 +98,10 @@ export default async function RootLayout(props: LayoutProps) {
             content={getGoogleVerificationTag()!}
           />
         )}
-        {/* Preconnect: LCP (Cloudflare Images) + Calendly assets; RealScout loads on-demand from listing widgets */}
-        <link rel="preconnect" href="https://imagedelivery.net" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="anonymous" />
+        {/*
+          Intentionally no preconnect: PSI flags unused hints when LCP is hero text (h1), not imagedelivery.
+          Hero image still uses priority + fetchPriority=high on next/image; Calendly CSS is non-blocking (media=print swap).
+        */}
         <StructuredData data={navigationSchemas} />
         <ThirdPartyScripts />
       </head>

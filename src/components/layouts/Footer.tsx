@@ -64,6 +64,7 @@ export function Footer() {
       {/* Structured Data for SEO */}
       <script
         type="application/ld+json"
+        // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml -- JSON-LD LocalBusiness
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
 

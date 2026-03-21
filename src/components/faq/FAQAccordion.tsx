@@ -55,7 +55,7 @@ export function FAQAccordion({ faqs }: FAQAccordionProps) {
 
         return (
           <div
-            key={index}
+            key={faq.question}
             className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md"
           >
             <button

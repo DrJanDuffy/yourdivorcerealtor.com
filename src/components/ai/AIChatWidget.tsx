@@ -1,12 +1,13 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 
 const SYSTEM_CONTEXT = `You are a helpful assistant for Dr. Jan Duffy, a divorce real estate specialist in Las Vegas and Henderson, Nevada. You help visitors with questions about selling a home during divorce, property division, buyouts, refinancing, and related topics. Be professional, empathetic, and concise. For legal or tax advice, recommend consulting an attorney or tax professional. When visitors have situation-specific questions, encourage them to schedule a free 15-minute consultation with Dr. Jan Duffy—they can book online at calendly.com/drjanduffy or call (702) 222-1964.`;
 
 type Message = {
+  id: string;
   role: 'user' | 'assistant';
   content: string;
 };
@@ -20,6 +21,11 @@ export function AIChatWidget({ className = '' }: AIChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const messageIdRef = useRef(0);
+  const nextMessageId = useCallback(() => {
+    messageIdRef.current += 1;
+    return `chat-${messageIdRef.current}`;
+  }, []);
 
   const apiPath = `/${locale}/api/ai/run`;
 
@@ -29,7 +35,7 @@ export function AIChatWidget({ className = '' }: AIChatWidgetProps) {
       return;
     }
 
-    const userMessage: Message = { role: 'user', content: trimmed };
+    const userMessage: Message = { id: nextMessageId(), role: 'user', content: trimmed };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
@@ -47,21 +53,22 @@ export function AIChatWidget({ className = '' }: AIChatWidgetProps) {
 
       if (!res.ok) {
         const err = data?.error ?? `Error ${res.status}`;
-        setMessages(prev => [...prev, { role: 'assistant', content: `Sorry, I couldn't get a response: ${err}` }]);
+        setMessages(prev => [...prev, { id: nextMessageId(), role: 'assistant', content: `Sorry, I couldn't get a response: ${err}` }]);
         return;
       }
 
       const reply = typeof data.response === 'string' ? data.response : 'I could not generate a response.';
-      setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
+      setMessages(prev => [...prev, { id: nextMessageId(), role: 'assistant', content: reply }]);
     } catch {
       setMessages(prev => [...prev, {
+        id: nextMessageId(),
         role: 'assistant',
         content: 'Something went wrong. Please try again or call (702) 222-1964 to speak with Dr. Jan Duffy.',
       }]);
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, apiPath]);
+  }, [input, isLoading, apiPath, nextMessageId]);
 
   return (
     <div className={`rounded-lg border border-gray-200 bg-white shadow-sm ${className}`.trim()}>
@@ -74,9 +81,9 @@ export function AIChatWidget({ className = '' }: AIChatWidgetProps) {
         {messages.length === 0 && (
           <p className="text-sm text-gray-500">Ask a question about divorce real estate in Las Vegas or Henderson.</p>
         )}
-        {messages.map((msg, i) => (
+        {messages.map(msg => (
           <div
-            key={`${msg.role}-${i}-${msg.content.slice(0, 30)}`}
+            key={msg.id}
             className={`rounded-lg px-3 py-2 ${
               msg.role === 'user'
                 ? 'ml-8 bg-blue-100 text-gray-900'

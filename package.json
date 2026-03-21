@@ -5,11 +5,12 @@
     "node": ">=20"
   },
   "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 Edge versions",
-    "last 2 Firefox versions",
-    "last 2 Safari versions",
-    "iOS >= 15"
+    "Chrome >= 111",
+    "Edge >= 111",
+    "Firefox >= 111",
+    "Safari >= 16.4",
+    "iOS >= 16.4",
+    "not dead"
   ],
   "scripts": {
     "dev:spotlight": "npx @spotlightjs/spotlight",

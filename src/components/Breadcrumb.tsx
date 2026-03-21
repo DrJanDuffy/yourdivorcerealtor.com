@@ -41,6 +41,7 @@ export function Breadcrumb() {
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
+        // eslint-disable-next-line react-dom/no-dangerously-set-innerhtml -- JSON-LD from route-derived schema
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
