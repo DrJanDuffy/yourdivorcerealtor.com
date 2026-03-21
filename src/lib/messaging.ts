@@ -1,6 +1,5 @@
 /**
- * Key messaging constants for divorce real estate website
- * Compiled from Starks Realty Group, Leslie Glazier Group, and industry standards
+ * Key messaging for Dr. Jan Duffy — Las Vegas / Henderson divorce real estate.
  */
 
 export const messaging = {
@@ -62,7 +61,7 @@ export const messaging = {
     primary: 'Schedule a Confidential Consultation',
     valuation: 'Get Your Free Home Valuation',
     discuss: 'Discuss Your Options Today',
-    call: 'Call Dr. Jan: (702) XXX-XXXX',
+    call: 'Call Dr. Jan: (702) 222-1964',
     urgency: 'It\'s Never Too Early to Plan',
     control: 'Take Control of Your Future Today',
   },

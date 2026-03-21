@@ -2,6 +2,7 @@
 
 import type { ErrorPageProps } from '@/types';
 import { useEffect } from 'react';
+import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
 
 /**
  * Global error boundary for the entire application
@@ -33,10 +34,12 @@ export default function GlobalError({ error, reset }: ErrorPageProps) {
                 Try Again
               </button>
               <a
-                href="tel:+17022221964"
+                href={SITE_PHONE_TEL}
                 className="block w-full rounded-lg bg-gray-200 px-6 py-3 font-semibold text-gray-900 transition-colors hover:bg-gray-300"
               >
-                Call (702) 222-1964
+                Call
+                {' '}
+                {SITE_PHONE_DISPLAY}
               </a>
             </div>
           </div>

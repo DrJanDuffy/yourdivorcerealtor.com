@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
+import { cn } from '@/lib/cn';
 import { messaging } from '@/lib/messaging';
 
 type DivorceCTAProps = {
-  variant?: 'primary' | 'secondary' | 'urgency';
+  /** primaryLight = white button with blue text (use on dark/blue backgrounds). */
+  variant?: 'primary' | 'primaryLight' | 'secondary' | 'urgency';
   className?: string;
 };
 
@@ -12,6 +14,12 @@ export function DivorceCTA({ variant = 'primary', className = '' }: DivorceCTAPr
     primary: {
       text: messaging.ctas.primary,
       style: 'bg-blue-600 text-white hover:bg-blue-700',
+      useCalendly: true,
+    },
+    primaryLight: {
+      text: messaging.ctas.primary,
+      style:
+        'bg-white text-blue-700 shadow-sm hover:bg-blue-50 hover:text-blue-800 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700 focus:outline-none',
       useCalendly: true,
     },
     secondary: {
@@ -32,7 +40,11 @@ export function DivorceCTA({ variant = 'primary', className = '' }: DivorceCTAPr
   if (config.useCalendly) {
     return (
       <CalendlyLink
-        className={`inline-block rounded-lg px-8 py-4 font-semibold transition-colors ${config.style} ${className}`}
+        className={cn(
+          'inline-block rounded-lg px-8 py-4 font-semibold transition-colors',
+          className,
+          config.style,
+        )}
       >
         {config.text}
       </CalendlyLink>
@@ -43,7 +55,11 @@ export function DivorceCTA({ variant = 'primary', className = '' }: DivorceCTAPr
   return (
     <Link
       href="#home-value"
-      className={`inline-block rounded-lg px-8 py-4 font-semibold transition-colors ${config.style} ${className}`}
+      className={cn(
+        'inline-block rounded-lg px-8 py-4 font-semibold transition-colors',
+        className,
+        config.style,
+      )}
     >
       {config.text}
     </Link>

@@ -11,6 +11,15 @@ import {
   generateRealEstateAgentSchema,
   generateServiceSchema,
 } from '@/lib/schema';
+import {
+  BROKERAGE_NAME,
+  NAP_ADDRESS_LOCALITY,
+  NAP_ADDRESS_REGION,
+  NAP_POSTAL_CODE,
+  NAP_STREET_LINES,
+  SITE_PHONE_DISPLAY,
+  SITE_PHONE_TEL,
+} from '@/lib/site-contact';
 
 type IContactProps = {
   params: Promise<{ locale: string }>;
@@ -81,17 +90,35 @@ export default async function Contact(props: IContactProps) {
                   Choose a 15-minute slot below, or talk with Dr. Jan Duffy directly.
                 </p>
                 <a
-                  href="tel:+17022221964"
+                  href={SITE_PHONE_TEL}
                   className="mb-6 inline-flex items-center gap-2 rounded-xl bg-green-600 px-8 py-4 text-lg font-semibold text-white shadow-md transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
                 >
                   <span aria-hidden>📞</span>
-                  Call (702) 222-1964
+                  Call
+                  {' '}
+                  {SITE_PHONE_DISPLAY}
                 </a>
                 <div className="rounded-lg border border-blue-100 bg-blue-50/50 p-4">
                   <p className="text-sm font-semibold text-gray-800">Dr. Jan Duffy, REALTOR®</p>
-                  <p className="text-sm text-gray-600">Berkshire Hathaway HomeServices Nevada Properties</p>
-                  <p className="mt-1 text-sm text-gray-600">601 N. Pecos, Family Courts and Services Center</p>
-                  <p className="text-sm text-gray-600">Las Vegas, NV 89155 · Monday - Friday, 8 a.m. - 4 p.m.</p>
+                  <p className="text-sm text-gray-600">{BROKERAGE_NAME}</p>
+                  {NAP_STREET_LINES.map((line, index) => (
+                    <p
+                      key={line}
+                      className={`text-sm text-gray-600 ${index === 0 ? 'mt-1' : ''}`}
+                    >
+                      {line}
+                    </p>
+                  ))}
+                  <p className="text-sm text-gray-600">
+                    {NAP_ADDRESS_LOCALITY}
+                    ,
+                    {' '}
+                    {NAP_ADDRESS_REGION}
+                    {' '}
+                    {NAP_POSTAL_CODE}
+                    {' '}
+                    · Monday - Friday, 8 a.m. - 4 p.m.
+                  </p>
                 </div>
                 <ul className="mt-6 space-y-2 text-sm text-gray-700">
                   <li className="flex items-start gap-2">
@@ -149,7 +176,10 @@ export default async function Contact(props: IContactProps) {
               Consider asking about your home’s value, equity, options (sell, buyout, co-own), process timeline, and fees. Dr. Jan Duffy will answer honestly and help you decide next steps.
             </p>
             <p className="mt-6 text-center text-lg font-semibold text-gray-800">
-              Schedule above or call (702) 222-1964. For a home valuation, schedule a call—Dr. Jan provides valuations during your consultation.
+              Schedule above or call
+              {' '}
+              {SITE_PHONE_DISPLAY}
+              . For a home valuation, schedule a call—Dr. Jan provides valuations during your consultation.
             </p>
           </section>
         </div>

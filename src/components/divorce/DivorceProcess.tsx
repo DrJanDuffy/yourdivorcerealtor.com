@@ -5,6 +5,7 @@
  * - Semantic HTML for accessibility
  * - Mobile-responsive timeline
  */
+import { SectionHeader } from '@/components/layouts/SectionHeader';
 import { messaging } from '@/lib/messaging';
 
 export function DivorceProcess() {
@@ -42,14 +43,12 @@ export function DivorceProcess() {
   ];
 
   return (
-    <section className="bg-white py-16 sm:py-20">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="mb-3 text-center text-3xl font-bold text-gray-900 sm:text-4xl">
-          Your Step-by-Step Path Forward
-        </h2>
-        <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600 sm:text-xl">
-          Dr. Jan Duffy guides you through every step of the divorce real estate process with clarity and compassion.
-        </p>
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="Your Step-by-Step Path Forward"
+          description="Dr. Jan Duffy guides you through every step of the divorce real estate process with clarity and compassion."
+        />
 
         <div className="mx-auto max-w-4xl">
           <div className="relative">

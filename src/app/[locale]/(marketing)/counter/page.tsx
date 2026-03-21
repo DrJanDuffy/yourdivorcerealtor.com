@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { CurrentCount } from '@/components/CurrentCount';
 import { generateLocaleAlternates } from '@/lib/metadata';
 
 const path = '/counter';
+
+type CounterPageProps = {
+  params: Promise<{ locale: string }>;
+};
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
@@ -21,16 +24,25 @@ export async function generateMetadata(props: {
     title: t('meta_title'),
     description: t('meta_description'),
     alternates: { canonical, languages },
+    robots: { index: false, follow: false },
   };
 }
 
-export default function Counter() {
-  const t = useTranslations('Counter');
+export default async function CounterPage(props: CounterPageProps) {
+  const { locale } = await props.params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations({
+    locale,
+    namespace: 'Counter',
+  });
 
   return (
     <>
       <div className="mb-6 text-center">
-        <p className="mb-4 text-gray-600">This page is for testing.</p>
+        <p className="mb-4 text-gray-600">
+          Internal demo only—not part of Dr. Jan Duffy’s client-facing divorce real estate content.
+        </p>
         <CalendlyLink className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700">
           Schedule a consultation
         </CalendlyLink>
@@ -52,6 +64,7 @@ export default function Counter() {
 
       <a
         href="https://launch.arcjet.com/Q6eLbRE"
+        aria-label="Arcjet"
       >
         <Image
           className="mx-auto mt-2"
@@ -63,4 +76,4 @@ export default function Counter() {
       </a>
     </>
   );
-};
+}

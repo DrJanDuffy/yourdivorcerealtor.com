@@ -1,8 +1,15 @@
 import type { Metadata } from 'next';
-import type { PageProps, PropertyListing } from '@/types';
+import type { PageProps } from '@/types';
 import { setRequestLocale } from 'next-intl/server';
-import { PropertyCard } from '@/components/sections/PropertyCard';
+import Link from 'next/link';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { generateLocaleAlternates } from '@/lib/metadata';
+import {
+  BROKERAGE_NAME,
+  REAL_ESTATE_LICENSE_NV,
+  SITE_PHONE_DISPLAY,
+  SITE_PHONE_TEL,
+} from '@/lib/site-contact';
 
 const path = '/homes';
 
@@ -10,80 +17,78 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const { locale } = await props.params;
   const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
-    title: 'Homes for Sale | Your Divorce Realtor',
-    description: 'Search homes for sale. Your best Real Estate Experience is here, browse homes.',
+    title: 'Browse Homes & Listings | Las Vegas Divorce Real Estate',
+    description:
+      'Explore active listing tools from the yourdivorcerealtor.com home page, or talk with Dr. Jan Duffy about divorce-related buying and selling in Las Vegas and Henderson.',
     alternates: { canonical, languages },
   };
 }
-
-// Mock listings - replace with real data from your API/database
-const allListings: PropertyListing[] = [
-  {
-    id: '1',
-    address: '216 Arcadian Way',
-    city: 'Madison',
-    price: 624999,
-    beds: 4,
-    baths: 4,
-    sqft: 2895,
-    mlsNumber: '21905765',
-    agentName: 'Rochon Hall',
-    agentPhone: '256-270-9393',
-    status: 'New',
-  },
-  {
-    id: '2',
-    address: '110 Independence Drive',
-    city: 'Meridianville',
-    price: 315999,
-    beds: 3,
-    baths: 2,
-    sqft: 1808,
-    mlsNumber: '21905764',
-    agentName: 'Rochon Hall',
-    agentPhone: '256-270-9393',
-    status: 'New',
-  },
-  {
-    id: '3',
-    address: '2011 1st Street',
-    city: 'Huntsville',
-    price: 179900,
-    beds: 2,
-    baths: 1,
-    sqft: 1506,
-    mlsNumber: '21902045',
-    agentName: 'Benjamin Waye',
-    agentPhone: '256-270-9393',
-    status: 'Active',
-  },
-];
 
 export default async function HomesPage(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="mb-8">
-        <h1 className="mb-4 text-4xl font-bold text-gray-900">
-          Homes for Sale
+    <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl">
+        <h1 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          Homes for Sale — Las Vegas Area
         </h1>
-        <p className="text-xl text-gray-600">
-          Your best Real Estate Experience is here, browse homes.
+        <p className="mb-8 text-lg leading-relaxed text-pretty text-gray-700">
+          Featured MLS-powered search widgets and listing sections live on the
+          {' '}
+          <Link href="/" className="font-semibold text-blue-600 hover:underline">
+            homepage
+          </Link>
+          . Dr. Jan Duffy focuses on divorce-related real estate—if you need a curated search tied to your timeline,
+          equity questions, or court orders, start with a consultation rather than anonymous listing data alone.
         </p>
-      </div>
 
-      {/* Search Filters - Add later */}
-      <div className="mb-8">
-        <p className="text-gray-600">Search filters coming soon...</p>
-      </div>
+        <div className="rounded-2xl border border-blue-100 bg-blue-50/80 p-8">
+          <h2 className="mb-3 text-xl font-semibold text-gray-900">Next steps</h2>
+          <ul className="mb-6 list-inside list-disc space-y-2 text-gray-700">
+            <li>
+              Return to the
+              {' '}
+              <Link href="/" className="font-semibold text-blue-600 hover:underline">
+                home page
+              </Link>
+              {' '}
+              to use the live listing tools there.
+            </li>
+            <li>
+              Review
+              {' '}
+              <Link href="/buying-home-after-divorce" className="font-semibold text-blue-600 hover:underline">
+                buying after divorce
+              </Link>
+              {' '}
+              or
+              {' '}
+              <Link href="/selling-home-during-divorce" className="font-semibold text-blue-600 hover:underline">
+                selling during divorce
+              </Link>
+              .
+            </li>
+          </ul>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <CalendlyLink className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700">
+              Schedule a call
+            </CalendlyLink>
+            <a href={SITE_PHONE_TEL} className="text-center font-semibold text-blue-700 hover:underline sm:text-left">
+              {SITE_PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
 
-      {/* Listings Grid */}
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {allListings.map(listing => (
-          <PropertyCard key={listing.id} {...listing} />
-        ))}
+        <p className="mt-8 text-sm text-gray-600">
+          MLS data is subject to change. Dr. Jan Duffy, license #
+          {REAL_ESTATE_LICENSE_NV}
+          ,
+          {' '}
+          {BROKERAGE_NAME}
+          .
+        </p>
       </div>
     </div>
   );

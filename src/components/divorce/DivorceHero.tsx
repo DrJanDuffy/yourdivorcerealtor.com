@@ -1,20 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
-import { CLOUDFLARE_HERO_VARIANT, cloudflareImageUrl } from '@/lib/cloudflare-images';
+import {
+  CLOUDFLARE_HERO_VARIANT,
+  CLOUDFLARE_IMAGE_IDS,
+  cloudflareImageUrl,
+} from '@/lib/cloudflare-images';
 import { messaging } from '@/lib/messaging';
-
-const HOMEPAGE_HERO_ID = 'lonemountaineights/hero/hero-las-vegas.png';
+import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
 
 export function DivorceHero() {
-  const heroImageSrc = cloudflareImageUrl(HOMEPAGE_HERO_ID, CLOUDFLARE_HERO_VARIANT);
+  const heroImageSrc = cloudflareImageUrl(
+    CLOUDFLARE_IMAGE_IDS['dr-jan-duffy-agent'],
+    CLOUDFLARE_HERO_VARIANT,
+  );
 
   return (
     <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 py-16 text-white sm:py-20 lg:py-24">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-12 lg:flex-row lg:gap-16">
           <div className="max-w-xl text-center lg:w-1/2 lg:max-w-none lg:text-left">
-            <h1 className="mb-4 text-4xl leading-tight font-bold sm:text-5xl md:text-6xl">
+            <h1 className="mb-4 text-4xl leading-tight font-bold text-balance sm:text-5xl md:text-6xl">
               Divorce Real Estate Agent Las Vegas
             </h1>
             <p className="mb-4 text-lg font-medium text-blue-50 sm:text-xl md:text-2xl">
@@ -45,10 +51,12 @@ export function DivorceHero() {
                 {messaging.ctas.valuation}
               </Link>
               <a
-                href="tel:+17022221964"
+                href={SITE_PHONE_TEL}
                 className="inline-flex items-center justify-center rounded-xl bg-amber-400 px-6 py-3.5 text-base font-semibold text-gray-900 transition-all hover:bg-amber-300 focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 focus:ring-offset-blue-600 focus:outline-none sm:px-8 sm:py-4"
               >
-                Call (702) 222-1964
+                Call
+                {' '}
+                {SITE_PHONE_DISPLAY}
               </a>
             </div>
           </div>
@@ -60,7 +68,7 @@ export function DivorceHero() {
               fill
               priority
               quality={85}
-              className="object-cover"
+              className="object-cover object-top"
               sizes="(max-width: 1024px) min(100vw, 32rem), 576px"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-transparent to-transparent" />

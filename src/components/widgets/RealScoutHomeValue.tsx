@@ -1,4 +1,5 @@
 import { CalendlyInline } from '@/components/calendly/CalendlyInline';
+import { SectionHeader } from '@/components/layouts/SectionHeader';
 
 /**
  * Home valuation CTA: schedule a call for your free home valuation.
@@ -6,15 +7,13 @@ import { CalendlyInline } from '@/components/calendly/CalendlyInline';
  */
 export function RealScoutHomeValue() {
   return (
-    <section className="bg-gray-50 py-14 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="mb-3 text-center text-2xl font-bold text-gray-900 sm:text-3xl">
-          What's Your Home Worth in a Divorce?
-        </h2>
-        <p className="mx-auto mb-8 max-w-2xl text-center text-gray-600 sm:text-lg">
-          Schedule a free 15-minute call to get your home valuation and understand your equity position for property division in Las Vegas.
-        </p>
-        <div className="mx-auto max-w-2xl overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+    <section className="bg-gray-50 py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="What's Your Home Worth in a Divorce?"
+          description="Schedule a free 15-minute call to get your home valuation and understand your equity position for property division in Las Vegas."
+        />
+        <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md ring-1 ring-gray-100">
           <CalendlyInline />
         </div>
       </div>

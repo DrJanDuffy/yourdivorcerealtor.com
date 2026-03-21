@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
+import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
 import { NavigationLink } from './NavigationLink';
 
 /**
@@ -112,11 +113,11 @@ export function Header() {
               Schedule a Call
             </CalendlyLink>
             <a
-              href="tel:+17022221964"
+              href={SITE_PHONE_TEL}
               className="rounded px-2 py-1 font-semibold text-blue-600 transition-colors hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              aria-label="Call Dr. Jan Duffy at 702-222-1964"
+              aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
             >
-              (702) 222-1964
+              {SITE_PHONE_DISPLAY}
             </a>
             {showUserButton && (
               <div className="flex items-center">
@@ -188,12 +189,12 @@ export function Header() {
                 Schedule a Call
               </CalendlyLink>
               <a
-                href="tel:+17022221964"
+                href={SITE_PHONE_TEL}
                 onClick={closeMobileMenu}
                 className="block rounded-md px-4 py-2 font-semibold text-blue-600 transition-colors hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                aria-label="Call Dr. Jan Duffy at 702-222-1964"
+                aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
               >
-                (702) 222-1964
+                {SITE_PHONE_DISPLAY}
               </a>
               {showUserButton && (
                 <div className="border-t border-gray-200 px-4 pt-4">

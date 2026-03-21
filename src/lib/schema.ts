@@ -3,6 +3,21 @@
  * For SEO and rich snippets in search results
  */
 
+import {
+  CLOUDFLARE_HERO_VARIANT,
+  CLOUDFLARE_IMAGE_IDS,
+  cloudflareImageUrl,
+} from '@/lib/cloudflare-images';
+import { siteUrl } from '@/lib/metadata';
+import {
+  BROKERAGE_NAME,
+  NAP_ADDRESS_LOCALITY,
+  NAP_ADDRESS_REGION,
+  NAP_POSTAL_CODE,
+  NAP_STREET_ADDRESS,
+  SITE_PHONE_E164,
+} from '@/lib/site-contact';
+
 type CitySchema = {
   '@type': 'City';
   'name': string;
@@ -270,19 +285,19 @@ export function generateRealEstateAgentSchema(): RealEstateAgentSchema {
     'name': 'Dr. Jan Duffy',
     'jobTitle': 'Divorce Real Estate Specialist',
     'description': 'Expert divorce real estate services in Las Vegas. Helping divorcing homeowners navigate property division with compassion and expertise.',
-    'url': 'https://www.yourdivorcerealtor.com',
-    'telephone': '+17022221964',
+    'url': siteUrl,
+    'telephone': SITE_PHONE_E164,
     'address': {
       '@type': 'PostalAddress',
-      'streetAddress': '601 N. Pecos, Family Courts and Services Center',
-      'addressLocality': 'Las Vegas',
-      'addressRegion': 'NV',
-      'postalCode': '89155',
+      'streetAddress': NAP_STREET_ADDRESS,
+      'addressLocality': NAP_ADDRESS_LOCALITY,
+      'addressRegion': NAP_ADDRESS_REGION,
+      'postalCode': NAP_POSTAL_CODE,
       'addressCountry': 'US',
     },
     'worksFor': {
       '@type': 'RealEstateAgent',
-      'name': 'Berkshire Hathaway HomeServices Nevada Properties',
+      'name': BROKERAGE_NAME,
     },
     'areaServed': [
       { '@type': 'City', 'name': 'Las Vegas' },
@@ -302,14 +317,14 @@ export function generateLocalBusinessSchema(): LocalBusinessSchema {
     '@type': 'LocalBusiness',
     'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
     'description': 'Expert divorce real estate services in Las Vegas. Specialized in helping divorcing homeowners navigate property division.',
-    'url': 'https://www.yourdivorcerealtor.com',
-    'telephone': '+17022221964',
+    'url': siteUrl,
+    'telephone': SITE_PHONE_E164,
     'address': {
       '@type': 'PostalAddress',
-      'streetAddress': '601 N. Pecos, Family Courts and Services Center',
-      'addressLocality': 'Las Vegas',
-      'addressRegion': 'NV',
-      'postalCode': '89155',
+      'streetAddress': NAP_STREET_ADDRESS,
+      'addressLocality': NAP_ADDRESS_LOCALITY,
+      'addressRegion': NAP_ADDRESS_REGION,
+      'postalCode': NAP_POSTAL_CODE,
       'addressCountry': 'US',
     },
     'openingHoursSpecification': [
@@ -480,7 +495,9 @@ export function generateCarouselItemListSchema(
   },
 ): CarouselItemListSchema {
   const { baseUrl, defaultImage, priceRange = '$$', aggregateRating } = options;
-  const fallbackImage = defaultImage || `${baseUrl}/images/hero/homepage-hero.jpg`;
+  const fallbackImage
+    = defaultImage
+      ?? cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['dr-jan-duffy-agent'], CLOUDFLARE_HERO_VARIANT);
 
   return {
     '@context': 'https://schema.org',
@@ -524,12 +541,12 @@ export function generateWebSiteSchema(): WebSiteSchema {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
-    'url': 'https://www.yourdivorcerealtor.com',
+    'url': siteUrl,
     'potentialAction': {
       '@type': 'SearchAction',
       'target': {
         '@type': 'EntryPoint',
-        'urlTemplate': 'https://www.yourdivorcerealtor.com/search?q={search_term_string}',
+        'urlTemplate': `${siteUrl}/search?q={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
@@ -544,16 +561,11 @@ export function generateOrganizationSchema(): OrganizationSchema {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
-    'url': 'https://www.yourdivorcerealtor.com',
-    'logo': 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
-    'sameAs': [
-      'https://www.facebook.com',
-      'https://www.linkedin.com',
-      'https://www.youtube.com',
-    ],
+    'url': siteUrl,
+    'logo': `${siteUrl}/images/logo/berkshire-hathaway-quality-seal.png`,
     'contactPoint': {
       '@type': 'ContactPoint',
-      'telephone': '+17022221964',
+      'telephone': SITE_PHONE_E164,
       'contactType': 'Customer Service',
       'areaServed': 'US',
     },
@@ -584,7 +596,7 @@ export function generateArticleSchema(
       'name': 'Dr. Jan Duffy - Divorce Real Estate Specialist',
       'logo': {
         '@type': 'ImageObject',
-        'url': 'https://www.yourdivorcerealtor.com/images/logo/berkshire-hathaway-quality-seal.png',
+        'url': `${siteUrl}/images/logo/berkshire-hathaway-quality-seal.png`,
       },
     },
     datePublished,
@@ -625,8 +637,6 @@ export function generateServiceSchema(
   };
 }
 
-const REVIEW_ITEM_BASE_URL = 'https://www.yourdivorcerealtor.com';
-
 /**
  * Generate Review schema for testimonials.
  * Google requires: author (@type + name), itemReviewed (@type + name + url).
@@ -648,7 +658,7 @@ export function generateReviewSchema(
     'itemReviewed': {
       '@type': 'RealEstateAgent',
       'name': 'Dr. Jan Duffy',
-      'url': REVIEW_ITEM_BASE_URL,
+      'url': siteUrl,
     },
   };
   if (datePublished) {

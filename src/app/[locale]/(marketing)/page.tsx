@@ -151,15 +151,19 @@ export default async function Index(props: PageProps) {
       <RealScoutFamilyHomes />
       <Testimonials />
 
-      <section className="bg-blue-600 py-20 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-4 text-4xl font-bold">
-            It's Never Too Early to Discuss Your Options
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-xl text-blue-50">
-            Schedule a confidential strategy call today and take control of your future.
-          </p>
-          <DivorceCTA variant="primary" className="bg-white text-blue-600 hover:bg-blue-50" />
+      <section className="bg-gradient-to-b from-blue-600 to-blue-800 py-16 text-white sm:py-20 lg:py-24">
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+              It's Never Too Early to Discuss Your Options
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-pretty text-blue-100 sm:text-xl">
+              Schedule a confidential strategy call today and take control of your future.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <DivorceCTA variant="primaryLight" />
+            </div>
+          </div>
         </div>
       </section>
     </>

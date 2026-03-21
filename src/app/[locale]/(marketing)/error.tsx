@@ -4,6 +4,7 @@ import type { ErrorPageProps } from '@/types';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
+import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
 
 /**
  * Error boundary for marketing pages
@@ -47,8 +48,8 @@ export default function Error({ error, reset }: ErrorPageProps) {
         <p className="mt-8 text-sm text-gray-500">
           If this problem persists, please call us at
           {' '}
-          <a href="tel:+17022221964" className="text-blue-600 hover:underline">
-            (702) 222-1964
+          <a href={SITE_PHONE_TEL} className="text-blue-600 hover:underline">
+            {SITE_PHONE_DISPLAY}
           </a>
         </p>
       </div>

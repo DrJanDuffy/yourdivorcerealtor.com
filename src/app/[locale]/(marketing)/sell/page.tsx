@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { generateLocaleAlternates } from '@/lib/metadata';
+import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
 
 type SellPageProps = {
   params: Promise<{ locale: string }>;
@@ -13,8 +15,9 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const { locale } = await props.params;
   const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
-    title: 'Sell Your House | Your Divorce Realtor',
-    description: 'Trust our real estate experts to advise you and secure the highest market value for your property.',
+    title: 'Selling a Home During Divorce | Dr. Jan Duffy — Las Vegas',
+    description:
+      'Neutral, specialized listing support for divorcing homeowners in Las Vegas and Henderson. Strategy, valuation coordination, and court-aware timelines—not generic “instant offer” programs.',
     alternates: { canonical, languages },
   };
 }
@@ -24,73 +27,52 @@ export default async function SellPage(props: SellPageProps) {
   setRequestLocale(locale);
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="mx-auto max-w-4xl">
-        <h1 className="mb-6 text-center text-5xl font-bold text-gray-900">
-          Sell My House
+    <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl">
+        <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          Sell Your Home During Divorce
         </h1>
-        <p className="mb-12 text-center text-xl text-gray-600">
-          We know how to sell your home fast. Our Realtors offer multiple ways
-          to sell your house through our instant offer, fixed to sell, and find
-          your own buyer guarantees to help meet your goals.
+        <p className="mb-8 text-lg leading-relaxed text-pretty text-gray-700">
+          Dr. Jan Duffy helps divorcing homeowners in Las Vegas and Henderson plan and execute a sale with clear
+          communication, neutral representation, and timelines that work with attorneys and court schedules. This is
+          not a generic iBuyer or “instant cash offer” program—expect a confidential consultation and a path tailored
+          to your situation.
         </p>
 
-        <div className="mb-12 grid gap-8 md:grid-cols-3">
-          <div className="rounded-lg bg-white p-8 text-center shadow-md">
-            <div className="mb-4 text-4xl">⚡</div>
-            <h2 className="mb-4 text-2xl font-bold">Instant Offer</h2>
-            <p className="mb-6 text-gray-600">
-              Get a fast, fair cash offer for your home. No showings, no waiting.
-            </p>
-            <Link
-              href="/sell/instant-offer"
-              className="inline-block rounded-lg bg-yellow-400 px-6 py-3 font-semibold text-gray-900 transition-colors hover:bg-yellow-300"
-            >
-              Get My Offer
-            </Link>
-          </div>
+        <ul className="mb-10 list-inside list-disc space-y-2 text-gray-700">
+          <li>Listing strategy aligned with property division and court orders</li>
+          <li>Coordination with your legal and financial professionals when appropriate</li>
+          <li>Focus on equity, timing, and reducing conflict—not hype or guarantees we cannot keep</li>
+        </ul>
 
-          <div className="rounded-lg bg-white p-8 text-center shadow-md">
-            <div className="mb-4 text-4xl">🏠</div>
-            <h2 className="mb-4 text-2xl font-bold">Traditional Sale</h2>
-            <p className="mb-6 text-gray-600">
-              Work with our expert agents to get the highest market value for your property.
-            </p>
-            <Link
-              href="/sell/traditional"
-              className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700"
-            >
-              Learn More
-            </Link>
-          </div>
-
-          <div className="rounded-lg bg-white p-8 text-center shadow-md">
-            <div className="mb-4 text-4xl">🔧</div>
-            <h2 className="mb-4 text-2xl font-bold">Fix to Sell</h2>
-            <p className="mb-6 text-gray-600">
-              We'll help you fix up your home to maximize its value before selling.
-            </p>
-            <Link
-              href="/sell/fix-to-sell"
-              className="inline-block rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700"
-            >
-              Learn More
-            </Link>
-          </div>
-        </div>
-
-        <div className="rounded-lg bg-gray-50 p-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold">Ready to Sell?</h2>
-          <p className="mb-6 text-gray-600">
-            Contact us today to discuss the best option for selling your home.
-          </p>
-          <a
-            href="tel:+12562709393"
-            className="inline-block rounded-lg bg-blue-600 px-8 py-4 font-semibold text-white transition-colors hover:bg-blue-700"
+        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+          <CalendlyLink className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3.5 font-semibold text-white shadow-sm transition-colors hover:bg-blue-700">
+            Schedule a confidential consultation
+          </CalendlyLink>
+          <Link
+            href="/selling-home-during-divorce"
+            className="inline-flex items-center justify-center rounded-xl border-2 border-blue-600 px-6 py-3.5 font-semibold text-blue-700 transition-colors hover:bg-blue-50"
           >
-            Call (256) 270-9393
-          </a>
+            Read: selling during divorce
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center rounded-xl border border-gray-300 px-6 py-3.5 font-semibold text-gray-800 transition-colors hover:bg-gray-50"
+          >
+            Contact
+          </Link>
         </div>
+
+        <p className="mt-10 text-sm text-gray-600">
+          Call
+          {' '}
+          <a href={SITE_PHONE_TEL} className="font-semibold text-blue-600 hover:underline">
+            {SITE_PHONE_DISPLAY}
+          </a>
+          {' '}
+          for phone questions. Dr. Jan Duffy is a licensed Nevada real estate professional; she does not provide legal
+          or tax advice—your attorney and CPA remain the sources for those topics.
+        </p>
       </div>
     </div>
   );

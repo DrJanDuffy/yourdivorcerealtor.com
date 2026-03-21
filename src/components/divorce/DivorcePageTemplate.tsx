@@ -47,14 +47,14 @@ export function DivorcePageTemplate({
     <>
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 py-14 text-white sm:py-16 lg:py-20">
-        <div className="container mx-auto px-4 sm:px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 lg:flex-row lg:gap-16">
             <div className="max-w-xl text-center lg:w-1/2 lg:max-w-none lg:text-left">
-              <h1 className="mb-4 text-3xl leading-tight font-bold sm:text-4xl md:text-5xl">
+              <h1 className="mb-4 text-3xl leading-tight font-bold text-balance sm:text-4xl md:text-5xl">
                 {h1}
               </h1>
               {heroSubhead && (
-                <p className="mb-8 text-lg text-blue-50 sm:text-xl md:text-2xl">
+                <p className="mb-8 text-lg text-pretty text-blue-50 sm:text-xl md:text-2xl">
                   {heroSubhead}
                 </p>
               )}
@@ -64,7 +64,7 @@ export function DivorcePageTemplate({
             </div>
 
             {resolvedHeroImage && (
-              <div className="relative h-64 w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/20 sm:h-72 lg:h-80 lg:w-1/2 lg:max-w-xl">
+              <div className="relative h-64 w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/30 sm:h-72 lg:h-80 lg:w-1/2 lg:max-w-xl">
                 <Image
                   src={resolvedHeroImage}
                   alt={resolvedHeroAlt}
@@ -81,8 +81,8 @@ export function DivorcePageTemplate({
       </section>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-14 sm:px-6 sm:py-16">
-        <div className="mx-auto max-w-4xl space-y-10 text-left leading-relaxed text-gray-800">
+      <div className="container mx-auto px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-4xl space-y-10 text-left leading-relaxed text-pretty text-gray-800">
           {(datePublished ?? dateModified) && (
             <BylineDate
               datePublished={datePublished}

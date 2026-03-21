@@ -1,5 +1,6 @@
 import type { Testimonial } from '@/types';
 import { Suspense } from 'react';
+import { SectionHeader } from '@/components/layouts/SectionHeader';
 
 const testimonials: Testimonial[] = [
   {
@@ -28,28 +29,26 @@ const testimonials: Testimonial[] = [
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <div
-      className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-blue-100 hover:shadow-md"
+      className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm ring-1 ring-gray-100 transition-all duration-300 hover:border-blue-100 hover:shadow-md"
       style={{
         viewTransitionName: `testimonial-${testimonial.id}`,
       }}
     >
       <div className="mb-4 flex items-center">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 font-bold text-white">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 font-bold text-white shadow-inner">
           {testimonial.name.charAt(0)}
         </div>
         <div className="ml-4">
           <div className="font-semibold text-gray-900">
             {testimonial.name}
           </div>
-          <div className="flex text-yellow-400">
+          <div className="flex text-amber-400" aria-hidden>
             {'★'.repeat(5)}
           </div>
         </div>
       </div>
-      <blockquote className="text-gray-600 italic">
-        &quot;
+      <blockquote className="border-l-4 border-blue-100 pl-4 leading-relaxed text-pretty text-gray-700">
         {testimonial.text}
-        &quot;
       </blockquote>
     </div>
   );
@@ -57,11 +56,12 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
 export function Testimonials() {
   return (
-    <section className="bg-white py-14 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="mb-10 text-center text-3xl font-bold text-gray-900 sm:mb-12 sm:text-4xl">
-          What Our Clients Say
-        </h2>
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="What Our Clients Say"
+          description="Feedback from divorcing homeowners who worked with Dr. Jan Duffy in Las Vegas."
+        />
 
         <Suspense
           fallback={(

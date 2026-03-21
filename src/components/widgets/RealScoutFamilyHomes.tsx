@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
+import { SectionHeader } from '@/components/layouts/SectionHeader';
 
 /**
  * RealScout Single Family Home Listings Widget
@@ -83,16 +84,12 @@ function RealScoutFamilyHomesWidget() {
 
 export function RealScoutFamilyHomes() {
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="mb-4 text-center text-3xl font-bold">
-          Family Homes for Your New Beginning
-        </h2>
-        <p className="mx-auto mb-8 max-w-2xl text-center text-gray-600">
-          Need a family-friendly home after divorce? Browse single-family
-          {' '}
-          homes in Las Vegas that give your children stability and space.
-        </p>
+    <section className="bg-gray-50 py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="Family Homes for Your New Beginning"
+          description="Need a family-friendly home after divorce? Browse single-family homes in Las Vegas that give your children stability and space."
+        />
         <Suspense
           fallback={(
             <div className="space-y-4" role="status" aria-live="polite">

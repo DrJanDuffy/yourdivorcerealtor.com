@@ -1,0 +1,17 @@
+/**
+ * Canonical contact and license — align with JSON-LD (`schema.ts`) and Google Business Profile.
+ */
+export const SITE_PHONE_DISPLAY = '(702) 222-1964';
+export const SITE_PHONE_TEL = 'tel:+17022221964';
+export const SITE_PHONE_E164 = '+17022221964';
+/** Office / professional line (footer) — keep in sync with GBP if listed. */
+export const PROFESSIONAL_PHONE_DISPLAY = '(702) 500-1955';
+export const PROFESSIONAL_PHONE_TEL = 'tel:+17025001955';
+export const REAL_ESTATE_LICENSE_NV = 'S.0197614.LLC';
+export const BROKERAGE_NAME = 'Berkshire Hathaway HomeServices Nevada Properties';
+export const NAP_STREET_LINES = ['601 N. Pecos', 'Family Courts and Services Center'] as const;
+export const NAP_ADDRESS_LOCALITY = 'Las Vegas';
+export const NAP_ADDRESS_REGION = 'NV';
+export const NAP_POSTAL_CODE = '89155';
+/** Single-line street for PostalAddress in JSON-LD */
+export const NAP_STREET_ADDRESS = '601 N. Pecos, Family Courts and Services Center';

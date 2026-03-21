@@ -1,85 +1,57 @@
 import type { Metadata } from 'next';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import Image from 'next/image';
+import { setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { generateLocaleAlternates } from '@/lib/metadata';
-import { routing } from '@/libs/I18nRouting';
 
-type IPortfolioProps = {
+type PortfolioProps = {
   params: Promise<{ locale: string }>;
 };
 
 const path = '/portfolio';
 
-export async function generateMetadata(props: IPortfolioProps): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'Portfolio',
-  });
-  const { canonical, languages } = generateLocaleAlternates(path, locale, {
-    hreflangLocales: routing.locales,
-  });
+  const { canonical, languages } = generateLocaleAlternates(path, locale);
   return {
-    title: t('meta_title'),
-    description: t('meta_description'),
+    title: 'Success Stories & Resources | Dr. Jan Duffy',
+    description:
+      'Learn about Dr. Jan Duffy’s divorce real estate work through testimonials and about pages—this site does not use a public transaction “portfolio” gallery.',
     alternates: { canonical, languages },
     robots: { index: true, follow: true },
   };
 }
 
-export default async function Portfolio(props: IPortfolioProps) {
+export default async function Portfolio(props: PortfolioProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
-  const t = await getTranslations({
-    locale,
-    namespace: 'Portfolio',
-  });
 
   return (
-    <>
-      <p>{t('presentation')}</p>
-
-      <div className="grid grid-cols-1 justify-items-start gap-3 md:grid-cols-2 xl:grid-cols-3">
-        {Array.from(Array.from({ length: 6 }).keys()).map(elt => (
+    <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <h1 className="mb-4 text-4xl font-bold text-gray-900">Client Experience</h1>
+        <p className="mb-8 text-lg leading-relaxed text-pretty text-gray-700">
+          For privacy and MLS compliance, we do not publish a browsable gallery of past sales here. For social proof and
+          background on how Dr. Jan Duffy helps divorcing homeowners in Las Vegas and Henderson, use the links below.
+        </p>
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            className="hover:text-blue-700"
-            key={elt}
-            href={`/portfolio/${elt}`}
+            href="/testimonials"
+            className="inline-flex rounded-xl bg-blue-600 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-blue-700"
           >
-            {t('portfolio_name', { name: elt })}
+            Testimonials
           </Link>
-        ))}
+          <Link
+            href="/about"
+            className="inline-flex rounded-xl border-2 border-blue-600 px-8 py-3.5 font-semibold text-blue-700 transition-colors hover:bg-blue-50"
+          >
+            About Dr. Jan
+          </Link>
+          <CalendlyLink className="inline-flex rounded-xl border border-gray-300 px-8 py-3.5 font-semibold text-gray-800 transition-colors hover:bg-gray-50">
+            Schedule a call
+          </CalendlyLink>
+        </div>
       </div>
-
-      <div className="mt-5 text-center text-sm">
-        {`${t('error_reporting_powered_by')} `}
-        <a
-          className="text-blue-700 hover:border-b-2 hover:border-blue-700"
-          href="https://sentry.io/for/nextjs/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo"
-        >
-          Sentry
-        </a>
-        {` - ${t('coverage_powered_by')} `}
-        <a
-          className="text-blue-700 hover:border-b-2 hover:border-blue-700"
-          href="https://about.codecov.io/codecov-free-trial/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo"
-        >
-          Codecov
-        </a>
-      </div>
-
-      <a
-        href="https://sentry.io/for/nextjs/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo"
-      >
-        <Image
-          className="mx-auto mt-2"
-          src="/assets/images/sentry-dark.png"
-          alt="Sentry"
-          width={128}
-          height={38}
-        />
-      </a>
-    </>
+    </div>
   );
-};
+}

@@ -1,24 +1,23 @@
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
+import { SectionHeader } from '@/components/layouts/SectionHeader';
 import { messaging } from '@/lib/messaging';
 
 export function PainPoints() {
   return (
-    <section className="bg-blue-50/70 py-16 sm:py-20">
-      <div className="container mx-auto px-4 sm:px-6">
-        <h2 className="mb-3 text-center text-3xl font-bold text-gray-900 sm:text-4xl">
-          Questions Keeping You Up at Night?
-        </h2>
-        <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600 sm:text-xl">
-          You're not alone. These are the most common questions divorcing homeowners face.
-        </p>
+    <section className="bg-blue-50/70 py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          title="Questions Keeping You Up at Night?"
+          description="You're not alone. These are the most common questions divorcing homeowners face."
+        />
 
         <div className="mx-auto mb-12 grid max-w-4xl grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
           {messaging.painPoints.map(point => (
             <div
               key={point}
-              className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm transition-all hover:border-blue-200 hover:shadow-md"
+              className="rounded-2xl border border-blue-100 bg-white p-6 shadow-sm ring-1 ring-blue-50 transition-all hover:border-blue-200 hover:shadow-md"
             >
-              <p className="text-lg leading-snug font-semibold text-gray-800">{point}</p>
+              <p className="text-lg leading-snug font-semibold text-pretty text-gray-800">{point}</p>
             </div>
           ))}
         </div>
