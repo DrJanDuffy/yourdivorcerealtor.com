@@ -12,9 +12,23 @@ jobs:
     name: Synchronize with Crowdin
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # Required for pushing the l10n branch and opening PRs (see crowdin/github-action README).
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v6
+
+      - name: Verify Crowdin repository secrets
+        env:
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+        run: |
+          if [ -z "$CROWDIN_PROJECT_ID" ] || [ -z "$CROWDIN_PERSONAL_TOKEN" ]; then
+            echo "::error::Configure Actions secrets CROWDIN_PROJECT_ID and CROWDIN_PERSONAL_TOKEN (repo Settings → Secrets and variables → Actions). Crowdin project ID is under Tools → API; token at crowdin.com → Account → API."
+            exit 1
+          fi
 
       - name: Crowdin action
         uses: crowdin/github-action@v2
