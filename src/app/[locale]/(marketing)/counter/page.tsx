@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { CurrentCount } from '@/components/CurrentCount';
+import { MarketingPageSchema } from '@/components/seo/MarketingPageSchema';
+import { VisibleNapBlock } from '@/components/seo/VisibleNapBlock';
 import { generateLocaleAlternates } from '@/lib/metadata';
 
 const path = '/counter';
@@ -39,6 +41,7 @@ export default async function CounterPage(props: CounterPageProps) {
 
   return (
     <>
+      <MarketingPageSchema />
       <div className="mb-6 text-center">
         <p className="mb-4 text-gray-600">
           Internal demo only—not part of Dr. Jan Duffy’s client-facing divorce real estate content.
@@ -74,6 +77,10 @@ export default async function CounterPage(props: CounterPageProps) {
           height={38}
         />
       </a>
+
+      <div className="mx-auto mt-10 max-w-lg px-4">
+        <VisibleNapBlock />
+      </div>
     </>
   );
 }

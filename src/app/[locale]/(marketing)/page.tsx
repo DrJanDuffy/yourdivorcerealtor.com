@@ -98,7 +98,7 @@ const Testimonials = dynamic(
   },
 );
 
-// Allow static/ISR where Next.js can (ClerkProvider in root layout may still opt into dynamic per route).
+// Allow static/ISR where Next.js can (Clerk loads only on /sign-in, /sign-up, /dashboard).
 const siteName = 'Dr. Jan Duffy | Las Vegas Divorce Real Estate Specialist';
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {

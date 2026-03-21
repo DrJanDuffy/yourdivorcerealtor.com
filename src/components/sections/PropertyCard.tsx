@@ -26,7 +26,7 @@ export function PropertyCard({
   }).format(price);
 
   return (
-    <Link href={`/property/${mlsNumber}`} className="group block">
+    <Link href="/homes" className="group block" title={`Listing ${mlsNumber} — view search and listings`}>
       <div className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-xl">
         {/* Image */}
         <div className="relative h-64 bg-gray-200">

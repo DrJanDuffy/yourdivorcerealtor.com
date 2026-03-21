@@ -3,21 +3,13 @@ import Script from 'next/script';
 /**
  * Centralized Third-Party Scripts Component
  * Optimizes loading strategies for better performance
- * - RealScout: lazyOnload (only loads when needed)
+ * - RealScout: injected only when listing widgets mount (see loadRealScoutScript)
  * - PostHog: afterInteractive (loads after page is interactive)
  * - Vercel Analytics: afterInteractive (if enabled)
  */
 export function ThirdPartyScripts() {
   return (
     <>
-      {/* RealScout Widgets - Load lazily since widgets are below the fold */}
-      <Script
-        src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
-        type="module"
-        strategy="lazyOnload"
-        id="realscout-widgets"
-      />
-
       {/* PostHog is initialized via PostHogProvider component */}
 
       {/* Vercel Analytics - Only if enabled via environment */}

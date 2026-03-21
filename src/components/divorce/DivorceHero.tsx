@@ -70,6 +70,7 @@ export function DivorceHero() {
               fill
               priority
               fetchPriority="high"
+              decoding="async"
               quality={75}
               className="object-cover object-top"
               sizes="(max-width: 1024px) min(100vw - 2rem, 28rem), 576px"

@@ -1,13 +1,14 @@
 'use client';
 
-import { UserButton } from '@clerk/nextjs';
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useTransition } from 'react';
+import { useMemo, useState, useTransition } from 'react';
 import { EngagementPhoneLink } from '@/components/analytics/EngagementPhoneLink';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
-import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
+import { HEADER_SERVICE_AREA, SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
+import { routing } from '@/libs/I18nRouting';
 import { NavigationLink } from './NavigationLink';
 
 /**
@@ -19,12 +20,17 @@ import { NavigationLink } from './NavigationLink';
  */
 export function Header() {
   const pathname = usePathname();
+  const locale = useLocale();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [, startTransition] = useTransition();
 
-  // Only render UserButton on client-side to avoid SSG issues
-  const showUserButton = typeof window !== 'undefined'
-    && !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const servicesHref = useMemo(
+    () =>
+      locale === routing.defaultLocale
+        ? '/divorce-real-estate-services'
+        : `/${locale}/divorce-real-estate-services`,
+    [locale],
+  );
 
   const toggleMobileMenu = () => {
     startTransition(() => {
@@ -54,12 +60,36 @@ export function Header() {
       {/* Top Banner */}
       <div className="bg-blue-600 py-2.5 text-center text-sm text-white sm:py-3">
         <div className="container mx-auto px-4 sm:px-6">
-          <p>
+          <p className="font-medium">
             Skip the Stress. Get Expert Divorce Real Estate Help.
             {' '}
             <CalendlyLink className="font-semibold underline transition-colors hover:text-blue-200">
               Schedule a Consultation
             </CalendlyLink>
+          </p>
+          <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs text-blue-100 sm:text-sm">
+            <span>{HEADER_SERVICE_AREA}</span>
+            <span className="hidden sm:inline" aria-hidden="true">
+              ·
+            </span>
+            <EngagementPhoneLink
+              href={SITE_PHONE_TEL}
+              location="header_banner_phone"
+              className="font-semibold text-white underline decoration-blue-200 underline-offset-2 transition-colors hover:text-blue-50"
+              aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
+            >
+              {SITE_PHONE_DISPLAY}
+            </EngagementPhoneLink>
+            <span className="hidden sm:inline" aria-hidden="true">
+              ·
+            </span>
+            <Link
+              href={servicesHref}
+              className="font-semibold text-white underline decoration-blue-200 underline-offset-2 transition-colors hover:text-blue-50"
+              prefetch={true}
+            >
+              Divorce real estate services
+            </Link>
           </p>
         </div>
       </div>
@@ -108,24 +138,31 @@ export function Header() {
             ))}
           </div>
 
-          {/* Right Side - Schedule CTA, Phone & Auth */}
-          <div className="hidden items-center space-x-4 lg:flex">
-            <CalendlyLink className="rounded-lg bg-blue-600 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none">
-              Schedule a Call
-            </CalendlyLink>
-            <EngagementPhoneLink
-              href={SITE_PHONE_TEL}
-              location="header_desktop"
-              className="rounded px-2 py-1 font-semibold text-blue-600 transition-colors hover:text-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
-              aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
+          {/* Right Side — location, services, phone (NAP-forward) */}
+          <div className="hidden max-w-md flex-col items-end gap-1 text-right lg:flex">
+            <span className="text-xs font-medium text-gray-600">{HEADER_SERVICE_AREA}</span>
+            <Link
+              href={servicesHref}
+              className="text-sm font-semibold text-blue-600 transition-colors hover:text-blue-800 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
+              prefetch={true}
             >
-              {SITE_PHONE_DISPLAY}
-            </EngagementPhoneLink>
-            {showUserButton && (
-              <div className="flex items-center">
-                <UserButton afterSignOutUrl="/" />
-              </div>
-            )}
+              Divorce real estate services
+            </Link>
+            <div className="mt-1 flex flex-wrap items-center justify-end gap-2">
+              <CalendlyLink className="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none">
+                Schedule a Call
+              </CalendlyLink>
+              <EngagementPhoneLink
+                href={SITE_PHONE_TEL}
+                location="header_desktop"
+                className="inline-flex items-center justify-center rounded-lg bg-amber-400 px-4 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:bg-amber-300 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:outline-none"
+                aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
+              >
+                Call
+                {' '}
+                {SITE_PHONE_DISPLAY}
+              </EngagementPhoneLink>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -168,6 +205,28 @@ export function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div id="mobile-menu" className="lg:hidden" aria-hidden="false">
+            <div className="space-y-3 border-t border-gray-200 px-4 py-4">
+              <p className="text-sm font-medium text-gray-800">{HEADER_SERVICE_AREA}</p>
+              <Link
+                href={servicesHref}
+                onClick={closeMobileMenu}
+                className="block text-sm font-semibold text-blue-600 hover:text-blue-800"
+                prefetch={true}
+              >
+                Divorce real estate services
+              </Link>
+              <EngagementPhoneLink
+                href={SITE_PHONE_TEL}
+                location="header_mobile_nap"
+                onClick={closeMobileMenu}
+                className="inline-flex w-full items-center justify-center rounded-lg bg-amber-400 px-4 py-3 text-base font-semibold text-gray-900 transition-colors hover:bg-amber-300 focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
+              >
+                Call
+                {' '}
+                {SITE_PHONE_DISPLAY}
+              </EngagementPhoneLink>
+            </div>
             <div className="space-y-4 border-t border-gray-200 py-4">
               {navigationLinks.map(link => (
                 <Link
@@ -190,20 +249,6 @@ export function Header() {
               >
                 Schedule a Call
               </CalendlyLink>
-              <EngagementPhoneLink
-                href={SITE_PHONE_TEL}
-                location="header_mobile_menu"
-                onClick={closeMobileMenu}
-                className="block rounded-md px-4 py-2 font-semibold text-blue-600 transition-colors hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:outline-none"
-                aria-label={`Call Dr. Jan Duffy at ${SITE_PHONE_DISPLAY}`}
-              >
-                {SITE_PHONE_DISPLAY}
-              </EngagementPhoneLink>
-              {showUserButton && (
-                <div className="border-t border-gray-200 px-4 pt-4">
-                  <UserButton afterSignOutUrl="/" />
-                </div>
-              )}
             </div>
           </div>
         )}

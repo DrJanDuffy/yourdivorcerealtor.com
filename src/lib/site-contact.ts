@@ -12,6 +12,8 @@ export const BROKERAGE_NAME = 'Berkshire Hathaway HomeServices Nevada Properties
 export const NAP_STREET_LINES = ['601 N. Pecos', 'Family Courts and Services Center'] as const;
 export const NAP_ADDRESS_LOCALITY = 'Las Vegas';
 export const NAP_ADDRESS_REGION = 'NV';
+/** Short service-area line for header and nav — align with GBP primary market. */
+export const HEADER_SERVICE_AREA = 'Las Vegas & Henderson, NV';
 export const NAP_POSTAL_CODE = '89155';
 /** Single-line street for PostalAddress in JSON-LD */
 export const NAP_STREET_ADDRESS = '601 N. Pecos, Family Courts and Services Center';

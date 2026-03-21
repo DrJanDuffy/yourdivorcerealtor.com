@@ -17,6 +17,16 @@ function initBadge() {
   }
 }
 
+/** Defer badge paint until idle so main-thread work during LCP/TBT stays lower on mobile. */
+function scheduleInitBadge() {
+  const run = () => initBadge();
+  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    window.requestIdleCallback(run, { timeout: 8000 });
+  } else {
+    setTimeout(run, 2000);
+  }
+}
+
 /**
  * Loads Calendly widget script and CSS, and initializes the floating badge widget site-wide.
  * Include once in root layout.
@@ -42,7 +52,7 @@ export function CalendlyScripts() {
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
         strategy="lazyOnload"
-        onLoad={initBadge}
+        onLoad={scheduleInitBadge}
         id="calendly-widget"
       />
     </>

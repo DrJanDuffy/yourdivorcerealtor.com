@@ -1,11 +1,17 @@
 import type { NextConfig } from 'next';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
 import './src/libs/Env';
 
+/** Resolves monorepo / multiple lockfile warnings so tracing uses this app root. */
+const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+
 // Define the base Next.js configuration
 const baseConfig: NextConfig = {
+  outputFileTracingRoot: projectRoot,
   devIndicators: {
     position: 'bottom-right',
   },
@@ -17,6 +23,8 @@ const baseConfig: NextConfig = {
   },
   experimental: {
     turbopackFileSystemCacheForDev: true,
+    /** Smaller client chunks where Clerk is imported (dashboard / auth). */
+    optimizePackageImports: ['@clerk/nextjs'],
   },
   // Non-www → www 301 so GSC indexes canonical (www) and reports "Page with redirect" as intended
   async redirects() {
@@ -96,6 +104,8 @@ const baseConfig: NextConfig = {
       },
     ],
     formats: ['image/avif', 'image/webp'],
+    /** Long-lived cache for optimized images (Cloudflare + static assets). */
+    minimumCacheTTL: 31536000,
   },
   // CacheLife profiles for Next.js 16 caching
   cacheLife: {

@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from 'react';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { SectionHeader } from '@/components/layouts/SectionHeader';
+import { useRealScoutScriptReady } from '@/hooks/useRealScoutScriptReady';
 
 /**
  * RealScout Condo/Townhome Listings Widget
@@ -11,6 +12,7 @@ import { SectionHeader } from '@/components/layouts/SectionHeader';
 function RealScoutListingsWidget() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const scriptReady = useRealScoutScriptReady(isVisible);
   // Error state reserved for future widget load error detection
   const hasError = false;
 
@@ -48,7 +50,7 @@ function RealScoutListingsWidget() {
     );
   }
 
-  if (!isVisible) {
+  if (!isVisible || !scriptReady) {
     return (
       <div
         ref={containerRef}
