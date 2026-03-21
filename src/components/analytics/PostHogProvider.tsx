@@ -102,10 +102,14 @@ export function PostHogProvider(props: { children: ReactNode }) {
 
   const { PHProvider, client } = bundle;
 
+  // Only pageview capture needs posthog-js/react context — keep marketing RSC tree outside PHProvider
+  // so hydration work is slightly cheaper (PSI LCP element render delay / main-thread tasks).
   return (
-    <PHProvider client={client}>
-      <SuspendedPostHogPageView />
+    <>
       {props.children}
-    </PHProvider>
+      <PHProvider client={client}>
+        <SuspendedPostHogPageView />
+      </PHProvider>
+    </>
   );
 }
