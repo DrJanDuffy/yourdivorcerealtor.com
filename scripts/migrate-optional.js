@@ -22,12 +22,12 @@ if (skipMigrations) {
 
 try {
   console.log('🔄 Running database migrations...');
-  execSync('npm run db:migrate', { 
+  execSync('npm run db:migrate', {
     stdio: 'inherit',
-    env: { ...process.env }
+    env: { ...process.env },
   });
   console.log('✅ Migrations completed successfully');
-} catch (error) {
+} catch {
   // Don't fail the build if migrations fail - they can be run separately
   // This is expected during Vercel builds when DATABASE_URL is not available
   console.log('⚠️  Migration skipped or failed (this is OK during build)');

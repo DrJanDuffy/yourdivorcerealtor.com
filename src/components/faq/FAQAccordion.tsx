@@ -61,7 +61,7 @@ export function FAQAccordion({ faqs }: FAQAccordionProps) {
             <button
               id={`faq-button-${index}`}
               type="button"
-              className="flex w-full items-center justify-between p-6 text-left focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+              className="flex w-full items-center justify-between p-6 text-left focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
               onClick={() => toggleFAQ(index)}
               onKeyDown={e => handleKeyDown(e, index)}
               aria-expanded={isOpen}
@@ -95,7 +95,7 @@ export function FAQAccordion({ faqs }: FAQAccordionProps) {
               aria-hidden={!isOpen}
             >
               <div className="border-t border-gray-200 px-6 py-4">
-                <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                <p className="leading-relaxed text-gray-700">{faq.answer}</p>
               </div>
             </div>
           </div>
@@ -104,7 +104,3 @@ export function FAQAccordion({ faqs }: FAQAccordionProps) {
     </div>
   );
 }
-
-
-
-

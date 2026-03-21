@@ -23,22 +23,24 @@ export function RelatedContent({
   }
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="bg-gray-50 py-12">
       <div className="container mx-auto px-4">
         <h2 className="mb-6 text-2xl font-bold text-gray-900">{title}</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {relatedLinks.map((link) => (
+          {relatedLinks.map(link => (
             <Link
               key={link.href}
               href={link.href}
               className="group rounded-lg border border-gray-200 bg-white p-4 transition-shadow hover:border-blue-500 hover:shadow-md"
               prefetch={true}
             >
-              <h3 className="mb-2 font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+              <h3 className="mb-2 font-semibold text-gray-900 transition-colors group-hover:text-blue-600">
                 {link.title}
               </h3>
               <p className="text-sm text-gray-600">
-                Learn more about {link.title.toLowerCase()}
+                Learn more about
+                {' '}
+                {link.title.toLowerCase()}
               </p>
             </Link>
           ))}
@@ -47,7 +49,3 @@ export function RelatedContent({
     </section>
   );
 }
-
-
-
-

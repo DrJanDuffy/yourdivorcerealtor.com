@@ -8,7 +8,7 @@ export function HeroSection() {
           <h1 className="mb-6 text-5xl font-bold md:text-6xl">
             Best Real Estate Agent Team
           </h1>
-        <p className="mb-8 text-xl text-blue-50 md:text-2xl">
+          <p className="mb-8 text-xl text-blue-50 md:text-2xl">
             Your best Real Estate Experience is here
           </p>
 

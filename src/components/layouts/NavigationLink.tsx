@@ -35,7 +35,9 @@ export function NavigationLink({
   // This effect is for tracking and can be extended for analytics
   useEffect(() => {
     const link = linkRef.current;
-    if (!link || !prefetch) return;
+    if (!link || !prefetch) {
+      return;
+    }
 
     const handleMouseEnter = () => {
       // Prefetch tracking - Next.js Link handles actual prefetching
@@ -57,8 +59,8 @@ export function NavigationLink({
       className={
         `block rounded px-2 py-1 font-medium transition-colors focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none md:inline-block ${
           isActive
-            ? 'border-b-2 border-blue-600 text-blue-600 bg-blue-50 md:bg-transparent'
-            : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50 md:hover:bg-transparent'
+            ? 'border-b-2 border-blue-600 bg-blue-50 text-blue-600 md:bg-transparent'
+            : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 md:hover:bg-transparent'
         }`
       }
       prefetch={prefetch ? (priority === 'high' ? true : undefined) : false}
@@ -68,4 +70,3 @@ export function NavigationLink({
     </Link>
   );
 }
-

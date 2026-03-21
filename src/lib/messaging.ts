@@ -9,8 +9,8 @@ export const messaging = {
     subtitle: 'Las Vegas Divorce Real Estate Specialist',
     unlock: 'Unlock Your New Normal',
     control: 'Get Control of Your Future',
-    notUsual: "This Isn't Business As Usual",
-    houseKey: "Your House Holds the Key to Unlocking Your Future",
+    notUsual: 'This Isn\'t Business As Usual',
+    houseKey: 'Your House Holds the Key to Unlocking Your Future',
     decisions: 'The decisions you make impact your future.',
     deserveExpert: 'Your home - and your future - deserve an expert.',
   },
@@ -30,7 +30,7 @@ export const messaging = {
     },
     closure: {
       title: 'CLOSURE',
-      message: "Without handling the house, you can't move on. The house is closure.",
+      message: 'Without handling the house, you can\'t move on. The house is closure.',
     },
   },
 
@@ -63,7 +63,7 @@ export const messaging = {
     valuation: 'Get Your Free Home Valuation',
     discuss: 'Discuss Your Options Today',
     call: 'Call Dr. Jan: (702) XXX-XXXX',
-    urgency: "It's Never Too Early to Plan",
+    urgency: 'It\'s Never Too Early to Plan',
     control: 'Take Control of Your Future Today',
   },
 
@@ -84,4 +84,3 @@ export const messaging = {
     shortSale: 'Short sale if underwater',
   },
 } as const;
-

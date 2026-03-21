@@ -15,7 +15,7 @@ export function Breadcrumb() {
 
   // Generate breadcrumb items from pathname
   const pathSegments = pathname?.split('/').filter(Boolean) || [];
-  
+
   const breadcrumbItems = [
     { name: 'Home', url: `${baseUrl}/` },
     ...pathSegments.map((segment, index) => {
@@ -46,14 +46,14 @@ export function Breadcrumb() {
 
       {/* Breadcrumb Navigation */}
       <nav
-        className="bg-gray-50 border-b border-gray-200 py-3"
+        className="border-b border-gray-200 bg-gray-50 py-3"
         aria-label="Breadcrumb"
       >
         <div className="container mx-auto px-4">
           <ol className="flex items-center space-x-2 text-sm">
             {breadcrumbItems.map((item, index) => {
               const isLast = index === breadcrumbItems.length - 1;
-              
+
               return (
                 <li key={item.url} className="flex items-center">
                   {index > 0 && (
@@ -70,19 +70,21 @@ export function Breadcrumb() {
                       />
                     </svg>
                   )}
-                  {isLast ? (
-                    <span className="font-medium text-gray-700" aria-current="page">
-                      {item.name}
-                    </span>
-                  ) : (
-                    <Link
-                      href={item.url.replace(baseUrl, '')}
-                      className="text-gray-500 hover:text-gray-700 transition-colors"
-                      prefetch={true}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
+                  {isLast
+                    ? (
+                        <span className="font-medium text-gray-700" aria-current="page">
+                          {item.name}
+                        </span>
+                      )
+                    : (
+                        <Link
+                          href={item.url.replace(baseUrl, '')}
+                          className="text-gray-500 transition-colors hover:text-gray-700"
+                          prefetch={true}
+                        >
+                          {item.name}
+                        </Link>
+                      )}
                 </li>
               );
             })}
@@ -92,4 +94,3 @@ export function Breadcrumb() {
     </>
   );
 }
-
