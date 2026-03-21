@@ -3,7 +3,12 @@
  * Account hash: byE6BTe9lNqo21V57n4aPQ
  * URL format: https://imagedelivery.net/{account_hash}/{image_id}/{variant}
  * @see https://developers.cloudflare.com/images/manage-images/serve-images/
+ *
+ * LCP: create a width-capped variant in Cloudflare (e.g. hero-960) and set
+ * NEXT_PUBLIC_CF_IMAGE_HERO_VARIANT=hero-960 in Vercel. Defaults to public.
  */
+
+import { Env } from '@/libs/Env';
 
 const CLOUDFLARE_ACCOUNT_HASH = 'byE6BTe9lNqo21V57n4aPQ';
 
@@ -11,10 +16,18 @@ const CLOUDFLARE_ACCOUNT_HASH = 'byE6BTe9lNqo21V57n4aPQ';
 const DEFAULT_VARIANT = 'public';
 
 /**
- * Homepage LCP hero: `public` works with next/image (AVIF/WebP). For smaller source files,
- * add a capped-width variant in Cloudflare (e.g. hero-1200) and set it here.
+ * Variant for homepage LCP hero portrait — prefer a capped width in Cloudflare dashboard.
  */
-export const CLOUDFLARE_HERO_VARIANT = 'public';
+export function getCloudflareHeroLcpVariant(): string {
+  return Env.NEXT_PUBLIC_CF_IMAGE_HERO_VARIANT ?? DEFAULT_VARIANT;
+}
+
+/**
+ * Variant for interior / community hero images (non-LCP priority).
+ */
+export function getCloudflareContentVariant(): string {
+  return Env.NEXT_PUBLIC_CF_IMAGE_CONTENT_VARIANT ?? DEFAULT_VARIANT;
+}
 
 /**
  * Build a Cloudflare Image Delivery URL.

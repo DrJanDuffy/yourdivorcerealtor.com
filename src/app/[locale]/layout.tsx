@@ -115,7 +115,8 @@ export default async function RootLayout(props: LayoutProps) {
             content={getGoogleVerificationTag()!}
           />
         )}
-        {/* Preconnect to third-party origins for faster LCP and script loading */}
+        {/* Preconnect to LCP image origin (Cloudflare Images) and third-party scripts */}
+        <link rel="preconnect" href="https://imagedelivery.net" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://em.realscout.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.realscout.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets.calendly.com" crossOrigin="anonymous" />

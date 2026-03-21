@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import {
-  CLOUDFLARE_HERO_VARIANT,
   CLOUDFLARE_IMAGE_IDS,
   cloudflareImageUrl,
+  getCloudflareHeroLcpVariant,
 } from '@/lib/cloudflare-images';
 import { messaging } from '@/lib/messaging';
 import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
@@ -12,7 +12,7 @@ import { SITE_PHONE_DISPLAY, SITE_PHONE_TEL } from '@/lib/site-contact';
 export function DivorceHero() {
   const heroImageSrc = cloudflareImageUrl(
     CLOUDFLARE_IMAGE_IDS['dr-jan-duffy-agent'],
-    CLOUDFLARE_HERO_VARIANT,
+    getCloudflareHeroLcpVariant(),
   );
 
   return (
@@ -67,9 +67,10 @@ export function DivorceHero() {
               alt="Dr. Jan Duffy, Las Vegas divorce real estate specialist"
               fill
               priority
-              quality={85}
+              fetchPriority="high"
+              quality={75}
               className="object-cover object-top"
-              sizes="(max-width: 1024px) min(100vw, 32rem), 576px"
+              sizes="(max-width: 1024px) min(100vw - 2rem, 28rem), 576px"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-transparent to-transparent" />
           </div>

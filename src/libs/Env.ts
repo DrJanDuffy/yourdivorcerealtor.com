@@ -11,6 +11,10 @@ export const Env = createEnv({
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().optional(),
+    /** Cloudflare Images variant name for LCP hero (create e.g. hero-960 in dashboard; default public). */
+    NEXT_PUBLIC_CF_IMAGE_HERO_VARIANT: z.string().optional(),
+    /** Optional width-capped variant for content/hero map images (default public). */
+    NEXT_PUBLIC_CF_IMAGE_CONTENT_VARIANT: z.string().optional(),
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
     NEXT_PUBLIC_BETTER_STACK_SOURCE_TOKEN: z.string().optional(),
     NEXT_PUBLIC_BETTER_STACK_INGESTING_HOST: z.string().optional(),
@@ -28,6 +32,8 @@ export const Env = createEnv({
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_CF_IMAGE_HERO_VARIANT: process.env.NEXT_PUBLIC_CF_IMAGE_HERO_VARIANT,
+    NEXT_PUBLIC_CF_IMAGE_CONTENT_VARIANT: process.env.NEXT_PUBLIC_CF_IMAGE_CONTENT_VARIANT,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     NEXT_PUBLIC_BETTER_STACK_SOURCE_TOKEN: process.env.NEXT_PUBLIC_BETTER_STACK_SOURCE_TOKEN,

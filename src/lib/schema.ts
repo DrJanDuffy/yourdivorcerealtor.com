@@ -4,9 +4,9 @@
  */
 
 import {
-  CLOUDFLARE_HERO_VARIANT,
   CLOUDFLARE_IMAGE_IDS,
   cloudflareImageUrl,
+  getCloudflareHeroLcpVariant,
 } from '@/lib/cloudflare-images';
 import { siteUrl } from '@/lib/metadata';
 import {
@@ -497,7 +497,7 @@ export function generateCarouselItemListSchema(
   const { baseUrl, defaultImage, priceRange = '$$', aggregateRating } = options;
   const fallbackImage
     = defaultImage
-      ?? cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['dr-jan-duffy-agent'], CLOUDFLARE_HERO_VARIANT);
+      ?? cloudflareImageUrl(CLOUDFLARE_IMAGE_IDS['dr-jan-duffy-agent'], getCloudflareHeroLcpVariant());
 
   return {
     '@context': 'https://schema.org',

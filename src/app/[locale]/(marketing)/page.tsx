@@ -10,6 +10,7 @@ import { FourPillars } from '@/components/divorce/FourPillars';
 import { PainPoints } from '@/components/divorce/PainPoints';
 import { WhySpecialist } from '@/components/divorce/WhySpecialist';
 import { StructuredData } from '@/components/seo/StructuredData';
+import { LazyWhenVisible } from '@/components/shared/LazyWhenVisible';
 import { generateLocaleAlternates } from '@/lib/metadata';
 import {
   generateLocalBusinessSchema,
@@ -18,74 +19,82 @@ import {
   generateWebSiteSchema,
 } from '@/lib/schema';
 
+const homeValueSkeleton = (
+  <div className="bg-gray-50 py-14 sm:py-16">
+    <div className="container mx-auto px-4 sm:px-6">
+      <div className="mx-auto max-w-2xl space-y-4">
+        <div className="mx-auto h-9 w-3/4 max-w-md animate-pulse rounded bg-gray-200" />
+        <div className="h-[min(700px,85vh)] min-h-[520px] animate-pulse rounded-xl bg-gray-200" />
+      </div>
+    </div>
+  </div>
+);
+
+const listingsSkeleton = (
+  <section className="bg-white py-16">
+    <div className="container mx-auto px-4">
+      <div className="mx-auto mb-8 h-10 w-2/3 max-w-lg animate-pulse rounded bg-gray-200" />
+      <div className="min-h-[520px] space-y-4" role="status" aria-live="polite">
+        <span className="sr-only">Loading property listings</span>
+        {[1, 2, 3].map(i => (
+          <div key={i} className="h-64 animate-pulse rounded-lg bg-gray-200" />
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const familyHomesSkeleton = (
+  <section className="bg-gray-50 py-16">
+    <div className="container mx-auto px-4">
+      <div className="mx-auto mb-8 h-10 w-2/3 max-w-lg animate-pulse rounded bg-gray-200" />
+      <div className="min-h-[520px] space-y-4" role="status" aria-live="polite">
+        <span className="sr-only">Loading family home listings</span>
+        {[1, 2, 3].map(i => (
+          <div key={i} className="h-64 animate-pulse rounded-lg bg-gray-200" />
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const testimonialsSkeleton = (
+  <section className="bg-white py-14 sm:py-16">
+    <div className="container mx-auto px-4 sm:px-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="h-56 animate-pulse rounded-2xl bg-gray-200" />
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 const RealScoutHomeValue = dynamic(
   () => import('@/components/widgets/RealScoutHomeValue').then(m => ({ default: m.RealScoutHomeValue })),
   {
-    loading: () => (
-      <div className="bg-gray-50 py-14 sm:py-16">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="mx-auto max-w-2xl space-y-4">
-            <div className="mx-auto h-9 w-3/4 max-w-md animate-pulse rounded bg-gray-200" />
-            <div className="h-[min(700px,85vh)] min-h-[520px] animate-pulse rounded-xl bg-gray-200" />
-          </div>
-        </div>
-      </div>
-    ),
+    loading: () => homeValueSkeleton,
   },
 );
 
 const RealScoutCondoListings = dynamic(
   () => import('@/components/widgets/RealScoutCondoListings').then(m => ({ default: m.RealScoutCondoListings })),
   {
-    loading: () => (
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto mb-8 h-10 w-2/3 max-w-lg animate-pulse rounded bg-gray-200" />
-          <div className="min-h-[520px] space-y-4" role="status" aria-live="polite">
-            <span className="sr-only">Loading property listings</span>
-            {[1, 2, 3].map(i => (
-              <div key={i} className="h-64 animate-pulse rounded-lg bg-gray-200" />
-            ))}
-          </div>
-        </div>
-      </section>
-    ),
+    loading: () => listingsSkeleton,
   },
 );
 
 const RealScoutFamilyHomes = dynamic(
   () => import('@/components/widgets/RealScoutFamilyHomes').then(m => ({ default: m.RealScoutFamilyHomes })),
   {
-    loading: () => (
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto mb-8 h-10 w-2/3 max-w-lg animate-pulse rounded bg-gray-200" />
-          <div className="min-h-[520px] space-y-4" role="status" aria-live="polite">
-            <span className="sr-only">Loading family home listings</span>
-            {[1, 2, 3].map(i => (
-              <div key={i} className="h-64 animate-pulse rounded-lg bg-gray-200" />
-            ))}
-          </div>
-        </div>
-      </section>
-    ),
+    loading: () => familyHomesSkeleton,
   },
 );
 
 const Testimonials = dynamic(
   () => import('@/components/sections/Testimonials').then(m => ({ default: m.Testimonials })),
   {
-    loading: () => (
-      <section className="bg-white py-14 sm:py-16">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="h-56 animate-pulse rounded-2xl bg-gray-200" />
-            ))}
-          </div>
-        </div>
-      </section>
-    ),
+    loading: () => testimonialsSkeleton,
   },
 );
 
@@ -144,12 +153,20 @@ export default async function Index(props: PageProps) {
       <DivorceOptions />
 
       <div id="home-value">
-        <RealScoutHomeValue />
+        <LazyWhenVisible fallback={homeValueSkeleton}>
+          <RealScoutHomeValue />
+        </LazyWhenVisible>
       </div>
 
-      <RealScoutCondoListings />
-      <RealScoutFamilyHomes />
-      <Testimonials />
+      <LazyWhenVisible fallback={listingsSkeleton}>
+        <RealScoutCondoListings />
+      </LazyWhenVisible>
+      <LazyWhenVisible fallback={familyHomesSkeleton}>
+        <RealScoutFamilyHomes />
+      </LazyWhenVisible>
+      <LazyWhenVisible fallback={testimonialsSkeleton}>
+        <Testimonials />
+      </LazyWhenVisible>
 
       <section className="bg-gradient-to-b from-blue-600 to-blue-800 py-16 text-white sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
