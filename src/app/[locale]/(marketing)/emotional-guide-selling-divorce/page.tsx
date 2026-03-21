@@ -5,7 +5,7 @@ import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -35,12 +35,11 @@ export default async function EmotionalGuide(props: IEmotionalGuideProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/emotional-guide-selling-divorce';
   const articleSchema = generateArticleSchema(
     'Emotional Guide to Selling Your Home in Divorce',
     'Emotional support and guidance for selling your home during divorce. Navigate the emotional challenges with compassion and expertise.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

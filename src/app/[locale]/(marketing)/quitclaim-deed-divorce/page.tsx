@@ -3,7 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -33,12 +33,11 @@ export default async function QuitclaimDeed(props: IQuitclaimProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/quitclaim-deed-divorce';
   const articleSchema = generateArticleSchema(
     'Quitclaim Deed in Divorce Transactions',
     'Expert guidance for quitclaim deeds in divorce. Transfer ownership correctly with professional assistance.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

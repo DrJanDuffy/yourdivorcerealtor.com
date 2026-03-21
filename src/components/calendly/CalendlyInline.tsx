@@ -5,9 +5,8 @@ const CALENDLY_URL = 'https://calendly.com/drjanduffy/dr-duffy-private-15-min-co
  */
 export function CalendlyInline() {
   return (
-    // eslint-disable-next-line tailwindcss/no-custom-classname -- Calendly widget required class
     <div
-      className="calendly-inline-widget"
+      className="calendly-inline-widget min-h-[700px] w-full min-w-[320px]" // eslint-disable-line tailwindcss/no-custom-classname -- Calendly widget API
       data-url={CALENDLY_URL}
       style={{ minWidth: 320, height: 700 }}
     />

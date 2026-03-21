@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { generateLocaleAlternates } from '@/lib/metadata';
+import { routing } from '@/libs/I18nRouting';
 
 type IPortfolioProps = {
   params: Promise<{ locale: string }>;
@@ -16,11 +17,14 @@ export async function generateMetadata(props: IPortfolioProps): Promise<Metadata
     locale,
     namespace: 'Portfolio',
   });
-  const { canonical, languages } = generateLocaleAlternates(path, locale);
+  const { canonical, languages } = generateLocaleAlternates(path, locale, {
+    hreflangLocales: routing.locales,
+  });
   return {
     title: t('meta_title'),
     description: t('meta_description'),
     alternates: { canonical, languages },
+    robots: { index: true, follow: true },
   };
 }
 

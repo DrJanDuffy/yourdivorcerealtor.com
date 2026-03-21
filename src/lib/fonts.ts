@@ -11,6 +11,7 @@ export const inter = Inter({
   display: 'swap',
   variable: '--font-inter',
   preload: true,
+  adjustFontFallback: true,
 });
 
 // Display font for headings
@@ -20,8 +21,5 @@ export const playfairDisplay = Playfair_Display({
   variable: '--font-playfair',
   preload: false, // Only load when needed
   weight: ['400', '600', '700'],
+  adjustFontFallback: true,
 });
-
-
-
-

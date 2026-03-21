@@ -4,6 +4,48 @@ import { getI18nPath } from '@/utils/Helpers';
 
 export const siteName = 'Dr. Jan Duffy | Las Vegas Divorce Real Estate Specialist';
 export const siteUrl = 'https://www.yourdivorcerealtor.com';
+
+/**
+ * Locales included in hreflang `alternates.languages` for pages whose body is not yet
+ * localized (duplicate English under /fr/). Add `fr` here when marketing copy is translated.
+ * Pages with real translations (e.g. portfolio) can pass `hreflangLocales: routing.locales`.
+ */
+export const HREFLANG_LOCALES: readonly string[] = [routing.defaultLocale];
+
+export type LocaleAlternatesOptions = {
+  /** Defaults to HREFLANG_LOCALES (English only) until /fr/ marketing is translated. */
+  hreflangLocales?: readonly string[];
+};
+
+/**
+ * Resolves the canonical href for indexing. Duplicate English pages under `/fr/` must use
+ * the English URL as canonical (matches Google’s choice and avoids “Duplicate, Google chose
+ * different canonical than user”). Fully localized routes pass `hreflangLocales` including `fr`.
+ */
+function resolveCanonicalHref(
+  path: string,
+  locale: string,
+  options?: LocaleAlternatesOptions,
+): string {
+  const hreflangLocales = options?.hreflangLocales ?? HREFLANG_LOCALES;
+  const frenchIsIndexedAlternate = hreflangLocales.includes('fr');
+  if (locale === 'fr' && !frenchIsIndexedAlternate) {
+    return `${siteUrl}${getI18nPath(path, routing.defaultLocale)}`;
+  }
+  return `${siteUrl}${getI18nPath(path, locale)}`;
+}
+
+/**
+ * Absolute canonical URL (matches HTML `link[rel=canonical]` and Article JSON-LD `url`).
+ * Pass the same `options` as `generateLocaleAlternates` when the page uses `hreflangLocales`.
+ */
+export function getCanonicalSiteUrl(
+  path: string,
+  locale: string,
+  options?: LocaleAlternatesOptions,
+): string {
+  return resolveCanonicalHref(path, locale, options);
+}
 const defaultDescription = 'Expert divorce real estate services in Las Vegas. Dr. Jan Duffy helps divorcing homeowners navigate property division with compassion and expertise.';
 
 /**
@@ -96,11 +138,12 @@ export function generatePageMetadata({
 export function generateLocaleAlternates(
   path: string,
   locale: string,
+  options?: LocaleAlternatesOptions,
 ): { canonical: string; languages: Record<string, string> } {
-  const canonicalPath = getI18nPath(path, locale);
-  const canonical = `${siteUrl}${canonicalPath}`;
+  const localesForHreflang = options?.hreflangLocales ?? HREFLANG_LOCALES;
+  const canonical = resolveCanonicalHref(path, locale, options);
   const languages: Record<string, string> = {};
-  for (const loc of routing.locales) {
+  for (const loc of localesForHreflang) {
     languages[loc] = `${siteUrl}${getI18nPath(path, loc)}`;
   }
   languages['x-default'] = `${siteUrl}${getI18nPath(path, routing.defaultLocale)}`;

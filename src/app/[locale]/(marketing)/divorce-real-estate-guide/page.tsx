@@ -7,7 +7,7 @@ import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListi
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -37,12 +37,11 @@ export default async function CompleteGuide(props: IGuideProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/divorce-real-estate-guide';
   const articleSchema = generateArticleSchema(
     'Complete Guide to Divorce Real Estate Las Vegas',
     'Comprehensive guide to divorce real estate in Las Vegas. Everything you need to know about property division, home sales, and fresh starts.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

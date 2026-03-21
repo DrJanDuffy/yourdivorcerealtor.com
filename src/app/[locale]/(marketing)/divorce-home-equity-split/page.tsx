@@ -6,7 +6,7 @@ import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateFAQPageSchema,
@@ -33,7 +33,6 @@ export default async function DivorceHomeEquitySplit(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/divorce-home-equity-split';
 
   const equitySplitFaqs = [
@@ -54,7 +53,7 @@ export default async function DivorceHomeEquitySplit(props: PageProps) {
   const articleSchema = generateArticleSchema(
     'Divorce Home Equity Split: Understanding Your Equity Position',
     'Learn how home equity is split in divorce. Nevada community property laws, equity calculations, and fair division strategies.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

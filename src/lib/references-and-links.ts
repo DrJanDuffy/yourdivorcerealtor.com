@@ -23,7 +23,7 @@ export const brochuresLinks: ReferenceLink[] = [
 export const clarkCountyLinks: ReferenceLink[] = [
   {
     title: 'Clark County Courts – E-filing assistance',
-    href: 'http://www.clarkcountycourts.us/departments/clerk/electronic-filing/support/',
+    href: 'https://www.clarkcountycourts.us/departments/clerk/electronic-filing/support/',
     description: 'Clark County District Court clerk electronic filing support and instructions.',
   },
   {
@@ -48,7 +48,7 @@ export const clarkCountyLinks: ReferenceLink[] = [
   },
   {
     title: 'Legal Aid Center of Southern Nevada',
-    href: 'http://www.lacsn.org/',
+    href: 'https://www.lacsn.org/',
     description: 'LACSN operates the Family Law Self-Help Center under contract with Clark County.',
   },
 ];
@@ -104,7 +104,7 @@ export const lawLibrariesLinks: ReferenceLink[] = [
 export const stateOfNevadaLinks: ReferenceLink[] = [
   {
     title: 'Nevada state portal',
-    href: 'http://nv.gov/',
+    href: 'https://nv.gov/',
     description: 'Official Nevada state government website.',
   },
   {

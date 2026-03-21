@@ -11,6 +11,12 @@ const CLOUDFLARE_ACCOUNT_HASH = 'byE6BTe9lNqo21V57n4aPQ';
 const DEFAULT_VARIANT = 'public';
 
 /**
+ * Homepage LCP hero: `public` works with next/image (AVIF/WebP). For smaller source files,
+ * add a capped-width variant in Cloudflare (e.g. hero-1200) and set it here.
+ */
+export const CLOUDFLARE_HERO_VARIANT = 'public';
+
+/**
  * Build a Cloudflare Image Delivery URL.
  * @param imageId - Image ID (UUID or custom ID path e.g. "centennialhillshomes/photos/clubhouse-exterior")
  * @param variant - Variant name (default: "public")

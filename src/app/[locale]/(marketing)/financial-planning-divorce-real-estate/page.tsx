@@ -6,7 +6,7 @@ import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListi
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -36,12 +36,11 @@ export default async function FinancialPlanning(props: IFinancialPlanningProps) 
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/financial-planning-divorce-real-estate';
   const articleSchema = generateArticleSchema(
     'Financial Planning for Divorce Real Estate',
     'Expert financial planning guidance for divorce real estate. Understand financial implications and plan for your future.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

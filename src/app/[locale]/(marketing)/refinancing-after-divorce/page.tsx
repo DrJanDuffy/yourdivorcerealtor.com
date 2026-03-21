@@ -5,7 +5,7 @@ import { StructuredData } from '@/components/seo/StructuredData';
 import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListings';
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -35,12 +35,11 @@ export default async function RefinancingAfterDivorce(props: IRefinancingProps) 
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/refinancing-after-divorce';
   const articleSchema = generateArticleSchema(
     'Refinancing Your Home After Divorce',
     'Expert guidance for refinancing your home after divorce. Remove your ex from the mortgage and protect your credit.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

@@ -17,11 +17,6 @@ const testimonials: Testimonial[] = [
     name: 'Jennifer L.',
     text: 'Going through a divorce with kids is hard enough. Dr. Jan Duffy understood our situation and helped us sell our home quickly so we could both move on. She was compassionate, professional, and got results.',
   },
-  {
-    id: '4',
-    name: 'Robert T.',
-    text: 'The court ordered us to sell our home, and I was worried about the process. Dr. Jan Duffy handled everything perfectly. She followed the court order exactly, kept everyone informed, and we closed on time.',
-  },
 ];
 
 /**
@@ -70,8 +65,8 @@ export function Testimonials() {
 
         <Suspense
           fallback={(
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {[1, 2, 3, 4].map(i => (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map(i => (
                 <div
                   key={i}
                   className="h-48 animate-pulse rounded-lg bg-gray-200"
@@ -80,7 +75,7 @@ export function Testimonials() {
             </div>
           )}
         >
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {testimonials.map(testimonial => (
               <TestimonialCard
                 key={testimonial.id}

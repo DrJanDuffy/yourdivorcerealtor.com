@@ -3,7 +3,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -33,12 +33,11 @@ export default async function CourtOrderedSale(props: ICourtOrderedProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/court-ordered-home-sale';
   const articleSchema = generateArticleSchema(
     'Court-Ordered Home Sale in Divorce',
     'Expert handling of court-ordered home sales in divorce. We handle court orders with strict compliance and professional service.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

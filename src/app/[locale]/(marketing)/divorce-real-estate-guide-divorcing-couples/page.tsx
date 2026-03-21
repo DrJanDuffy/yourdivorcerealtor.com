@@ -9,7 +9,7 @@ import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListi
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -39,14 +39,13 @@ export default async function DivorcingCouplesGuide(props: IGuideProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const contentPath = path.join(process.cwd(), 'src/content/divorce-real-estate-guide-divorcing-couples.md');
   const markdownContent = fs.readFileSync(contentPath, 'utf-8');
 
   const articleSchema = generateArticleSchema(
     'Real Estate Guide for Divorcing Couples in Nevada',
     'Complete guide for divorcing couples in Las Vegas and Nevada. Property division, selling vs. keeping the home, privacy during marketing, and professional team advice.',
-    `${baseUrl}${pagePath}`,
+    getCanonicalSiteUrl(pagePath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

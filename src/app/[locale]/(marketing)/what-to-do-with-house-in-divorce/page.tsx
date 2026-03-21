@@ -7,7 +7,7 @@ import { MarkdownContent } from '@/components/content/MarkdownContent';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -33,14 +33,13 @@ export default async function WhatToDoWithHouseInDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const contentPath = path.join(process.cwd(), 'src/content/what-to-do-with-house-in-divorce.md');
   const markdownContent = fs.readFileSync(contentPath, 'utf-8');
 
   const articleSchema = generateArticleSchema(
     'What to Do with House in Divorce: Your Complete Options Guide',
     'What to do with house in divorce? Complete guide to your options: sell, buyout, co-own, refinance. Understand each option and make informed decisions.',
-    `${baseUrl}${pagePath}`,
+    getCanonicalSiteUrl(pagePath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

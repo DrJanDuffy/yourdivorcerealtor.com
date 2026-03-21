@@ -29,11 +29,14 @@ export async function generateMetadata(props: IPortfolioDetailProps): Promise<Me
     namespace: 'PortfolioSlug',
   });
   const path = `/portfolio/${slug}`;
-  const { canonical, languages } = generateLocaleAlternates(path, locale);
+  const { canonical, languages } = generateLocaleAlternates(path, locale, {
+    hreflangLocales: routing.locales,
+  });
   return {
     title: t('meta_title', { slug }),
     description: t('meta_description', { slug }),
     alternates: { canonical, languages },
+    robots: { index: true, follow: true },
   };
 }
 

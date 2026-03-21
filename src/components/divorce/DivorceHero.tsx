@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { CalendlyLink } from '@/components/calendly/CalendlyLink';
-import { cloudflareImageUrl } from '@/lib/cloudflare-images';
+import { CLOUDFLARE_HERO_VARIANT, cloudflareImageUrl } from '@/lib/cloudflare-images';
 import { messaging } from '@/lib/messaging';
 
 const HOMEPAGE_HERO_ID = 'lonemountaineights/hero/hero-las-vegas.png';
 
 export function DivorceHero() {
-  const heroImageSrc = cloudflareImageUrl(HOMEPAGE_HERO_ID);
+  const heroImageSrc = cloudflareImageUrl(HOMEPAGE_HERO_ID, CLOUDFLARE_HERO_VARIANT);
 
   return (
     <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 py-16 text-white sm:py-20 lg:py-24">
@@ -53,14 +53,15 @@ export function DivorceHero() {
             </div>
           </div>
 
-          <div className="relative h-72 w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/20 sm:h-80 lg:h-96 lg:w-1/2 lg:max-w-xl">
+          <div className="relative aspect-4/5 min-h-72 w-full max-w-lg overflow-hidden rounded-2xl shadow-2xl ring-2 ring-white/20 sm:min-h-80 lg:aspect-auto lg:h-96 lg:w-1/2 lg:max-w-xl">
             <Image
               src={heroImageSrc}
               alt="Dr. Jan Duffy, Las Vegas divorce real estate specialist"
               fill
               priority
+              quality={85}
               className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) min(100vw, 32rem), 576px"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-transparent to-transparent" />
           </div>

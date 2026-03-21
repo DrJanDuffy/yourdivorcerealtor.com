@@ -6,7 +6,7 @@ import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -32,12 +32,11 @@ export default async function HowToSellHouseDuringDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/how-to-sell-house-during-divorce';
   const articleSchema = generateArticleSchema(
     'How to Sell House During Divorce: Complete Step-by-Step Guide',
     'Complete guide on how to sell house during divorce. Step-by-step process, timeline, checklist, and common mistakes to avoid.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

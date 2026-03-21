@@ -6,7 +6,7 @@ import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateFAQPageSchema,
@@ -33,7 +33,6 @@ export default async function CommunityPropertyDivorceHouse(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/community-property-divorce-house';
 
   const communityPropertyFaqs = [
@@ -54,7 +53,7 @@ export default async function CommunityPropertyDivorceHouse(props: PageProps) {
   const articleSchema = generateArticleSchema(
     'Community Property and Divorce House: Nevada Law Guide',
     'Complete guide to community property and divorce house in Nevada. How community property laws affect property division, home sales, and equity split.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

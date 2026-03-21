@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateFAQPageSchema,
@@ -35,12 +35,11 @@ export default async function PropertyDivision(props: IPropertyDivisionProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/divorce-property-division';
   const articleSchema = generateArticleSchema(
     'Nevada Divorce Property Division | Who Gets the House in a Divorce Nevada',
     'Expert guidance for Nevada divorce property division. Learn who gets the house in a divorce Nevada. Community property laws, fair valuations, and equitable solutions.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

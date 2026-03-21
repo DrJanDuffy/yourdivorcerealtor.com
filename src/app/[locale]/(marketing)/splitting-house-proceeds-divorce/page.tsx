@@ -6,7 +6,7 @@ import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -32,12 +32,11 @@ export default async function SplittingHouseProceedsDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/splitting-house-proceeds-divorce';
   const articleSchema = generateArticleSchema(
     'Splitting House Proceeds in Divorce: Complete Guide',
     'Complete guide to splitting house proceeds in divorce. Nevada community property laws, 50/50 division, calculating each spouse\'s share, and distribution process.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

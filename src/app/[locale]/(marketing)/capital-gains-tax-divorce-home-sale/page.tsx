@@ -6,7 +6,7 @@ import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -32,12 +32,11 @@ export default async function CapitalGainsTaxDivorceHomeSale(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/capital-gains-tax-divorce-home-sale';
   const articleSchema = generateArticleSchema(
     'Capital Gains Tax on Divorce Home Sale: Complete Tax Guide',
     'Complete guide to capital gains tax on divorce home sale. IRS rules, exemptions, and Nevada-specific considerations. Minimize taxes when selling your home during divorce.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

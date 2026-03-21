@@ -6,7 +6,7 @@ import { RealScoutCondoListings } from '@/components/widgets/RealScoutCondoListi
 import { RealScoutFamilyHomes } from '@/components/widgets/RealScoutFamilyHomes';
 import { RealScoutHomeValue } from '@/components/widgets/RealScoutHomeValue';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -36,12 +36,11 @@ export default async function SettlementOptions(props: ISettlementProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/divorce-settlement-options';
   const articleSchema = generateArticleSchema(
     'Divorce Settlement Real Estate Options',
     'Understand all your divorce settlement real estate options. Sell, buyout, co-own, or refinance - expert guidance for each option.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

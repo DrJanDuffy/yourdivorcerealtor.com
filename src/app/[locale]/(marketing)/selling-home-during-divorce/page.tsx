@@ -5,7 +5,7 @@ import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateFAQPageSchema,
@@ -36,7 +36,6 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/selling-home-during-divorce';
 
   const sellingFaqs = [
@@ -61,7 +60,7 @@ export default async function SellingDuringDivorce(props: ISellingProps) {
   const articleSchema = generateArticleSchema(
     'Selling House During Divorce Las Vegas',
     'Expert guidance for selling house during divorce in Las Vegas. Specialized divorce listing process, neutral representation, and proven results.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );

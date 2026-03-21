@@ -6,7 +6,7 @@ import { CalendlyLink } from '@/components/calendly/CalendlyLink';
 import { DivorcePageTemplate } from '@/components/divorce/DivorcePageTemplate';
 import { StructuredData } from '@/components/seo/StructuredData';
 import { CONTENT_LAST_UPDATED, toSchemaDateTime } from '@/lib/content-dates';
-import { generateLocaleAlternates } from '@/lib/metadata';
+import { generateLocaleAlternates, getCanonicalSiteUrl } from '@/lib/metadata';
 import {
   generateArticleSchema,
   generateRealEstateAgentSchema,
@@ -16,22 +16,6 @@ import {
 export const dynamic = 'force-dynamic';
 
 const path = '/can-i-sell-my-house-during-divorce';
-
-// #region agent log
-fetch('http://127.0.0.1:7246/ingest/aba3c3fb-219d-4db0-ba97-481ba0275178', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    sessionId: 'debug-session',
-    runId: 'pre-fix',
-    hypothesisId: 'H1',
-    location: 'can-i-sell-my-house-during-divorce/page.tsx:module',
-    message: 'Marketing page module loaded',
-    data: { page: '/can-i-sell-my-house-during-divorce' },
-    timestamp: 0,
-  }),
-}).catch(() => {});
-// #endregion
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params;
@@ -48,29 +32,12 @@ export default async function CanISellMyHouseDuringDivorce(props: PageProps) {
   const { locale } = await props.params;
   setRequestLocale(locale);
 
-  const baseUrl = 'https://www.yourdivorcerealtor.com';
   const currentPath = '/can-i-sell-my-house-during-divorce';
-
-  // #region agent log
-  fetch('http://127.0.0.1:7246/ingest/aba3c3fb-219d-4db0-ba97-481ba0275178', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      sessionId: 'debug-session',
-      runId: 'pre-fix',
-      hypothesisId: 'H2',
-      location: 'can-i-sell-my-house-during-divorce/page.tsx:loader',
-      message: 'Locale resolved for can-i-sell page',
-      data: { locale, currentPath },
-      timestamp: 0,
-    }),
-  }).catch(() => {});
-  // #endregion
 
   const articleSchema = generateArticleSchema(
     'Can I Sell My House During Divorce? Yes, Here\'s How',
     'Yes, you can sell your house during divorce. Learn when you can sell, legal requirements, spouse approval, court orders, and how to proceed.',
-    `${baseUrl}${currentPath}`,
+    getCanonicalSiteUrl(currentPath, locale),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
     toSchemaDateTime(CONTENT_LAST_UPDATED),
   );
@@ -80,22 +47,6 @@ export default async function CanISellMyHouseDuringDivorce(props: PageProps) {
     ['Las Vegas', 'Henderson', 'Summerlin', 'North Las Vegas'],
   );
   const realEstateAgentSchema = generateRealEstateAgentSchema();
-
-  // #region agent log
-  fetch('http://127.0.0.1:7246/ingest/aba3c3fb-219d-4db0-ba97-481ba0275178', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      sessionId: 'debug-session',
-      runId: 'pre-fix',
-      hypothesisId: 'H3',
-      location: 'can-i-sell-my-house-during-divorce/page.tsx:schemas',
-      message: 'Schemas generated for can-i-sell page',
-      data: { schemaCount: 3 },
-      timestamp: 0,
-    }),
-  }).catch(() => {});
-  // #endregion
 
   return (
     <>
