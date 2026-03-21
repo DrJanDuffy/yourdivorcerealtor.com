@@ -18,6 +18,12 @@ const baseConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   reactCompiler: true,
+  /** Smaller prod bundles (keep error/warn for debugging). */
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
+      ? { exclude: ['error', 'warn'] }
+      : false,
+  },
   outputFileTracingIncludes: {
     '/': ['./migrations/**/*'],
   },
@@ -26,7 +32,7 @@ const baseConfig: NextConfig = {
     /** Inline CSS in HTML in production (App Router) to cut render-blocking CSS chain. */
     inlineCss: true,
     /** Smaller client chunks where Clerk is imported (dashboard / auth). */
-    optimizePackageImports: ['@clerk/nextjs', 'posthog-js'],
+    optimizePackageImports: ['@clerk/nextjs'],
   },
   // Non-www → www 301 so GSC indexes canonical (www) and reports "Page with redirect" as intended
   async redirects() {

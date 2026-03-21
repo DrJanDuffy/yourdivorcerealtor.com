@@ -6,11 +6,11 @@ export const siteName = 'Dr. Jan Duffy | Las Vegas Divorce Real Estate Specialis
 export const siteUrl = 'https://www.yourdivorcerealtor.com';
 
 /**
- * Locales included in hreflang `alternates.languages` for pages whose body is not yet
- * localized (duplicate English under /fr/). Add `fr` here when marketing copy is translated.
- * Pages with real translations (e.g. portfolio) can pass `hreflangLocales: routing.locales`.
+ * Locales included in hreflang `alternates.languages` and self-canonical rules.
+ * Both `en` and `fr` URLs are indexed; use `hreflangLocales: [routing.defaultLocale]` on a
+ * page if you ever need English-only hreflang for a specific route.
  */
-export const HREFLANG_LOCALES: readonly string[] = [routing.defaultLocale];
+export const HREFLANG_LOCALES: readonly string[] = [...routing.locales];
 
 export type LocaleAlternatesOptions = {
   /** Defaults to HREFLANG_LOCALES (English only) until /fr/ marketing is translated. */
@@ -18,9 +18,8 @@ export type LocaleAlternatesOptions = {
 };
 
 /**
- * Resolves the canonical href for indexing. Duplicate English pages under `/fr/` must use
- * the English URL as canonical (matches Google’s choice and avoids “Duplicate, Google chose
- * different canonical than user”). Fully localized routes pass `hreflangLocales` including `fr`.
+ * Resolves the canonical href for indexing (locale-prefixed for `fr`, default locale as-needed).
+ * Pass `hreflangLocales` without `fr` only when a route should canonicalize to English only.
  */
 function resolveCanonicalHref(
   path: string,

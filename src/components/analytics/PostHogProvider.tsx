@@ -1,23 +1,47 @@
 'use client';
 
-import posthog from 'posthog-js';
-import { PostHogProvider as PHProvider } from 'posthog-js/react';
-import { useEffect } from 'react';
+import type { PostHog } from 'posthog-js';
+import type { ComponentType, ReactNode } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import { Env } from '@/libs/Env';
-import { SuspendedPostHogPageView } from './PostHogPageView';
 
-export const PostHogProvider = (props: { children: React.ReactNode }) => {
-  // Defer init until idle (or fallback delay) to reduce main-thread work during LCP
+/**
+ * Pageview capture — separate chunk so posthog-js/react is not in the initial bundle.
+ */
+const SuspendedPostHogPageView = dynamic(
+  () => import('./PostHogPageView').then(m => ({ default: m.SuspendedPostHogPageView })),
+  { ssr: false },
+);
+
+type PostHogBundle = {
+  PHProvider: ComponentType<{ client: PostHog; children: ReactNode }>;
+  client: PostHog;
+};
+
+/**
+ * Loads posthog-js only after requestIdleCallback (or timeout), keeping the main bundle smaller
+ * and reducing main-thread work during LCP/TBT (PSI "unused JavaScript" / legacy polyfill noise).
+ */
+export function PostHogProvider(props: { children: ReactNode }) {
+  const [bundle, setBundle] = useState<PostHogBundle | null>(null);
+
   useEffect(() => {
-    if (!Env.NEXT_PUBLIC_POSTHOG_KEY || typeof window === 'undefined') {
+    const key = Env.NEXT_PUBLIC_POSTHOG_KEY;
+    if (!key || typeof window === 'undefined') {
       return;
     }
+
     let cancelled = false;
-    const init = () => {
+
+    const init = async () => {
+      const phMod = await import('posthog-js');
       if (cancelled) {
         return;
       }
-      posthog.init(Env.NEXT_PUBLIC_POSTHOG_KEY!, {
+
+      const posthog = phMod.default;
+      posthog.init(key, {
         api_host: Env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
         capture_pageview: false,
         capture_pageleave: true,
@@ -32,14 +56,31 @@ export const PostHogProvider = (props: { children: React.ReactNode }) => {
           }
         },
       });
+
+      const reactMod = await import('posthog-js/react');
+      if (cancelled) {
+        return;
+      }
+
+      setBundle({
+        PHProvider: reactMod.PostHogProvider,
+        client: posthog,
+      });
     };
+
     let idleId: number | undefined;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    const schedule = () => {
+      void init();
+    };
+
     if ('requestIdleCallback' in window) {
-      idleId = window.requestIdleCallback(() => init(), { timeout: 5000 });
+      idleId = window.requestIdleCallback(schedule, { timeout: 5000 });
     } else {
-      timeoutId = setTimeout(init, 2500);
+      timeoutId = setTimeout(schedule, 2500);
     }
+
     return () => {
       cancelled = true;
       if (idleId !== undefined && 'cancelIdleCallback' in window) {
@@ -55,10 +96,16 @@ export const PostHogProvider = (props: { children: React.ReactNode }) => {
     return props.children;
   }
 
+  if (!bundle) {
+    return props.children;
+  }
+
+  const { PHProvider, client } = bundle;
+
   return (
-    <PHProvider client={posthog}>
+    <PHProvider client={client}>
       <SuspendedPostHogPageView />
       {props.children}
     </PHProvider>
   );
-};
+}
